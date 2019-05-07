@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- 보조 환경 설정 파일 등록하기 -->
+		<!-- 디렉토리의 구조나 xml파일명은 자유롭게 가능
+			 하지만 반드시	/WEB-INF/ 폴더 하위에 만들어야 한다!!! 주의!
+		-->
+		<param-value>/WEB-INF/webSpring/sub-context.xml</param-value>
+	</context-param>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<!-- 해당 Dispatch 서블릿의 환경설정 파일을 지정하는 부분-->
+			<!-- 헤딩 Dispatch 서블릿마다 환경설정을 다르게 지정할 수 있다 -->
+			<!-- 디렉토리의 구조나 xml파일명은 자유롭게 가능
+				 하지만 반드시	/WEB-INF/ 폴더 하위에 만들어야 한다!!! 주의!
+			 -->
+			<param-value>/WEB-INF/webSpring/sb-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<!-- 위에서 선언한 Dispatch 서블릿이 어떤 요청을 받았을 때 실행할지를 지정하는 부분 -->
+		<!-- 예전 jsp프로젝트에서  @WebServlet("*.do")에 해당하는 부분 -->
+		<!-- 만약  <url-pattern>*.user</url-pattern>으로 작성하면
+			 웹브라우저의 주소부분이 	.user로 끝나는 경우에  해당디스페치서블릿으로 연결시켜준다
+		-->
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+	<!--  POST 방식의 한글 깨짐 방지  -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>	
+
+</web-app>

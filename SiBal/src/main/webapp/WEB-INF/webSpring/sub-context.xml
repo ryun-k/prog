@@ -32,12 +32,17 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	
 	<bean id="noticeDAO" class="sb.com.dao.NoticeDAO" >
+		<property name="sqlSessionTemplate" ref="sqlSession"/>
+	</bean>
+	<bean id="qnaDAO" class="sb.com.dao.QnaDAO" >
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
 		
 	<!-- serviece bean처리 -->
 	<bean id="noticeService" class="sb.com.service.NoticeService"/>
+	<bean id="qnaService" class="sb.com.service.QnaService"/>
 		
 
 

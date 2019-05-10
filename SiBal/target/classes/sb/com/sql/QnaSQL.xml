@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qnaBoard">
+	<select id="totalCount" resultType="int">
+		select count(*) as cnt from qna
+	</select>
+	
+	<select id="qnaList" parameterType="qVO" resultType="qVO">
+		select * from (
+		SELECT NO, ROWNUM as rNo, p_NO as pNo, g_no as gNo, LPAD(' ', 2* (LEVEL-1)) || TITLE as title, 
+		m.id, writedate as wDate, hit
+		FROM QNA q, member m
+		where q.id=m.id
+		START WITH P_NO is null
+		CONNECT BY PRIOR NO = P_NO
+		order SIBLINGS by g_no desc)
+		where rno BETWEEN #{start} and #{end}
+	</select>
+</mapper>

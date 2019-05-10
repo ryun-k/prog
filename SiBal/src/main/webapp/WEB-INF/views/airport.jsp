@@ -86,6 +86,7 @@
 		</table>
 	</div>
 	<br>
+	<br>
 	<a href='/iedu/airportForm.do'>돌아가기</a>
 </body>
 </html>

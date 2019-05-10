@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>index</h1>
+<h1>SiBal</h1><br><br>
+<a href='/iedu/airportForm.do'>비행기표 확인</a>
 </body>
 </html>

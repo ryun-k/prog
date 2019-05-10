@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>메인화면</h1>
+<h1>SiBal</h1><br><br>
+<a href='/iedu/airportForm.do'>비행기표 확인</a>
 <a href="../sb/member/loginForm.do"><button>로그인</button></a><br/><br/>
 
 <a href="../sb/member/logoutProc.do"><button>로그아웃</button></a><br/><br/>

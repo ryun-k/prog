@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "member">
+
+<insert id="signUp" parameterType="memberVO">
+    insert into member1(m_id, m_password, m_nick ) 
+    values(#{id}, #{pw}, #{nick}) 
+</insert>
+
+
+
+	<select id="memberlist" resultType="memberVO">
+	
+	select 
+U_NO as no,
+U_ID as id,
+U_PW as pw,
+U_NAME as name,
+U_NICK as nick,
+U_BIRTH as birth,
+U_GENDER as gender,
+U_STATE as state,
+U_JOINDATE as joindate,
+U_LOGINDATE as logindate,
+U_CHECK as check1,
+U_PHOTO as photo
+from 
+member
+	
+	</select>	
+	
+	<select id = "test" resultType="memberVO" >
+	select m_id as id,
+m_nick as nick
+from member1
+where 
+m_nick='준호'
+
+
+	</select>
+	
+	
+	<select id="loginProc" parameterType="hMap"
+	resultType="hMap">
+	SELECT
+	    M_ID            AS ID,
+	    M_PASSWORD      AS PW,
+	    M_NICK          AS NICK
+	 FROM
+	    MEMBER1
+	 WHERE
+	    M_ID = #{id}
+	    AND
+	    M_PASSWORD = #{pw}
+	</select>
+	</mapper>

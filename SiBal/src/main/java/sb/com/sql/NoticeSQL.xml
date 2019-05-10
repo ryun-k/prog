@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notice">
+	
+	<!-- count -->
+	<select id="totalcount" resultType="int">
+		SELECT
+			COUNT(*) AS CNT
+		FROM
+			NOTICE
+		WHERE
+			upper(n_IsShow)='Y' 
+	</select>
+	
+	<!-- 글목록 -->
+	<select id="noticeList" resultType="noticeVO" parameterType="noticeVO">
+		select
+		    N_NO            as no,
+		    N_TITLE         as title,
+		    N_WDATE         as wDate,
+		    N_HIT           as hit
+		from 
+			notice
+	</select>
+
+	
+	<!-- 글추가 -->
+	<insert id="insert">
+	
+	</insert>
+	
+	<!-- 글수정  -->
+	<update id="modify">
+	
+	</update>
+	
+	<!-- 글삭제 -->
+	<delete id="delete">
+	
+	</delete>
+
+</mapper>

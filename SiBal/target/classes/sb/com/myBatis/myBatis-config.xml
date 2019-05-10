@@ -42,8 +42,8 @@
 		<typeAlias alias="memberVO" type="sb.com.MemberVO.MemberVO"/>
 
 		
-		<typeAlias alias="noticeVO" type="sb.com.vo.NoticeVO" />
-		<typeAlias alias="qVO" type="sb.com.vo.QnaVO" />
+		<typeAlias alias="noticeVO" type="sb.com.vo.NoticeVo" />
+		<typeAlias alias="qVO" type="sb.com.vo.QnaVo" />
 		
 
 	</typeAliases>	

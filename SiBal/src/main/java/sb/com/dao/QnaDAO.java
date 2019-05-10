@@ -13,6 +13,6 @@ public class QnaDAO extends SqlSessionDaoSupport{
 	}
 	
 	public ArrayList getQnaList(QnaVo vo) {
-		return (ArrayList)getSqlSession().selectList("qnaBoard.qnaList");
+		return (ArrayList)getSqlSession().selectList("qnaBoard.qnaList",vo);
 	}
 }

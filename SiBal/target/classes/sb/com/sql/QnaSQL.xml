@@ -8,13 +8,13 @@
 	
 	<select id="qnaList" parameterType="qVO" resultType="qVO">
 		select * from (
-		SELECT NO, ROWNUM as rNo, p_NO as pNo, g_no as gNo, LPAD(' ', 2* (LEVEL-1)) || TITLE as title, 
-		m.id, writedate as wDate, hit
+		SELECT no, ROWNUM as rNo, p_no as pNo, g_no as gNo, LPAD('-',2*(LEVEL-1)) || TITLE as title, 
+		m.id as id, writedate as wDate, hit
 		FROM QNA q, member m
 		where q.id=m.id
-		START WITH P_NO is null
-		CONNECT BY PRIOR NO = P_NO
+		START WITH p_no=0
+		CONNECT BY PRIOR no = p_no
 		order SIBLINGS by g_no desc)
-		where rno BETWEEN #{start} and #{end}
+		where rNo BETWEEN #{start} and #{end}
 	</select>
 </mapper>

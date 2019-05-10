@@ -42,8 +42,8 @@
 		<typeAlias alias="memberVO" type="sb.com.MemberVO.MemberVO"/>
 
 		
-		<typeAlias alias="noticeVO" type="sb.com.vo.NoticeVO" />
-		<typeAlias alias="qVO" type="sb.com.vo.QnaVO" />
+		<typeAlias alias="noticeVO" type="sb.com.vo.NoticeVo" />
+		<typeAlias alias="qVO" type="sb.com.vo.QnaVo" />
 		
 
 	</typeAliases>	
@@ -56,8 +56,8 @@
 		<mapper resource="/sb/com/MemberSQL/MemberSQL.xml"/>
 
 	 
-		<mapper resource="/sb/com/sql/NoticeSQL.xml"/>
-		<mapper resource="/sb/com/sql/QnaSQL.xml"/>
+		<mapper resource="/sb/com/sql/NoticeSQL.xml" />
+		<mapper resource="/sb/com/sql/QnaSQL.xml" />
 	 
 	</mappers>
 </configuration>

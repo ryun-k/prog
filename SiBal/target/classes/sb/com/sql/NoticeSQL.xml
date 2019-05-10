@@ -15,7 +15,7 @@
 	</select>
 	
 	<!-- 글목록 -->
-	<select id="noticeList" resultType="notice" parameterType="notice">
+	<select id="noticeList" resultType="noticeVO" parameterType="noticeVO">
 		select
 		    N_NO            as no,
 		    N_TITLE         as title,

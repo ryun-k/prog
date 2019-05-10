@@ -36,6 +36,8 @@ member
 	select m_id as id,
 m_nick as nick
 from member1
+where 
+m_nick='준호'
 
 
 	</select>

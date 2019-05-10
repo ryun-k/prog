@@ -1,4 +1,4 @@
-package sb.com.MemberController;
+package sb.com.controller;
 
 import java.util.ArrayList;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import sb.com.MemberService.MemberService;
-import sb.com.MemberVO.MemberVO;
+import sb.com.service.MemberService;
+import sb.com.vo.MemberVO;
 
 @Controller
 @RequestMapping("/member")

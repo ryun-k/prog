@@ -1,4 +1,4 @@
-package sb.com.MemberVO;
+package sb.com.vo;
 
 import java.util.Date;
 

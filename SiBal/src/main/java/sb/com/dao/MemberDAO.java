@@ -1,4 +1,4 @@
-package sb.com.MemberDAO;
+package sb.com.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import sb.com.MemberVO.MemberVO;
+import sb.com.vo.MemberVO;
 
 public class MemberDAO extends SqlSessionDaoSupport{
 	@Autowired
@@ -44,18 +44,6 @@ public class MemberDAO extends SqlSessionDaoSupport{
 		session.insert("member.signUp",vo);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }

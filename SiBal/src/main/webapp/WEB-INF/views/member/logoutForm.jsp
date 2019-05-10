@@ -7,6 +7,16 @@
 <head>
 <meta charset="EUC-KR">
 <title>로그아웃</title>
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
 </head>
 <body>
 <h1>로그아웃</h1>
@@ -19,6 +29,8 @@
 </c:if>
 
 <br/>
+
+<a href="#" onclick="signOut();">Sign out</a>
 <a href="../"><button>메인가기</button></a>
 </body>
 </html>

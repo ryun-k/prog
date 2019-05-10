@@ -14,8 +14,27 @@
 <body>
 
 <div class="container">
-  <h1>list</h1>
-  <p>This is some text.</p> 
+  <h2>*공지사항*</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>NO</th>
+        <th>TITLE</th>
+        <th>HIT</th>
+        <th>DATE</th>
+      </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${LIST }" var="data">
+      <tr>
+        <td>${LIST.no }</td>
+        <td>${LIST.title }</td>
+        <td>${LIST.hit }</td>
+        <td>${LIST.wDate }</td>
+      </tr>
+    </c:forEach>
+    </tbody>
+  </table>
 </div>
 
 </body>

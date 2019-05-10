@@ -1,4 +1,4 @@
-package sb.com.MemberService;
+package sb.com.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sb.com.MemberDAO.MemberDAO;
-import sb.com.MemberVO.MemberVO;
+import sb.com.dao.MemberDAO;
+import sb.com.vo.MemberVO;
 
 
 public class MemberService {

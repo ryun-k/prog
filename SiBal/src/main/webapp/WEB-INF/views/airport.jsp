@@ -44,7 +44,7 @@
 								<td>${item.arrAirportNm}</td>
 								<td>${item.economyCharge}원</td>
 								<td>${item.vihicleId}</td>
-								<button></button>
+								<button class="a"></button>
 							</c:when>
 						</c:choose>
 					</tr>

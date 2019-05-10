@@ -1,11 +1,20 @@
 package sb.com.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import sb.com.service.NoticeService;
+import sb.com.vo.NoticeVo;
 
 @Controller
 @RequestMapping("/notice")
 public class NoticeController {
+	
+	@Autowired
+//	private NoticeService nService;
+	
+	
 	//공지사항 리스트
 	@RequestMapping("/List")
 	public void noticeList() {

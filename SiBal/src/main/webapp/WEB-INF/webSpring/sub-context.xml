@@ -32,8 +32,7 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
-	
-	<bean id="noticeDAO" class="sb.com.dao.NoticeDAO" >
+		<bean id="noticeDAO" class="sb.com.dao.NoticeDAO" >
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
 	<bean id="qnaDAO" class="sb.com.dao.QnaDAO" >
@@ -44,6 +43,11 @@
 	<bean id="noticeService" class="sb.com.service.NoticeService"/>
 	<bean id="qnaService" class="sb.com.service.QnaService"/>
 		
-
-
+	<bean id="memberDAO" class="sb.com.MemberDAO.MemberDAO">
+		<property name="sqlSessionTemplate" ref="sqlSession"/>
+	</bean>
+	
+	<bean id="memberControll" class="sb.com.MemberController.MemberController"/>
+	<bean id="memberService" class="sb.com.MemberService.MemberService"/>
+	
 </beans>

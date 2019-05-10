@@ -38,16 +38,23 @@
 	<typeAliases>
 		<typeAlias alias="int" type="java.lang.Integer"/>
 		<typeAlias alias="hMap" type="java.util.HashMap"/>
+
+		<typeAlias alias="memberVO" type="sb.com.MemberVO.MemberVO"/>
+
 		
 		<typeAlias alias="noticeVO" type="sb.com.vo.NoticeVO" />
 		<typeAlias alias="qVO" type="sb.com.vo.QnaVO" />
 		
+
 	</typeAliases>	
 	
 	<!-- myBatis에서는 쿼리문을 xml파일을 이용해서 만들어 사용한다
 			mappers요소에는  만들어진 SQL용 XML파일을 등록하는 부분이다
 	 -->
 	<mappers>
+
+		<mapper resource="/sb/com/MemberSQL/MemberSQL.xml"/>
+
 	 
 		<mapper resource="/sb/com/sql/NoticeSQL.xml"/>
 		<mapper resource="/sb/com/sql/QnaSQL.xml"/>

@@ -59,6 +59,10 @@ public class HomeController {
 		return "airport";
 	}
 	
+	@RequestMapping("/rConfirm")
+	public String rConfirm() {
+		return "rConfirm";
+	}
 	
 	
 	

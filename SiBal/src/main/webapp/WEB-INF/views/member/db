@@ -8,7 +8,8 @@ nick
 address
 phone
 photo
-
+status
+isshow
 
 myspl
 CREATE TABLE `junho`.`sbmember` (  
@@ -21,11 +22,13 @@ CREATE TABLE `junho`.`sbmember` (
 `m_address` VARCHAR(100) NULL DEFAULT NULL ,  
 `m_phone` VARCHAR(20) NULL DEFAULT NULL ,  
 `m_photo` VARCHAR(100) NULL DEFAULT NULL ,  
+`m_isshow` VARCHAR(10) NOT NULL DEFAULT 'Y' ,
+`m_status` INT(10) NOT NULL DEFAULT 1
 PRIMARY KEY (`m_no`),  
 UNIQUE (`m_id`),  
 UNIQUE (`m_email`),  
 UNIQUE (`m_nick`))   
  ENGINE = InnoDB;
  
- INSERT INTO `sbmember` (`m_no`, `m_id`, `m_pw`, `m_email`, `m_name`, `m_nick`, `m_address`, `m_phone`, `m_photo`) 
- VALUES ('1', 'jang', 'jang1234', 'nazzzzang@gmail.com', '준호', '준호', '서울시 관악구 과천대로 933 개명빌딜 302호', '010-8968-2452', NULL);
+INSERT INTO `sbmember1` (`m_no`, `m_id`, `m_pw`, `m_email`, `m_name`, `m_nick`, `m_address`, `m_phone`, `m_photo`, `m_isshow`, `m_status`) 
+VALUES ('1', 'jang', '123s', 'nazzzzang@gmail.com', '준호', '준호', NULL, NULL, NULL, 'Y', '1');

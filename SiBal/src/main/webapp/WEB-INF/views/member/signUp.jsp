@@ -36,7 +36,7 @@ function onSignIn(googleUser) {
   var image= profile.getImageUrl();
   var id= profile.getId(); 
 	document.getElementById('google').innerHTML=email+'<p/>'+name+id+
-	'<p/>'+image;
+	'<p/>'+'<img src="'+image+'">';
 }
 
 $(document).ready(function(){

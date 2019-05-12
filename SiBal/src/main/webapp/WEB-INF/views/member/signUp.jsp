@@ -18,12 +18,6 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 <script 
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-	$("#sBtn").click(function(){
-		$("#signUp").submit();
-	});
-});
-
 function onSignIn(googleUser) {
   // Useful data for your client-side scripts:
   var profile = googleUser.getBasicProfile();
@@ -37,9 +31,20 @@ function onSignIn(googleUser) {
   // The ID token you need to pass to your backend:
   var id_token = googleUser.getAuthResponse().id_token;
   console.log("ID Token: " + id_token);
-  alert('ddd'+profile.getId());
+  var email=profile.getEmail();
+  var name= profile.getName();
+  var image= profile.getImageUrl();
+  var id= profile.getId(); 
+	document.getElementById('google').innerHTML=email+'<p/>'+name+id+
+	'<p/>'+image;
 }
 
+$(document).ready(function(){
+	$("#sBtn").click(function(){
+		$("#signUp").submit();
+	});
+
+});
 </script> 
 
 </head>
@@ -76,6 +81,8 @@ function onSignIn(googleUser) {
 </form>
 
 <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+<div id='google'></div>
 
+<input type='button' id='info' value='정보보기'>
 </body>
 </html>

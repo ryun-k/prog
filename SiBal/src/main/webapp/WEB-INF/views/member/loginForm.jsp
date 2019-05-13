@@ -25,10 +25,10 @@
 <%
 		//세션에서 데이터 꺼내보자
 		//왜? 로그인 했는지 안했는지의 차이는 세션에  (특정)데이터가 있고 없고의 차이니까..
-		String id = (String)session.getAttribute("UID");
+	/* 	String id = (String)session.getAttribute("UID"); */
 	  String nick = (String)session.getAttribute("UNICK");
-	  System.out.println(id);
-	  if(id==null||id.length()==0){ 
+	  System.out.println(nick);
+	  if(nick==null||nick.length()==0){ 
 	%>
 			<%-- 로그인 안 했다면 	로그인폼  --%>
 	<form method="POST" id="loginForm" action="../member/loginProc.do">

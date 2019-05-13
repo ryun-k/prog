@@ -5,6 +5,29 @@
 
 <mapper namespace = "member">
 
+
+
+<insert id="signUp1" parameterType="memberVO">
+insert into sbmember(
+m_no,
+m_email ,
+m_pw ,  
+m_name  ,  
+m_nick ,  
+m_address  ,  
+m_phone  )
+values(
+sbmember_seq.NEXTVAL,
+#{email},
+#{pw},
+#{name},
+#{nick},
+#{addr},
+#{phone}
+)
+
+</insert>
+
 <insert id="signUp" parameterType="memberVO">
     insert into member1(m_id, m_password, m_nick ) 
     values(#{id}, #{pw}, #{nick}) 
@@ -53,6 +76,20 @@ m_nick='준호'
 	    MEMBER1
 	 WHERE
 	    M_ID = #{id}
+	    AND
+	    M_PASSWORD = #{pw}
+	</select>
+
+	<select id="loginProc1" parameterType="hMap"
+	resultType="hMap">
+	SELECT
+	    M_email            AS email,
+	    M_PASSWORD      AS PW,
+	    M_NICK          AS NICK
+	 FROM
+	    SBMEMBER
+	 WHERE
+	    M_EMAIL = #{email}
 	    AND
 	    M_PASSWORD = #{pw}
 	</select>

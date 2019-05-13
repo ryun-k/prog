@@ -55,4 +55,23 @@ public class MemberService {
 			System.out.println("service");
 			mDAO.signUpProc(vo);
 		}
+		
+		public void signUpProc1(MemberVO vo) {
+			mDAO.signUpProc1(vo);
+		}
+		
+public void loginProc1(MemberVO vo, HttpSession session) {
+			
+			HashMap map = new HashMap();
+			map.put("nick", vo.getNick());
+			map.put("pw",vo.getPw());
+			
+			HashMap result = mDAO.loginProc1(map);
+			if(result ==null || result.size()==0) {
+				System.out.println("값없음");
+			}else {
+				session.setAttribute("UNICK", result.get("NICK"));
+				System.out.println("값있음"+result.get("NICK"));
+			}
+		}
 }

@@ -44,6 +44,15 @@ public class MemberDAO extends SqlSessionDaoSupport{
 		session.insert("member.signUp",vo);
 	}
 	
-
+	public void signUpProc1(MemberVO vo) {
+		SqlSession session = this.getSqlSession();
+		session.insert("member.signUp1",vo);
+	}
+	
+	public HashMap loginProc1(HashMap map) {
+		System.out.println("DAO");
+		HashMap result = session.selectOne("member.loginProc1",map);
+		return result;
+	}
 	
 }

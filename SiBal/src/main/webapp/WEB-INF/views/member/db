@@ -1,0 +1,50 @@
+create table sbmember 
+no 
+pw
+email
+name
+nick
+address
+phone
+photo
+status
+isshow
+
+
+
+ORACLE
+create sequence SBMEMBER_seq;
+ 
+CREATE TABLE sbmember (
+m_no NUMBER	CONSTRAINT no_pk Primary Key, 
+m_email VARCHAR2(30) NOT NULL UNIQUE,
+m_pw VARCHAR2(10) NOT NULL ,  
+m_name VARCHAR2(10) NOT NULL ,  
+m_nick VARCHAR2(10) NOT NULL UNIQUE,  
+m_address VARCHAR2(100)  DEFAULT NULL ,  
+m_phone VARCHAR2(20)  DEFAULT NULL ,  
+m_photo VARCHAR2(100)  DEFAULT 'DEFAULT.PNG' ,   
+m_isshow VARCHAR2(10) DEFAULT 'Y' ,
+m_status NUMBER(10)  DEFAULT 1);
+
+myspl
+CREATE TABLE `junho`.`sbmember` (  
+`m_no` INT NOT NULL AUTO_INCREMENT ,  
+`m_id` VARCHAR(10) NOT NULL ,  
+`m_pw` VARCHAR(10) NOT NULL ,  
+`m_email` VARCHAR(30) NOT NULL ,  
+`m_name` VARCHAR(10) NOT NULL ,  
+`m_nick` VARCHAR(10) NOT NULL ,  
+`m_address` VARCHAR(100) NULL DEFAULT NULL ,  
+`m_phone` VARCHAR(20) NULL DEFAULT NULL ,  
+`m_photo` VARCHAR(100) NULL DEFAULT NULL ,  
+`m_isshow` VARCHAR(10) NOT NULL DEFAULT 'Y' ,
+`m_status` INT(10) NOT NULL DEFAULT 1
+PRIMARY KEY (`m_no`),  
+UNIQUE (`m_id`),  
+UNIQUE (`m_email`),  
+UNIQUE (`m_nick`))   
+ ENGINE = InnoDB;
+ 
+INSERT INTO `sbmember1` (`m_no`, `m_id`, `m_pw`, `m_email`, `m_name`, `m_nick`, `m_address`, `m_phone`, `m_photo`, `m_isshow`, `m_status`) 
+VALUES ('1', 'jang', '123s', 'nazzzzang@gmail.com', 'ÁØÈ£', 'ÁØÈ£', NULL, NULL, NULL, 'Y', '1');

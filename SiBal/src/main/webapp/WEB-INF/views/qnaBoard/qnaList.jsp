@@ -28,8 +28,8 @@
     <tbody>
 		<c:forEach items="${LIST}" var="data">
 			<tr>
-				<td>${data.no }</td>
-				<td><a href="../qna/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title}</a></td>
+				<td>${data.rNo }</td>
+				<td><a href="../qnaBoard/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title}</a></td>
 				<td>${data.id }</td>
 				<td>${data.wDate }</td>
 				<td>${data.hit}</td>
@@ -48,7 +48,7 @@
 				
 				<c:if test="${PINFO.startPage ne 1}">
 				<%-- 링크는 목록보기 --%>
-				<a href="../qna/qnaList.do?nowPage=${PINFO.startPage-1}">[이전]</a>
+				<a href="../qnaBoard/qnaList.do?nowPage=${PINFO.startPage-1}">[이전]</a>
 				</c:if>			 
 				
 				<%-- 2. 페이지번호 [1][2][3][4][5]만들기 --%>
@@ -56,7 +56,7 @@
 							begin="${PINFO.startPage}"
 							end="${PINFO.endPage}"   
 							step="1">
-				  <a href="../qna/qnaList.do?nowPage=${page}">[${page}]</a>
+				  <a href="../qnaBoard/qnaList.do?nowPage=${page}">[${page}]</a>
 				</c:forEach>
 				
 				
@@ -66,7 +66,7 @@
 				</c:if>
 				
 				<c:if test="${PINFO.endPage ne PINFO.totalPage}">
-				<a href="../qna/qnaList.do?nowPage=${PINFO.endPage+1}">[다음]</a></c:if>	
+				<a href="../qnaBoard/qnaList.do?nowPage=${PINFO.endPage+1}">[다음]</a></c:if>	
 			</td>
 		</tr>
 	</tbody>

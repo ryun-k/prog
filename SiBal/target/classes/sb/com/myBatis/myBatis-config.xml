@@ -56,8 +56,8 @@
 		<mapper resource="/sb/com/sql/MemberSQL.xml"/>
 
 	 
-		<mapper resource="/sb/com/sql/NoticeSQL.xml"/>
-		<mapper resource="/sb/com/sql/QnaSQL.xml"/>
+		<mapper resource="/sb/com/sql/NoticeSQL.xml" />
+		<mapper resource="/sb/com/sql/QnaSQL.xml" />
 	 
 	</mappers>
 </configuration>

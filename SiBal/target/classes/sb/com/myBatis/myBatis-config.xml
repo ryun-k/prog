@@ -40,7 +40,8 @@
 		<typeAlias alias="hMap" type="java.util.HashMap"/>
 
 		<typeAlias alias="memberVO" type="sb.com.vo.MemberVO"/>
-
+		<typeAlias alias="informationVO" type="sb.com.vo.InformationVO"/>
+		
 		
 		<typeAlias alias="noticeVO" type="sb.com.vo.NoticeVo" />
 		<typeAlias alias="qVO" type="sb.com.vo.QnaVo" />
@@ -56,6 +57,7 @@
 		<mapper resource="/sb/com/sql/MemberSQL.xml"/>
 
 	 
+		<mapper resource="/sb/com/sql/InformationSQL.xml" />
 		<mapper resource="/sb/com/sql/NoticeSQL.xml" />
 		<mapper resource="/sb/com/sql/QnaSQL.xml" />
 	 

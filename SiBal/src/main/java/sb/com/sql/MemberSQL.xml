@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "member">
+<!-- 회원정보 불러오기 -->
+<select id="memberInfo" parameterType="memberVO" resultType="memberVO">
+select 
+	m_email	 	 as email,
+	m_pw 		 as pw,  
+	m_name 		 as name,  
+	m_nick		 as nick,  
+	m_address 	 as addr,  
+	m_phone		 as phone
+from 
+	sbmember
+where 
+	m_nick=#{nick}
+</select>
+
+<!-- 회원가입 -->
+<insert id="signUp" parameterType="memberVO">
+insert into 
+	sbmember(
+		m_no,
+		m_email ,
+		m_pw ,  
+		m_name  ,  
+		m_nick ,  
+		m_address  ,  
+		m_phone  )
+	values(
+		sbmember_seq.NEXTVAL,
+		#{email},
+		#{pw},
+		#{name},
+		#{nick},
+		#{addr},
+		#{phone}
+	)
+</insert>
+
+	<!-- 로그인 본인 확인 쿼리 -->
+	<select id="loginProc" parameterType="hMap" resultType="hMap">
+	SELECT
+	    M_email            	AS email,
+	    M_PW     			AS pw,
+	    M_NICK          	AS nick
+	 FROM
+	    SBMEMBER
+	 WHERE
+	    M_EMAIL = #{email}
+	    AND
+	    M_PW = #{pw}
+	</select>
+	</mapper>

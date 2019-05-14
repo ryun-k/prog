@@ -25,16 +25,53 @@
       </tr>
     </thead>
     <tbody>
-    <c:forEach items="${LIST }" var="data">
-      <tr>
-        <td>${LIST.no }</td>
-        <td>${LIST.title }</td>
-        <td>${LIST.hit }</td>
-        <td>${LIST.wDate }</td>
-      </tr>
-    </c:forEach>
+	    <c:forEach items="${LIST }" var="data">
+	      <tr>
+	        <td>${data.no }</td>
+	        <td>${data.title }</td>
+	        <td>${data.hit }</td>
+	        <td>${data.wDate }</td>
+	      </tr>
+	    </c:forEach>
+	    
+	     <%-- 페이지 이동 --%>
+	  	
     </tbody>
   </table>
+  	<table class="table">
+		<tbody>
+			<tr>
+				<td align="center">
+					<%-- 1. 이전단추 만들기 --%>
+					<%-- PINFO는 컨트롤러에서 페이징관련정보가 담긴 모델 --%>
+					<c:if test="${PINFO.startPage eq 1}"> << </c:if>
+					
+					<c:if test="${PINFO.startPage ne 1}">
+					<%-- 링크는 목록보기 --%>
+					<a href="../notice/List.do?nowPage=${PINFO.startPage-1}"><<</a>
+					</c:if>			 
+					
+					<%-- 2. 페이지번호 [1][2][3][4][5]만들기 --%>
+					<c:forEach  var="page"
+								begin="${PINFO.startPage}"
+								end="${PINFO.endPage}"   
+								step="1">
+					  <a href="../notice/List.do?nowPage=${page}">[${page}]</a>
+					</c:forEach>
+					
+					
+					<%-- 3. 다음단추 만들기 --%>
+					<c:if test="${PINFO.endPage eq PINFO.totalPage}">
+					 >> 
+					</c:if>
+					
+					<c:if test="${PINFO.endPage ne PINFO.totalPage}">
+					<a href="../notice/List.do?nowPage=${PINFO.endPage+1}">>> </a></c:if>	
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 
 </body>

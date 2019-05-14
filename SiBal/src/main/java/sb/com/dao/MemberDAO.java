@@ -15,44 +15,23 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	@Autowired
 	SqlSessionTemplate session;
 	
-	
-	
-	public ArrayList memberList() {
-		System.out.println("DAO실행");
-		ArrayList result = (ArrayList)session.selectList("member.memberlist");
-		return result;
-//		return (ArrayList)getSqlSession().selectList("member.memberList");
-		
-	}
-
-	public MemberVO test() {
-		System.out.println("DAO");
-		MemberVO vo = session.selectOne("member.test");
-		return vo;
-	}
-	
+	//로그인 쿼리 실행
 	public HashMap loginProc(HashMap map) {
 		System.out.println("DAO");
 		HashMap result = session.selectOne("member.loginProc",map);
 		return result;
 	}
-	
+
+	//회원가입 쿼리 실행
 	public void signUpProc(MemberVO vo) {
-		System.out.println("DAO"+vo.getId());
 		SqlSession session = this.getSqlSession();
-		System.out.println("DAO"+vo.getId());
 		session.insert("member.signUp",vo);
 	}
 	
-	public void signUpProc1(MemberVO vo) {
+	//멤버정보 쿼리 실행
+	public MemberVO memberInfo(MemberVO vo) {
 		SqlSession session = this.getSqlSession();
-		session.insert("member.signUp1",vo);
+		MemberVO info = session.selectOne("member.memberInfo",vo);
+		return info;
 	}
-	
-	public HashMap loginProc1(HashMap map) {
-		System.out.println("DAO");
-		HashMap result = session.selectOne("member.loginProc1",map);
-		return result;
-	}
-	
 }

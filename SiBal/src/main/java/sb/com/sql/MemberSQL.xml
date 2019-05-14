@@ -4,93 +4,54 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "member">
-
-
-
-<insert id="signUp1" parameterType="memberVO">
-insert into sbmember(
-m_no,
-m_email ,
-m_pw ,  
-m_name  ,  
-m_nick ,  
-m_address  ,  
-m_phone  )
-values(
-sbmember_seq.NEXTVAL,
-#{email},
-#{pw},
-#{name},
-#{nick},
-#{addr},
-#{phone}
-)
-
-</insert>
-
-<insert id="signUp" parameterType="memberVO">
-    insert into member1(m_id, m_password, m_nick ) 
-    values(#{id}, #{pw}, #{nick}) 
-</insert>
-
-
-
-	<select id="memberlist" resultType="memberVO">
-	
-	select 
-U_NO as no,
-U_ID as id,
-U_PW as pw,
-U_NAME as name,
-U_NICK as nick,
-U_BIRTH as birth,
-U_GENDER as gender,
-U_STATE as state,
-U_JOINDATE as joindate,
-U_LOGINDATE as logindate,
-U_CHECK as check1,
-U_PHOTO as photo
+<!-- 회원정보 불러오기 -->
+<select id="memberInfo" parameterType="memberVO" resultType="memberVO">
+select 
+	m_email	 	 as email,
+	m_pw 		 as pw,  
+	m_name 		 as name,  
+	m_nick		 as nick,  
+	m_address 	 as addr,  
+	m_phone		 as phone
 from 
-member
-	
-	</select>	
-	
-	<select id = "test" resultType="memberVO" >
-	select m_id as id,
-m_nick as nick
-from member1
+	sbmember
 where 
-m_nick='준호'
+	m_nick=#{nick}
+</select>
 
+<!-- 회원가입 -->
+<insert id="signUp" parameterType="memberVO">
+insert into 
+	sbmember(
+		m_no,
+		m_email ,
+		m_pw ,  
+		m_name  ,  
+		m_nick ,  
+		m_address  ,  
+		m_phone  )
+	values(
+		sbmember_seq.NEXTVAL,
+		#{email},
+		#{pw},
+		#{name},
+		#{nick},
+		#{addr},
+		#{phone}
+	)
+</insert>
 
-	</select>
-	
-	
-	<select id="loginProc" parameterType="hMap"
-	resultType="hMap">
+	<!-- 로그인 본인 확인 쿼리 -->
+	<select id="loginProc" parameterType="hMap" resultType="hMap">
 	SELECT
-	    M_ID            AS ID,
-	    M_PASSWORD      AS PW,
-	    M_NICK          AS NICK
-	 FROM
-	    MEMBER1
-	 WHERE
-	    M_ID = #{id}
-	    AND
-	    M_PASSWORD = #{pw}
-	</select>
-
-	<select id="loginProc1" parameterType="hMap"
-	resultType="hMap">
-	SELECT
-	    M_email            AS email,
-	    M_PASSWORD      AS PW,
-	    M_NICK          AS NICK
+	    M_email            	AS email,
+	    M_PW     			AS pw,
+	    M_NICK          	AS nick
 	 FROM
 	    SBMEMBER
 	 WHERE
 	    M_EMAIL = #{email}
 	    AND
-	    M_PASSWORD = #{pw}
+	    M_PW = #{pw}
 	</select>
 	</mapper>

@@ -22,20 +22,22 @@
 <body>
 	<div class="container">
 	  <h2>질문하기</h2>
-	  <form action="../qnaBoard/qWriteProc.do">
+	  <form action="../qnaBoard/qnaModifyProc.do">
+	 	<input type="hidden" name="oriNo" value="${VIEW.no}" />
+		<input type="hidden" name="nowPage" value="${nowPage}" />
 	    <div class="form-group">
 	      <label for="title">제목:</label>
-	      <input type="text" class="form-control" id="title" name="title">
+	      <input type="text" class="form-control" id="title" name="title" value="${VIEW.title}">
 	    </div>
 	    <div class="form-group">
 	      <label for="content">내용:</label>
-	      <textarea class="form-control" rows="5" id="content" name="content"></textarea>
+	      <textarea class="form-control" rows="5" id="content" name="content">${VIEW.content}</textarea>
 	    </div>
 	    <div class="form-group">
 	      <label for="id">작성자</label>
-	      <input type="text" class="form-control" id="id" name="id" >
+	      <input type="text" class="form-control" id="id" name="id" value="${VIEW.id}">
 	    </div>
-	    <button type="submit" class="btn btn-dark">질문하기</button>
+	    <button type="submit" class="btn btn-dark">수정하기</button>
 	    <button type="button" class="btn btn-dark" id="cBtn">취소</button>
 	  </form>
 	</div>

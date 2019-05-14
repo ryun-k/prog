@@ -73,12 +73,29 @@ public class QnaService {
 		QnaVo vo = qDAO.getQnaView(oriNo);
 		return vo;
 	}
-
+	
+	// 답변하기
 	public void insertA(HttpSession session, QnaVo vo) {
 //		String id = (String)session.getAttribute("UID");
 //		vo.setId(id);
-		qDAO.insertA(vo);
 		
+		vo.getRef();
+		vo.setStep(vo.getStep()+1);
+		vo.setDepth(vo.getDepth()+1);
+		vo.setpNo(vo.getNo());
+		// 관련글이 같고 순서번호가 1증가 시킨 값과 같거나 큰 데이터들의 순서번호를 모두 1증가시킨다.
+		qDAO.updateStep(vo);
+		qDAO.insertA(vo);
+	}
+	
+	// 수정하기
+	public void  updateQna(QnaVo vo) {
+		qDAO.updateQna(vo);
+	}
+	
+	// 삭제하기
+	public void deleteQna(int oriNo) {
+		qDAO.deleteQna(oriNo);	
 	}
 	
 }

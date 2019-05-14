@@ -16,13 +16,17 @@
 	
 	<!-- 글목록 -->
 	<select id="noticeList" resultType="noticeVO" parameterType="noticeVO">
-		select
-		    N_NO            as no,
-		    N_TITLE         as title,
-		    N_WDATE         as wDate,
-		    N_HIT           as hit
-		from 
-			notice
+		select *
+		from
+		    (select
+		        row_number() over(order by n_No DESC) AS rno,
+		        N_NO            as no,
+		        N_TITLE         as title,
+		        N_WDATE         as wDate,
+		        N_HIT           as hit    
+		    from notice)
+		where 
+		    RNO BETWEEN #{start} AND #{end}
 	</select>
 
 	

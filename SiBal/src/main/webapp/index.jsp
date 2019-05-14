@@ -16,6 +16,7 @@
 <a href="../sb/member/logoutProc.do"><button>로그아웃</button></a><br/><br/>
 
 <a href="../sb/member/memberList.do"><button>멤버리스트</button></a><br/><br/>
+<a href="../sb/qnaBoard/qnaList.do"><button>질문리스트</button></a><br/><br/>
 <a href="../sb/member/test.do"><button>테스트</button></a><br/><br/>
 </body>
 </html>

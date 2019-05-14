@@ -37,7 +37,24 @@ public class NoticeDAO extends SqlSessionDaoSupport{
 	}
 	
 	//상세보기
+	public NoticeVo getView(int oriNo) {
+		return (NoticeVo)getSqlSession().selectOne("notice.viewNotice",oriNo);
+	}
+	
+	
+	//조회수증가
+	public void hitNotice(int oriNo) {
+		getSqlSession().update("notice.updatehit",oriNo);
+	}
+	
+	//글수정
+	public void modifyNotice(NoticeVo vo,int oriNo) {
+		getSqlSession().update("notice.updateNotice",oriNo);
+	}
 	
 	
 	//글삭제
+	public void deleteNotice(int oriNo) {
+		getSqlSession().delete("notice.deleteNotice",oriNo);
+	}
 }

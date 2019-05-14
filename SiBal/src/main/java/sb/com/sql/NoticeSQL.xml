@@ -40,6 +40,15 @@
 	</insert>
 	
 	<!-- 글수정  -->
+	<update id="hit">
+		UPDATE NOTICE 
+		SET 
+			hit = hit+1 
+		WHERE 
+			no= #{oriNo}
+	</update>
+	
+	<!-- 글수정  -->
 	<update id="modify">
 	
 	</update>

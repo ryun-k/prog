@@ -14,13 +14,19 @@ public class NoticeVo {
 	private int hit;
 	private String isshow;
 	
-	//pageing
-	
 	private int start;
 	private int end;
 	
+	private int oriNo;
 	
 	
+	
+	public int getOriNo() {
+		return oriNo;
+	}
+	public void setOriNo(int oriNo) {
+		this.oriNo = oriNo;
+	}
 	public String getIsshow() {
 		return isshow;
 	}

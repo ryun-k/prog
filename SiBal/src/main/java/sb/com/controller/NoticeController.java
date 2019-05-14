@@ -3,6 +3,7 @@ package sb.com.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,8 +75,17 @@ public class NoticeController {
 	
 	//조회수 처리
 	@RequestMapping("/hitProc")
-	public void noticeHitProc() {
+	public ModelAndView	noticeHitProc(ModelAndView mv, HttpServletRequest req, HttpSession session) {
+		String  strOriNo= req.getParameter("oriNo");
+		int     oriNo = Integer.parseInt(strOriNo);
+		String  nowPage = req.getParameter("nowPage"); 
+		nService.hitNotice(oriNo);
+		RedirectView rv = new RedirectView("../notice/View.do");
 		
+		rv.addStaticAttribute("oriNo", oriNo);
+		rv.addStaticAttribute("nowPage", nowPage);
+		mv.setView(rv);
+		return mv;
 	}
 	
 	//공지사항 수정 폼

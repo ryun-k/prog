@@ -4,6 +4,34 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "member">
+<!-- 회원탈퇴 -->
+<update id="withdraw" parameterType="memberVO">
+
+update 
+	sbmember
+set
+	m_status = '0'
+where 
+	m_nick = #{nick}
+and
+	m_pw = #{pw}
+</update>
+
+
+<!-- 회원정보 수정하기 -->
+<update id="infoModify" parameterType="memberVO" >
+Update 
+	sbmember
+set 
+	m_pw 		= #{pw},
+	m_name 		= #{name},  
+	m_nick 		= #{nick},  
+	m_address 	= #{addr},  
+	m_phone 	= #{phone}
+where 
+	m_email 	= #{email}
+</update>
+
 <!-- 회원정보 불러오기 -->
 <select id="memberInfo" parameterType="memberVO" resultType="memberVO">
 select 

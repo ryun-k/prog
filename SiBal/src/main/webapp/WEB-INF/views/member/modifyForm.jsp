@@ -6,10 +6,19 @@
 
 
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>회원정보수정</title>
 <script 
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#mBtn").click(function(){
+		if($("#pw").val() != $("#pw2").val()){
+			alert("비밀번호를 알맞게 입력하세요");
+		}
+	});
+});
 
+</script>
 
 </head>
 <body>
@@ -18,7 +27,9 @@
 <table width="500" border="1" align="center">
 <tr>
 	<td>email</td> 
-	<td>${INFO.email} </td>
+	<input type="hidden" name="email" value="${INFO.email}">
+	<td>${INFO.email}</td>
+	
 </tr>
 
 
@@ -55,7 +66,7 @@
 </table>
 
 <br/>
-<input type="submit" id="ssBtn" value="수정하기">
+<input type="submit" id="mBtn" value="수정하기">
 </form>
 
 </body>

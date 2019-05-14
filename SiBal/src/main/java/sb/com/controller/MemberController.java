@@ -1,6 +1,5 @@
 package sb.com.controller;
 
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -58,22 +57,48 @@ public class MemberController {
 	
 	//회원가입처리
 	@RequestMapping("/signUpProc")
-	public ModelAndView signUpProc(MemberVO vo) {
+	public ModelAndView signUpProc(MemberVO vo,ModelAndView mv) {
 		mService.signUpProc(vo);
-		ModelAndView mv = new ModelAndView();
 		RedirectView rv = new RedirectView("../member/loginForm.do");
 		mv.setView(rv);
 		return mv;
 	}
 	//회원정보수정
 	@RequestMapping("/modifyForm")
-	public ModelAndView modifyform(MemberVO vo,HttpSession session) {
+	public ModelAndView modifyForm(MemberVO vo,HttpSession session,ModelAndView mv) {
 		String nick = (String)session.getAttribute("nick");
 		vo.setNick(nick);
 		MemberVO info = mService.memberInfo(vo);
-		ModelAndView mv = new ModelAndView();
 		mv.addObject("INFO",info);
 		mv.setViewName("member/modifyForm");
+		return mv;
+	}
+	
+	//회원정보 수정처리
+	@RequestMapping("/modifyProc")
+	public ModelAndView modifyProc(MemberVO vo,HttpSession session,ModelAndView mv) {
+		mService.modifyProc(vo,session);
+		mv.setViewName("member/loginForm");
+		return mv;
+	}
+	
+	//회원탈퇴 폼
+	@RequestMapping("/withdrawForm")
+	public ModelAndView withdrawForm(MemberVO vo, HttpSession session,ModelAndView mv) {
+		String nick = (String)session.getAttribute("nick");
+		vo.setNick(nick);
+		MemberVO info = mService.memberInfo(vo);
+		mv.addObject("INFO",info);
+		mv.setViewName("member/withdrawForm");
+		return mv;
+	}
+	//회원탈퇴 처리
+	@RequestMapping("/withdrawProc")
+	public ModelAndView withdrawProc(MemberVO vo,HttpSession session,ModelAndView mv,HttpServletRequest request) {
+		String nick = (String)session.getAttribute("nick");
+		vo.setNick(nick);
+		mService.withdraw(vo,request);
+		mv.setViewName("member/loginForm");
 		return mv;
 	}
 }

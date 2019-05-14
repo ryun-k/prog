@@ -16,7 +16,7 @@
     <c:when test="${not empty sessionScope.nick }">    
         <li><a href="../sb/member/logoutProc.do"><button>로그아웃</button></a><br/><br/></li>
         <li><a href="../sb/member/modifyForm.do"><button>회원정보수정</button></a><br/><br/></li>
-        <li><a href="#"><button>회원탈퇴</button></a><br/><br/></li>
+        <li><a href="../sb/member/withdrawForm.do"><button>회원탈퇴</button></a><br/><br/></li>
         <%
 	  String nick = (String)session.getAttribute("nick");
         %>

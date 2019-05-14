@@ -12,7 +12,7 @@ public class NoticeVo {
 	private Date endDate;
 	private Date wDate;
 	private int hit;
-	
+	private String isshow;
 	
 	//pageing
 	
@@ -21,6 +21,12 @@ public class NoticeVo {
 	
 	
 	
+	public String getIsshow() {
+		return isshow;
+	}
+	public void setIsshow(String isshow) {
+		this.isshow = isshow;
+	}
 	public int getStart() {
 		return start;
 	}

@@ -13,13 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import sb.com.util.AirVO;
+import sb.com.vo.AirVO;
 import sb.com.util.ApiExplorer;
 import sb.com.util.MyUtils;
 
-/**
- * Handles requests for the application home page.
- */
+
 @Controller
 public class HomeController {
 	
@@ -39,30 +37,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("/airportForm")
-	public String airportForm() {
-		return "airportForm";
-	}
 	
-	@RequestMapping(value="/airport", method = RequestMethod.POST)
-	public String airport(AirVO airVO, Model model) throws Exception{
-		Map<String, String> result = MyUtils.getAirportId();
-		String depAirportId = result.get(airVO.getDepAirportNm());
-		String arrAirportId = result.get(airVO.getArrAirportNm());
-		String depPlandTime = airVO.getDepPlandTime();
-		String arrPlandTime = airVO.getArrPlandTime();
-		List<AirVO> go = ApiExplorer.getAirportJson(depAirportId, arrAirportId, depPlandTime);
-		List<AirVO> back = ApiExplorer.getAirportJson(depAirportId, arrAirportId, arrPlandTime);
-		
-		model.addAttribute("go", go);
-		model.addAttribute("back", back);
-		return "airport";
-	}
-	
-	@RequestMapping("/rConfirm")
-	public String rConfirm() {
-		return "rConfirm";
-	}
 	
 	
 	

@@ -50,7 +50,7 @@
 	<bean id="memberDAO" class="sb.com.dao.MemberDAO">
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
-	
+	<bean id="qnaControll" class="sb.com.controller.QnaController"/>
 	<bean id="memberControll" class="sb.com.controller.MemberController"/>
 	<bean id="memberService" class="sb.com.service.MemberService"/>
 	

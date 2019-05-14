@@ -26,25 +26,27 @@
 		<table class="table table-striped">
 			<thead align="center">
 				<tr align="center">
+					<th>번호</th>
 					<th>항공사</th>
 					<th>출발지</th>
 					<th>도착지</th>
 					<th>가격</th>
 					<th>비행기</th>
-					<th>예매</th>
 				</tr>
 			</thead>
-			<c:forEach var="item" items="${go}">
+			<c:forEach var="item" varStatus="status" items="${go}">
 				<tbody align="center">
 					<tr align="center">
 						<c:choose>
 							<c:when test="${item.economyCharge!=null}">
+								<td>${status.count}</td>
 								<td>${item.airlineNm}</td>
 								<td>${item.depAirportNm}</td>
 								<td>${item.arrAirportNm}</td>
 								<td>${item.economyCharge}원</td>
-								<td>${item.vihicleId}</td>
-								<button class="a"></button>
+								<td>${item.vihicleId}
+									<button class="reserve">예매</button>
+								</td>
 							</c:when>
 						</c:choose>
 					</tr>
@@ -61,6 +63,7 @@
 		<table class="table table-striped">
 			<thead align="center">
 				<tr align="center">
+					<th>번호</th>
 					<th>항공사</th>
 					<th>출발지</th>
 					<th>도착지</th>
@@ -68,16 +71,19 @@
 					<th>비행기</th>
 				</tr>
 			</thead>
-			<c:forEach var="item" items="${back}">
+			<c:forEach var="item" varStatus="status" items="${back}">
 				<tbody align="center">
 					<tr align="center">
 						<c:choose>
 							<c:when test="${item.economyCharge!=null}">
+								<td>${status.count}</td>
 								<td>${item.airlineNm}</td>
 								<td>${item.depAirportNm}</td>
 								<td>${item.arrAirportNm}</td>
 								<td>${item.economyCharge}원</td>
-								<td>${item.vihicleId}</td>
+								<td>${item.vihicleId}
+								<button class="reserve">예매</button>
+								</td>
 							</c:when>
 						</c:choose>
 					</tr>
@@ -86,15 +92,14 @@
 		</table>
 	</div>
 	<br>
-	<br>
-	<a href='/iedu/airportForm.do'>돌아가기</a>
+	<a href='/sb/airportForm.do'>돌아가기</a>
 </body>
 </html>
 <%-- 	항공사 : ${item.airlineNm}<br> --%>
-	<%-- 	출발지 : ${item.depAirportNm}<br> --%>
-	<%-- 	출발시간 : ${item.depPlandTime}<br> --%>
-	<%-- 	도착지 : ${item.arrAirportNm}<br> --%>
-	<%-- 	도착시간 : ${item.arrPlandTime}<br> --%>
-	<%-- 	가격 : ${item.economyCharge}<br> --%>
-	<%-- 	비즈니스석 수수료 : ${item.prestigeCharge}<br> --%>
-	<%-- 	비행기번호 : ${item.vihicleId}<br> --%>
+<%-- 	출발지 : ${item.depAirportNm}<br> --%>
+<%-- 	출발시간 : ${item.depPlandTime}<br> --%>
+<%-- 	도착지 : ${item.arrAirportNm}<br> --%>
+<%-- 	도착시간 : ${item.arrPlandTime}<br> --%>
+<%-- 	가격 : ${item.economyCharge}<br> --%>
+<%-- 	비즈니스석 수수료 : ${item.prestigeCharge}<br> --%>
+<%-- 	비행기번호 : ${item.vihicleId}<br> --%>

@@ -9,7 +9,8 @@
 <title>Home</title>
 </head>
 <body>
-<form action="/iedu/airport.do" method="post">
+
+<form action="/sb/airport/airport.do" method="post">
 	출발 : <input type="text" name="depAirportNm"><br/>
 	도착 : <input type="text" name="arrAirportNm"><br/>
 	가는날 : <input type="text" name="depPlandTime"><br/>

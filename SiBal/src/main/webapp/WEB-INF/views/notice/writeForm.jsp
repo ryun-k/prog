@@ -10,12 +10,61 @@
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 	
+ 	<script type="text/javascript">
+ 	
+ 	  $( function() {
+	    $( "#startDate" ).datepicker();
+        $( "#startDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+        $( "#endDate" ).datepicker();
+        $( "#endDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+ 	 } );
+
+
+ 	</script>
 </head>
 <body>
 
 <div class="container">
   <h1>writeForm</h1>
-  <p>This is some text.</p> 
+  <form class="form-horizontal" action="../notice/writeProc.do" method="get">
+    <div class="form-group">
+      <label class="control-label col-sm-2" >제목</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="title" name="title">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="content">내용</label>
+      <div class="col-sm-10">          
+        <textarea type="text" class="form-control" id="content" name="content"></textarea>
+      </div>
+    </div>
+    
+	<div class="form-group">
+      <label class="control-label col-sm-2" >시작일</label>
+      <div class="col-sm-10">          
+		<input type="text" class="form-control"  id="startDate" name="startDate" size="30"/> 
+      </div>
+      <label class="control-label col-sm-2" >종료일</label>
+      <div class="col-sm-10">          
+		<input type="text" class="form-control"  id="endDate"  name="endDate" size="30"/>
+      </div>
+    </div> 
+       
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label><input type="checkbox" name="isshow" value="Y" >공개</label>
+        </div>
+      </div>
+    </div>
+        <button type="submit" class="btn btn-primary">글쓰기</button>
+  </form>
 </div>
 
 </body>

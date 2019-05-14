@@ -18,60 +18,35 @@ public class MemberService {
 		@Autowired
 		private MemberDAO mDAO;
 		
-		public ArrayList memberList() {
-			ArrayList list = mDAO.memberList();
-			System.out.println("service실행");
-			return list;
-		}
-		
-		public MemberVO test() {
-			MemberVO result  = mDAO.test();
-			System.out.println("service");
-			return result;
-			
-		}
-		
+		//로그인처리
 		public void loginProc(MemberVO vo, HttpSession session) {
-			
 			HashMap map = new HashMap();
-			map.put("id", vo.getId());
+			map.put("email", vo.getEmail());
 			map.put("pw",vo.getPw());
 			
 			HashMap result = mDAO.loginProc(map);
 			if(result ==null || result.size()==0) {
 				System.out.println("값없음");
 			}else {
-				session.setAttribute("UID", result.get("ID"));
-				session.setAttribute("UNICK", result.get("NICK"));
+				session.setAttribute("nick", result.get("NICK"));
 				System.out.println("값있음"+result.get("NICK"));
 			}
 		}
-		
+
+		//로그아웃 처리
 		public void logoutProc(HttpServletRequest request) {
-			request.getSession().removeAttribute("UID");
+			request.getSession().removeAttribute("nick");
 		}
 		
+		//회원가입 처리
 		public void signUpProc(MemberVO vo) {
-			System.out.println("service");
 			mDAO.signUpProc(vo);
 		}
 		
-		public void signUpProc1(MemberVO vo) {
-			mDAO.signUpProc1(vo);
-		}
-		
-public void loginProc1(MemberVO vo, HttpSession session) {
-			
-			HashMap map = new HashMap();
-			map.put("nick", vo.getNick());
-			map.put("pw",vo.getPw());
-			
-			HashMap result = mDAO.loginProc1(map);
-			if(result ==null || result.size()==0) {
-				System.out.println("값없음");
-			}else {
-				session.setAttribute("UNICK", result.get("NICK"));
-				System.out.println("값있음"+result.get("NICK"));
-			}
+		//회원정보 불러오기
+		public MemberVO memberInfo(MemberVO vo) {
+			System.out.println(vo.getNick());
+			MemberVO info =mDAO.memberInfo(vo);
+			return info;
 		}
 }

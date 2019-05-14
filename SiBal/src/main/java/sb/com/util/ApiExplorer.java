@@ -15,6 +15,8 @@ import org.json.simple.parser.JSONParser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import sb.com.vo.AirVO;
+
 public class ApiExplorer {
 	public static String getAirportData(String depAirportId, String arrAirportId, String depPlandTime)
 			throws IOException {

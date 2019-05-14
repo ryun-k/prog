@@ -1,4 +1,4 @@
-package sb.com.util;
+package sb.com.vo;
 
 public class AirVO {
 	private String airlineNm;

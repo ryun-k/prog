@@ -48,9 +48,10 @@ public class InformationService {
 		
 		for(int i=0; i<list.size(); i++) {
 
-			vo.setOriNo(vo.getNo());
+			vo.setOriNo(vo.getOriNo());
 			HashMap map =(HashMap)list.get(i);	
 			vo.setPath((String)map.get("path"));
+			
 			vo.setOriName((String)map.get("oriName"));
 			vo.setSaveName((String)map.get("saveName"));
 			vo.setLen((Long)map.get("len"));
@@ -86,4 +87,57 @@ public class InformationService {
 			iDAO.updateHit(No);
 		}
 	}
+	
+	//상세보기 요청 처리함수
+	public InformationVO getInformationView(int No) {
+		InformationVO vo = iDAO.getInformationView(No);
+		return vo;
+	}
+	
+	//첨부파일 검색 요청 처리함수
+	public ArrayList getImageInfo(int oriNo) {
+		ArrayList list = iDAO.getImageInfo(oriNo);
+		return list;
+	}
+	
+	//검색하기 요청함수 처리함수-- 페이징처리를 위한 정보
+	public PageUtil getSearchPage(InformationVO vo, int nowPage) {
+		int searchCount = iDAO.getSearchCount(vo); //검색에 따른 총 게시물수조회
+		System.out.println("검색에 따른 총 게시물수="+ searchCount );
+		
+		PageUtil pageInfo = new PageUtil(nowPage,searchCount,5,5);
+		return pageInfo;
+	}
+	
+	//검색하기 요청함수 처리함수--목록에 뿌릴 자료
+	public ArrayList getSearchList(PageUtil pInfo,String target,String word) {	
+		int start = (pInfo.getNowPage()-1) * pInfo.getListCount()+1;
+		int end   = start + pInfo.getListCount() -1;
+		
+		InformationVO vo = new InformationVO();
+		vo.setStart(start);
+		vo.setEnd(end);
+		vo.setTarget(target);
+		vo.setWord(word);
+		
+		ArrayList searchList = iDAO.getSearchList(vo);
+		System.out.println("서비스 searchList.size()="+searchList.size());
+		return searchList;
+	}
+
+	//게시물 수정 요청 처리함수
+	public void  updateInformation(InformationVO vo) {
+		iDAO.updateInformation(vo);
+	}
+	
+	//첨부파일정보 삭제 요청 처리함수
+	public void deleteInfo(int oriNo) {
+		iDAO.deleteInfo(oriNo);
+	}
+	
+	public void insertImageInfo(InformationVO vo) {
+		iDAO.insertInformation(vo,"imageInfo");
+	}
+	
+	
 }

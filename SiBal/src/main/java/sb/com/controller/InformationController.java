@@ -59,6 +59,24 @@ public class InformationController {
 		return mv;
 	}
 	
+	//3.상세보기-2)상세보기   요청함수
+	@RequestMapping("/informationView")
+	public ModelAndView informationView(@RequestParam(value="No") int No,
+			@RequestParam(value="nowPage") int nowPage) {
+		InformationVO  vo = iService.getInformationView(No);
+		
+		ArrayList list = iService.getImageInfo(No);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("VIEW",vo);//누가 어떤 제목과 내용으로 언제..
+		mv.addObject("LIST",list);//첨부파일목록
+		mv.addObject("nowPage",nowPage); //릴레이용
+		
+		
+		mv.setViewName("/information/informationView");
+		return mv;
+	}
+	
 	//글쓰기 폼보기
 	@RequestMapping("/informationWriteForm")
 	public String informationWriteForm() throws Exception{
@@ -70,34 +88,13 @@ public class InformationController {
 	@RequestMapping("/informationWriteProc")
 	public ModelAndView informationWriteProc(InformationVO vo, HttpSession session, ModelAndView mv){
 		System.out.println("fileWriteProc()컨트롤러함수 호출성공");
-		//1.파라미터 받기
 		
-		//2.비즈니스로직을 서비스위임
-		/*서버로 데이터가 전송되면 업로드 파일은 임시 폴더에 자동 저장된다.
-		  해당 컨트롤러 실행이 끝나면 이  파일은 자동 삭제된다.*/
-		//파일을 정보를 알아낸다
-		
-		//파일을 만들때에는 어디(폴더)에 무슨 이름으로 만들것인지 지정해야 한다
-		//new File(어디에, 무슨이름);
-		//폴더명은   다운로드일경우에는 원하는 폴더를 지정
-		//참고      폴더명은  만약에 web에서 보여줄 목적이라면 getRealPath()를 이용해서 만들어야 한다
-		
-		
-		/*알아낸 파일정보를 토대로하여 임시 저장된 파일을 임시폴더에서 복사해서*/
 		String path = "D:\\uploads";
-		//String path = "D:\\test\\upload";
-		
-		//업로드된 파일이 여러개일경우에는
-		//파일의 정보가 배열에 기억되므로  배열을 이용해서 각 파일의 정보를 받아야 한다
-		
-		//파일의 정보를 하나라 묶기 위한 변수
 		ArrayList list = new ArrayList();
 		
 		for( int i=0; i<vo.getFiles().length ;i++) {
-			//파일이름을 알아내기
 			String oriName = vo.getFiles()[i].getOriginalFilename();
 			
-			//파일이 업로드 되지 않을 경우   다음 파일을 업로드해라..
 			if( oriName==null || oriName.length()==0 ) {
 				continue;
 			}
@@ -107,17 +104,17 @@ public class InformationController {
 			try {
 				File file = new File(path, saveName);
 		
-			   	//강제로 특정폴더에 실제 업로드(복사)시켜 줘야 한다
-				//.transferTo()를 이용해서 복사
 				vo.getFiles()[i].transferTo(file);
 			
-				//위의 코드까지는 하나의 파일이 업로드된 상태이다
-				//업로드된 파일은 정보를 Map()으로 묶자
 				HashMap map = new HashMap();
 				map.put("path", path);	//저장된 경로
+				System.out.println("path="+path);
 				map.put("oriName", oriName);//원래이름
+				System.out.println("oriName="+oriName);
 				map.put("saveName", saveName);//저장된이름
+				System.out.println("saveName="+saveName);
 				map.put("len", file.length());//파일크기
+				System.out.println("len="+file.length());
 			
 				list.add(map);
 				
@@ -133,18 +130,163 @@ public class InformationController {
 		iService.inserInformation(vo, session, list);
 		System.out.println("insert문실행 후 no="+vo.getNo());
 		
-		//3.모델
-		//4.뷰: 리다이렉트 : 목록보기
 		RedirectView rv = new RedirectView("../information/informationList.do");
-	    //필요시 리다이렉트뷰에도 파라미터를 추가하여 보낼 수 있다
-		//rv.addStaticAttribute(name, value);
-		                       //("downloadFile", new File(~,~))~~~~~~~~~~~~   
-		
-		
 		
 		mv.setView(rv);
 		return mv;
 	}
 	
+	@RequestMapping("/informationSearch")
+	public ModelAndView informationSearch(HttpServletRequest request, ModelAndView mv) {
+		//1.파라메터받기
+		String target= request.getParameter("target");
+		String word  = request.getParameter("word");
+		
+		
+		String strNowPage = request.getParameter("nowPage");
+		int	nowPage = 1; //선택
+		
+		if(strNowPage==null || strNowPage.length()==0) {
+			nowPage = 1;
+		}
+		else {
+			nowPage = Integer.parseInt(strNowPage);
+		}
+		
+		//2.비즈니스로직 >서비스에게
+		InformationVO  vo= new InformationVO();
+		vo.setTarget(target);
+		vo.setWord(word);
+		System.out.println( "vo.getTarget()="+vo.getTarget());
+		System.out.println( "vo.getWord()  ="+vo.getWord());
+		System.out.println( "nowPage ="+nowPage);
+		
+		PageUtil pInfo = iService.getSearchPage(vo, nowPage);
+
+		ArrayList list = iService.getSearchList(pInfo,target,word);
+		
+		
+		//3.모델
+		mv.addObject("target", target);
+		mv.addObject("word", word);
+		mv.addObject("LIST", list); //게시물내용
+		mv.addObject("PINFO", pInfo);//페이징처리
+		
+		mv.setViewName("information/informationSearch");
+		return mv;
+	}
 	
+	@RequestMapping("/informationUpdateForm")
+	public ModelAndView  informationUpdateForm(HttpServletRequest request, ModelAndView mv) {
+		String strNo = request.getParameter("No");
+		int    No    = Integer.parseInt(strNo);
+		String nowPage  = request.getParameter("nowPage");
+		
+		InformationVO  vo = iService.getInformationView(No); 
+		
+		mv.addObject("VIEW",vo);
+		mv.addObject("nowPage",nowPage);
+
+		mv.setViewName("information/informationUpdateForm");	
+		return mv;
+	}
+	
+	//4.수정하기-2)수정하기
+	@RequestMapping("/informationUpdateProc")
+	public ModelAndView informationUpdateProc(InformationVO vo,ModelAndView mv, RedirectView rv) {
+
+		System.out.println("vo.getOriNo()="+vo.getOriNo());
+		System.out.println("vo.getNowPage()="+vo.getNowPage());
+
+		boolean isUpload = false; 
+		
+		for(int i=0; i<vo.getFiles().length ;i++) {
+
+			String tempName = vo.getFiles()[i].getOriginalFilename();
+			if( tempName!=null && tempName.length()!=0) {
+
+				isUpload = true;
+
+				break;
+			}
+		}
+			
+		String path = "D:\\uploads";
+		ArrayList fileList = new ArrayList(); 
+				
+		if(isUpload) {
+			for( int i=0; i<vo.getFiles().length ;i++) {			
+				String oriName = vo.getFiles()[i].getOriginalFilename();
+						
+				if( oriName==null || oriName.length()==0 ) {
+					continue;
+				}
+				
+				String saveName = FileUtil.renameTo(path, oriName);			
+				File file = new File(path, saveName);
+		
+				try {
+					vo.getFiles()[i].transferTo(file);
+				} catch (Exception e) {
+					System.out.println("수정폼 파일업로드관련 에러="+e);
+					e.printStackTrace();
+				}
+			
+				HashMap map = new HashMap();
+				map.put("path", path);	//저장된 경로
+				map.put("oriName", oriName);//원래이름
+				map.put("saveName", saveName);//저장된이름
+				map.put("len", file.length());//파일크기
+			
+				fileList.add(map);
+			}//for
+		}//if	
+				
+		iService.updateInformation(vo);	
+		
+		//기존의 파일 모두를 삭제
+		if(isUpload == true) {
+			//삭제해야할 파일의 정보를 알아오자.. 첨부파일모두
+			ArrayList list = iService.getImageInfo(vo.getOriNo());
+			
+			if( list !=null && list.size()!=0 ) {//첨부파일이 있으면
+				for(int i=0; i<list.size() ;i++) {//첨부파일의 개수만큼하기위한 
+					InformationVO tempVo= (InformationVO)list.get(i);
+					// 해당 파일을 File객체로 만들어서 한 개씩 파일의 정보를 꺼낼 예정
+					// 삭제할 파일의 이름이 다 다르므로..
+					File tempFile= new File(path,tempVo.getSaveName());	
+					
+					//삭제한다
+					tempFile.delete();		
+				}
+			}
+			
+			//DB에서 첨부파일정보를 삭제하자
+			iService.deleteInfo(vo.getOriNo());
+	
+			
+			for(int i=0; i<fileList.size() ;i++) {
+				InformationVO vo1 = new InformationVO();
+				vo1.setOriNo( vo.getOriNo() );
+				vo1.setPath( path );
+				
+				HashMap tempMap = (HashMap)fileList.get(i);
+
+				vo1.setOriName((String)tempMap.get("oriName"));//원래이름
+				vo1.setSaveName((String)tempMap.get("saveName"));//저장된이름
+				vo1.setLen((java.lang.Long)tempMap.get("len"));//파일크기
+				
+				iService.insertImageInfo(vo1);
+			}//for
+			
+		}//end of if(isUpload == true) {
+		
+		
+		rv.setUrl("../information/informationView.do");
+		rv.addStaticAttribute("oriNo"  , vo.getOriNo()  );
+		rv.addStaticAttribute("nowPage", vo.getNowPage());
+		mv.setView(rv);
+		return mv;
+	}
+
 }

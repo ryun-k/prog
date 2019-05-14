@@ -29,7 +29,7 @@
 				
 				//추가할 폼을 만든다
 				var tr = "<tr><th>첨부파일</th>";
-				tr +="<td><input type='file' name='files' id='files"+count+"'></td></tr>";
+				tr +="<td><input type='file' name='files' id='files"+count+"' class='img'><img id='siba' src='#' alt=' ' width='200' height='130'/></td></tr>";
 				
 				//원하는 위치에 배치시킨다
 				$("#copy").before(tr);
@@ -49,6 +49,25 @@
 				count--;
 			});
 		});
+		$(document).ready(function(){ 
+			function readURL(input) { 
+				var files = event.target.files;
+				for(var i=0; i<files.length; i++){
+				if (input.files && input.files[i]) {
+					var reader = new FileReader(); 
+					reader.onload = function (e) { 
+						$('#siba').attr('src', e.target.result);
+					} 
+					reader.readAsDataURL(input.files[i]); 
+					}
+				}
+				}
+				$(".img").change(function(){ 
+					readURL(this); 
+				}); 
+			});
+
+		
 	</script>
 </head>
 <body>
@@ -61,7 +80,7 @@
   	<table border="1" width="800" align="center">
   		<tr>
   			<th>작성자</th>
-  			<td></td>
+  			<td><input type="text" name="writer" id="writer"></td>
   		</tr>
   		<tr>
   			<th>제목</th>
@@ -80,7 +99,9 @@
   		</tr>
   		<tr>
   			<th>첨부파일</th>
-  			<td><input type="file" name="files" id="files"></td>
+  			<td><input type="file" name="files" id="files" class="img"/>
+  				<img id="siba" src="#" alt=" " width="200" height="130"/>
+  			</td>
   		</tr>		
   		<tr id="copy">
   			<td colspan="2" align="center">

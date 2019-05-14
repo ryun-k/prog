@@ -38,7 +38,7 @@
 	<bean id="qnaDAO" class="sb.com.dao.QnaDAO" >
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
-	<bean id="infomationDAO" class="sb.com.dao.InformationDAO" >
+	<bean id="informationDAO" class="sb.com.dao.InformationDAO" >
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
 		

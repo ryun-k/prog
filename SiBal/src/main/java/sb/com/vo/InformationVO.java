@@ -1,5 +1,7 @@
 package sb.com.vo;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +30,22 @@ public class InformationVO {
 	private int  start;
 	private int  end;
 	
+	private String target;
+	private String word;
+		
+	
+	public String getTarget() {
+		return target;
+	}
+	public void setTarget(String target) {
+		this.target = target;
+	}
+	public String getWord() {
+		return word;
+	}
+	public void setWord(String word) {
+		this.word = word;
+	}
 	public int getRno() {
 		return rno;
 	}
@@ -107,6 +125,11 @@ public class InformationVO {
 	public void setBody(String body) {
 		this.body = body;
 	}
+	//천단위마다 컴마찍기
+	public String getComma() {
+		DecimalFormat form = new DecimalFormat("###,###,###");
+		return form.format(len);
+	}
 	public String getWriter() {
 		return writer;
 	}
@@ -119,8 +142,19 @@ public class InformationVO {
 	public void setFiles(MultipartFile[] files) {
 		this.files = files;
 	}
-	public Date getWriteDate() {
-		return writeDate;
+	public String getWriteDate() {
+		SimpleDateFormat form1 = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat form2 = new SimpleDateFormat("hh:mm:ss");
+		
+		String now   = form1.format(new Date()); //현재일시정보의 포맷변경
+		String wDay  = form1.format(writeDate); //글작성일정보의 포맷변경
+		
+		if( !now.equals(wDay) ) { //오늘날짜를 작성일과 비교하여 동일하지않을 경우
+			return wDay;
+		}
+		else { //작성일이 오늘날짜와 동일하면
+			return form2.format(writeDate);
+		}
 	}
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;

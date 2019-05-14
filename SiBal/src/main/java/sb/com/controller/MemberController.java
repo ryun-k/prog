@@ -84,4 +84,25 @@ public class MemberController {
 		mv.setView(rv);
 		return mv;
 	}
+	
+	//회원가입처리1
+	@RequestMapping("/signUpProc1")
+	public ModelAndView signUpProc1(MemberVO vo) {
+		mService.signUpProc1(vo);
+		ModelAndView mv = new ModelAndView();
+		RedirectView rv = new RedirectView("../member/loginForm.do");
+		mv.setView(rv);
+		return mv;
+	}
+	
+	@RequestMapping("/loginProc1")
+	public ModelAndView loginProc1(MemberVO vo, HttpSession session) {
+		System.out.println("loginProc1");
+		mService.loginProc1(vo,session);
+		ModelAndView mv = new ModelAndView();
+		RedirectView rv = new RedirectView("../member/loginForm.do");
+		mv.setView(rv);
+		System.out.println(session.getId());
+		return mv;
+	}
 }

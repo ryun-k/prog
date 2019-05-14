@@ -8,6 +8,22 @@
 		upper(i_IsShow)='Y' 
 	</sql>
 	
+	<sql id="searchField">
+	<if test="target eq 'title'">
+			i_Title 	LIKE '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'body'">	
+			i_Body  	LIKE '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'writer'">	
+			i_Writer LIKE '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'both'">	
+			( i_Title 	LIKE '%'||#{word}||'%'
+			  OR
+			  i_Body  	LIKE '%'||#{word}||'%' )
+		</if>
+	</sql>
 	
 	<!-- 총 데이터 개수 조회 쿼리 -->
 	<select id="totalCount" resultType="int">
@@ -21,14 +37,30 @@
 	
 	<!-- 목록 -->
 	<select id="informationList" resultType="informationVO" parameterType="informationVO">
-		select
-		    I_NO            as no,
-		    I_TITLE         as title,
-		    I_WRITEDATE     as writeDate,
-		    I_WRITER		as writer,
-		    I_HIT           as hit
-		from 
-			INFORMATION
+		SELECT
+		    *
+		FROM (		SELECT
+			i_No       AS no,
+			i_Title    AS title, 
+			i_writeDate     AS writeDate,	
+			i_Hit      AS hit, 
+		        i_Writer   AS writer,
+		        NVL(T1.CNT,0) AS fileCount, 
+		        row_number() over(order by i_No DESC) AS rno
+		    FROM
+		        INFORMATION,
+		        (SELECT
+		            COUNT(*) AS CNT, 
+		            FI_ORINO
+		        FROM 
+		            IMAGEINFO
+		        GROUP BY FI_ORINO) T1
+		    WHERE
+				upper(i_IsShow)='Y' 
+		        AND
+		         INFORMATION.i_No=T1.FI_ORINO(+))
+		 WHERE
+		    RNO BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 데이터입력 쿼리문  -->                   
@@ -41,11 +73,112 @@
 	</insert>
 	
 	<!-- 파일정보 데이터입력 쿼리문 -->
+	
 	<insert id="insertimageInfo" parameterType="informationVO">
 	INSERT INTO	imageInfo
 	VALUES(	(SELECT NVL(MAX(fi_No),0)+1 FROM imageInfo),
 	#{oriNo},#{path},#{oriName},#{saveName},#{len})
 	</insert>
 	
+	<!-- 조회수 증가  -->	
+	<update id="updateHit" parameterType="int">
+		UPDATE INFORMATION
+		SET i_Hit = i_Hit+1
+		WHERE i_No = #{no}
+	</update>
+	
+	<!-- 상세보기 -->
+	<resultMap id="clobView" type="informationVO">
+		<result property="body"   column="i_Body"
+						jdbcType="CLOB"		javaType="java.lang.String"/>				
+	</resultMap>
+	<select id="informationView" resultMap="clobView" parameterType="int">	
+		SELECT
+			i_No	AS no,
+			i_Title AS title,
+			i_WriteDate AS writeDate,
+			i_Hit AS hit,
+			i_Writer   AS writer,
+			i_Body	<!-- as를 이용한 alias처리하지말것! -->
+		FROM
+		    INFORMATION
+		WHERE
+		    i_No = #{no}
+		    AND
+		    <include refid="isShow"/>
+	</select>
+	
+	<!-- 첨부 파일!! 검색  -->
+	<select id="imageInfo" parameterType="int" resultType="informationVO">
+		SELECT
+		  	fi_No			as 	no,
+			fi_OriNo		as 	oriNo,
+			fi_Path			as 	path,
+			fi_OriName	as 	oriName,
+			fi_SaveName	as 	saveName,
+			fi_Length		as 	len
+		FROM IMAGEINFO
+		WHERE fi_OriNo = #{oriNo}
+	</select>
+	
+		 <!-- 검색 결과 데이터 개수 구하기 -->
+	<select id="informationsearchCount" parameterType="informationVO" resultType="int">
+		SELECT
+		    COUNT(*) AS CNT
+		FROM
+		    INFORMATION
+		WHERE
+		  <include refid="searchField"/>
+			AND
+			<include refid="isShow"/>
+	</select>
+	 
+	<!-- 검색 결과를 반영한 목록조회 -->
+	<select id="informationsearchList" parameterType="informationVO" 
+					resultType="informationVO">
+		SELECT
+		    *
+		FROM (		SELECT
+			i_No       AS no,
+			i_Title    AS title, 
+			i_writeDate     AS writeDate,	
+			i_Hit      AS hit, 
+		        i_Writer   AS writer,
+		        NVL(T1.CNT,0) AS fileCount, 
+		        row_number() over(order by i_No DESC) AS rno
+		    FROM
+		        INFORMATION,
+		        (SELECT
+		            COUNT(*) AS CNT, 
+		            FI_ORINO
+		        FROM 
+		            IMAGEINFO
+		        GROUP BY FI_ORINO) T1
+		    WHERE
+		        <include refid="isShow"/>
+		        AND
+		         INFORMATION.i_No=T1.FI_ORINO(+)
+		        AND
+		        <include refid="searchField"/>)
+		 WHERE
+		    RNO BETWEEN #{start} AND #{end}			
+	</select>
+	
+	<!-- 게시물 수정 쿼리문	-->
+	<update id="updateInformation"  parameterType="informationVO">
+		UPDATE FILEBOARD
+		SET i_Title =#{title},
+				i_Body  =#{body},
+		WHERE
+				i_No=#{oriNo}
+	</update>
+	
+	
+	<!-- 기존 첨부파일 정보 삭제 -->
+	<delete id="informationdeleteInfo" parameterType="int">
+		DELETE FROM IMAGEINFO
+	  WHERE  
+	  	fi_OriNo=#{oriNo}
+	</delete> 
 	
 </mapper>

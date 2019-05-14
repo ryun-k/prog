@@ -16,6 +16,14 @@ public class QnaVo {
 	private int start;
 	private int end;
 	
+	private int oriNo;
+	
+	public int getOriNo() {
+		return oriNo;
+	}
+	public void setOriNo(int oriNo) {
+		this.oriNo = oriNo;
+	}
 	public int getrNo() {
 		return rNo;
 	}
@@ -49,6 +57,15 @@ public class QnaVo {
 	public String getContent() {
 		return content;
 	}
+	
+	public String getBrContent() {
+		String result="";
+		if(content!=null && content.length()!=0) {
+			result = content.replace("\r\n", "<br/>");
+		}
+		return result;
+	}
+	
 	public void setContent(String content) {
 		this.content = content;
 	}

@@ -16,7 +16,7 @@ public class NoticeService {
 	public PageUtil getPageInfo(int nowPage) {
 		//총 데이터 개수 구하자
 		int totalCount = nDAO.getTotalCount();
-		
+		System.out.println("totalCount "+totalCount);
 		PageUtil pageInfo = new PageUtil(nowPage,totalCount,5,5);
 		return pageInfo;
 	}
@@ -33,5 +33,11 @@ public class NoticeService {
 		
 		ArrayList list = nDAO.getNoticeList(vo);
 		return list;
+	}
+	
+	//insert
+	public void insertNotice(NoticeVo vo) {
+		System.out.println("insertNotice()");
+		nDAO.insertNotice(vo);
 	}
 }

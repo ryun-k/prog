@@ -31,8 +31,12 @@
 
 	
 	<!-- 글추가 -->
-	<insert id="insert">
-	
+	<insert id="insert" parameterType="noticeVO">
+		INSERT INTO NOTICE 
+  		VALUES	(
+  		(SELECT NVL(MAX(N_NO),0)+1 FROM NOTICE), 
+  		#{title}, #{content}, #{startDate}, #{endDate}, SYSDATE, 0, #{isshow}
+  		)
 	</insert>
 	
 	<!-- 글수정  -->

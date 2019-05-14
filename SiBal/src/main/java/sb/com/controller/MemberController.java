@@ -21,29 +21,12 @@ public class MemberController {
 	@Autowired
 	private MemberService mService; 
 	
-	@RequestMapping("/memberList")
-	public ModelAndView MemberList() {
-		ArrayList list = mService.memberList();
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("LIST",list);
-		mv.setViewName("/member/memberList");
-		System.out.println("memberlist();");
-		return mv;
-	}
-	@RequestMapping("/test")
-	public ModelAndView test() {
-		System.out.println("test");
-		MemberVO vo= mService.test();
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("VIEW",vo);
-		mv.setViewName("/member/test");
-		System.out.println(vo.getId());
-		return mv;
-	}
+	//로그인폼
 	@RequestMapping("/loginForm")
 	public String loginForm() {
 		return "member/loginForm";
 	}
+	//로그인처리
 	@RequestMapping("/loginProc")
 	public ModelAndView loginProc(MemberVO vo, HttpSession session) {
 		System.out.println("loginProc");
@@ -51,17 +34,15 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		RedirectView rv = new RedirectView("../member/loginForm.do");
 		mv.setView(rv);
-		System.out.println(session.getId());
 		return mv;
 	}
+	//로그아웃폼
 	@RequestMapping("/logoutForm")
 	public void logoutForm() {
-		
 	}
-	
+	//로그아웃처리
 	@RequestMapping("/logoutProc")
 	public ModelAndView logoutProc(HttpServletRequest request) {
-		System.out.println("logoutProc");
 		mService.logoutProc(request);
 		ModelAndView mv = new ModelAndView();
 		RedirectView rv = new RedirectView("../member/logoutForm.do");
@@ -74,35 +55,25 @@ public class MemberController {
 	public String SignUp() {
 		return "member/signUp";
 	}
-	//회원가입 처리
+	
+	//회원가입처리
 	@RequestMapping("/signUpProc")
-	public ModelAndView SignUpProc(MemberVO vo) {
-		System.out.println("signUpProc");
+	public ModelAndView signUpProc(MemberVO vo) {
 		mService.signUpProc(vo);
 		ModelAndView mv = new ModelAndView();
-		RedirectView rv = new RedirectView("../member/loginProc.do");
-		mv.setView(rv);
-		return mv;
-	}
-	
-	//회원가입처리1
-	@RequestMapping("/signUpProc1")
-	public ModelAndView signUpProc1(MemberVO vo) {
-		mService.signUpProc1(vo);
-		ModelAndView mv = new ModelAndView();
 		RedirectView rv = new RedirectView("../member/loginForm.do");
 		mv.setView(rv);
 		return mv;
 	}
-	
-	@RequestMapping("/loginProc1")
-	public ModelAndView loginProc1(MemberVO vo, HttpSession session) {
-		System.out.println("loginProc1");
-		mService.loginProc1(vo,session);
+	//회원정보수정
+	@RequestMapping("/modifyForm")
+	public ModelAndView modifyform(MemberVO vo,HttpSession session) {
+		String nick = (String)session.getAttribute("nick");
+		vo.setNick(nick);
+		MemberVO info = mService.memberInfo(vo);
 		ModelAndView mv = new ModelAndView();
-		RedirectView rv = new RedirectView("../member/loginForm.do");
-		mv.setView(rv);
-		System.out.println(session.getId());
+		mv.addObject("INFO",info);
+		mv.setViewName("member/modifyForm");
 		return mv;
 	}
 }

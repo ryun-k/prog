@@ -24,11 +24,11 @@
 </head>
 <body>
 <h1>로그아웃</h1>
-<c:if test="${not empty sessionScope.UID}">
+<c:if test="${not empty sessionScope.nick}">
 <input type = "button" id="logout" value="로그아웃">
 </c:if>
 
-<c:if test="${empty sessionScope.UID}">
+<c:if test="${empty sessionScope.nick}">
 <h2>로그아웃 되었습니다.</h2>
 </c:if>
 

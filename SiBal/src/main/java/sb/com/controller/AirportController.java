@@ -29,7 +29,7 @@ public class AirportController {
 		String depPlandTime = airVO.getDepPlandTime();
 		String arrPlandTime = airVO.getArrPlandTime();
 		List<AirVO> go = ApiExplorer.getAirportJson(depAirportId, arrAirportId, depPlandTime);
-		List<AirVO> back = ApiExplorer.getAirportJson(depAirportId, arrAirportId, arrPlandTime);
+		List<AirVO> back = ApiExplorer.getAirportJson(arrAirportId,depAirportId , arrPlandTime);
 		
 		model.addAttribute("go", go);
 		model.addAttribute("back", back);

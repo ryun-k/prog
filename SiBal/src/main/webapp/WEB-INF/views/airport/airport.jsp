@@ -16,6 +16,16 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script >
+$(document).ready(function(){
+	$("button.reserve").click(function(){
+	//alert(  this)
+		alert(  $(this).val() );
+		
+		//$(this).value='';
+	})
+});
+</script>
 <title>Home</title>
 </head>
 <body>
@@ -34,11 +44,14 @@
 					<th>비행기</th>
 				</tr>
 			</thead>
-			<c:forEach var="item" varStatus="status" items="${go}">
-				<tbody align="center">
-					<tr align="center">
+			<tbody align="center">
+				<c:forEach var="item" varStatus="status" items="${go}">
+					<tr align="center" id="t${status.count}">
 						<c:choose>
 							<c:when test="${item.economyCharge!=null}">
+								<form actionb="">
+									<input type="hidden" name="" value="${item.airlineNm}" />
+								</form>
 								<td>${status.count}</td>
 								<td>${item.airlineNm}</td>
 								<td>${item.depAirportNm}</td>
@@ -46,12 +59,13 @@
 								<td>${item.economyCharge}원</td>
 								<td>${item.vihicleId}
 									<button class="reserve">예매</button>
+									<!-- <input type="button" class="reserve" value="예매"/> -->
 								</td>
 							</c:when>
 						</c:choose>
 					</tr>
-				</tbody>
-			</c:forEach>
+				</c:forEach>
+			</tbody>
 		</table>
 	</div>
 	<br>
@@ -92,7 +106,7 @@
 		</table>
 	</div>
 	<br>
-	<a href='/sb/airportForm.do'>돌아가기</a>
+	<a href='/sb//airport/airportForm.do'>돌아가기</a>
 </body>
 </html>
 <%-- 	항공사 : ${item.airlineNm}<br> --%>

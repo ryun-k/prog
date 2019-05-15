@@ -29,7 +29,7 @@ public class MemberService {
 				System.out.println("값없음");
 			}else {
 				session.setAttribute("nick", result.get("NICK"));
-				System.out.println("값있음"+result.get("NICK"));
+				System.out.println("nick있음="+result.get("NICK"));
 			}
 		}
 
@@ -48,5 +48,18 @@ public class MemberService {
 			System.out.println(vo.getNick());
 			MemberVO info =mDAO.memberInfo(vo);
 			return info;
+		}
+		
+		//회원정보 수정처리,닉네임의 세션을 새로 바꿔준 닉네임으로 변경,
+		public void modifyProc(MemberVO vo,HttpSession session) {
+			 mDAO.modifyProc(vo);
+			 session.setAttribute("nick", vo.getNick());
+		}
+		
+		//회원 탈퇴 , status를 바꿔주고 세션도 죽인다.
+		public void withdraw(MemberVO vo,HttpServletRequest request) {
+			mDAO.withdraw(vo);
+			request.getSession().removeAttribute("nick");
+			System.out.println(vo.getStatus());
 		}
 }

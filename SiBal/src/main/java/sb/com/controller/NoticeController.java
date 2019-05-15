@@ -3,11 +3,14 @@ package sb.com.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import sb.com.service.NoticeService;
 import sb.com.util.PageUtil;
@@ -48,8 +51,17 @@ public class NoticeController {
 	
 	//공지사항 상세보기
 	@RequestMapping("/View")
-	public void noticeView() {
+	public ModelAndView noticeView(@RequestParam(value="oriNo") int oriNo, @RequestParam(value="nowPage") int nowPage) {
+		System.out.println("noticeView진입");
+		System.out.println("oriNo "+oriNo);
+		NoticeVo vo = nService.viewNotice(oriNo);
+		System.out.println("viewNotice 서비스종료");
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("VIEW",vo);
+		mv.addObject("nowPage",nowPage);
+		mv.setViewName("notice/View");
 		
+		return mv;
 	}
 	
 	//공지사항 글쓰기폼
@@ -60,25 +72,64 @@ public class NoticeController {
 	
 	//공지사항 글쓰기 처리
 	@RequestMapping("/writeProc")
-	public void noticeWriteProc() {
+	public ModelAndView noticeWriteProc(NoticeVo vo,ModelAndView mv) {
+		System.out.println("writeProc 진입");
+		nService.insertNotice(vo);
+		System.out.println("nService종료");
 		
+		RedirectView rv = new RedirectView("../notice/List.do");
+		mv.setView(rv);
+		return mv;
 	}
 	
 	//조회수 처리
 	@RequestMapping("/hitProc")
-	public void noticeHitProc() {
+	public ModelAndView	noticeHitProc(ModelAndView mv, HttpServletRequest req, HttpSession session) {
+		String  strOriNo= req.getParameter("oriNo");
+		int     oriNo = Integer.parseInt(strOriNo);
+		String  nowPage = req.getParameter("nowPage"); 
+		nService.hitNotice(oriNo);
+		RedirectView rv = new RedirectView("../notice/View.do");
 		
+		rv.addStaticAttribute("oriNo", oriNo);
+		rv.addStaticAttribute("nowPage", nowPage);
+		mv.setView(rv);
+		return mv;
 	}
 	
 	//공지사항 수정 폼
 	@RequestMapping("/modifyForm")
-	public void noticeModifyForm() {
+	public ModelAndView noticeModifyForm(HttpServletRequest req, ModelAndView mv) {
+		String strOriNo = req.getParameter("oriNo");
+		int    oriNo    = Integer.parseInt(strOriNo);
+		String nowPage  = req.getParameter("nowPage");
+		System.out.println("modifyForm oriNo "+oriNo);
+		NoticeVo vo = nService.modifyNotice(oriNo);
+		
+		System.out.println(vo.getNo());
+		System.out.println(vo.getOriNo());
+		System.out.println(vo.getTitle());
+		System.out.println(vo.getContent());
+		System.out.println(vo.getStartDate());
+		System.out.println(vo.getEndDate());
+		System.out.println(vo.getwDate());
+		System.out.println(vo.getHit());
+		System.out.println(vo.getIsshow());
+		
+		
+		
+		
+		mv.addObject("DATA",vo);
+		mv.addObject("nowPage",nowPage);
+		mv.setViewName("notice/modifyForm");
+		return mv;
 		
 	}
 	
 	//공지사항 글쓰기 처리
 	@RequestMapping("/modifyProc")
-	public void noticeModifyProc() {
+	public void noticeModifyProc(ModelAndView mv, HttpServletRequest req) {
+		
 		
 	}
 	

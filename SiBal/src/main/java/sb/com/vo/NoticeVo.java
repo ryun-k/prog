@@ -12,15 +12,27 @@ public class NoticeVo {
 	private Date endDate;
 	private Date wDate;
 	private int hit;
-	
-	
-	//pageing
+	private String isshow;
 	
 	private int start;
 	private int end;
 	
+	private int oriNo;
 	
 	
+	
+	public int getOriNo() {
+		return oriNo;
+	}
+	public void setOriNo(int oriNo) {
+		this.oriNo = oriNo;
+	}
+	public String getIsshow() {
+		return isshow;
+	}
+	public void setIsshow(String isshow) {
+		this.isshow = isshow;
+	}
 	public int getStart() {
 		return start;
 	}

@@ -3,19 +3,74 @@ package sb.com.vo;
 import java.sql.Date;
 
 public class QnaVo {
+	
 	private int no;
 	private int pNo;
-	private int gNo;
 	private String title;
 	private String content;
 	private String id;
 	private Date wDate;
 	private int hit;
 	private int rNo; // rownum
+	private int ref;
+	private int step;
+	private int depth;
 	
 	private int start;
 	private int end;
 	
+	private int oriNo;
+	private int nowPage;
+	
+	private String target;
+	private String word;
+	
+	
+	public int getNowPage() {
+		return nowPage;
+	}
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
+	public String getTarget() {
+		return target;
+	}
+	public void setTarget(String target) {
+		this.target = target;
+	}
+	public String getWord() {
+		return word;
+	}
+	public void setWord(String word) {
+		this.word = word;
+	}
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+	public int getStep() {
+		return step;
+	}
+	public void setStep(int step) {
+		this.step = step;
+	}
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+	
+	
+	
+	public int getOriNo() {
+		return oriNo;
+	}
+	public void setOriNo(int oriNo) {
+		this.oriNo = oriNo;
+	}
 	public int getrNo() {
 		return rNo;
 	}
@@ -34,12 +89,6 @@ public class QnaVo {
 	public void setpNo(int pNo) {
 		this.pNo = pNo;
 	}
-	public int getgNo() {
-		return gNo;
-	}
-	public void setgNo(int gNo) {
-		this.gNo = gNo;
-	}
 	public String getTitle() {
 		return title;
 	}
@@ -49,6 +98,15 @@ public class QnaVo {
 	public String getContent() {
 		return content;
 	}
+	
+	public String getBrContent() {
+		String result="";
+		if(content!=null && content.length()!=0) {
+			result = content.replace("\r\n", "<br/>");
+		}
+		return result;
+	}
+	
 	public void setContent(String content) {
 		this.content = content;
 	}

@@ -40,13 +40,10 @@
 		<typeAlias alias="hMap" type="java.util.HashMap"/>
 
 		<typeAlias alias="memberVO" type="sb.com.vo.MemberVO"/>
-<<<<<<< HEAD
 		<typeAlias alias="airVO" type="sb.com.vo.AirVO"/>
 
-=======
 		<typeAlias alias="informationVO" type="sb.com.vo.InformationVO"/>
 		
->>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
 		
 		<typeAlias alias="noticeVO" type="sb.com.vo.NoticeVo" />
 		<typeAlias alias="qVO" type="sb.com.vo.QnaVo" />

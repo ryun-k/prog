@@ -31,7 +31,6 @@
     </c:otherwise>                  
 </c:choose>
 
-<a href="../sb/member/logoutProc.do"><button>·Î±×¾Æ¿ô</button></a><br/><br/>
 <a href="../sb/information/informationList.do">²ó</a><br/><br/>
 
 <a href="../sb/member/memberList.do"><button>¸â¹ö¸®½ºÆ®</button></a><br/><br/>

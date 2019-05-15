@@ -23,6 +23,14 @@
 	</repositories>
 	
 	<dependencies>
+	
+	<!-- 메일보내기 -->
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-email</artifactId>
+		<version>1.5</version>
+	</dependency>
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

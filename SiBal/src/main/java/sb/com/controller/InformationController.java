@@ -33,7 +33,6 @@ public class InformationController {
 			HttpServletRequest request) {
 		
 		PageUtil pInfo = iService.getPageInfo(nowPage);
-		
 		ArrayList list = iService.getInformationList(pInfo);
 		
 		request.setAttribute("LIST", list);
@@ -45,27 +44,65 @@ public class InformationController {
 	public ModelAndView	informationHitProc(ModelAndView mv,
 			HttpServletRequest req,HttpSession session) {
 		
-		String  strNo= req.getParameter("No");
-		int     No = Integer.parseInt(strNo);
+		String  stroriNo= req.getParameter("oriNo");
+		int     oriNo = Integer.parseInt(stroriNo);
 		String  nowPage = req.getParameter("nowPage"); //릴레이용
 		
-		iService.updateHit(No, session);
+		iService.updateHit(oriNo, session);
 		
 		RedirectView rv = new RedirectView("../information/informationView.do");
 		
-		rv.addStaticAttribute("No", No);
+		rv.addStaticAttribute("oriNo", oriNo);
 		rv.addStaticAttribute("nowPage", nowPage);
 		mv.setView(rv);
 		return mv;
 	}
 	
-	//3.상세보기-2)상세보기   요청함수
-	@RequestMapping("/informationView")
-	public ModelAndView informationView(@RequestParam(value="No") int No,
-			@RequestParam(value="nowPage") int nowPage) {
-		InformationVO  vo = iService.getInformationView(No);
+	//상세보기 조회수 
+		@RequestMapping("/noGoodProc")
+		public ModelAndView	informationNoGoodProc(ModelAndView mv,
+				HttpServletRequest req,HttpSession session) {
+			
+			String  stroriNo= req.getParameter("oriNo");
+			int     oriNo = Integer.parseInt(stroriNo);
+			String  nowPage = req.getParameter("nowPage"); //릴레이용
+			
+			iService.updateNoGood(oriNo, session);
+			
+			RedirectView rv = new RedirectView("../information/informationView.do");
+			
+			rv.addStaticAttribute("oriNo", oriNo);
+			rv.addStaticAttribute("nowPage", nowPage);
+			mv.setView(rv);
+			return mv;
+		}
+		//상세보기 조회수 
+		@RequestMapping("/goodProc")
+		public ModelAndView	informationGoodProc(ModelAndView mv,
+				HttpServletRequest req,HttpSession session) {
+			
+			String  stroriNo= req.getParameter("oriNo");
+			int     oriNo = Integer.parseInt(stroriNo);
+			String  nowPage = req.getParameter("nowPage"); //릴레이용
+			
+			iService.updateGood(oriNo, session);
+			
+			RedirectView rv = new RedirectView("../information/informationView.do");
+			
+			rv.addStaticAttribute("oriNo", oriNo);
+			rv.addStaticAttribute("nowPage", nowPage);
+			mv.setView(rv);
+			return mv;
+		}
 		
-		ArrayList list = iService.getImageInfo(No);
+	
+	//3.상세보기 
+	@RequestMapping("/informationView")
+	public ModelAndView informationView(@RequestParam(value="oriNo") int oriNo,
+			@RequestParam(value="nowPage") int nowPage) {
+		InformationVO  vo = iService.getInformationView(oriNo);
+		
+		ArrayList list = iService.getImageInfo(oriNo);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("VIEW",vo);//누가 어떤 제목과 내용으로 언제..
@@ -138,13 +175,13 @@ public class InformationController {
 	
 	@RequestMapping("/informationSearch")
 	public ModelAndView informationSearch(HttpServletRequest request, ModelAndView mv) {
-		//1.파라메터받기
+
 		String target= request.getParameter("target");
 		String word  = request.getParameter("word");
 		
 		
 		String strNowPage = request.getParameter("nowPage");
-		int	nowPage = 1; //선택
+		int	nowPage = 1;
 		
 		if(strNowPage==null || strNowPage.length()==0) {
 			nowPage = 1;
@@ -153,7 +190,6 @@ public class InformationController {
 			nowPage = Integer.parseInt(strNowPage);
 		}
 		
-		//2.비즈니스로직 >서비스에게
 		InformationVO  vo= new InformationVO();
 		vo.setTarget(target);
 		vo.setWord(word);
@@ -166,23 +202,23 @@ public class InformationController {
 		ArrayList list = iService.getSearchList(pInfo,target,word);
 		
 		
-		//3.모델
 		mv.addObject("target", target);
 		mv.addObject("word", word);
-		mv.addObject("LIST", list); //게시물내용
-		mv.addObject("PINFO", pInfo);//페이징처리
+		mv.addObject("LIST", list);
+		mv.addObject("PINFO", pInfo);
 		
 		mv.setViewName("information/informationSearch");
 		return mv;
 	}
 	
+	//수정폼
 	@RequestMapping("/informationUpdateForm")
 	public ModelAndView  informationUpdateForm(HttpServletRequest request, ModelAndView mv) {
-		String strNo = request.getParameter("No");
-		int    No    = Integer.parseInt(strNo);
+		String stroriNo = request.getParameter("oriNo");
+		int    oriNo    = Integer.parseInt(stroriNo);
 		String nowPage  = request.getParameter("nowPage");
 		
-		InformationVO  vo = iService.getInformationView(No); 
+		InformationVO  vo = iService.getInformationView(oriNo); 
 		
 		mv.addObject("VIEW",vo);
 		mv.addObject("nowPage",nowPage);
@@ -191,7 +227,7 @@ public class InformationController {
 		return mv;
 	}
 	
-	//4.수정하기-2)수정하기
+	//4.수정하기
 	@RequestMapping("/informationUpdateProc")
 	public ModelAndView informationUpdateProc(InformationVO vo,ModelAndView mv, RedirectView rv) {
 
@@ -244,24 +280,20 @@ public class InformationController {
 				
 		iService.updateInformation(vo);	
 		
-		//기존의 파일 모두를 삭제
 		if(isUpload == true) {
-			//삭제해야할 파일의 정보를 알아오자.. 첨부파일모두
+
 			ArrayList list = iService.getImageInfo(vo.getOriNo());
 			
 			if( list !=null && list.size()!=0 ) {//첨부파일이 있으면
 				for(int i=0; i<list.size() ;i++) {//첨부파일의 개수만큼하기위한 
 					InformationVO tempVo= (InformationVO)list.get(i);
-					// 해당 파일을 File객체로 만들어서 한 개씩 파일의 정보를 꺼낼 예정
-					// 삭제할 파일의 이름이 다 다르므로..
-					File tempFile= new File(path,tempVo.getSaveName());	
+
+		File tempFile= new File(path,tempVo.getSaveName());	
 					
-					//삭제한다
 					tempFile.delete();		
 				}
 			}
 			
-			//DB에서 첨부파일정보를 삭제하자
 			iService.deleteInfo(vo.getOriNo());
 	
 			
@@ -279,8 +311,7 @@ public class InformationController {
 				iService.insertImageInfo(vo1);
 			}//for
 			
-		}//end of if(isUpload == true) {
-		
+		}
 		
 		rv.setUrl("../information/informationView.do");
 		rv.addStaticAttribute("oriNo"  , vo.getOriNo()  );
@@ -288,5 +319,28 @@ public class InformationController {
 		mv.setView(rv);
 		return mv;
 	}
-
+	@RequestMapping("/informationDelete")
+	public ModelAndView informationDelete(@RequestParam(value="oriNo") int oriNo, ModelAndView mv) {
+		
+		InformationVO vo=new InformationVO();
+		vo.setOriNo(oriNo);
+		System.out.println("vo.getOriNo()="+vo.getOriNo());
+		int cnt = iService.informationDelete(vo);
+		
+		RedirectView rv = null;
+		System.out.println("컨트롤러 cnt="+cnt);
+		if(cnt==0) { //상세보기(삭제실패시)
+			System.out.println("cnt==0");
+			rv = new RedirectView("../information/informationView.do");
+			rv.addStaticAttribute("oriNo",   vo.getOriNo());
+			rv.addStaticAttribute("nowPage", vo.getNowPage()); //릴레이용
+		}
+		else {
+			//목록보기(삭제성공시)
+			System.out.println("cnt!=0");
+			rv = new RedirectView("../information/informationList.do");
+		}
+		mv.setView(rv);
+		return mv; 
+	}
 }

@@ -24,14 +24,14 @@ public class QnaController {
 	
 	// 목록보기
 	@RequestMapping("/qnaList")
-	public void qnaList(@RequestParam(value="nowPage", required=false, 	defaultValue="1") int nowPage, HttpServletRequest request){
+	public void qnaList(@RequestParam(value="nowPage", required=false, 	defaultValue="1") int nowPage, HttpServletRequest req){
 		
 		PageUtil pInfo = qService.getPageInfo(nowPage);
 		
 		ArrayList list = qService.getQnaList(pInfo);
 		
-		request.setAttribute("LIST", list);
-		request.setAttribute("PINFO", pInfo);
+		req.setAttribute("LIST", list);
+		req.setAttribute("PINFO", pInfo);
 		
 	}
 	// 질문하기 폼
@@ -78,17 +78,62 @@ public class QnaController {
 	}
 	
 	// 답변하기 폼
-		@RequestMapping("/aWriteForm")
-		public void aWriterForm() {
-		}
+	@RequestMapping("/aWriteForm")
+	public void aWriterForm() {
+	}
 	
 	// 답변하기
-		@RequestMapping("/aWriteProc")
-		public ModelAndView aWriteProc(ModelAndView mv, QnaVo vo, HttpSession session) {
-			System.out.println(vo.getOriNo());
-			qService.insertA(session,vo);
-			RedirectView rv = new RedirectView("../qnaBoard/qnaList.do");
-			mv.setView(rv);
-			return mv;
-		}
+	@RequestMapping("/aWriteProc")
+	public ModelAndView aWriteProc(ModelAndView mv, QnaVo vo, HttpSession session) {
+		qService.insertA(session,vo);
+		RedirectView rv = new RedirectView("../qnaBoard/qnaList.do");
+		mv.setView(rv);
+		return mv;
+	}
+	
+	// 수정하기 폼
+	@RequestMapping("/qnaModifyForm")
+	public ModelAndView  modifyForm(HttpServletRequest req, ModelAndView mv) {
+		String strOriNo = req.getParameter("oriNo");
+		int    oriNo    = Integer.parseInt(strOriNo);
+		String nowPage  = req.getParameter("nowPage");
+		
+		QnaVo vo= qService.getQnaView(oriNo);
+		
+		mv.addObject("VIEW",vo);
+		mv.addObject("nowPage",nowPage);
+		mv.setViewName("qnaBoard/qnaModifyForm");	
+		return mv;
+	}
+	
+	// 수정하기
+	@RequestMapping("/qnaModifyProc")
+	public ModelAndView  modifyProc(HttpServletRequest req, ModelAndView mv, QnaVo vo) {
+		String strOriNo = req.getParameter("oriNo");
+		int    oriNo    = Integer.parseInt(strOriNo);
+		String nowPage  = req.getParameter("nowPage");
+		
+		qService.updateQna(vo);
+		RedirectView rv = new RedirectView("../qnaBoard/qnaView.do");
+		mv.addObject("VIEW",vo);
+		mv.addObject("oriNo",oriNo);
+		mv.addObject("nowPage",nowPage);
+		mv.setView(rv);	
+		return mv;
+	}
+	
+	// 삭제하기
+	@RequestMapping("/deleteProc")
+	public ModelAndView  deleteProc(HttpServletRequest req, ModelAndView mv) {
+		String strOriNo = req.getParameter("oriNo");
+		int    oriNo    = Integer.parseInt(strOriNo);
+		String nowPage  = req.getParameter("nowPage");
+		
+		qService.deleteQna(oriNo);
+		RedirectView rv = new RedirectView("../qnaBoard/qnaList.do");
+		mv.addObject("oriNo",oriNo);
+		mv.addObject("nowPage",nowPage);
+		mv.setView(rv);	
+		return mv;
+	}
 }

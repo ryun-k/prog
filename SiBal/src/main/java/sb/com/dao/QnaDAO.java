@@ -41,5 +41,19 @@ public class QnaDAO extends SqlSessionDaoSupport{
 		session.insert("qnaBoard.insertA",vo);
 		
 	}
-
+	// 스텝증가
+	public void updateStep(QnaVo vo) {
+		getSqlSession().update("qnaBoard.updateStep",vo);
+	}
+	
+	// 수정하기
+	
+	//게시물 수정 쿼리실행 함수
+	public void updateQna(QnaVo vo) {
+		getSqlSession().update("qnaBoard.updateQna",vo);
+	}
+	
+	public void deleteQna(int no) {
+		getSqlSession().delete("qnaBoard.deleteQna",no);
+	}
 }

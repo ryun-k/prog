@@ -43,9 +43,9 @@
 			i_No       AS no,
 			i_Title    AS title, 
 			i_writeDate     AS writeDate,	
-			i_Hit      AS hit, 
+			i_Hit      AS hit,
+			i_Good	   AS good, 
 		        i_Writer   AS writer,
-		        NVL(T1.CNT,0) AS fileCount, 
 		        row_number() over(order by i_No DESC) AS rno
 		    FROM
 		        INFORMATION,
@@ -59,10 +59,10 @@
 				upper(i_IsShow)='Y' 
 		        AND
 		         INFORMATION.i_No=T1.FI_ORINO(+))
-		 WHERE
-		    RNO BETWEEN #{start} AND #{end}
+		WHERE
+			RNO BETWEEN #{start} AND #{end}
 	</select>
-	
+		
 	<!-- 데이터입력 쿼리문  -->                   
 	<insert id="insertInformation" parameterType="informationVO">
 	  <selectKey keyProperty="no" resultType="int" order="BEFORE">
@@ -84,8 +84,23 @@
 	<update id="updateHit" parameterType="int">
 		UPDATE INFORMATION
 		SET i_Hit = i_Hit+1
-		WHERE i_No = #{no}
+		WHERE i_No = #{oriNo}
 	</update>
+	
+	<!-- 좋아요 증가  -->	
+	<update id="updateGood" parameterType="int">
+		UPDATE INFORMATION
+		SET i_Good = i_Good+1
+		WHERE i_No = #{oriNo}
+	</update>
+	
+	<!-- 좋아요 감소 -->	
+	<update id="updateNoGood" parameterType="int">
+		UPDATE INFORMATION
+		SET i_Good = i_Good-1
+		WHERE i_No = #{oriNo}
+	</update>
+	
 	
 	<!-- 상세보기 -->
 	<resultMap id="clobView" type="informationVO">
@@ -98,6 +113,7 @@
 			i_Title AS title,
 			i_WriteDate AS writeDate,
 			i_Hit AS hit,
+			i_Good	   AS good, 
 			i_Writer   AS writer,
 			i_Body	<!-- as를 이용한 alias처리하지말것! -->
 		FROM
@@ -142,9 +158,9 @@
 			i_No       AS no,
 			i_Title    AS title, 
 			i_writeDate     AS writeDate,	
-			i_Hit      AS hit, 
+			i_Hit      AS hit,
+			i_Good	   AS good,  
 		        i_Writer   AS writer,
-		        NVL(T1.CNT,0) AS fileCount, 
 		        row_number() over(order by i_No DESC) AS rno
 		    FROM
 		        INFORMATION,
@@ -166,9 +182,9 @@
 	
 	<!-- 게시물 수정 쿼리문	-->
 	<update id="updateInformation"  parameterType="informationVO">
-		UPDATE FILEBOARD
+		UPDATE INFORMATION
 		SET i_Title =#{title},
-				i_Body  =#{body},
+				i_Body  =#{body}
 		WHERE
 				i_No=#{oriNo}
 	</update>
@@ -180,5 +196,13 @@
 	  WHERE  
 	  	fi_OriNo=#{oriNo}
 	</delete> 
+	
+	<!-- 삭제  -->
+	<update id="deleteInformation" parameterType="informationVO">
+		UPDATE INFORMATION
+		SET    i_IsShow='N'
+		WHERE  i_No=#{oriNo}
+	</update>
+		
 	
 </mapper>

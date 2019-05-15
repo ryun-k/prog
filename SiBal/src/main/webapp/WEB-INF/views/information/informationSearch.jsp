@@ -3,11 +3,15 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
 		$(document).ready(function(){
 			//글쓰기버튼 클릭시
 			$("#wBtn").click(function(){
@@ -23,58 +27,34 @@
 			});
 		});	
 	</script>
-</head>
+	</head>
 <body>
-  <h1>*검색을 반영한 information목록(informationSearch.jsp)*</h1>
-  	<%-- mv.addObject("target", target);
-		    mv.addObject("word", word); --%>
-		검색분야=${target} / 검색키워드=${word}<p/>
-  
-  <%-- 검색창 만들기 --%>
-	<form method="POST" id="sFrm" action="../information/informationSearch.do">
-		<table border="1" width="800" align="center">
+   <%-- 기타 기능 --%>
+    <div class="container">
+    <table class="table table-hover" width="800">
 			<tr>
-				<td align="center">
-					<%-- 검색대상 --%>
-					<select id="target" name="target">
-						<option value="title">제목</option>
-						<option value="body">내용</option>
-						<option value="writer">작성자</option>
-						<option value="both">제목+내용</option>
-					</select>
-					<%-- 검색단어 --%>
-					<input type="text" id="word" name="word"/>
-					<%-- 검색버튼 --%>
-					<input type="button" id="sBtn"value="검색"/>
+				<td align="right">
+					<input class="btn btn-primary" type="button" id="wBtn" value="글쓰기"/>
 				</td>
 			</tr>
-		</table>
-	</form>
+		</table>	
 	
-  <%-- 목록 보여주기 --%>
-  <table border="1" width="800" align="center">
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성일</th>
-				<th>조회수</th>
-				<th>작성자</th>
-				<th>첨부파일</th>
-			</tr>
+	  <%-- 목록 보여주기 --%>
+  		<div class="row">
 			<c:forEach items="${LIST}" var="data">
-				<tr>
-					<td>${data.no }</td>
-					 <td><a href="../information/hitProc.do?No=${data.no}&nowPage=${PINFO.nowPage}">${data.title}</a></td>
-					<%-- <td><a href="../fileBoard/boardView.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title}</a></td> --%>
-					<td>${data.writeDate }</td>
-					<td>${data.hit }</td>
-					<td>${data.writer }</td>
-					<td>${data.fileCount }</td>
-				</tr>
+				<div class="col-md-4">
+				<div class="card" style="width:300px;">
+					<img class="card-img-top" src="/uploads/ab.jpg" style="width:100% "/>
+					 <div class="card-body">
+					 <h4 class="card-title"><a href="../information/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title}</a></h4>
+					<p class="card-text"><span class="far fa-calendar-check"> ${data.writeDate}</span> | <span class="fas fa-search"> ${data.hit}</span> | <span class="fas fa-heart"> ${data.good }</span></p>
+					</div>
+				</div>
+				</div>
 			</c:forEach>
-		</table>		 
+		</div>	 
   <%-- 페이지 이동 --%>
-  	<table name="tbl2" id="tbl2" width="800" align="center">
+  	<table class="table table-hover" name="tbl2" id="tbl2" width="800" align="center">
 		<tbody>
 			<tr>
 				<td align="center">
@@ -110,10 +90,27 @@
 		</tbody>
 	</table>
   
-  <%-- 기타 기능 
-  		필요하면 넣기
-  --%>
-  		
+  <%-- 검색창 만들기 --%>
+	<form method="POST" id="sFrm" action="../information/informationSearch.do">
+		<table class="table table-hover" width="800" align="center">
+			<tr>
+				<td align="center">
+					<%-- 검색대상 --%>
+					<select id="target" name="target">
+						<option value="title">제목</option>
+						<option value="body">내용</option>
+						<option value="writer">작성자</option>
+						<option value="both">제목+내용</option>
+					</select>
+					<%-- 검색단어 --%>
+					<input type="text" id="word" name="word"/>
+					<%-- 검색버튼 --%>
+					<input type="button" id="sBtn"value="검색"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>
 </body>
 </html>
 

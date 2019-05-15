@@ -18,8 +18,8 @@ public class InformationDAO extends SqlSessionDaoSupport{
 	}
 	
 	//조회수증가 쿼리
-	public void updateHit(int No) {
-		getSqlSession().update("information.updateHit",No);
+	public void updateHit(int oriNo) {
+		getSqlSession().update("information.updateHit",oriNo);
 	}
 	
 	//데이터 입력 쿼리실행 함수
@@ -55,14 +55,27 @@ public class InformationDAO extends SqlSessionDaoSupport{
 	}
 	
 	//첨부파일정보 삭제 쿼리실행함수
-	public void deleteInfo(int No) {
-		getSqlSession().delete("information.informationdeleteInfo", No);
+	public void deleteInfo(int oriNo) {
+		getSqlSession().delete("information.informationdeleteInfo", oriNo);
 	}
 	
 	public void updateInformation(InformationVO vo) {
 		getSqlSession().update("information.updateInformation",vo);
 	}
 	
+	//삭제 쿼리 실행함수
+	public int informationDelete(InformationVO vo) {
+		int cnt = getSqlSession().update("information.deleteInformation", vo);
+		return cnt;
+	}
 	
+	//좋아요감소 쿼리
+	public void updateNoGood(int oriNo) {
+		getSqlSession().update("information.updateNoGood",oriNo);
+	}
 	
+	//좋아요증가 쿼리
+	public void updateGood(int oriNo) {
+		getSqlSession().update("information.updateGood",oriNo);
+	}
 }

@@ -5,18 +5,41 @@ import java.sql.Date;
 public class QnaVo {
 	private int no;
 	private int pNo;
-	private int gNo;
 	private String title;
 	private String content;
 	private String id;
 	private Date wDate;
 	private int hit;
 	private int rNo; // rownum
+	private int ref;
+	private int step;
+	private int depth;
 	
 	private int start;
 	private int end;
 	
 	private int oriNo;
+	
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+	public int getStep() {
+		return step;
+	}
+	public void setStep(int step) {
+		this.step = step;
+	}
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+	
+	
 	
 	public int getOriNo() {
 		return oriNo;
@@ -41,12 +64,6 @@ public class QnaVo {
 	}
 	public void setpNo(int pNo) {
 		this.pNo = pNo;
-	}
-	public int getgNo() {
-		return gNo;
-	}
-	public void setgNo(int gNo) {
-		this.gNo = gNo;
 	}
 	public String getTitle() {
 		return title;

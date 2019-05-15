@@ -40,4 +40,28 @@ public class NoticeService {
 		System.out.println("insertNotice()");
 		nDAO.insertNotice(vo);
 	}
+	
+	//view
+	public void viewNotice(int oriNo) {
+		System.out.println("viewNotice");
+		nDAO.getView(oriNo);
+	}
+	
+	//modify
+	public void modifyNotice(NoticeVo vo,int oriNo) {
+		System.out.println("modifyNotice");
+		nDAO.modifyNotice(vo, oriNo);
+	}
+	
+	//hit
+	public void hitNotice(int oriNo) {
+		System.out.println("hitNotice");
+		nDAO.hitNotice(oriNo);
+	}
+	
+	//delete
+	public void deleteNotice(int oriNo) {
+		System.out.println("deleteNotice");
+		nDAO.getView(oriNo);
+	}
 }

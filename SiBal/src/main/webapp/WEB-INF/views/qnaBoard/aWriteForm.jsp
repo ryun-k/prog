@@ -13,8 +13,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script type="text/javascript">
   	$(function(){
-  		$("#lBtn").click(function(){
-  			location.href="../qnaBoard/qnaList.do";
+  		$("#cBtn").click(function(){
+  			history.back();
   		});
   	});
   </script>
@@ -23,6 +23,10 @@
 	<div class="container">
 	  <h2>답변하기</h2>
 	  <form action="../qnaBoard/aWriteProc.do">
+	  	<input type="hidden" name="no" value="${param.no}" />
+	  	<input type="hidden" name="ref" value="${param.ref}" />
+	  	<input type="hidden" name="step" value="${param.step}" />
+	  	<input type="hidden" name="depth" value="${param.depth}" />
 	    <div class="form-group">
 	      <label for="title">제목:</label>
 	      <input type="text" class="form-control" id="title" name="title">
@@ -36,7 +40,7 @@
 	      <input type="text" class="form-control" id="id" name="id" >
 	    </div>
 	    <button type="submit" class="btn btn-dark">답변하기</button>
-	    <button type="button" class="btn btn-dark" id="lBtn">목록으로</button>
+	    <button type="button" class="btn btn-dark" id="cBtn">취소</button>
 	  </form>
 	</div>
 </body>

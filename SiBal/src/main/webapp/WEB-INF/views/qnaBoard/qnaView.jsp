@@ -69,7 +69,42 @@
    	<button type="submit" class="btn btn-dark" id="dBtn" >삭제하기</button>
    	<button type="submit" class="btn btn-dark" id="lBtn" >목록으로</button>
   </div>
+</div>
+<br/>
 
+<div class="container">
+  <div class="jumbotron">
+  <div class="card bg-light text-dark">
+    <div class="card-body">Light card</div>
+  </div>
+  	<table class="table table-borderless" id="${reply.no }">
+   		<tr align="left" class="table-dark text-dark col-sm-12">
+   			<th class="col-sm-6">
+   				<input type="hidden" id="no" name="no" value="${reply.no }"/>
+   				작성자 : ${reply.writer }
+   			</th>
+   			<th class="col-sm-2">
+   				2019-05-15
+   			</th>
+   			<th class="col-sm-3">
+   				<input type="button" value="답글달기" class="ruBtn btn" name="ruBtn"/>
+   			</th>
+   		</tr>
+   		<tr class="table-dark text-dark">
+   			<td class="col-sm-10" align="left">
+   				내용: ${reply.brBody }
+   			</td>
+    		<td class="col-sm-2">
+   			<c:if test="${sessionScope.ID eq reply.writer}">
+    				<input type="button" value="댓글수정" class="ruBtn btn" name="ruBtn"/>
+    		<td class="col-sm-2">
+    				<input type="button" value="댓글삭제" class="rdBtn btn" name="rdBtn"/>
+    		</td>
+   			</c:if>
+    		</td>
+   		</tr>
+   	</table>
+  </div>
 </div>
 </body>
 </html>

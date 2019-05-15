@@ -43,6 +43,7 @@
 
 	<bean id="airportDAO" class="sb.com.dao.AirportDAO">
 		<property name="sqlSessionTemplate" ref="sqlSession"/>	
+	</bean>
 
 	<bean id="informationDAO" class="sb.com.dao.InformationDAO" >
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
@@ -52,17 +53,21 @@
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 
 	</bean>
+
 		
 	<!-- serviece bean처리 -->
 	<bean id="noticeService" class="sb.com.service.NoticeService"/>
 	<bean id="qnaService" class="sb.com.service.QnaService"/>
 
 	<bean id="airportService" class="sb.com.service.AirportService"/>	
+
 	
 	
-	<bean id="memberControll" class="sb.com.controller.MemberController"/>
+
 
 	<bean id="informationService" class="sb.com.service.InformationService"/>
+
+
 
 	<bean id="memberService" class="sb.com.service.MemberService"/>
 		

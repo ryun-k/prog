@@ -11,11 +11,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style type="text/css">
+  	.gun a:link { text-decoration:none ; color:#fff}
+  	.gun a:visited { text-decoration:none ; color:#fff}
+  	.gun a:active { text-decoration:none ; color:#fff}
+  	.gun a:hover { text-decoration:none ; color:#fff}
+  </style>
   <script type="text/javascript">
   	$(function(){
   		$("#wBtn").click(function(){
   			location.href="../qnaBoard/qWriteForm.do";
   		});
+  		
   	});
   
   </script>
@@ -35,9 +42,14 @@
     </thead>
     <tbody>
 		<c:forEach items="${LIST}" var="data">
-			<tr>
+			<tr class="gun">
 				<td>${data.no }</td>
-				<td><a href="../qnaBoard/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title}</a></td>
+					<td>
+						<a href="../qnaBoard/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">
+						<c:forEach begin="1" end="${data.depth * 5}">&nbsp;</c:forEach>
+						${data.title}
+						</a>
+					</td>
 				<td>${data.id }</td>
 				<td>${data.wDate }</td>
 				<td>${data.hit}</td>

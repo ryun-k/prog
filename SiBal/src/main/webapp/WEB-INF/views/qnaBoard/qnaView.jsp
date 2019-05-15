@@ -14,11 +14,20 @@
   <script type="text/javascript">
   	$(function(){
   		$("#lBtn").click(function(){
-  			location.href="../qnaBoard/qnaList.do";
+  			location.href="../qnaBoard/qnaList.do?nowPage=${nowPage}";
   		});
   		
   		$("#rBtn").click(function(){
-  			location.href="../qnaBoard/aWriteForm.do";
+  			location.href="../qnaBoard/aWriteForm.do?no=${VIEW.no}&ref=${VIEW.ref}&step=${VIEW.step}&depth=${VIEW.depth}";
+  		});
+  		
+  		$("#uBtn").click(function(){
+  			location.href="../qnaBoard/qnaModifyForm.do?oriNo=${VIEW.no}&nowPage=${nowPage}";
+  		});
+  		
+  		$("#dBtn").click(function(){
+  			if(confirm("정말 삭제하시겠습니까?"))
+  				location.href="../qnaBoard/deleteProc.do?oriNo=${VIEW.no}&nowPage=${nowPage}";
   		});
   	});
   </script>
@@ -26,7 +35,7 @@
 <body>
 <div class="container">
   <h2>상세보기</h2>
-  <table class="table table-dark table-striped">
+  	<table class="table table-dark table-striped">
     <tbody>
 		<tr>
 			<td>글번호</td>
@@ -39,6 +48,10 @@
 		<tr>
 			<td>내용</td>
 			<td>${VIEW.brContent}</td>
+		</tr>
+		<tr>
+			<td>작성자</td>
+			<td>${VIEW.id}</td>
 		</tr>
 		<tr>
 			<td>작성일</td>

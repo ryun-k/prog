@@ -3,11 +3,14 @@ package sb.com.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import sb.com.service.NoticeService;
 import sb.com.util.PageUtil;
@@ -60,14 +63,29 @@ public class NoticeController {
 	
 	//공지사항 글쓰기 처리
 	@RequestMapping("/writeProc")
-	public void noticeWriteProc() {
+	public ModelAndView noticeWriteProc(NoticeVo vo,ModelAndView mv) {
+		System.out.println("writeProc 진입");
+		nService.insertNotice(vo);
+		System.out.println("nService종료");
 		
+		RedirectView rv = new RedirectView("../notice/List.do");
+		mv.setView(rv);
+		return mv;
 	}
 	
 	//조회수 처리
 	@RequestMapping("/hitProc")
-	public void noticeHitProc() {
+	public ModelAndView	noticeHitProc(ModelAndView mv, HttpServletRequest req, HttpSession session) {
+		String  strOriNo= req.getParameter("oriNo");
+		int     oriNo = Integer.parseInt(strOriNo);
+		String  nowPage = req.getParameter("nowPage"); 
+		nService.hitNotice(oriNo);
+		RedirectView rv = new RedirectView("../notice/View.do");
 		
+		rv.addStaticAttribute("oriNo", oriNo);
+		rv.addStaticAttribute("nowPage", nowPage);
+		mv.setView(rv);
+		return mv;
 	}
 	
 	//공지사항 수정 폼

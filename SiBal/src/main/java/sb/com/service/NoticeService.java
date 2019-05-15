@@ -42,16 +42,22 @@ public class NoticeService {
 	}
 	
 	//view
-	public void viewNotice(int oriNo) {
-		System.out.println("viewNotice");
-		nDAO.getView(oriNo);
+	public NoticeVo viewNotice(int oriNo) {
+		System.out.println("oriNo "+oriNo);
+		return nDAO.getView(oriNo); 
 	}
 	
-	//modify
-	public void modifyNotice(NoticeVo vo,int oriNo) {
+	//modifyFrom
+	public NoticeVo modifyNotice(int oriNo) {
 		System.out.println("modifyNotice");
-		nDAO.modifyNotice(vo, oriNo);
+		return (NoticeVo)nDAO.modifyNotice(oriNo);
 	}
+	//modifyProc
+	public void updateNotice(NoticeVo vo) {
+		System.out.println("updateNotice");
+		nDAO.updateNotice(vo);
+	}
+	
 	
 	//hit
 	public void hitNotice(int oriNo) {

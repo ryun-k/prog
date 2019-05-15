@@ -74,12 +74,14 @@ insert into
 	SELECT
 	    M_email            	AS email,
 	    M_PW     			AS pw,
-	    M_NICK          	AS nick
+	    M_NICK          	AS nick,
+	    M_STATUS			AS status
 	 FROM
 	    SBMEMBER
 	 WHERE
 	    M_EMAIL = #{email}
 	    AND
 	    M_PW = #{pw}
+	  
 	</select>
 	</mapper>

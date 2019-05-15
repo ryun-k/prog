@@ -23,13 +23,15 @@ public class MemberService {
 			HashMap map = new HashMap();
 			map.put("email", vo.getEmail());
 			map.put("pw",vo.getPw());
+			map.put("status",vo.getStatus());
 			
 			HashMap result = mDAO.loginProc(map);
 			if(result ==null || result.size()==0) {
 				System.out.println("값없음");
 			}else {
 				session.setAttribute("nick", result.get("NICK"));
-				System.out.println("nick있음="+result.get("NICK"));
+				session.setAttribute("status", result.get("STATUS"));
+				
 			}
 		}
 

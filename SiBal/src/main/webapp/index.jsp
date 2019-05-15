@@ -19,6 +19,7 @@
         <li><a href="../sb/member/withdrawForm.do"><button>회원탈퇴</button></a><br/><br/></li>
         <%
 	  String nick = (String)session.getAttribute("nick");
+       
         %>
         <li>
         <%=nick %>(으)로 접속중.

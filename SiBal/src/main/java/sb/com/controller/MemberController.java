@@ -28,10 +28,9 @@ public class MemberController {
 	//로그인처리
 	@RequestMapping("/loginProc")
 	public ModelAndView loginProc(MemberVO vo, HttpSession session) {
-		System.out.println("loginProc");
 		mService.loginProc(vo,session);
 		ModelAndView mv = new ModelAndView();
-		RedirectView rv = new RedirectView("../member/loginForm.do");
+		RedirectView rv = new RedirectView();
 		mv.setView(rv);
 		return mv;
 	}

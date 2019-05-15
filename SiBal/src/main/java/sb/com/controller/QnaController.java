@@ -27,7 +27,6 @@ public class QnaController {
 	public void qnaList(@RequestParam(value="nowPage", required=false, 	defaultValue="1") int nowPage, HttpServletRequest req){
 		
 		PageUtil pInfo = qService.getPageInfo(nowPage);
-		
 		ArrayList list = qService.getQnaList(pInfo);
 		
 		req.setAttribute("LIST", list);
@@ -134,6 +133,36 @@ public class QnaController {
 		mv.addObject("oriNo",oriNo);
 		mv.addObject("nowPage",nowPage);
 		mv.setView(rv);	
+		return mv;
+	}
+	
+	// 검색하기
+	@RequestMapping("/qnaSearch")
+	public ModelAndView qnaSearch(HttpServletRequest req, ModelAndView mv) {
+		String target = req.getParameter("target");
+		String word = req.getParameter("word");
+		String strNowPage = req.getParameter("nowPage");
+		int nowPage = 1;
+	
+		if(strNowPage==null || strNowPage.length()==0) {
+			nowPage =1;
+		}else {
+			nowPage = Integer.parseInt(strNowPage);
+		}
+		
+		QnaVo vo = new QnaVo();
+		vo.setTarget(target);
+		vo.setWord(word);
+		
+		PageUtil pInfo = qService.getSearchPage(vo, nowPage);
+		ArrayList list = qService.getSearchList(pInfo,target,word);
+		
+		mv.addObject("target",target);
+		mv.addObject("word",word);
+		mv.addObject("LIST",list);
+		mv.addObject("PINFO",pInfo);
+		
+		mv.setViewName("qnaBoard/qnaSearch");
 		return mv;
 	}
 }

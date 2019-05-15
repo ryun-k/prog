@@ -3,6 +3,7 @@ package sb.com.vo;
 import java.sql.Date;
 
 public class QnaVo {
+	
 	private int no;
 	private int pNo;
 	private String title;
@@ -19,7 +20,30 @@ public class QnaVo {
 	private int end;
 	
 	private int oriNo;
+	private int nowPage;
 	
+	private String target;
+	private String word;
+	
+	
+	public int getNowPage() {
+		return nowPage;
+	}
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
+	public String getTarget() {
+		return target;
+	}
+	public void setTarget(String target) {
+		this.target = target;
+	}
+	public String getWord() {
+		return word;
+	}
+	public void setWord(String word) {
+		this.word = word;
+	}
 	public int getRef() {
 		return ref;
 	}

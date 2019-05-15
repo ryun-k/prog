@@ -3,7 +3,23 @@
 
 <mapper namespace="qnaBoard">
 	
-	<!-- 게시물 총 갯수 -->
+	<!-- 검색 결과반영 동적 SQL -->
+	<sql id="searchField">
+		<if test="target eq 'title'">
+			q_title like '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'body'">
+			q_content like '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'writer'">
+			q_id like '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'both'">
+			(q_title like '%'||#{word}||'%' or q_content like '%'||#{word}||'%')
+		</if>
+	</sql>
+	
+	<!-- 게시물 카운트 -->
 	<select id="totalCount" resultType="int">
 		select count(*) as cnt from qna
 	</select>
@@ -60,5 +76,22 @@
 	<delete id="deleteQna" parameterType="int">
 		delete from qna where q_no=#{no}	
 	</delete>
+	
+	<!-- 검색결과 카운트 -->
+	<select id="searchCount" parameterType="qVO" resultType="int">
+		select count(*) as cnt from qna where <include refid="searchField" />
+	</select>
+	
+	<!-- 검색하기 -->
+	<select id="searchList" parameterType="qVO" resultType="qVO">
+		select * from
+		(select rownum as rNo, q_no as no, q_title as title, m.m_id as id, q_wDate as wDate, q_hit as hit,depth from qna q, member m
+		where m.m_id=q.q_id
+		and 
+		<include refid="searchField" />
+		order by ref desc, step asc)
+		where rNo BETWEEN #{start} and #{end}
+	</select>
+	
 	
 </mapper>

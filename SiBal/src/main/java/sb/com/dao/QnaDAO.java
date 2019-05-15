@@ -47,13 +47,23 @@ public class QnaDAO extends SqlSessionDaoSupport{
 	}
 	
 	// 수정하기
-	
-	//게시물 수정 쿼리실행 함수
 	public void updateQna(QnaVo vo) {
 		getSqlSession().update("qnaBoard.updateQna",vo);
 	}
 	
+	// 삭제하기
 	public void deleteQna(int no) {
 		getSqlSession().delete("qnaBoard.deleteQna",no);
+	}
+	
+	// 검색결과 카운트
+	public int getSearchCount(QnaVo vo) {
+		int count = (Integer)getSqlSession().selectOne("qnaBoard.searchCount",vo);
+		return count;
+	}
+	
+	// 검색하기
+	public ArrayList getSearchList(QnaVo vo) {
+		return (ArrayList) getSqlSession().selectList("qnaBoard.searchList",vo);
 	}
 }

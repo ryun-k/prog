@@ -32,26 +32,41 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
-		<bean id="noticeDAO" class="sb.com.dao.NoticeDAO" >
+	
+	<!-- DAO선언 -->
+	<bean id="noticeDAO" class="sb.com.dao.NoticeDAO" >
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
 	<bean id="qnaDAO" class="sb.com.dao.QnaDAO" >
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
+
+	<bean id="airportDAO" class="sb.com.dao.AirportDAO">
+		<property name="sqlSessionTemplate" ref="sqlSession"/>	
+
 	<bean id="informationDAO" class="sb.com.dao.InformationDAO" >
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
+	</bean>
+
+	<bean id="memberDAO" class="sb.com.dao.MemberDAO">
+		<property name="sqlSessionTemplate" ref="sqlSession"/>
+
 	</bean>
 		
 	<!-- serviece bean처리 -->
 	<bean id="noticeService" class="sb.com.service.NoticeService"/>
 	<bean id="qnaService" class="sb.com.service.QnaService"/>
+
+	<bean id="airportService" class="sb.com.service.AirportService"/>	
+	
+	
+	<bean id="memberControll" class="sb.com.controller.MemberController"/>
+
 	<bean id="informationService" class="sb.com.service.InformationService"/>
+
+	<bean id="memberService" class="sb.com.service.MemberService"/>
 		
-	<bean id="memberDAO" class="sb.com.dao.MemberDAO">
-		<property name="sqlSessionTemplate" ref="sqlSession"/>
-	</bean>
 	<bean id="qnaControll" class="sb.com.controller.QnaController"/>
 	<bean id="memberControll" class="sb.com.controller.MemberController"/>
-	<bean id="memberService" class="sb.com.service.MemberService"/>
 	
 </beans>

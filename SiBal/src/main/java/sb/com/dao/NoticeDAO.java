@@ -38,7 +38,8 @@ public class NoticeDAO extends SqlSessionDaoSupport{
 	
 	//상세보기
 	public NoticeVo getView(int oriNo) {
-		return (NoticeVo)getSqlSession().selectOne("notice.viewNotice",oriNo);
+		System.out.println("oriNo "+oriNo);
+		return (NoticeVo)getSqlSession().selectOne("notice.noticeView",oriNo);
 	}
 	
 	
@@ -47,9 +48,14 @@ public class NoticeDAO extends SqlSessionDaoSupport{
 		getSqlSession().update("notice.updatehit",oriNo);
 	}
 	
+	//글수정폼
+	public NoticeVo modifyNotice(int oriNo) {
+		return (NoticeVo)getSqlSession().selectOne("notice.modifyForm",oriNo);
+	}
+	
 	//글수정
-	public void modifyNotice(NoticeVo vo,int oriNo) {
-		getSqlSession().update("notice.updateNotice",oriNo);
+	public void updateNotice(NoticeVo vo) {
+		getSqlSession().update("notice.modifyProc",vo);
 	}
 	
 	

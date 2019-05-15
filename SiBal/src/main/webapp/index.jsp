@@ -14,7 +14,7 @@
 =======
 <h1>임시메인</h1><br><br>
 
-<a href='/iedu/airportForm.do'>비행기표 확인</a><br/><br/>
+<a href='../sb/airport/airportForm.do'>비행기표 확인</a><br/><br/>
 
 <c:choose> 
     <c:when test="${not empty sessionScope.nick }">    

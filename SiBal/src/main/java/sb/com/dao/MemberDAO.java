@@ -41,7 +41,6 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	
 	//회원탈퇴 쿼리 실행
 	public void withdraw(MemberVO vo) {
-		System.out.println("DAO="+vo.getNick());
 		System.out.println("DAO="+vo.getPw());
 		session.update("member.withdraw",vo);
 	}
@@ -66,6 +65,12 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	//중복이메일,닉네임 확인 쿼리 실행
 	public int dupleCk(MemberVO vo) {
 		int str = session.selectOne("member.dupleCk",vo);
+		return str;
+	}
+	
+	//로그인,회원탈퇴 본인 확인 쿼리 실행
+	public int CheckProc(MemberVO vo) {
+		int str = session.selectOne("member.CheckProc",vo);
 		return str;
 	}
 }

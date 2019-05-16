@@ -18,7 +18,17 @@ where m_nick = #{nick}
 
 
 <!-- ======================= 쿼리문 등록 ================================= -->
-
+<!-- 로그인,탈퇴시 본인확인	 -->
+<select id ="CheckProc" parameterType="memberVO" resultType="int">
+select 
+	count (*)
+from 
+	sbmember
+where 
+	m_email = #{email}
+and
+	m_pw = #{pw}
+</select>
 
 <!-- 이메일, 닉네임 중복확인  -->
 <select id="dupleCk" parameterType="String" resultType="int">
@@ -70,7 +80,7 @@ update
 set
 	m_status = '0'
 where 
-	m_nick = #{nick}
+	m_email = #{email}
 and
 	m_pw = #{pw}
 </update>

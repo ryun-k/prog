@@ -30,23 +30,7 @@ public class MemberController {
 	public String loginForm() {
 		return "member/loginForm";
 	}
-	//로그인처리
-	@RequestMapping("/loginProc")
-	public ModelAndView loginProc(MemberVO vo, HttpSession session) {
-		mService.loginProc(vo,session);
-		System.out.println(session.getAttribute("status"));
-		ModelAndView mv = new ModelAndView();
-		RedirectView rv=null;
-		String strStatus = (String)session.getAttribute("status");
-		int status = Integer.parseInt(strStatus);
-		if(status==1) {
-			rv = new RedirectView("../member/loginForm.do");
-		}else if(status==0){
-			rv = new RedirectView("../member/withDraw.do");
-		}
-		mv.setView(rv);
-		return mv;
-	}
+
 	//로그아웃폼
 	@RequestMapping("/logoutForm")
 	public void logoutForm() {
@@ -104,18 +88,11 @@ public class MemberController {
 		mv.setViewName("member/withdrawForm");
 		return mv;
 	}
-	//회원탈퇴 처리
-	@RequestMapping("/withdrawProc")
-	public ModelAndView withdrawProc(MemberVO vo,HttpSession session,ModelAndView mv,HttpServletRequest request) {
-		String nick = (String)session.getAttribute("nick");
-		vo.setNick(nick);
-		mService.withdraw(vo,request);
-		mv.setViewName("member/loginForm");
-		return mv;
-	}
+
 	//탈퇴시 뷰
 	@RequestMapping("/withDraw")
-	public String withDraw() {
+	public String withDraw(HttpServletRequest request) {
+		mService.logoutProc(request);
 		return "member/withDraw";
 	}
 	//이메일 유효검사
@@ -189,11 +166,9 @@ public class MemberController {
 	
 	//이메일 중복 체크
 	@RequestMapping(value="/EmailCheck", method= RequestMethod.POST)
-	public @ResponseBody String AjaxView(MemberVO vo,@RequestParam("email") String emailck,
-											@RequestParam("target") String target) {
+	public @ResponseBody String AjaxView(MemberVO vo) {
 		System.out.println("ajax연결,email");
-		vo.setEmail(emailck);
-		vo.setTarget(target);
+		
 		String str="";
 		int emailCk = mService.dupleCk(vo);
 		if(emailCk==1) {
@@ -206,11 +181,9 @@ public class MemberController {
 	
 	//닉네임 중복 체크
 	@RequestMapping(value="/NickCheck", method= RequestMethod.POST)
-	public @ResponseBody String AjaxView1(MemberVO vo,@RequestParam("nick") String nickck,
-											@RequestParam("target") String target) {
+	public @ResponseBody String AjaxView1(MemberVO vo) {
 		System.out.println("ajax연결,nick");
-		vo.setNick(nickck);
-		vo.setTarget(target);
+		
 		String str="";
 		int nickCk = mService.dupleCk(vo);
 		System.out.println(nickCk);
@@ -221,4 +194,41 @@ public class MemberController {
 		}
 		return str;
 	}
+	
+	//회원탈퇴 비번 확인
+	@RequestMapping(value="/withdrawProc", method=RequestMethod.POST)
+	public @ResponseBody String WithdrawProc(MemberVO vo,HttpServletRequest request) {
+		System.out.println("ajax연결,탈퇴처리"+vo.getEmail());
+		
+		String str="";
+		int ok = mService.CheckProc(vo);
+		if(ok==1) {
+			mService.withdraw(vo,request);
+			str="YES";
+		}else {
+			str="NO";
+		}
+		return str;
+	}
+	//로그인시 비번 확인과 로그인 처리.
+	@RequestMapping(value="/CheckProc", method=RequestMethod.POST)
+	public @ResponseBody String CheckProc(MemberVO vo,HttpSession session) {
+		System.out.println("ajax연결,로그인처리"+vo.getEmail());
+		String str="";
+		int ok = mService.CheckProc(vo);
+		if(ok==1) {
+			mService.loginProc(vo,session);
+			String strStatus = (String)session.getAttribute("status");
+			int status = Integer.parseInt(strStatus);
+			if(status==1) {
+				str="YES1";
+			}else if(status==0){
+				str="YES2";
+			}
+		}else {
+			str="NO";
+		}
+		return str;
+	}
+
 }

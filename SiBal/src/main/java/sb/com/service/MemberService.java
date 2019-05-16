@@ -55,12 +55,7 @@ public class MemberService {
 			 session.setAttribute("nick", vo.getNick());
 		}
 		
-		//회원 탈퇴 , status를 바꿔주고 세션도 죽인다.
-		public void withdraw(MemberVO vo,HttpServletRequest request) {
-			mDAO.withdraw(vo);
-			request.getSession().removeAttribute("nick");
-			System.out.println(vo.getStatus());
-		}
+		
 		
 		//비번찾기 인증코드 발송을 위한 이메일확인 작업
 		public MemberVO pwCode(MemberVO vo) {
@@ -82,5 +77,17 @@ public class MemberService {
 		public int dupleCk(MemberVO vo) {
 			int str=mDAO.dupleCk(vo);
 			return str;
+		}
+		
+		//로그인,탈퇴시 비번 확인
+		public	int CheckProc(MemberVO vo) {
+			int str= mDAO.CheckProc(vo);
+			return str;
+		}
+		//회원 탈퇴 , status를 바꿔주고 세션도 죽인다.
+		public void withdraw(MemberVO vo,HttpServletRequest request) {
+			mDAO.withdraw(vo);
+			request.getSession().removeAttribute("nick");
+			System.out.println(vo.getStatus());
 		}
 }

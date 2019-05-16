@@ -9,6 +9,7 @@ public class AirVO {
 	private int economyCharge;
 	private String prestigeCharge;
 	private String vihicleId;
+	
 	public String getAirlineNm() {
 		return airlineNm;
 	}

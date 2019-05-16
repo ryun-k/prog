@@ -27,9 +27,9 @@ public class AirportController {
 	public String airportForm() {
 		return "/airport/airportForm";
 	}
-	
+	//비행기 조회
 	@RequestMapping(value="/airport/airport", method = RequestMethod.POST)
-	public String airport(AirVO airVO, Model model) throws Exception{
+	public String goinfo(AirVO airVO, Model model) throws Exception{
 		Map<String, String> result = MyUtils.getAirportId();
 		String depAirportId = result.get(airVO.getDepAirportNm());
 		String arrAirportId = result.get(airVO.getArrAirportNm());
@@ -43,11 +43,25 @@ public class AirportController {
 		return "/airport/airport";
 	}
 	
-	@RequestMapping("/airport/rProc")
-	public ModelAndView rProc(AirVO vo, HttpSession session, ModelAndView mv) {
+	 
+	//가는편 비행기 예매정보 입력
+	@RequestMapping("/airport/goProc")
+	public ModelAndView goProc(AirVO vo, HttpSession session, ModelAndView mv) {
 		System.out.println("rConfirm()컨트롤러함수 호출성공");
 		
-		aService.insertBoard(vo, session);
+		aService.insertGo(vo, session);
+		//뷰
+		RedirectView rv = new RedirectView("../airport/airportForm.do");
+		mv.setView(rv);
+		return mv;
+	}
+	
+	//오는편 비행기 예매정보 입력
+	@RequestMapping("/airport/backProc")
+	public ModelAndView backProc(AirVO vo, HttpSession session, ModelAndView mv) {
+		System.out.println("rConfirm()컨트롤러함수 호출성공");
+		
+		aService.insertBack(vo, session);
 		//뷰
 		RedirectView rv = new RedirectView("../airport/rConfirm.do");
 		mv.setView(rv);

@@ -11,9 +11,13 @@ public class AirportService {
 	@Autowired
 	private AirportDAO aDAO;
 	
-	public void insertBoard(AirVO vo, HttpSession session) {
+	public void insertGo(AirVO vo, HttpSession session) {
 		System.out.println("DAO호출성공");
-		aDAO.insertBoard(vo, "go");
-		aDAO.insertBoard(vo, "back");
+		aDAO.insertGo(vo, "go");
+	}
+	
+	public void insertBack(AirVO vo, HttpSession session) {
+		System.out.println("DAO호출성공");
+		aDAO.insertBack(vo, "back");
 	}
 }

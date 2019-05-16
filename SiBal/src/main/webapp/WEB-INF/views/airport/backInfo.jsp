@@ -17,18 +17,16 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function() {
-		$("input.btn").click(function() {
-			var formObj = this.form;
+		$(".backbtn").click(function() {
+			var formObj=this.form;
 			$(this.form).submit();
-			//alert(  this.value );
-			//$(this).value='t${status.count}';
-		})
+		});
 	});
 </script>
-<title>Insert title here</title>
+<title>오는날</title>
 </head>
 <body>
-	<h1 align="center">가는날</h1>
+<h1 align="center">오는날</h1>
 	&nbsp;
 
 	<div class="container">
@@ -38,16 +36,13 @@
 					<th>번호</th>
 					<th>항공사</th>
 					<th>출발지</th>
-					<!-- <th>출발시간</th> -->
 					<th>도착지</th>
-					<!-- <th>도착시간</th> -->
 					<th>가격</th>
 					<th>비행기</th>
 				</tr>
 			</thead>
-			<tbody align="center">
-				<c:forEach var="item" varStatus="status" items="${go}">
-					<tr align="center" id="t${status.count}">
+			<c:forEach var="item" varStatus="status" items="${back}">
+				<tr align="center" id="t${status.index}">
 						<c:choose>
 							<c:when test="${item.economyCharge!=0}">
 								<td>${status.count}</td>
@@ -58,26 +53,21 @@
 								<%-- <td>${item.arrPlandTime}</td> --%>
 								<td>${item.economyCharge}원</td>
 								<td>${item.vihicleId}
-								<td><form id="info${status.count}" method="GET"
-										action="../airport/rProc.do">
-										<input type="hidden" name="airlineNm"
-											value="${item.airlineNm}" /> <input type="hidden"
-											name="depAirportNm" value="${item.depAirportNm}" /> <input
-											type="hidden" name="arrAirportNm"
-											value="${item.arrAirportNm}" /> <input type="hidden"
-											name="economyCharge" value="${item.economyCharge}" /> <input
-											type="hidden" name="vihicleId" value="${item.vihicleId}" />
-										<input type="button" class="btn btn-secondary" value="예매" />
-										<!-- <input type="button" class="reserve" value="예매"/> -->
-										<%-- <button class="reserve">예매</button> <!-- <input type="button" class="reserve" value="예매"/> -->--%>
-									</form></td>
+								<td><form id="info${status.index}" method="GET" action="../airport/backProc.do">
+									<input type="hidden" name="airlineNm" value="${item.airlineNm}" />
+									<input type="hidden" name="depAirportNm" value="${item.depAirportNm}" /> 
+										<input type="hidden" name="arrAirportNm" value="${item.arrAirportNm}" /> 
+										<input type="hidden" name="economyCharge" value="${item.economyCharge}" /> 
+										<input type="hidden" name="vihicleId" value="${item.vihicleId}" />
+									<input type="button" class="btn btn-secondary backbtn"  value="예매"/> <!-- <input type="button" class="reserve" value="예매"/> -->
+									<%-- <button class="reserve">예매</button> <!-- <input type="button" class="reserve" value="예매"/> -->--%>
+								</form>
+								</td>
 							</c:when>
 						</c:choose>
 					</tr>
-				</c:forEach>
-			</tbody>
+			</c:forEach>
 		</table>
 	</div>
-	<br>
 </body>
 </html>

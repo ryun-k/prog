@@ -45,7 +45,7 @@ public class NoticeDAO extends SqlSessionDaoSupport{
 	
 	//조회수증가
 	public void hitNotice(int oriNo) {
-		getSqlSession().update("notice.updatehit",oriNo);
+		getSqlSession().update("notice.hitProc",oriNo);
 	}
 	
 	//글수정폼

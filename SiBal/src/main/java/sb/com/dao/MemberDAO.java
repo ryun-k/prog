@@ -61,6 +61,11 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	//비번 재지정 쿼리 실행
 	public void modifyPw(MemberVO vo) {
 		session.update("member.modifyPw",vo);
-		
+	}
+	
+	//중복이메일,닉네임 확인 쿼리 실행
+	public int dupleCk(MemberVO vo) {
+		int str = session.selectOne("member.dupleCk",vo);
+		return str;
 	}
 }

@@ -4,6 +4,29 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "member">
+<!-- ======================= 쿼리문 등록 ================================= -->
+<!-- 이메일과 닉네임 중복 -->
+<sql id="dupleSelect">
+<if test="target eq 'email'">
+where m_email = #{email}
+</if>
+<if test="target eq 'nick'">
+where m_nick = #{nick}
+</if>
+</sql>
+
+
+
+<!-- ======================= 쿼리문 등록 ================================= -->
+
+
+<!-- 이메일, 닉네임 중복확인  -->
+<select id="dupleCk" parameterType="String" resultType="int">
+select count  (*)
+from sbmember
+<include refid = "dupleSelect"/>
+</select>
+
 
 <!--  코드인증후 비번 재지정 -->
 <update id="modifyPw" parameterType="memberVO">

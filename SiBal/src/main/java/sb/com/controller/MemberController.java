@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -185,4 +187,38 @@ public class MemberController {
 		return mv;
 	}
 	
+	//이메일 중복 체크
+	@RequestMapping(value="/EmailCheck", method= RequestMethod.POST)
+	public @ResponseBody String AjaxView(MemberVO vo,@RequestParam("email") String emailck,
+											@RequestParam("target") String target) {
+		System.out.println("ajax연결,email");
+		vo.setEmail(emailck);
+		vo.setTarget(target);
+		String str="";
+		int emailCk = mService.dupleCk(vo);
+		if(emailCk==1) {
+			str="NO";
+		}else {
+			str="YES";
+		}
+		return str;
+	}
+	
+	//닉네임 중복 체크
+	@RequestMapping(value="/NickCheck", method= RequestMethod.POST)
+	public @ResponseBody String AjaxView1(MemberVO vo,@RequestParam("nick") String nickck,
+											@RequestParam("target") String target) {
+		System.out.println("ajax연결,nick");
+		vo.setNick(nickck);
+		vo.setTarget(target);
+		String str="";
+		int nickCk = mService.dupleCk(vo);
+		System.out.println(nickCk);
+		if(nickCk==1) {
+			str="NO";
+		}else {
+			str="YES";
+		}
+		return str;
+	}
 }

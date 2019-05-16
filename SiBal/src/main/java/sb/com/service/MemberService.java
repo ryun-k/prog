@@ -77,4 +77,10 @@ public class MemberService {
 		public void modifyPw(MemberVO vo) {
 			mDAO.modifyPw(vo);
 		}
+		
+		//ajax 이메일과 닉네임 중복 확인
+		public int dupleCk(MemberVO vo) {
+			int str=mDAO.dupleCk(vo);
+			return str;
+		}
 }

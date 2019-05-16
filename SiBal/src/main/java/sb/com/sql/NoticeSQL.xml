@@ -64,7 +64,7 @@
 	<update id="hitProc" parameterType="int">
 		UPDATE NOTICE 
 		SET 
-			hit = hit+1 
+			n_hit = n_hit+1 
 		WHERE 
 			N_no= #{oriNo}
 	</update>
@@ -89,13 +89,13 @@
 			N_CONTENT	= #{content}, 
 			N_STARTDATE	= #{startDate}, 
 			N_ENDDATE	= #{endDate}, 
-			N_ISSOW		= #{isshow}
+			N_ISSHOW		= #{isshow}
 		WHERE
 			N_NO = #{oriNo}
 	</update>
 	
 	<!-- 글삭제 -->
-	<delete id="delete" parameterType="int">
+	<delete id="deleteNotice" parameterType="int">
 		DELETE
 		FROM
 			NOTICE

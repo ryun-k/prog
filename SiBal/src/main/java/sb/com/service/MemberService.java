@@ -20,16 +20,15 @@ public class MemberService {
 		
 		//로그인처리
 		public void loginProc(MemberVO vo, HttpSession session) {
-			HashMap map = new HashMap();
-			map.put("email", vo.getEmail());
-			map.put("pw",vo.getPw());
+		
 			
-			HashMap result = mDAO.loginProc(map);
-			if(result ==null || result.size()==0) {
+			MemberVO result = mDAO.loginProc(vo);
+			if(result ==null) {
 				System.out.println("값없음");
 			}else {
-				session.setAttribute("nick", result.get("NICK"));
-				System.out.println("nick있음="+result.get("NICK"));
+				session.setAttribute("nick", result.getNick());
+				session.setAttribute("status", result.getStatus());
+				System.out.println(session.getAttribute("status"));
 			}
 		}
 
@@ -61,5 +60,21 @@ public class MemberService {
 			mDAO.withdraw(vo);
 			request.getSession().removeAttribute("nick");
 			System.out.println(vo.getStatus());
+		}
+		
+		//비번찾기 인증코드 발송을 위한 이메일확인 작업
+		public MemberVO pwCode(MemberVO vo) {
+			MemberVO code=mDAO.pwCode(vo);
+			return code;
+		}
+		
+		//인증코드저장
+		public void setCode(MemberVO vo) {
+			mDAO.setCode(vo);
+		}
+		
+		//인증코드 작성후 비번 새로 지정하기
+		public void modifyPw(MemberVO vo) {
+			mDAO.modifyPw(vo);
 		}
 }

@@ -1,59 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-						http://www.springframework.org/schema/beans/spring-beans.xsd 
-						http://www.springframework.org/schema/context 
-						http://www.springframework.org/schema/context/spring-context.xsd">
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                  http://www.springframework.org/schema/beans/spring-beans.xsd 
+                  http://www.springframework.org/schema/context 
+                  http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:annotation-config />
-	
-	<!--	컨넥션 풀 설정을 위한 작업 부분	-->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521/xe"/>
-		<property name="username" value="sibal"/>
-		<property name="password" value="sbsb"/>
-	</bean>
-	<!-- myBatis 등록 부분이다 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<!-- myBatis를 위한 환경 설정 파일을 어디에 무슨이름으로
-			 만들어 놓을지를 지정하는 부분이다
-		-->
-		<property name="configLocation" >
-			<value>classpath:/sb/com/myBatis/myBatis-config.xml</value>
-		</property>
-		<!-- myBatis와 연결하는 데이터베이스(컨넥션 풀)을 지정하는 부분	-->
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<!--	myBatis 등록 밑에 스테이트먼트 구하는 기능을 DI기법으로 등록한다로 추가하자.	-->
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean>
-	
-	<!-- DAO선언 -->
-	<bean id="noticeDAO" class="sb.com.dao.NoticeDAO" >
-		<property name="sqlSessionTemplate" ref="sqlSession"/>
-	</bean>
-	<bean id="qnaDAO" class="sb.com.dao.QnaDAO" >
-		<property name="sqlSessionTemplate" ref="sqlSession"/>
-	</bean>
-	<bean id="informationDAO" class="sb.com.dao.InformationDAO" >
-		<property name="sqlSessionTemplate" ref="sqlSession"/>
-	</bean>
-	<bean id="memberDAO" class="sb.com.dao.MemberDAO">
-		<property name="sqlSessionTemplate" ref="sqlSession"/>
-	</bean>
-		
-	<!-- serviece bean처리 -->
-	<bean id="noticeService" class="sb.com.service.NoticeService"/>
-	<bean id="qnaService" class="sb.com.service.QnaService"/>
-	<bean id="informationService" class="sb.com.service.InformationService"/>
-	<bean id="memberService" class="sb.com.service.MemberService"/>
-		
-	<bean id="qnaControll" class="sb.com.controller.QnaController"/>
-	<bean id="memberControll" class="sb.com.controller.MemberController"/>
-	
+   <context:annotation-config />
+   
+   <!--   컨넥션 풀 설정을 위한 작업 부분   -->
+   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+      <property name="url" value="jdbc:oracle:thin:@localhost:1521/xe"/>
+      <property name="username" value="sibal"/>
+      <property name="password" value="sbsb"/>
+   </bean>
+   <!-- myBatis 등록 부분이다 -->
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <!-- myBatis를 위한 환경 설정 파일을 어디에 무슨이름으로
+          만들어 놓을지를 지정하는 부분이다
+      -->
+      <property name="configLocation" >
+         <value>classpath:/sb/com/myBatis/myBatis-config.xml</value>
+      </property>
+      <!-- myBatis와 연결하는 데이터베이스(컨넥션 풀)을 지정하는 부분   -->
+      <property name="dataSource" ref="dataSource" />
+   </bean>
+   
+   <!--   myBatis 등록 밑에 스테이트먼트 구하는 기능을 DI기법으로 등록한다로 추가하자.   -->
+   <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+      <constructor-arg index="0" ref="sqlSessionFactory" />
+   </bean>
+   
+   <!-- DAO선언 -->
+   <bean id="noticeDAO" class="sb.com.dao.NoticeDAO" >
+      <property name="sqlSessionTemplate" ref="sqlSession"/>
+   </bean>
+   <bean id="qnaDAO" class="sb.com.dao.QnaDAO" >
+      <property name="sqlSessionTemplate" ref="sqlSession"/>
+   </bean>
+
+   <bean id="airportDAO" class="sb.com.dao.AirportDAO">
+      <property name="sqlSessionTemplate" ref="sqlSession"/>   
+   </bean>
+
+   <bean id="informationDAO" class="sb.com.dao.InformationDAO" >
+      <property name="sqlSessionTemplate" ref="sqlSession"/>
+   </bean>
+
+   <bean id="memberDAO" class="sb.com.dao.MemberDAO">
+      <property name="sqlSessionTemplate" ref="sqlSession"/>
+
+   </bean>
+
+      
+   <!-- serviece bean처리 -->
+   <bean id="noticeService" class="sb.com.service.NoticeService"/>
+   <bean id="qnaService" class="sb.com.service.QnaService"/>
+
+   <bean id="airportService" class="sb.com.service.AirportService"/>   
+
+   
+   
+
+
+   <bean id="informationService" class="sb.com.service.InformationService"/>
+
+
+
+   <bean id="memberService" class="sb.com.service.MemberService"/>
+      
+   <bean id="qnaControll" class="sb.com.controller.QnaController"/>
+   <bean id="memberControll" class="sb.com.controller.MemberController"/>
+   
 </beans>

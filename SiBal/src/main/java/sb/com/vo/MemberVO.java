@@ -18,9 +18,16 @@ public class MemberVO {
 	private String phone;
 	private String isshow;
 	private String status;
+	private String target;
 	
 	
 	
+	public String getTarget() {
+		return target;
+	}
+	public void setTarget(String target) {
+		this.target = target;
+	}
 	public String getCheck() {
 		return check;
 	}

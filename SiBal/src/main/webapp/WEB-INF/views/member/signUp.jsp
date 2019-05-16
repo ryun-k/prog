@@ -9,7 +9,58 @@
 <title>Insert title here</title>
 <script 
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#email").blur(function(){
+		$.ajax({
+			type:"POST",
+			url:"../member/EmailCheck.do",
+			data:{
+				"email":$("#email").val(),
+				"target":"email"
+			},
+			success:function(data){
+				if($.trim(data)=='YES'){
+					if($("#email").val()!=""){
+						alert("사용가능한 이메일입니다.");
+					}
+				}else{
+					if($("#email").val()!=""){
+						alert("중복된 이메일입니다.");
+						$("#email").val("");
+						$("#email").focus();
+					}
+				}
+			}
+		})
+	})
 
+	$("#nick").blur(function(){
+		$.ajax({
+			type:"POST",
+			url:"../member/NickCheck.do",
+			data:{
+				"nick":$("#nick").val(),
+				"target":"nick"
+			},
+			success:function(data){
+				if($.trim(data)=='YES'){
+					if($("#nick").val()!=""){
+						alert("사용가능한 닉네임입니다.");
+					}
+				}else{
+					if($("#nick").val()!=""){
+						alert("중복된 닉네임입니다.");
+						$("#nick").val("");
+						$("#nick").focus();
+					}
+				}
+			}
+		})
+	})
+
+});
+</script>
 
 </head>
 <body>

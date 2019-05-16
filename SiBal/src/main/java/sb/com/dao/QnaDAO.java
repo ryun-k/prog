@@ -66,4 +66,27 @@ public class QnaDAO extends SqlSessionDaoSupport{
 	public ArrayList getSearchList(QnaVo vo) {
 		return (ArrayList) getSqlSession().selectList("qnaBoard.searchList",vo);
 	}
+	
+	// 댓글 카운트
+	public int repCount(int oriNo) {
+		int count=  (Integer)getSqlSession().selectOne("qnaBoard.repCount",oriNo);
+		return count;
+	}
+	
+	// 댓글 리스트
+	public ArrayList repList(QnaVo vo) {
+		return (ArrayList)getSqlSession().selectList("qnaBoard.repList",vo);
+	}
+	
+	// 댓글입력
+	public void repInsert(QnaVo vo) {
+		SqlSession session = this.getSqlSession();
+		session.insert("qnaBoard.repInsert",vo);
+	}
+
+	// 대댓글입력
+	public void repRepInsert(QnaVo vo) {
+		SqlSession session = this.getSqlSession();
+		session.insert("qnaBoard.repRepInsert",vo);
+	}
 }

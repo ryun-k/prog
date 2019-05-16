@@ -93,5 +93,34 @@
 		where rNo BETWEEN #{start} and #{end}
 	</select>
 	
+	<!-- 댓글 카운트 -->
+	<select id="repCount" resultType="int" parameterType="int">
+		select count(*) as cnt from re_qna
+		where re_q_no =#{oriNo}
+	</select>
+	
+	<!-- 댓글리스트 -->
+	<select id="repList" resultType="qVO" parameterType="qVO">
+		select * from
+		(select rownum as reRNo, re_no as reNo, re_content as reContent, m.m_id as id, re_wDate as reWDate, re_depth as reDepth from re_qna r, member m
+		where m.m_id=r.re_id and re_q_no=#{oriNo}
+		order by re_ref asc, re_wDate asc)
+		where reRNo between #{start} and #{end}
+	</select>
+	
+	<!-- 댓글 쓰기 -->
+	<insert id="repInsert" parameterType="qVO">
+		insert into re_qna(re_no, re_q_no, re_content, re_id, re_depth, re_ref)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reContent},#{id},0,(select nvl(max(re_ref),0)+1 from re_qna))
+	</insert>
+	
+	<!-- 대댓글 쓰기 -->
+	<insert id="repRepInsert" parameterType="qVO">
+		insert into re_qna(re_no, re_q_no, re_content, re_id, re_depth, re_ref)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reContent},#{id},#{reDepth},#{reRef})
+	</insert>
+	
+	
+	
 	
 </mapper>

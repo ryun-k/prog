@@ -74,36 +74,82 @@
 
 <div class="container">
   <div class="jumbotron">
-  <div class="card bg-light text-dark">
-    <div class="card-body">Light card</div>
+		<c:forEach items="${LIST}" var="data">
+		 	<div class="card" style=" margin-left: <c:out value='${data.reDepth * 40}'/>px;">
+			   <div class="card-header">
+			     <strong class="card-text">${data.id}</strong>
+			     <span>${data.reWDate}</span>
+			     <button class="card-link btn btn-outline-secondary rBtn" data-toggle="modal" data-target="#myModal" >답글달기</button>
+				 <button class="card-link btn btn-outline-secondary mBtn">수정하기</button>
+				 <button class="card-link btn btn-outline-secondary dBtn">삭제하기</button>
+			   </div>
+			   <div class="card-body">
+			      <strong class="card-text">${data.reContent}</strong>
+			   </div>
+		   </div>
+	   	</c:forEach>
+		<form action="../qnaBoard/repWrite.do">
+		  <input type="hidden" name="oriNo" value="${oriNo}" />
+		  <input type="hidden" name="nowPage" value="${nowPage}" />
+		  <div class="form-group">
+		    <label for="reContent"></label>
+		    <textarea class="form-control" rows="4" id="reContent" name="reContent"></textarea>
+		  <button type="submit" class="form-control btn-dark">댓글입력</button>
+		  </div>
+		</form>
+	   	<table align="center">
+	   	<tr>
+    		<td>
+			  <ul class="pagination" >
+				
+				<c:if test="${PINFO.startPage eq 1}">
+			    <li class="page-item">
+					<a  class="page-link" href="" >이전</a>
+			    </li>
+				</c:if>
+				<c:if test="${PINFO.startPage ne 1}">
+			    <li class="page-item">
+					<a  class="page-link" href="../qnaBoard/qnaView.do?oriNo=${oriNo}&nowPage=${PINFO.startPage-1}">이전</a>
+			    </li>
+				</c:if>
+			    <c:forEach  var="page" begin="${PINFO.startPage}" end="${PINFO.endPage}" step="1">
+			    <li class="page-item">
+			    	<a class="page-link" href="../qnaBoard/qnaView.do?oriNo=${oriNo}&nowPage=${page}">${page}</a>
+			    </li>
+			    </c:forEach>
+			    <c:if test="${PINFO.endPage eq PINFO.totalPage}">
+				<li class="page-item">
+			    	<a class="page-link" href="">다음</a>
+			    </li>
+				</c:if>
+				<c:if test="${PINFO.endPage ne PINFO.totalPage}">
+			    <li class="page-item">
+			    	<a class="page-link" href="../qnaBoard/qnaView.do?oriNo=${oriNo}&nowPage=${PINFO.endPage+1}">다음</a>
+			    </li>
+				</c:if>
+			  </ul>
+	  		</td>
+	  	</tr>
+	   	</table>
   </div>
-  	<table class="table table-borderless" id="${reply.no }">
-   		<tr align="left" class="table-dark text-dark col-sm-12">
-   			<th class="col-sm-6">
-   				<input type="hidden" id="no" name="no" value="${reply.no }"/>
-   				작성자 : ${reply.writer }
-   			</th>
-   			<th class="col-sm-2">
-   				2019-05-15
-   			</th>
-   			<th class="col-sm-3">
-   				<input type="button" value="답글달기" class="ruBtn btn" name="ruBtn"/>
-   			</th>
-   		</tr>
-   		<tr class="table-dark text-dark">
-   			<td class="col-sm-10" align="left">
-   				내용: ${reply.brBody }
-   			</td>
-    		<td class="col-sm-2">
-   			<c:if test="${sessionScope.ID eq reply.writer}">
-    				<input type="button" value="댓글수정" class="ruBtn btn" name="ruBtn"/>
-    		<td class="col-sm-2">
-    				<input type="button" value="댓글삭제" class="rdBtn btn" name="rdBtn"/>
-    		</td>
-   			</c:if>
-    		</td>
-   		</tr>
-   	</table>
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">답글입력</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">답글입력</button>
+        </div>
+        
+      </div>
+    </div>
   </div>
 </div>
 </body>

@@ -123,4 +123,52 @@ public class QnaService {
 		return searchList;
 	}
 	
+	// 댓글 카운트
+	public PageUtil repPageInfo(int nowPage,int oriNo) {
+		
+		int totalCount = qDAO.repCount(oriNo);
+		
+		PageUtil pageInfo = new PageUtil(nowPage,totalCount,10,5);
+		return pageInfo;
+		
+	}
+	
+	// 댓글 리스트
+	public ArrayList repList(PageUtil pInfo, int oriNo) {
+		
+		int start = (pInfo.getNowPage()-1) * pInfo.getListCount()+1;
+		int end   = start + pInfo.getListCount() -1;
+		
+		QnaVo vo = new QnaVo();
+		vo.setStart(start);
+		vo.setEnd(end);
+		vo.setOriNo(oriNo);
+		
+		ArrayList list = qDAO.repList(vo);
+		return list;
+	}
+	
+	// 댓글 입력
+	public void repInsert(HttpSession session,QnaVo vo) {
+//		String id = (String)session.getAttribute("UID");
+//		vo.setId(id);
+		String id = "gun";
+		vo.setId(id);
+		qDAO.repInsert(vo);
+	}
+	
+	// 답변하기
+	public void repRepInsert(HttpSession session, QnaVo vo) {
+//		String id = (String)session.getAttribute("UID");
+//		vo.setId(id);
+		
+		String id = "gun";
+		vo.setId(id);
+		
+		vo.getReRef();
+		vo.setReDepth(vo.getReDepth()+1);
+		
+		qDAO.repRepInsert(vo);
+	}
+	
 }

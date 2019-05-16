@@ -33,11 +33,11 @@ public class QnaController {
 		req.setAttribute("PINFO", pInfo);
 		
 	}
+	
 	// 질문하기 폼
 	@RequestMapping("/qWriteForm")
 	public void qWriterForm() {
-		
-		
+				
 	}
 	
 	// 질문하기
@@ -64,11 +64,18 @@ public class QnaController {
 		return mv;
 	}
 	
-	// 상세보기
+	// 상세보기 (댓글리스트 추가)
 	@RequestMapping("/qnaView")
-	public ModelAndView qnaView(@RequestParam(value="oriNo") int oriNo, @RequestParam(value="nowPage") int nowPage, ModelAndView mv) {
+	public ModelAndView qnaView(@RequestParam(value="nowPage") int nowPage,@RequestParam(value="oriNo") int oriNo , ModelAndView mv) {
+		
 		QnaVo vo = qService.getQnaView(oriNo);
 		
+		PageUtil pInfo = qService.repPageInfo(nowPage,oriNo);
+		ArrayList list = qService.repList(pInfo,oriNo);
+		
+		mv.addObject("LIST", list);
+		mv.addObject("PINFO", pInfo);
+		mv.addObject("oriNo", oriNo);
 		mv.addObject("VIEW",vo);
 		mv.addObject("nowPage",nowPage);
 		
@@ -165,4 +172,27 @@ public class QnaController {
 		mv.setViewName("qnaBoard/qnaSearch");
 		return mv;
 	}
+	
+	@RequestMapping("/repWrite")
+	public ModelAndView repWrite(@RequestParam(value="nowPage") int nowPage,@RequestParam(value="oriNo") int oriNo ,ModelAndView mv, QnaVo vo, HttpSession session) {
+		qService.repInsert(session,vo);
+		RedirectView rv = new RedirectView("../qnaBoard/qnaView.do");
+		mv.addObject("oriNo", oriNo);
+		mv.addObject("nowPage",nowPage);
+		mv.setView(rv);
+		return mv;
+	}
+	
+	@RequestMapping("/repRepWrite")
+	public ModelAndView repRepWrite(@RequestParam(value="nowPage") int nowPage,@RequestParam(value="oriNo") int oriNo ,ModelAndView mv, QnaVo vo, HttpSession session) {
+		qService.repRepInsert(session,vo);
+		RedirectView rv = new RedirectView("../qnaBoard/qnaView.do");
+		mv.addObject("oriNo", oriNo);
+		mv.addObject("nowPage",nowPage);
+		mv.setView(rv);
+		return mv;
+	}
+	
+	
+	
 }

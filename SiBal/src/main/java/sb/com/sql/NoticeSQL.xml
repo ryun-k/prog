@@ -89,13 +89,13 @@
 			N_CONTENT	= #{content}, 
 			N_STARTDATE	= #{startDate}, 
 			N_ENDDATE	= #{endDate}, 
-			N_ISSOW		= #{isshow}
+			N_ISSHOW		= #{isshow}
 		WHERE
 			N_NO = #{oriNo}
 	</update>
 	
 	<!-- 글삭제 -->
-	<delete id="delete" parameterType="int">
+	<delete id="deleteNotice" parameterType="int">
 		DELETE
 		FROM
 			NOTICE

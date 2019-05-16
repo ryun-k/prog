@@ -53,7 +53,7 @@ public class NoticeService {
 		return (NoticeVo)nDAO.modifyNotice(oriNo);
 	}
 	//modifyProc
-	public void updateNotice(NoticeVo vo) {
+	public void updateNotice(NoticeVo vo,int oriNo) {
 		System.out.println("updateNotice");
 		nDAO.updateNotice(vo);
 	}
@@ -68,6 +68,6 @@ public class NoticeService {
 	//delete
 	public void deleteNotice(int oriNo) {
 		System.out.println("deleteNotice");
-		nDAO.getView(oriNo);
+		nDAO.deleteNotice(oriNo);
 	}
 }

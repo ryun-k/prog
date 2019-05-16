@@ -30,7 +30,10 @@
 <body>
 <div class="container">
   <h1>writeForm</h1>
-  <form class="form-horizontal" action="../notice/modifyProc.do" method="post">
+  <form class="form-horizontal" action="../notice/modifyProc.do" method="get">
+  	<input type="hidden" id="oriNo" name="oriNo" value="${DATA.no }"/>
+  	<input type="hidden" id="nowPage" name="nowPage" value="${nowPage }"/>
+  	 
     <div class="form-group">
       <label class="control-label col-sm-2" >제목</label>
       <div class="col-sm-10">

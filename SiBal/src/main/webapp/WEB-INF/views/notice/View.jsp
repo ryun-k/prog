@@ -20,7 +20,7 @@
  			$(location).attr("href","../notice/modifyForm.do?oriNo=${VIEW.no}&nowPage=${nowPage}");
  		});
  		$('#dBtn').click(function(){
- 			//$(location).attr("href","../notice/delete.do?oriNo=${VIEW.no}");
+ 			$(location).attr("href","../notice/delete.do?oriNo=${VIEW.no}&nowPage=${nowPage}");
  		});
  	});
  	

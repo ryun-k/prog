@@ -10,6 +10,13 @@
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ 	<script type="text/javascript">
+ 	$(function(){
+ 		$('#wBtn').click(function(){
+			$(location).attr("href","../notice/writeForm.do");
+ 		});
+ 	});
+ 	</script>
 </head>
 <body>
 
@@ -27,7 +34,7 @@
     <tbody>
 	    <c:forEach items="${LIST }" var="data">
 	      <tr>
-	        <td>${data.no }</td>
+	        <td><a href="../notice/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.no }</a></td>
 	        <td>${data.title }</td>
 	        <td>${data.hit }</td>
 	        <td>${data.wDate }</td>
@@ -38,10 +45,12 @@
 	  	
     </tbody>
   </table>
+  	
   	<table class="table">
 		<tbody>
 			<tr>
 				<td align="center">
+				
 					<%-- 1. 이전단추 만들기 --%>
 					<%-- PINFO는 컨트롤러에서 페이징관련정보가 담긴 모델 --%>
 					<c:if test="${PINFO.startPage eq 1}"> << </c:if>
@@ -70,8 +79,14 @@
 					
 				</td>
 			</tr>
+			<tr>
+				<td>
+				    <button type="button" class="btn btn-primary" id="wBtn">글쓰기</button>
+				</td>
+			</tr>
 		</tbody>
 	</table>
+	
 </div>
 
 </body>

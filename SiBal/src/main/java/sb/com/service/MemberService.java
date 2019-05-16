@@ -20,16 +20,15 @@ public class MemberService {
 		
 		//로그인처리
 		public void loginProc(MemberVO vo, HttpSession session) {
-			HashMap map = new HashMap();
-			map.put("email", vo.getEmail());
-			map.put("pw",vo.getPw());
+		
 			
-			HashMap result = mDAO.loginProc(map);
-			if(result ==null || result.size()==0) {
+			MemberVO result = mDAO.loginProc(vo);
+			if(result ==null) {
 				System.out.println("값없음");
 			}else {
-				session.setAttribute("nick", result.get("NICK"));
-				System.out.println("nick있음="+result.get("NICK"));
+				session.setAttribute("nick", result.getNick());
+				session.setAttribute("status", result.getStatus());
+				System.out.println(session.getAttribute("status"));
 			}
 		}
 
@@ -56,6 +55,35 @@ public class MemberService {
 			 session.setAttribute("nick", vo.getNick());
 		}
 		
+		
+		
+		//비번찾기 인증코드 발송을 위한 이메일확인 작업
+		public MemberVO pwCode(MemberVO vo) {
+			MemberVO code=mDAO.pwCode(vo);
+			return code;
+		}
+		
+		//인증코드저장
+		public void setCode(MemberVO vo) {
+			mDAO.setCode(vo);
+		}
+		
+		//인증코드 작성후 비번 새로 지정하기
+		public void modifyPw(MemberVO vo) {
+			mDAO.modifyPw(vo);
+		}
+		
+		//ajax 이메일과 닉네임 중복 확인
+		public int dupleCk(MemberVO vo) {
+			int str=mDAO.dupleCk(vo);
+			return str;
+		}
+		
+		//로그인,탈퇴시 비번 확인
+		public	int CheckProc(MemberVO vo) {
+			int str= mDAO.CheckProc(vo);
+			return str;
+		}
 		//회원 탈퇴 , status를 바꿔주고 세션도 죽인다.
 		public void withdraw(MemberVO vo,HttpServletRequest request) {
 			mDAO.withdraw(vo);

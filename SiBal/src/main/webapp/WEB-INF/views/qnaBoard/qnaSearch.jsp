@@ -68,12 +68,12 @@
 				</c:if>
 				<c:if test="${PINFO.startPage ne 1}">
 			    <li class="page-item">
-					<a  class="page-link" href="../qnaBoard/qnaList.do?nowPage=${PINFO.startPage-1}">이전</a>
+					<a  class="page-link" href="../qnaBoard/qnaSearch.do?nowPage=${PINFO.startPage-1}&target=${target}&word=${word}">이전</a>
 			    </li>
 				</c:if>
 			    <c:forEach  var="page" begin="${PINFO.startPage}" end="${PINFO.endPage}" step="1">
 			    <li class="page-item">
-			    	<a class="page-link" href="../qnaBoard/qnaList.do?nowPage=${page}">${page}</a>
+			    	<a class="page-link" href="../qnaBoard/qnaSearch.do?nowPage=${page}&target=${target}&word=${word}">${page}</a>
 			    </li>
 			    </c:forEach>
 			    <c:if test="${PINFO.endPage eq PINFO.totalPage}">
@@ -83,7 +83,7 @@
 				</c:if>
 				<c:if test="${PINFO.endPage ne PINFO.totalPage}">
 			    <li class="page-item">
-			    	<a class="page-link" href="../qnaBoard/qnaList.do?nowPage=${PINFO.endPage+1}">다음</a>
+			    	<a class="page-link" href="../qnaBoard/qnaSearch.do?nowPage=${PINFO.endPage+1}&target=${target}&word=${word}">다음</a>
 			    </li>
 				</c:if>
 			  </ul>
@@ -107,7 +107,6 @@
   <div>
    	<button type="submit" class="btn btn-dark" id="wBtn" >글쓰기</button>
   </div>
-  
 </div>
 </body>
 </html>

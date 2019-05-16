@@ -3,6 +3,7 @@ package sb.com.vo;
 import java.sql.Date;
 
 public class QnaVo {
+	
 	private int no;
 	private int pNo;
 	private String title;
@@ -19,7 +20,82 @@ public class QnaVo {
 	private int end;
 	
 	private int oriNo;
+	private int nowPage;
 	
+	private String target;
+	private String word;
+	
+	// 댓글용
+	
+	private int reNo;
+	private int reQNo;
+	private String reContent;
+	private Date reWDate;
+	private int reDepth;
+	private int reRef;
+	
+	private int reRNo;
+	
+	public int getReNo() {
+		return reNo;
+	}
+	public void setReNo(int reNo) {
+		this.reNo = reNo;
+	}
+	public int getReQNo() {
+		return reQNo;
+	}
+	public void setReQNo(int reQNo) {
+		this.reQNo = reQNo;
+	}
+	public String getReContent() {
+		return reContent;
+	}
+	public void setReContent(String reContent) {
+		this.reContent = reContent;
+	}
+	public Date getReWDate() {
+		return reWDate;
+	}
+	public void setReWDate(Date reWDate) {
+		this.reWDate = reWDate;
+	}
+	public int getReDepth() {
+		return reDepth;
+	}
+	public void setReDepth(int reDepth) {
+		this.reDepth = reDepth;
+	}
+	public int getReRef() {
+		return reRef;
+	}
+	public void setReRef(int reRef) {
+		this.reRef = reRef;
+	}
+	public int getReRNo() {
+		return reRNo;
+	}
+	public void setReRNo(int reRNo) {
+		this.reRNo = reRNo;
+	}
+	public int getNowPage() {
+		return nowPage;
+	}
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
+	public String getTarget() {
+		return target;
+	}
+	public void setTarget(String target) {
+		this.target = target;
+	}
+	public String getWord() {
+		return word;
+	}
+	public void setWord(String word) {
+		this.word = word;
+	}
 	public int getRef() {
 		return ref;
 	}

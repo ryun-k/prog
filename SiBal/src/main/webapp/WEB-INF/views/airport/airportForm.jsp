@@ -5,18 +5,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#gopicker" ).datepicker();
+    $( "#backpicker" ).datepicker();
+  });
+  
+  </script>
 <title>Home</title>
 </head>
 <body>
 
+<h2>정보입력</h2>
 <form action="/sb/airport/airport.do" method="post">
 	출발 : <input type="text" name="depAirportNm"><br/>
 	도착 : <input type="text" name="arrAirportNm"><br/>
-	가는날 : <input type="text" name="depPlandTime"><br/>
-	오는날 : <input type="text" name="arrPlandTime"><br/>
+	가는날 : <input type="text" id="gopicker" name="depPlandTime"><br/>
+	오는날 : <input type="text" id="backpicker" name="arrPlandTime"><br/>
 	<input type="submit" value="확인">
-
 </form>
 </body>
 </html>

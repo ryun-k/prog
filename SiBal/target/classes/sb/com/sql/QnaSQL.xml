@@ -3,7 +3,23 @@
 
 <mapper namespace="qnaBoard">
 	
-	<!-- 게시물 총 갯수 -->
+	<!-- 검색 결과반영 동적 SQL -->
+	<sql id="searchField">
+		<if test="target eq 'title'">
+			q_title like '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'body'">
+			q_content like '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'writer'">
+			q_id like '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'both'">
+			(q_title like '%'||#{word}||'%' or q_content like '%'||#{word}||'%')
+		</if>
+	</sql>
+	
+	<!-- 게시물 카운트 -->
 	<select id="totalCount" resultType="int">
 		select count(*) as cnt from qna
 	</select>
@@ -60,5 +76,51 @@
 	<delete id="deleteQna" parameterType="int">
 		delete from qna where q_no=#{no}	
 	</delete>
+	
+	<!-- 검색결과 카운트 -->
+	<select id="searchCount" parameterType="qVO" resultType="int">
+		select count(*) as cnt from qna where <include refid="searchField" />
+	</select>
+	
+	<!-- 검색하기 -->
+	<select id="searchList" parameterType="qVO" resultType="qVO">
+		select * from
+		(select rownum as rNo, q_no as no, q_title as title, m.m_id as id, q_wDate as wDate, q_hit as hit,depth from qna q, member m
+		where m.m_id=q.q_id
+		and 
+		<include refid="searchField" />
+		order by ref desc, step asc)
+		where rNo BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 댓글 카운트 -->
+	<select id="repCount" resultType="int" parameterType="int">
+		select count(*) as cnt from re_qna
+		where re_q_no =#{oriNo}
+	</select>
+	
+	<!-- 댓글리스트 -->
+	<select id="repList" resultType="qVO" parameterType="qVO">
+		select * from
+		(select rownum as reRNo, re_no as reNo, re_content as reContent, m.m_id as id, re_wDate as reWDate, re_depth as reDepth from re_qna r, member m
+		where m.m_id=r.re_id and re_q_no=#{oriNo}
+		order by re_ref asc, re_wDate asc)
+		where reRNo between #{start} and #{end}
+	</select>
+	
+	<!-- 댓글 쓰기 -->
+	<insert id="repInsert" parameterType="qVO">
+		insert into re_qna(re_no, re_q_no, re_content, re_id, re_depth, re_ref)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reContent},#{id},0,(select nvl(max(re_ref),0)+1 from re_qna))
+	</insert>
+	
+	<!-- 대댓글 쓰기 -->
+	<insert id="repRepInsert" parameterType="qVO">
+		insert into re_qna(re_no, re_q_no, re_content, re_id, re_depth, re_ref)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reContent},#{id},#{reDepth},#{reRef})
+	</insert>
+	
+	
+	
 	
 </mapper>

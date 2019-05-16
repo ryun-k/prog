@@ -21,7 +21,7 @@ public class QnaService {
 		
 		int totalCount = qDAO.getTotalCount();
 		
-		PageUtil pageInfo = new PageUtil(nowPage,totalCount,5,5);
+		PageUtil pageInfo = new PageUtil(nowPage,totalCount,10,5);
 		return pageInfo;
 		
 	}
@@ -96,6 +96,79 @@ public class QnaService {
 	// 삭제하기
 	public void deleteQna(int oriNo) {
 		qDAO.deleteQna(oriNo);	
+	}
+	
+	// 검색결과 카운트
+	public PageUtil getSearchPage(QnaVo vo, int nowPage) {
+		int searchCount = qDAO.getSearchCount(vo);
+		
+		PageUtil pageInfo = new PageUtil(nowPage,searchCount,10,5);
+		return pageInfo;
+	}
+	
+	// 검색하기
+	public ArrayList getSearchList(PageUtil pInfo, String target, String word) {
+		
+		int start = (pInfo.getNowPage()-1) * pInfo.getListCount()+1;
+		int end   = start + pInfo.getListCount() -1;
+		
+		QnaVo vo = new QnaVo();
+		vo.setStart(start);
+		vo.setEnd(end);
+		vo.setTarget(target);
+		vo.setWord(word);
+				
+		ArrayList searchList = qDAO.getSearchList(vo);
+		
+		return searchList;
+	}
+	
+	// 댓글 카운트
+	public PageUtil repPageInfo(int nowPage,int oriNo) {
+		
+		int totalCount = qDAO.repCount(oriNo);
+		
+		PageUtil pageInfo = new PageUtil(nowPage,totalCount,10,5);
+		return pageInfo;
+		
+	}
+	
+	// 댓글 리스트
+	public ArrayList repList(PageUtil pInfo, int oriNo) {
+		
+		int start = (pInfo.getNowPage()-1) * pInfo.getListCount()+1;
+		int end   = start + pInfo.getListCount() -1;
+		
+		QnaVo vo = new QnaVo();
+		vo.setStart(start);
+		vo.setEnd(end);
+		vo.setOriNo(oriNo);
+		
+		ArrayList list = qDAO.repList(vo);
+		return list;
+	}
+	
+	// 댓글 입력
+	public void repInsert(HttpSession session,QnaVo vo) {
+//		String id = (String)session.getAttribute("UID");
+//		vo.setId(id);
+		String id = "gun";
+		vo.setId(id);
+		qDAO.repInsert(vo);
+	}
+	
+	// 답변하기
+	public void repRepInsert(HttpSession session, QnaVo vo) {
+//		String id = (String)session.getAttribute("UID");
+//		vo.setId(id);
+		
+		String id = "gun";
+		vo.setId(id);
+		
+		vo.getReRef();
+		vo.setReDepth(vo.getReDepth()+1);
+		
+		qDAO.repRepInsert(vo);
 	}
 	
 }

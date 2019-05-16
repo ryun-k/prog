@@ -27,9 +27,15 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 				$("#loginForm").submit();
 			}
 			});
+			//비번 찾기시 프롬프트창 열기. 이메일 입력받고 확인후 코드전송함.
+			$("#fBtn").click(function(){
+				var email = prompt("가입하신 이메일을 입력하세요");
+				$("#email1").val(email);
+				$("#codeForm").submit();
+			});
 		});
 		</script>
-		<script>
+<!-- 		<script>
 function onSignIn(googleUser) {
   // Useful data for your client-side scripts:
   var profile = googleUser.getBasicProfile(){
@@ -51,7 +57,7 @@ function onSignIn(googleUser) {
 	'<p/>'+'<img src="'+image+'">';
   }
 }
-	</script> 
+	</script>  -->
 </head>
 <body>
 <%
@@ -74,6 +80,7 @@ function onSignIn(googleUser) {
 			<tr>
 				<td colspan="2" align="center">
 					<input type="button" id="lBtn" value="Login">
+					<input type="button" id="fBtn" value="비밀번호 찾기">
 				</td>
 			</tr>
 		</table>
@@ -101,5 +108,9 @@ function onSignIn(googleUser) {
 	<%	  
 	  }
 	%>	
+	<form id="codeForm" method="post" action="checkEmail.do">
+	<input type="hidden" id="email1" name="email">
+	</form>
+	${MSG}
 </body>
 </html>

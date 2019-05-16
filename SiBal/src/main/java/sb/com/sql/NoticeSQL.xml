@@ -64,7 +64,7 @@
 	<update id="hitProc" parameterType="int">
 		UPDATE NOTICE 
 		SET 
-			hit = hit+1 
+			n_hit = n_hit+1 
 		WHERE 
 			N_no= #{oriNo}
 	</update>

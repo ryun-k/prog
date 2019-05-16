@@ -77,7 +77,7 @@ public class NoticeController {
 		String  strOriNo= req.getParameter("oriNo");
 		int     oriNo = Integer.parseInt(strOriNo);
 		String  nowPage = req.getParameter("nowPage"); 
-		nService.hitNotice(oriNo);
+		nService.hitNotice(oriNo,session);
 		RedirectView rv = new RedirectView("../notice/View.do");
 		
 		rv.addStaticAttribute("oriNo", oriNo);

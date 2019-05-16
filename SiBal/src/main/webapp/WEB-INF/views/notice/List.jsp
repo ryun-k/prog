@@ -34,7 +34,7 @@
     <tbody>
 	    <c:forEach items="${LIST }" var="data">
 	      <tr>
-	        <td><a href="../notice/View.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.no }</a></td>
+	        <td><a href="../notice/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.no }</a></td>
 	        <td>${data.title }</td>
 	        <td>${data.hit }</td>
 	        <td>${data.wDate }</td>

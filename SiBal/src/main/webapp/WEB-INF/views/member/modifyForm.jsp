@@ -14,6 +14,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script 
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	//정규식
@@ -109,7 +110,21 @@ $(document).ready(function(){
 			}
 		}
 	})
-	
+	//주소쓰기
+	$("#map").click(function(){
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var addr = ''; // 주소 변수
+            if (data.userSelectedType === 'R') { 
+                addr = data.roadAddress;
+            } else { 
+                addr = data.jibunAddress;
+            }
+            document.getElementById("addr").value = addr+data.buildingName;
+            document.getElementById("addr").focus();
+        }
+    }).open();
+	});
 	
 	
 	$("#cBtn").click(function(){
@@ -125,12 +140,12 @@ $(document).ready(function(){
 <h1>회원정보수정</h1>
 <form id = "modify" class="was-validated" method="post" action="../member/modifyProc.do" encType="utf-8" >
 <div class="form-group">
- 
+  
 	<input type="hidden" class="form-control" name="email" value="${INFO.email}">
 	<h3>${INFO.email}</h3><br/>
 	
 	<label for="pw"> password</label>
-	<input type="password" id="pw" class="form-control" name="pw" placeholder="패스워드를 입력해주세요" required="required" 
+	<input type="password" id="pw" class="form-control" name="pw" placeholder="새로운 패스워드를 입력해주세요" required="required" 
 	 pattern="^[\W-가-힣a-zA-Z0-9]{4,20}" maxlength="20"> <br/>
 	 
 
@@ -146,14 +161,15 @@ $(document).ready(function(){
 	<input type="text" id="nick" class="form-control" name="nick" required="required" placeholder="닉네임을  입력해주세요"
 	pattern="^[\W-가-힣a-zA-Z0-9]{2,10}" maxlength="10" value="${INFO.nick}"><br/>
 
-	<label for="addr">주소</label>
-	<input type="text" id="add" class="form-control" name="addr" placeholder="주소를 입력해주세요(선택)" value="${INFO.addr}"><br/>
+	<label for="addr">주소</label><br/><input type="button" id="map" name="map" value="주소입력">
+	<input type="text" id="addr" class="form-control" name="addr" placeholder="주소를 입력해주세요" value="${INFO.addr}"><br/>
 
 	<label for="phone">휴대폰 번호</label> 
-	<input type="text" id="phone" class="form-control" name="phone" placeholder="휴대폰 번호를 입력해주세요(선택)" value="${INFO.phone}"
+	<input type="text" id="phone" class="form-control" name="phone" placeholder="휴대폰 번호를 입력해주세요" value="${INFO.phone}"
 	 pattern="^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$"> <br/>
 
 <br/>
+</div>
 <input type="submit" id="mBtn" class="btn btn-primary" value="수정하기">
 <input type="button" id="cBtn" class="btn btn-primary" value="취소하기">
 </form>

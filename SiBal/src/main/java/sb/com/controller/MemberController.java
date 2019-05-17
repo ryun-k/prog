@@ -25,17 +25,17 @@ public class MemberController {
 	@Autowired
 	private MemberService mService; 
 	
-	//·Î±×ÀÎÆû
+	//ë¡œê·¸ì¸í¼
 	@RequestMapping("/loginForm")
 	public String loginForm() {
 		return "member/loginForm";
 	}
 
-	//·Î±×¾Æ¿ôÆû
+	//ë¡œê·¸ì•„ì›ƒí¼
 	@RequestMapping("/logoutForm")
 	public void logoutForm() {
 	}
-	//·Î±×¾Æ¿ôÃ³¸®
+	//ë¡œê·¸ì•„ì›ƒì²˜ë¦¬
 	@RequestMapping("/logoutProc")
 	public ModelAndView logoutProc(HttpServletRequest request) {
 		mService.logoutProc(request);
@@ -45,13 +45,13 @@ public class MemberController {
 		return mv;
 	}
 	
-	//È¸¿ø°¡ÀÔÆû.
+	//íšŒì›ê°€ì…í¼
 	@RequestMapping("/signUp")
 	public String SignUp() {
 		return "member/signUp";
 	}
 	
-	//È¸¿ø°¡ÀÔÃ³¸®
+	//íšŒì›ê°€ì…ì²˜ë¦¬
 	@RequestMapping("/signUpProc")
 	public ModelAndView signUpProc(MemberVO vo,ModelAndView mv) {
 		mService.signUpProc(vo);
@@ -59,7 +59,7 @@ public class MemberController {
 		mv.setView(rv);
 		return mv;
 	}
-	//È¸¿øÁ¤º¸¼öÁ¤
+	//íšŒì›ì •ë³´ìˆ˜ì •
 	@RequestMapping("/modifyForm")
 	public ModelAndView modifyForm(MemberVO vo,HttpSession session,ModelAndView mv) {
 		String nick = (String)session.getAttribute("nick");
@@ -70,7 +70,7 @@ public class MemberController {
 		return mv;
 	}
 	
-	//È¸¿øÁ¤º¸ ¼öÁ¤Ã³¸®
+	//íšŒì›ì •ë³´ ìˆ˜ì •ì²˜ë¦¬
 	@RequestMapping("/modifyProc")
 	public ModelAndView modifyProc(MemberVO vo,HttpSession session,ModelAndView mv) {
 		mService.modifyProc(vo,session);
@@ -78,7 +78,7 @@ public class MemberController {
 		return mv;
 	}
 	
-	//È¸¿øÅ»Åğ Æû
+	//íšŒì›íƒˆí‡´í¼
 	@RequestMapping("/withdrawForm")
 	public ModelAndView withdrawForm(MemberVO vo, HttpSession session,ModelAndView mv) {
 		String nick = (String)session.getAttribute("nick");
@@ -89,23 +89,23 @@ public class MemberController {
 		return mv;
 	}
 
-	//Å»Åğ½Ã ºä
+	//íƒˆí‡´ì‹œë·°
 	@RequestMapping("/withDraw")
 	public String withDraw(HttpServletRequest request) {
 		mService.logoutProc(request);
 		return "member/withDraw";
 	}
-	//ÀÌ¸ŞÀÏ À¯È¿°Ë»ç
+	//ì´ë©”ì¼ ìœ íš¨ê²€ì‚¬
 	@RequestMapping("/checkEmail")
 	public ModelAndView checkEmail(MemberVO vo) {
-		//emailÀÌ °¡ÀÔµÈ°ÍÀÎÁö È®ÀÎ
+		//emailì´ ê°€ì…ëœ ê²ƒì¸ì§€ í™•ì¸
 		System.out.println(vo.getEmail());
 		MemberVO check = mService.pwCode(vo);
 		System.out.println("check="+check.getEmail());
 		RedirectView rv= null;
 		ModelAndView mv = null;
 		if(check.getEmail().equals("0")) {
-			String msg="Á¸ÀçÇÏÁö ¾Ê´Â ÀÌ¸ŞÀÏÀÔ´Ï´Ù.";
+			String msg="ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì´ë©”ì¼ì…ë‹ˆë‹¤..";
 			rv=new RedirectView("../member/loginForm.do");
 			mv=new ModelAndView();
 			mv.setView(rv);
@@ -123,7 +123,7 @@ public class MemberController {
 		
 	}
 
-	//ºñ¹Ğ¹øÈ£ Ã£±â ÀÎÁõÄÚµå
+	//ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ì¸ì¦ ì½”ë“œ
 	@RequestMapping("/pwCode")
 	public ModelAndView pwCode(MemberVO vo, HttpSession session) {
 		RedirectView rv=new RedirectView();
@@ -135,20 +135,20 @@ public class MemberController {
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-	String subject = "ºñ¹Ğ¹øÈ£ Ã£±â ÀÎÁõÄÚµå ¾È³»";
+	String subject = "ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ì¸ì¦ì½”ë“œ ì•ˆë‚´";
 	
 	String msg = "";
 	msg += "<div align = 'center' style='border:1px solid black; font-family:verdana'>";
-	msg += "<h1 style = 'color: blue;'> ºñ¹Ğ¹øÈ£ Ã£±â ÀÎÁõ ÄÚµåÀÔ´Ï´Ù..</h1>";
-	msg += "<h3>ºñ¹Ğ¹øÈ£ Ã£±â ÆäÀÌÁö·Î µ¹¾Æ°¡ ÀÎÁõÄÚµå</h3><h1> <strong>";
-	msg += KeyCode+"</strong></h1><h3>¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.</h3></div><br/>	";
+	msg += "<h1 style = 'color: blue;'> ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ì¸ì¦ ì½”ë“œì…ë‹ˆë‹¤..</h1>";
+	msg += "<h3>ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° í˜ì´ì§€ë¡œ ëŒì•„ê°€ ì¸ì¦ì½”ë“œ</h3><h1> <strong>";
+	msg += KeyCode+"</strong></h1><h3>ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.</h3></div><br/>	";
 	
 	try {
 		Email.sendMail(vo.getEmail(),subject,msg);
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-	//vo¿¡ Å° ÄÚµå¸¦ ÀúÀå½ÃÅ°°í Æû¿¡¼­ ºñ±³ÇÑ´Ù.
+	//voì— í‚¤ ì½”ë“œë¥¼ ì €ì¥ì‹œí‚¤ê³  í¼ì—ì„œ ë¹„êµí•œë‹¤.
 	vo.setCheck(KeyCode);
 	
 	mService.setCode(vo);
@@ -164,10 +164,10 @@ public class MemberController {
 		return mv;
 	}
 	
-	//ÀÌ¸ŞÀÏ Áßº¹ Ã¼Å©
+	//ì´ë©”ì¼ ì¤‘ë³µì²´í¬
 	@RequestMapping(value="/EmailCheck", method= RequestMethod.POST)
 	public @ResponseBody String AjaxView(MemberVO vo) {
-		System.out.println("ajax¿¬°á,email");
+		System.out.println("ajaxì‹¤í–‰,email");
 		
 		String str="";
 		int emailCk = mService.dupleCk(vo);
@@ -179,10 +179,10 @@ public class MemberController {
 		return str;
 	}
 	
-	//´Ğ³×ÀÓ Áßº¹ Ã¼Å©
+	//ë‹‰ë„¤ì„ ì¤‘ë³µ ì²´í¬
 	@RequestMapping(value="/NickCheck", method= RequestMethod.POST)
 	public @ResponseBody String AjaxView1(MemberVO vo) {
-		System.out.println("ajax¿¬°á,nick");
+		System.out.println("ajaxì‹¤í–‰,nick");
 		
 		String str="";
 		int nickCk = mService.dupleCk(vo);
@@ -195,10 +195,10 @@ public class MemberController {
 		return str;
 	}
 	
-	//È¸¿øÅ»Åğ ºñ¹ø È®ÀÎ
+	//íšŒì›íƒˆí‡´ ë¹„ë²ˆ í™•ì¸
 	@RequestMapping(value="/withdrawProc", method=RequestMethod.POST)
 	public @ResponseBody String WithdrawProc(MemberVO vo,HttpServletRequest request) {
-		System.out.println("ajax¿¬°á,Å»ÅğÃ³¸®"+vo.getEmail());
+		System.out.println("ajaxì—°ê²°,íƒˆí‡´ì²˜ë¦¬"+vo.getEmail());
 		
 		String str="";
 		int ok = mService.CheckProc(vo);
@@ -210,10 +210,10 @@ public class MemberController {
 		}
 		return str;
 	}
-	//·Î±×ÀÎ½Ã ºñ¹ø È®ÀÎ°ú ·Î±×ÀÎ Ã³¸®.
+	//ë¡œê·¸ì¸ì‹œ ë¹„ë²ˆ í™•ì¸ê³¼ ë¡œê·¸ì¸ ì²˜ë¦¬.
 	@RequestMapping(value="/CheckProc", method=RequestMethod.POST)
 	public @ResponseBody String CheckProc(MemberVO vo,HttpSession session) {
-		System.out.println("ajax¿¬°á,·Î±×ÀÎÃ³¸®"+vo.getEmail());
+		System.out.println("ajaxì—°ê²°,ë¡œê·¸ì¸ì²˜ë¦¬"+vo.getEmail());
 		String str="";
 		int ok = mService.CheckProc(vo);
 		if(ok==1) {
@@ -230,5 +230,44 @@ public class MemberController {
 		}
 		return str;
 	}
-
+	
+	//ì¹´ì¹´ì˜¤ ì´ë©”ì¼ë¡œ ì´ë¯¸ ê°€ì…ë˜ì–´ìˆëŠ”ì§€ í™•ì¸
+	@RequestMapping(value="/CheckKakao", method=RequestMethod.POST)
+	public @ResponseBody String CheckKakao(MemberVO vo) {
+	System.out.println("ajaxì‹¤í–‰,ì¹´ì¹´ì˜¤");
+		
+	String str="";
+	int ok = mService.CheckKakao(vo);
+	if(ok==1) {
+		str="YES";
+	}else {
+		System.out.println("0ë°˜í™˜");
+		//ê°€ì…ì‹œí‚¨ë‹¤.
+		mService.signUpProc(vo);
+		str="NO";
+	}
+	return str;
+	}
+	
+	//ì¹´ì¹´ì˜¤ë¡œ ë¡œê·¸ì¸ì²˜ë¦¬
+	@RequestMapping(value="/KakaoLogin", method=RequestMethod.POST)
+	public @ResponseBody String KakaoLogin(MemberVO vo,HttpSession session) {
+		System.out.println("ajaxtì‹¤í–‰,ì¹´ì¹´ì˜¤ ë¡œê·¸ì¸");
+		String str="";
+		int ok = mService.KakaoLogin(vo);
+		if(ok==1) {
+			//ë¡œê·¸ì¸ì‹¤í–‰
+			mService.kakaostatus(vo,session);
+			String strStatus = (String)session.getAttribute("status");
+			int status = Integer.parseInt(strStatus);
+			if(status==1) {
+				str="YES1";
+			}else if(status==0) {
+				str="YES2";
+			}
+		}else {
+			str="NO";
+		}
+		return str;
+	}
 }

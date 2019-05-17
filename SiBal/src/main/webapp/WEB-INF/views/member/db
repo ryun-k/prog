@@ -18,13 +18,14 @@ create sequence SBMEMBER_seq;
 CREATE TABLE sbmember (
 m_no NUMBER	CONSTRAINT no_pk Primary Key, 
 m_email VARCHAR2(30) NOT NULL UNIQUE,
-m_pw VARCHAR2(10) NOT NULL ,  
-m_name VARCHAR2(10) NOT NULL ,  
-m_nick VARCHAR2(10) NOT NULL UNIQUE,  
+m_pw VARCHAR2(30) NOT NULL ,  
+m_name VARCHAR2(30) NOT NULL ,  
+m_nick VARCHAR2(30) NOT NULL UNIQUE,  
 m_address VARCHAR2(100)  DEFAULT NULL ,  
 m_phone VARCHAR2(20)  DEFAULT NULL ,  
-m_photo VARCHAR2(100)  DEFAULT 'DEFAULT.PNG' ,   
+m_check VARCHAR2(100)  DEFAULT 'DEFAULT' ,   
 m_isshow VARCHAR2(10) DEFAULT 'Y' ,
+m_kakao VARCHAR2(30) DEFAULT 'code' ,
 m_status NUMBER(10)  DEFAULT 1);
 
 myspl

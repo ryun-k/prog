@@ -27,11 +27,11 @@ public class NoticeController {
 	//공지사항 리스트
 	@RequestMapping("/List")
 	public void noticeList(@RequestParam(value="nowPage", required=false, 	defaultValue="1") int nowPage,
-			HttpServletRequest request
+			HttpServletRequest request, HttpSession session
 		) {
-		PageUtil pInfo = nService.getPageInfo(nowPage);
+		PageUtil pInfo = nService.getPageInfo(nowPage,session);
 		
-		ArrayList list = nService.getBoardList(pInfo);
+		ArrayList list = nService.getBoardList(pInfo,session);
 		
 		request.setAttribute("LIST", list); //게시물내용
 		request.setAttribute("PINFO", pInfo);//페이징처리

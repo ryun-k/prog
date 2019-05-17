@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="en">
-<head>
-	<title>list</title>
-	<meta charset="utf-8">
- 	<meta name="viewport" content="width=device-width, initial-scale=1">
- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<!doctype html>	
+<html lang="en">	
+<head>	
+	<title>list</title>		
+	<meta charset="utf-8">	
+  	<meta name="viewport" content="width=device-width, initial-scale=1">	
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">	
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>	
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>	
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
  	<script type="text/javascript">
  	$(function(){
@@ -20,7 +20,6 @@
 </head>
 <body>
 
-<div class="container">
   <h2>*공지사항*</h2>
   <table class="table table-hover">
     <thead>
@@ -45,7 +44,7 @@
 	  	
     </tbody>
   </table>
-  	
+<div class="container">
   	<table class="table">
 		<tbody>
 			<tr>
@@ -81,13 +80,12 @@
 			</tr>
 			<tr>
 				<td>
-				    <button type="button" class="btn btn-primary" id="wBtn">글쓰기</button>
+					<c:if test="${sessionScope.UID eq 'admin'}">
+					    <button type="button" class="btn btn-primary" id="wBtn">글쓰기</button>
+					</c:if>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	
 </div>
-
 </body>
-</html>

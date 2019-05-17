@@ -18,38 +18,41 @@ public class MemberService {
 		@Autowired
 		private MemberDAO mDAO;
 		
-		//·Î±×ÀÎÃ³¸®
+		//ë¡œê·¸ì¸ì²˜ë¦¬
 		public void loginProc(MemberVO vo, HttpSession session) {
 		
 			
 			MemberVO result = mDAO.loginProc(vo);
 			if(result ==null) {
-				System.out.println("°ª¾øÀ½");
+				System.out.println("ê°’ì—†ìŒ");
 			}else {
+				session.setAttribute("UID", result.getEmail());
 				session.setAttribute("nick", result.getNick());
 				session.setAttribute("status", result.getStatus());
 				System.out.println(session.getAttribute("status"));
 			}
 		}
 
-		//·Î±×¾Æ¿ô Ã³¸®
+		//ë¡œê·¸ì•„ì›ƒ ì²˜ë¦¬
 		public void logoutProc(HttpServletRequest request) {
 			request.getSession().removeAttribute("nick");
+			request.getSession().removeAttribute("UID");
 		}
 		
-		//È¸¿ø°¡ÀÔ Ã³¸®
+		//íšŒì›ê°€ì… ì²˜ë¦¬
 		public void signUpProc(MemberVO vo) {
-			mDAO.signUpProc(vo);
+			 mDAO.signUpProc(vo);
+			
 		}
 		
-		//È¸¿øÁ¤º¸ ºÒ·¯¿À±â
+		//íšŒì›ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°
 		public MemberVO memberInfo(MemberVO vo) {
 			System.out.println(vo.getNick());
 			MemberVO info =mDAO.memberInfo(vo);
 			return info;
 		}
 		
-		//È¸¿øÁ¤º¸ ¼öÁ¤Ã³¸®,´Ğ³×ÀÓÀÇ ¼¼¼ÇÀ» »õ·Î ¹Ù²ãÁØ ´Ğ³×ÀÓÀ¸·Î º¯°æ,
+		//íšŒì›ì •ë³´ ìˆ˜ì •ì²˜ë¦¬, ë‹‰ë„¤ì„ì˜ ì„¸ì…˜ì„ ìƒˆë¡œ ë°”ê¿”ì¤€ ë‹‰ë„¤ì„ìœ¼ë¡œ ë³€ê²½,
 		public void modifyProc(MemberVO vo,HttpSession session) {
 			 mDAO.modifyProc(vo);
 			 session.setAttribute("nick", vo.getNick());
@@ -57,37 +60,60 @@ public class MemberService {
 		
 		
 		
-		//ºñ¹øÃ£±â ÀÎÁõÄÚµå ¹ß¼ÛÀ» À§ÇÑ ÀÌ¸ŞÀÏÈ®ÀÎ ÀÛ¾÷
+		//ë¹„ë²ˆì°¾ê¸° ì¸ì¦ì½”ë“œ ë°œì†¡ì„ ìœ„í•œ ì´ë©”ì¼í™•ì¸ ì‘ì—…
 		public MemberVO pwCode(MemberVO vo) {
 			MemberVO code=mDAO.pwCode(vo);
 			return code;
 		}
 		
-		//ÀÎÁõÄÚµåÀúÀå
+		//ì¸ì¦ì½”ë“œì €ì¥
 		public void setCode(MemberVO vo) {
 			mDAO.setCode(vo);
 		}
 		
-		//ÀÎÁõÄÚµå ÀÛ¼ºÈÄ ºñ¹ø »õ·Î ÁöÁ¤ÇÏ±â
+		//ì¸ì¦ì½”ë“œ ì‘ì„±í›„ ë¹„ë²ˆ ìƒˆë¡œ ì§€ì •í•˜ê¸°
 		public void modifyPw(MemberVO vo) {
 			mDAO.modifyPw(vo);
 		}
 		
-		//ajax ÀÌ¸ŞÀÏ°ú ´Ğ³×ÀÓ Áßº¹ È®ÀÎ
+		//ajax ì´ë©”ì¼ê³¼ ë‹‰ë„¤ì„ ì¤‘ë³µ í™•ì¸
 		public int dupleCk(MemberVO vo) {
 			int str=mDAO.dupleCk(vo);
 			return str;
 		}
 		
-		//·Î±×ÀÎ,Å»Åğ½Ã ºñ¹ø È®ÀÎ
+		//ë¡œê·¸ì¸,íƒˆí‡´ì‹œ ë¹„ë²ˆ í™•ì¸
 		public	int CheckProc(MemberVO vo) {
 			int str= mDAO.CheckProc(vo);
 			return str;
 		}
-		//È¸¿ø Å»Åğ , status¸¦ ¹Ù²ãÁÖ°í ¼¼¼Çµµ Á×ÀÎ´Ù.
+		//íšŒì› íƒˆí‡´ , statusë¥¼ ë°”ê¿”ì£¼ê³  ì„¸ì…˜ë„ ì£½ì¸ë‹¤.
 		public void withdraw(MemberVO vo,HttpServletRequest request) {
 			mDAO.withdraw(vo);
 			request.getSession().removeAttribute("nick");
 			System.out.println(vo.getStatus());
+		}
+		//ì¹´ì¹´ì˜¤ì´ë©”ì¼ë¡œ ê°€ì…ë˜ì—ˆëŠ”ì§€ í™•ì¸
+		public int CheckKakao(MemberVO vo) {
+			int str = mDAO.CheckKakao(vo);
+			return str;
+		}
+		//ì¹´ì¹´ì˜¤ë¡œ ë¡œê·¸ì¸í•˜ê¸°
+		public int KakaoLogin(MemberVO vo) {
+			int str = mDAO.KakaoLogin(vo);
+			return str;
+		}
+		//ì¹´ì¹´ì˜¤ íšŒì› ê¶Œí•œí™•ì¸
+public void kakaostatus(MemberVO vo, HttpSession session) {
+		
+			MemberVO result = mDAO.kakaostatus(vo);
+			if(result ==null) {
+				System.out.println("ê°’ì—†ìŒ");
+			}else {
+				session.setAttribute("UID", result.getEmail());
+				session.setAttribute("nick", result.getNick());
+				session.setAttribute("status", result.getStatus());
+				System.out.println(session.getAttribute("status"));
+			}
 		}
 }

@@ -19,9 +19,16 @@ public class MemberVO {
 	private String isshow;
 	private String status;
 	private String target;
+	private String kakao;
 	
 	
 	
+	public String getKakao() {
+		return kakao;
+	}
+	public void setKakao(String kakao) {
+		this.kakao = kakao;
+	}
 	public String getTarget() {
 		return target;
 	}

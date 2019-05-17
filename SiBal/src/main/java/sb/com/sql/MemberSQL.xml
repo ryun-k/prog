@@ -18,6 +18,47 @@ where m_nick = #{nick}
 
 
 <!-- ======================= 쿼리문 등록 ================================= -->
+<!-- 카카오 권한확인 -->
+<select id="kakaostatus" parameterType="memberVO" resultType="memberVO">
+	SELECT
+	    M_email            	AS email,
+	    M_kakao     		AS kakao,
+	    M_NICK          	AS nick,
+	    M_STATUS			AS status
+	 FROM
+	    SBMEMBER
+	 WHERE
+	    M_EMAIL = #{email}
+	    AND
+	    M_KAKAO = #{kakao}
+	  
+	</select>
+
+<!--  카카오 로그인 -->
+<select id="KakaoLogin" parameterType="memberVO" resultType="int">
+select 
+	count	(*)
+from 
+	sbmember
+where
+	m_email = #{email}
+and
+	m_kakao = #{kakao}
+	  
+	</select>
+
+
+
+<select id="CheckKakao" parameterType="memberVO" resultType="int">
+select
+	count (*)
+from
+	sbmember
+where
+	m_email = #{email}
+</select>
+
+
 <!-- 로그인,탈퇴시 본인확인	 -->
 <select id ="CheckProc" parameterType="memberVO" resultType="int">
 select 
@@ -125,7 +166,8 @@ insert into
 		m_name  ,  
 		m_nick ,  
 		m_address  ,  
-		m_phone  )
+		m_phone	,
+		m_kakao  )
 	values(
 		sbmember_seq.NEXTVAL,
 		#{email},
@@ -133,7 +175,8 @@ insert into
 		#{name},
 		#{nick},
 		#{addr},
-		#{phone}
+		#{phone},
+		#{kakao}
 	)
 </insert>
 

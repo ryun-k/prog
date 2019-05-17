@@ -17,60 +17,78 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	@Autowired
 	SqlSessionTemplate session;
 	
-	//·Î±×ÀÎ Äõ¸® ½ÇÇà
+	//ë¡œê·¸ì¸ ì¿¼ë¦¬ ì‹¤í–‰
 	public MemberVO loginProc(MemberVO vo) {
 		MemberVO result = session.selectOne("member.loginProc",vo);
 		return result;
 	}
 
-	//È¸¿ø°¡ÀÔ Äõ¸® ½ÇÇà
+	//íšŒì›ê°€ì… ì¿¼ë¦¬ ì‹¤í–‰
 	public void signUpProc(MemberVO vo) {
 		session.insert("member.signUp",vo);
 	}
 	
-	//¸â¹öÁ¤º¸ Äõ¸® ½ÇÇà
+	//ë©¤ë²„ì •ë³´ ì¿¼ë¦¬ ì‹¤í–‰
 	public MemberVO memberInfo(MemberVO vo) {
 		MemberVO info = session.selectOne("member.memberInfo",vo);
 		return info;
 	}
 	
-	//Á¤º¸¼öÁ¤ Äõ¸® ½ÇÇà
+	//ì •ë³´ìˆ˜ì • ì¿¼ë¦¬ ì‹¤í–‰
 	public void modifyProc(MemberVO vo) {
 		session.update("member.infoModify",vo);
 	}
 	
-	//È¸¿øÅ»Åğ Äõ¸® ½ÇÇà
+	//íšŒì›íƒˆí‡´ ì¿¼ë¦¬ ì‹¤í–‰
 	public void withdraw(MemberVO vo) {
 		System.out.println("DAO="+vo.getPw());
 		session.update("member.withdraw",vo);
 	}
 	
-	//¹ß¼ÛÀÌ¸ŞÀÏ È®ÀÎÄõ¸® ½ÇÇà
+	//ë°œì†¡ì´ë©”ì¼ í™•ì¸ì¿¼ë¦¬ ì‹¤í–‰
 	public MemberVO pwCode(MemberVO vo) {
 		System.out.println("DAO="+vo.getEmail());
 		MemberVO code = session.selectOne("member.pwCode",vo);
 		return code;
 	}
 	
-	//ÀÎÁõÄÚµå ÀúÀåÄõ¸® ½ÇÇà
+	//ì¸ì¦ì½”ë“œ ì €ì¥ì¿¼ë¦¬ ì‹¤í–‰
 	public void setCode(MemberVO vo) {
 		session.insert("member.setCode",vo);
 	}
 	
-	//ºñ¹ø ÀçÁöÁ¤ Äõ¸® ½ÇÇà
+	//ë¹„ë²ˆ ì¬ì§€ì • ì¿¼ë¦¬ ì‹¤í–‰
 	public void modifyPw(MemberVO vo) {
 		session.update("member.modifyPw",vo);
 	}
 	
-	//Áßº¹ÀÌ¸ŞÀÏ,´Ğ³×ÀÓ È®ÀÎ Äõ¸® ½ÇÇà
+	//ì¤‘ë³µì´ë©”ì¼,ë‹‰ë„¤ì„ í™•ì¸ ì¿¼ë¦¬ ì‹¤í–‰
 	public int dupleCk(MemberVO vo) {
 		int str = session.selectOne("member.dupleCk",vo);
 		return str;
 	}
 	
-	//·Î±×ÀÎ,È¸¿øÅ»Åğ º»ÀÎ È®ÀÎ Äõ¸® ½ÇÇà
+	//ë¡œê·¸ì¸,íšŒì›íƒˆí‡´ ë³¸ì¸ í™•ì¸ ì¿¼ë¦¬ ì‹¤í–‰
 	public int CheckProc(MemberVO vo) {
 		int str = session.selectOne("member.CheckProc",vo);
 		return str;
+	}
+	
+	//ê°€ì…ëœ ì¹´ì¹´ì˜¤ ì´ë©”ì¼ í™•ì¸ ì¿¼ë¦¬ ì‹¤í–‰
+	public int CheckKakao(MemberVO vo) {
+		int str = session.selectOne("member.CheckKakao",vo);
+		return str;
+	}
+	
+	//ì¹´ì¹´ì˜¤ ë¡œê·¸ì¸ ì¿¼ë¦¬ ì‹¤í–‰
+	public int KakaoLogin(MemberVO vo) {
+		int str = session.selectOne("member.KakaoLogin",vo);
+		return str;
+	}
+	
+	//ì¹´ì¹´ì˜¤ ê¶Œí•œ í™•ì¸ ì¿¼ë¦¬ ì‹¤í–‰
+	public MemberVO kakaostatus(MemberVO vo) {
+		MemberVO result = session.selectOne("member.kakaostatus",vo);
+		return result;
 	}
 }

@@ -27,8 +27,8 @@
 	<!-- 목록보기 -->
 	<select id="qnaList" parameterType="qVO" resultType="qVO">
 		select * from
-		(select rownum as rNo, q_no as no, q_title as title, m.m_id as id, q_wDate as wDate, q_hit as hit,depth from qna q, member m
-		where m.m_id=q.q_id
+		(select rownum as rNo, q_no as no, q_title as title, m.m_nick as id, q_wDate as wDate, q_hit as hit,depth from qna q, sbmember m
+		where m.m_nick=q.q_id
 		order by ref desc, step asc)
 		where rNo BETWEEN #{start} and #{end}
 	</select>
@@ -50,9 +50,9 @@
 		<result property="content" column="q_content" jdbcType="CLOB" javaType="java.lang.String"/>
 	</resultMap>
 	<select id="qnaView" resultMap="clobView" parameterType="int">
-		select q_no as no, q_title as title, q_content, m.m_id as id, q_wDate as wDate, q_hit as hit, ref, step, depth
-		from qna q, member m
-		where q_no=#{no} and q.q_id = m.m_id
+		select q_no as no, q_title as title, q_content, m.m_nick as id, q_wDate as wDate, q_hit as hit, ref, step, depth
+		from qna q, sbmember m
+		where q_no=#{no} and q.q_id = m.m_nick
 	</select>
 	
 	<!-- 답변입력 쿼리 -->
@@ -85,8 +85,8 @@
 	<!-- 검색하기 -->
 	<select id="searchList" parameterType="qVO" resultType="qVO">
 		select * from
-		(select rownum as rNo, q_no as no, q_title as title, m.m_id as id, q_wDate as wDate, q_hit as hit,depth from qna q, member m
-		where m.m_id=q.q_id
+		(select rownum as rNo, q_no as no, q_title as title, m.m_nick as id, q_wDate as wDate, q_hit as hit,depth from qna q, sbmember m
+		where m.m_nick=q.q_id
 		and 
 		<include refid="searchField" />
 		order by ref desc, step asc)
@@ -101,26 +101,47 @@
 	
 	<!-- 댓글리스트 -->
 	<select id="repList" resultType="qVO" parameterType="qVO">
-		select * from
-		(select rownum as reRNo, re_no as reNo, re_content as reContent, m.m_id as id, re_wDate as reWDate, re_depth as reDepth from re_qna r, member m
+		<!-- select * from
+		(select rownum as reRNo, re_no as reNo, re_content as reContent, m.m_id as id, re_wDate as reWDate, re_depth as reDepth, re_step as reStep from re_qna r, member m
 		where m.m_id=r.re_id and re_q_no=#{oriNo}
 		order by re_ref asc, re_wDate asc)
+		where reRNo between #{start} and #{end}
+		 -->
+		select * from
+		(select rownum as reRNo, re_no as reNo, re_p_no as rePno, re_content as reContent, m.m_nick as id, re_wDate as reWDate, re_depth as reDepth from re_qna r, sbmember m
+		where m.m_nick=r.re_id and re_q_no=#{oriNo}
+		START WITH re_p_no is null
+        CONNECT BY PRIOR re_no = re_p_no
+        order SIBLINGS by re_ref asc)
 		where reRNo between #{start} and #{end}
 	</select>
 	
 	<!-- 댓글 쓰기 -->
 	<insert id="repInsert" parameterType="qVO">
-		insert into re_qna(re_no, re_q_no, re_content, re_id, re_depth, re_ref)
-		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reContent},#{id},0,(select nvl(max(re_ref),0)+1 from re_qna))
+		<!-- insert into re_qna(re_no, re_q_no, re_content, re_id, re_depth, re_ref, re_step)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reContent},#{id},0,(select nvl(max(re_ref),0)+1 from re_qna),1) -->
+		insert into re_qna(re_no, re_q_no, re_p_no, re_content, re_id, re_depth, re_ref)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},null,#{reContent},#{id},0,(select nvl(max(re_ref),0)+1 from re_qna))
 	</insert>
 	
 	<!-- 대댓글 쓰기 -->
 	<insert id="repRepInsert" parameterType="qVO">
-		insert into re_qna(re_no, re_q_no, re_content, re_id, re_depth, re_ref)
-		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reContent},#{id},#{reDepth},#{reRef})
+		<!-- insert into re_qna(re_no, re_q_no, re_content, re_id, re_depth, re_ref, re_step)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reContent},#{id},#{reDepth},#{reRef},#{reStep}) -->
+		insert into re_qna(re_no, re_q_no, re_p_no, re_content, re_id, re_depth, re_ref)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reNo},#{reContent},#{id},#{reDepth},#{reNo})
 	</insert>
 	
+	<!-- 수정하기 -->
+	<update id="repUpdate">
+		update re_qna set re_content =#{reContent}
+		where re_no=#{reNo}
+	</update>	
 	
+	<!-- 삭제하기 -->
+	<delete id="repDelete">
+		delete from re_qna where re_no=#{reNo}
+	</delete>
 	
 	
 </mapper>

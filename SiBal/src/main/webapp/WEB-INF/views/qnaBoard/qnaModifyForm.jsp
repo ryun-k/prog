@@ -21,7 +21,7 @@
 </head>
 <body>
 	<div class="container">
-	  <h2>질문하기</h2>
+	  <h2 align="center">수정하기</h2>
 	  <form action="../qnaBoard/qnaModifyProc.do">
 	 	<input type="hidden" name="oriNo" value="${VIEW.no}" />
 		<input type="hidden" name="nowPage" value="${nowPage}" />
@@ -35,7 +35,7 @@
 	    </div>
 	    <div class="form-group">
 	      <label for="id">작성자</label>
-	      <input type="text" class="form-control" id="id" name="id" value="${VIEW.id}">
+	      <input type="text" class="form-control" id="id" name="id" value="${VIEW.id}" readonly="readonly">
 	    </div>
 	    <button type="submit" class="btn btn-dark">수정하기</button>
 	    <button type="button" class="btn btn-dark" id="cBtn">취소</button>

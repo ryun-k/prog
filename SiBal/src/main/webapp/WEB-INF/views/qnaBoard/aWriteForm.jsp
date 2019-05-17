@@ -21,7 +21,7 @@
 </head>
 <body>
 	<div class="container">
-	  <h2>답변하기</h2>
+	  <h2 align="center">답변하기</h2>
 	  <form action="../qnaBoard/aWriteProc.do">
 	  	<input type="hidden" name="no" value="${param.no}" />
 	  	<input type="hidden" name="ref" value="${param.ref}" />
@@ -37,7 +37,7 @@
 	    </div>
 	    <div class="form-group">
 	      <label for="id">작성자</label>
-	      <input type="text" class="form-control" id="id" name="id" >
+	      <input type="text" class="form-control" id="id" name="id" value="${sessionScope.nick}" readonly="readonly" >
 	    </div>
 	    <button type="submit" class="btn btn-dark">답변하기</button>
 	    <button type="button" class="btn btn-dark" id="cBtn">취소</button>

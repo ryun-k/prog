@@ -5,12 +5,24 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
- <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- 
+<title>시ː발  始發</title>
+
+<style type="text/css">
+
+	.main-img{
+		height:200px;
+		background-image: url("/sb/img/canada-lake-feb.jpg");
+		background-size: cover;
+	}
+
+</style>
+
 </head>
 <body>
+<div class="main-img"></div>
+
+
+
 <h1>임시메인</h1><br><br>
 
 

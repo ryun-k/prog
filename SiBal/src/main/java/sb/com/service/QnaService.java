@@ -41,8 +41,8 @@ public class QnaService {
 	}
 	// 질문 입력
 	public void insertQ(HttpSession session,QnaVo vo) {
-//		String id = (String)session.getAttribute("UID");
-//		vo.setId(id);
+		String id = (String)session.getAttribute("nick");
+		vo.setId(id);
 		qDAO.insertQ(vo);
 	}
 	
@@ -76,8 +76,8 @@ public class QnaService {
 	
 	// 답변하기
 	public void insertA(HttpSession session, QnaVo vo) {
-//		String id = (String)session.getAttribute("UID");
-//		vo.setId(id);
+		String id = (String)session.getAttribute("nick");
+		vo.setId(id);
 		
 		vo.getRef();
 		vo.setStep(vo.getStep()+1);
@@ -150,19 +150,14 @@ public class QnaService {
 	
 	// 댓글 입력
 	public void repInsert(HttpSession session,QnaVo vo) {
-//		String id = (String)session.getAttribute("UID");
-//		vo.setId(id);
-		String id = "gun";
+		String id = (String)session.getAttribute("nick");
 		vo.setId(id);
 		qDAO.repInsert(vo);
 	}
 	
-	// 답변하기
+	// 대댓글 입력
 	public void repRepInsert(HttpSession session, QnaVo vo) {
-//		String id = (String)session.getAttribute("UID");
-//		vo.setId(id);
-		
-		String id = "gun";
+		String id = (String)session.getAttribute("nick");
 		vo.setId(id);
 		
 		vo.getReRef();
@@ -171,4 +166,14 @@ public class QnaService {
 		qDAO.repRepInsert(vo);
 	}
 	
+	// 수정하기
+	public void repUpdate(QnaVo vo) {
+		qDAO.repUpdate(vo);
+	}
+	
+	// 삭제하기
+	public void repDelete(int reNo) {
+		qDAO.repDelete(reNo);	
+	}
+
 }

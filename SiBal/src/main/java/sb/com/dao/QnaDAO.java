@@ -89,4 +89,13 @@ public class QnaDAO extends SqlSessionDaoSupport{
 		SqlSession session = this.getSqlSession();
 		session.insert("qnaBoard.repRepInsert",vo);
 	}
+	
+	// 삭제하기
+	public void repDelete(int no) {
+		getSqlSession().delete("qnaBoard.repDelete",no);
+	}
+	// 수정하기
+	public void repUpdate(QnaVo vo) {
+		getSqlSession().update("qnaBoard.repUpdate",vo);
+	}
 }

@@ -52,11 +52,7 @@
 		  </li>
 		</ul>
 	</nav>	
-	
-<div class="container">
         <decorator:body />
-</div>
-
 </body>
 </html>
 

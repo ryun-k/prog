@@ -18,7 +18,7 @@ public class MemberService {
 		@Autowired
 		private MemberDAO mDAO;
 		
-		//�α���ó��
+		//로그인처리
 		public void loginProc(MemberVO vo, HttpSession session) {
 		
 			
@@ -33,25 +33,25 @@ public class MemberService {
 			}
 		}
 
-		//�α׾ƿ� ó��
+		//로그아웃 처리
 		public void logoutProc(HttpServletRequest request) {
 			request.getSession().removeAttribute("nick");
 			request.getSession().removeAttribute("UID");
 		}
 		
-		//ȸ������ ó��
+		//회원가입 처리
 		public void signUpProc(MemberVO vo) {
 			mDAO.signUpProc(vo);
 		}
 		
-		//ȸ������ �ҷ�����
+		//회원정보 불러오기
 		public MemberVO memberInfo(MemberVO vo) {
 			System.out.println(vo.getNick());
 			MemberVO info =mDAO.memberInfo(vo);
 			return info;
 		}
 		
-		//ȸ������ ����ó��,�г����� ������ ���� �ٲ��� �г������� ����,
+		//회원정보 수정처리, 닉네임의 세션을 새로 바꿔준 닉네임으로 변경,
 		public void modifyProc(MemberVO vo,HttpSession session) {
 			 mDAO.modifyProc(vo);
 			 session.setAttribute("nick", vo.getNick());
@@ -59,34 +59,34 @@ public class MemberService {
 		
 		
 		
-		//���ã�� �����ڵ� �߼��� ���� �̸���Ȯ�� �۾�
+		//비번찾기 인증코드 발송을 위한 이메일확인 작업
 		public MemberVO pwCode(MemberVO vo) {
 			MemberVO code=mDAO.pwCode(vo);
 			return code;
 		}
 		
-		//�����ڵ�����
+		//인증코드저장
 		public void setCode(MemberVO vo) {
 			mDAO.setCode(vo);
 		}
 		
-		//�����ڵ� �ۼ��� ��� ���� �����ϱ�
+		//인증코드 작성후 비번 새로 지정하기
 		public void modifyPw(MemberVO vo) {
 			mDAO.modifyPw(vo);
 		}
 		
-		//ajax �̸��ϰ� �г��� �ߺ� Ȯ��
+		//ajax 이메일과 닉네임 중복 확인
 		public int dupleCk(MemberVO vo) {
 			int str=mDAO.dupleCk(vo);
 			return str;
 		}
 		
-		//�α���,Ż��� ��� Ȯ��
+		//로그인,탈퇴시 비번 확인
 		public	int CheckProc(MemberVO vo) {
 			int str= mDAO.CheckProc(vo);
 			return str;
 		}
-		//ȸ�� Ż�� , status�� �ٲ��ְ� ���ǵ� ���δ�.
+		//회원 탈퇴 , status를 바꿔주고 세션도 죽인다.
 		public void withdraw(MemberVO vo,HttpServletRequest request) {
 			mDAO.withdraw(vo);
 			request.getSession().removeAttribute("nick");

@@ -6,17 +6,17 @@ public class Email {
 	
 	public static void sendMail(String email, String subject, String msg)throws Exception{
 		
-		//mail server¼³Á¤
+		//mail serverì„¤ì •
 		String charSet= "utf-8";
 		String hostSMTP = "smtp.naver.com";
 		String hostSMTPid = "nazzzang";
 		String hostSMTPpwd = "bawr@1404";
 		
-		//º¸³»´Â »ç¶÷
+		//ë³´ë‚´ëŠ” ì‚¬ëžŒ
 		String fromEmail = "nazzzang@naver.com";
-		String fromName = "ºñ¹Ð¹øÈ£Ã£±â";
+		String fromName = "ë¹„ë°€ë²ˆí˜¸ì°¾ê¸°";
 		
-		//emailÀü¼Û
+		//emailì „ì†¡
 		
 		HtmlEmail mail = new HtmlEmail();
 		mail.setDebug(true);

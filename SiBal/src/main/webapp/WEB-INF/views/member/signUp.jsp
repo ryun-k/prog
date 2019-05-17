@@ -11,6 +11,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	//정규식
@@ -143,8 +145,92 @@ $(document).ready(function(){
 			}
 		}
 	})
+	//주소쓰기
+	$("#map").click(function(){
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var addr = ''; // 주소 변수
+            if (data.userSelectedType === 'R') { 
+                addr = data.roadAddress;
+            } else { 
+                addr = data.jibunAddress;
+            }
+            $("#addr").val(addr+" "+data.buildingName+" ");
+			$("#addr").focus();
+           
+        }
+    }).open()
+	})
 	
-	
+	//카카오 로그인
+			$("#kakao-login-btn").click(function(){
+				Kakao.init('af6e8975be3fffc8d0f8d9b119294dea'); 
+			    Kakao.Auth.createLoginButton({
+			      container: '#kakao-login-btn',
+			      success: function(authObj) {
+			    	  Kakao.API.request({
+			    	       url: '/v1/user/me',
+			    	       success: function(res) {
+			    	            /*  console.log(res.id);
+			    	             console.log(res.properties.nickname); 
+			    	             console.log(res.kaccount_email);
+			    	             console.log(res.kaccount_email_verified);
+			    	             console.log(res.properties.profile_image);
+			    	             console.log(res);
+			    	             console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력 */
+								
+			    	             if(res.kaccount_email_verified){
+				    	              var pw=res.id;
+									  var email= res.kaccount_email;
+									  var image= res.properties.profile_image;
+									  var name= res.properties.nickname; 
+									  var nick= name+authObj.access_token.slice(0,5);
+									  
+									  $("#Kemail").val(email);
+									  $("#Kpw").val(pw);
+									  $("#Knick").val(nick);
+									  $("#Kname").val(name);
+									  $("#Kkakao").val(pw);
+									  
+									  
+									  if($("#Kemail").val()!="" && $("#Kpw").val()!=""){
+										  $.ajax({
+					    						type:"POST",
+					    						url:"../member/CheckKakao.do",
+					    						data:{
+					    							"email":$("#Kemail").val(),
+					    							"pw":$("#Kpw").val(),
+					    							"nick":$("#Knick").val(),
+					    							"name":$("#Kname").val(),
+					    							"addr":$("#Kaddr").val(),
+					    							"phone":$("#Kphone").val(),
+					    							"kakao":$("#Kkakao").val()
+					    						},
+					    						success:function(data){
+					    							if($.trim(data)=='YES'){
+					    								alert('이미 가입된 아이디 입니다.');
+					    							}
+					    							else{
+					    								alert('가입 되었습니다.')
+					    								$(location).attr("href","../member/loginForm.do");
+					    							}
+					    						}
+					    					})
+									  }else{
+										  alert('오류발생');
+									  }
+								}else{
+									alert('귀하의 카카오 계정의 이메일은 본인확인이 필요합니다.')
+							   }
+			    	        }
+			    	   })
+			      },
+			      fail: function(err) {
+			         alert('로그인이 실패 되었습니다.');
+			      }
+			    })
+			    })
+	//취소버튼
 	$("#cBtn").click(function(){
 		$(location).attr("href","../");
 	})
@@ -181,8 +267,9 @@ $(document).ready(function(){
 	pattern="^[\W-가-힣a-zA-Z0-9]{2,10}" maxlength="10">
 	<br/>
 
-	<label for="addr">주소</label>
-	<input type="text" id="add" class="form-control" name="addr"  placeholder="주소를 입력해주세요." title="선택사항입니다." >
+	<label for="addr">주소</label><br/><input type="button" id="map" name="map" value="주소입력">
+	<input type="text" id="addr" class="form-control" name="addr"  placeholder="주소를 입력해주세요." title="선택사항입니다." >
+	
 	<br/>
 	<label for="addr">휴대폰 번호</label>
 	<input type="text" id="phone" class="form-control" name="phone"  placeholder="휴대폰 번호를 입력해주세요." title="선택사항입니다."
@@ -192,8 +279,19 @@ $(document).ready(function(){
 </div>
 <input type="submit" class="btn btn-primary" id="ssBtn" value="가입하기">
 <input type="button" class="btn btn-primary" id="cBtn" value="메인가기">
+<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오계정으로 가입">
 
 </form>
+
+<form id="kakaoSignup" method="post" action="../member/CheckKakao.do">
+	<input type="hidden" id="Kemail" name="email">
+	<input type="hidden" id="Kpw" name="pw">
+	<input type="hidden" id="Knick" name="nick">
+	<input type="hidden" id="Kname" name="name">
+	<input type="hidden" id="Kkakao" name="kakao">
+	<input type="hidden" id="Kaddr" name="addr" value="미기입">
+	<input type="hidden" id="Kphone" name="phone" >
+	</form>
 </div>
 </body>
 </html>

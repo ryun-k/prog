@@ -73,4 +73,22 @@ public class MemberDAO extends SqlSessionDaoSupport{
 		int str = session.selectOne("member.CheckProc",vo);
 		return str;
 	}
+	
+	//가입된 카카오 이메일 확인 쿼리 실행
+	public int CheckKakao(MemberVO vo) {
+		int str = session.selectOne("member.CheckKakao",vo);
+		return str;
+	}
+	
+	//카카오 로그인 쿼리 실행
+	public int KakaoLogin(MemberVO vo) {
+		int str = session.selectOne("member.KakaoLogin",vo);
+		return str;
+	}
+	
+	//카카오 권한 확인 쿼리 실행
+	public MemberVO kakaostatus(MemberVO vo) {
+		MemberVO result = session.selectOne("member.kakaostatus",vo);
+		return result;
+	}
 }

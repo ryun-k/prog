@@ -18,7 +18,7 @@ $(document).ready(function(){
 	$("#codeForm").submit();
 	})
 	//code 정규식
-	var reg = /^[a-zA-Z0-9]{13}$/
+	var reg = /^[a-zA-Z0-9]{10,16}$/
 	
 	//이메일
 	var reg1 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;

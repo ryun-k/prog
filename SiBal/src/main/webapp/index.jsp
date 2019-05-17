@@ -6,6 +6,9 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+ <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
 </head>
 <body>
 <h1>임시메인</h1><br><br>

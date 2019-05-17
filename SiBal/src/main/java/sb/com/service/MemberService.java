@@ -35,8 +35,8 @@ public class MemberService {
 
 		//로그아웃 처리
 		public void logoutProc(HttpServletRequest request) {
-			request.getSession().removeAttribute("nick");
-			request.getSession().removeAttribute("UID");
+			request.getSession().invalidate();
+			request.getSession().invalidate();
 		}
 		
 		//회원가입 처리
@@ -90,7 +90,7 @@ public class MemberService {
 		//회원 탈퇴 , status를 바꿔주고 세션도 죽인다.
 		public void withdraw(MemberVO vo,HttpServletRequest request) {
 			mDAO.withdraw(vo);
-			request.getSession().removeAttribute("nick");
+			request.getSession().invalidate();
 			System.out.println(vo.getStatus());
 		}
 		//카카오이메일로 가입되었는지 확인

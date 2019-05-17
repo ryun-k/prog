@@ -13,7 +13,7 @@
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
  	
  	<decorator:head />
  	
@@ -37,9 +37,18 @@
 	      <a class="nav-link" href="#">Left Link 2</a>
 	    </li>
 		</ul>
+		
 		<ul class="navbar-nav ml-auto">
 		  <li class="nav-item">
-		    <a class="nav-link"><span class="glyphicon glyphicon-log-in"></span>Login</a>
+		  <c:if test="${empty sessionScope.UID}">
+		    <a class="nav-link" href="/sb/member/loginForm.do">
+		    <i class='fas fa-power-off' style='font-size:14px'></i>Login</a>
+		  </c:if>
+		  <c:if test="${not empty sessionScope.UID}">
+		    <a class="nav-link" href="/sb/member/logoutProc.do">
+		    <i class='fas fa-power-off' style='font-size:14px'></i>Logout</a>
+		  </c:if>
+		    
 		  </li>
 		</ul>
 	</nav>	

@@ -81,7 +81,6 @@
 			</tr>
 			<tr>
 				<td>
-				${sessionScope.UID}
 					<c:if test="${sessionScope.UID eq 'admin'}">
 					    <button type="button" class="btn btn-primary" id="wBtn">글쓰기</button>
 					</c:if>

@@ -3,18 +3,25 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="notice">
-	<sql id="selectField">
-			N_NO			as	no,
-			N_TITLE			as	title,
-			N_CONTENT		as	content,
-			N_STARTDATE		as	startDate,
-			N_ENDDATE		as	endDate,
-			N_WDATE			as	wDate,
-			N_HIT			as	hit,
-			N_ISSHOW		as	issow
+	<sql id="eventT">
+		N_STARTDATE <![CDATA[ <= ]]> sysdate
+		and 
+		sysdate <![CDATA[ <= ]]> N_ENDDATE
 	</sql>
+
+	<sql id="selectField">
+		N_NO			as	no,
+		N_TITLE			as	title,
+		N_CONTENT		as	content,
+		N_STARTDATE		as	startDate,
+		N_ENDDATE		as	endDate,
+		N_WDATE			as	wDate,
+		N_HIT			as	hit,
+		N_ISSHOW		as	issow
+	</sql>
+	
 	<!-- count -->
-	<select id="totalcount" resultType="int">
+	<select id="totalcountAdmin" resultType="int">
 		SELECT
 			COUNT(*) AS CNT
 		FROM
@@ -22,18 +29,51 @@
 		WHERE
 			upper(n_IsShow)='Y' 
 	</select>
+	<select id="totalcount" resultType="int">
+		SELECT
+			COUNT(*) AS CNT
+		FROM
+			NOTICE
+		WHERE
+			upper(n_IsShow)='Y' 
+			and
+			
+			<include refid="eventT" />			
+	</select>
 	
 	<!-- 글목록 -->
+	<select id="noticeListAdmin" resultType="noticeVO" parameterType="noticeVO">
+		select *
+		from
+		    (
+			    select
+			        row_number() over(order by n_No DESC) AS rno,
+			        N_NO            as no,
+			        N_TITLE         as title,
+			        N_WDATE         as wDate,
+			        N_HIT           as hit    
+			    from 
+			    	notice
+			)
+		where 
+		    RNO BETWEEN #{start} AND #{end}
+	</select>
 	<select id="noticeList" resultType="noticeVO" parameterType="noticeVO">
 		select *
 		from
-		    (select
-		        row_number() over(order by n_No DESC) AS rno,
-		        N_NO            as no,
-		        N_TITLE         as title,
-		        N_WDATE         as wDate,
-		        N_HIT           as hit    
-		    from notice)
+		    (
+			    select
+			        row_number() over(order by n_No DESC) AS rno,
+			        N_NO            as no,
+			        N_TITLE         as title,
+			        N_WDATE         as wDate,
+			        N_HIT           as hit    
+			    from 
+			    	notice
+			    	
+			    where
+			    	<include refid="eventT" />	
+			)
 		where 
 		    RNO BETWEEN #{start} AND #{end}
 	</select>

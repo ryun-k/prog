@@ -28,7 +28,6 @@ public class NoticeDAO extends SqlSessionDaoSupport{
 			}
 			return result;
 		} catch (Exception e) {
-			e.printStackTrace();
 			return (Integer)getSqlSession().selectOne("notice.totalcount");
 		}
 	}
@@ -49,7 +48,6 @@ public class NoticeDAO extends SqlSessionDaoSupport{
 			}
 			return result;
 		} catch (Exception e) {
-			e.printStackTrace();
 			return (ArrayList)getSqlSession().selectList("notice.noticeList", vo);
 		}
 		
@@ -61,14 +59,12 @@ public class NoticeDAO extends SqlSessionDaoSupport{
 	public void insertNotice(NoticeVo vo) {
 		SqlSession session = this.getSqlSession();
 		System.out.println("dao시작");
-		
-		System.out.println("getNo"+vo.getNo());
-		System.out.println("getTitle"+vo.getTitle());
-		System.out.println("getContent"+vo.getContent());
-		System.out.println("getStartDate"+vo.getStartDate());
-		System.out.println("getEndDate"+vo.getEndDate());
-		System.out.println("getIsshow"+vo.getIsshow());
-		
+//		System.out.println("getNo"+vo.getNo());
+//		System.out.println("getTitle"+vo.getTitle());
+//		System.out.println("getContent"+vo.getContent());
+//		System.out.println("getStartDate"+vo.getStartDate());
+//		System.out.println("getEndDate"+vo.getEndDate());
+//		System.out.println("getIsshow"+vo.getIsshow());
 		session.insert("notice.insert",vo);
 		System.out.println("dao종료");
 	}

@@ -35,7 +35,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" >제목</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="title" name="title" value="eee">
+        <input type="text" class="form-control" id="title" name="title" value="">
       </div>
     </div>
     <div class="form-group">

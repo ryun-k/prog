@@ -81,12 +81,14 @@
 			</tr>
 			<tr>
 				<td>
-				    <button type="button" class="btn btn-primary" id="wBtn">글쓰기</button>
+				${sessionScope.UID}
+					<c:if test="${sessionScope.UID eq 'admin'}">
+					    <button type="button" class="btn btn-primary" id="wBtn">글쓰기</button>
+					</c:if>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	
 </div>
 
 </body>

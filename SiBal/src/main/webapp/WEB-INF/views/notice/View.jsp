@@ -38,7 +38,7 @@
       </tr>
       <tr>
         <td width="10%">내용</td>
-        <td>${VIEW.content }</td>
+        <td>${VIEW.brBody }</td>
       </tr>
       <tr>
        

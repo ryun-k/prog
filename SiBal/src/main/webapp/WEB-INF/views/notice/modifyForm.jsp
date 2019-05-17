@@ -43,7 +43,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="content">내용</label>
       <div class="col-sm-10">          
-        <textarea type="text" class="form-control" id="content" name="content">${DATA.content}</textarea>
+        <textarea type="text" class="form-control" id="content" name="content">${DATA.brBody}</textarea>
       </div>
     </div>
     

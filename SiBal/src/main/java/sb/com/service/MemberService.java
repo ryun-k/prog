@@ -18,38 +18,40 @@ public class MemberService {
 		@Autowired
 		private MemberDAO mDAO;
 		
-		//·Î±×ÀÎÃ³¸®
+		//ï¿½Î±ï¿½ï¿½ï¿½Ã³ï¿½ï¿½
 		public void loginProc(MemberVO vo, HttpSession session) {
 		
 			
 			MemberVO result = mDAO.loginProc(vo);
 			if(result ==null) {
-				System.out.println("°ª¾øÀ½");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			}else {
+				session.setAttribute("UID", result.getEmail());
 				session.setAttribute("nick", result.getNick());
 				session.setAttribute("status", result.getStatus());
 				System.out.println(session.getAttribute("status"));
 			}
 		}
 
-		//·Î±×¾Æ¿ô Ã³¸®
+		//ï¿½Î±×¾Æ¿ï¿½ Ã³ï¿½ï¿½
 		public void logoutProc(HttpServletRequest request) {
 			request.getSession().removeAttribute("nick");
+			request.getSession().removeAttribute("UID");
 		}
 		
-		//È¸¿ø°¡ÀÔ Ã³¸®
+		//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 		public void signUpProc(MemberVO vo) {
 			mDAO.signUpProc(vo);
 		}
 		
-		//È¸¿øÁ¤º¸ ºÒ·¯¿À±â
+		//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 		public MemberVO memberInfo(MemberVO vo) {
 			System.out.println(vo.getNick());
 			MemberVO info =mDAO.memberInfo(vo);
 			return info;
 		}
 		
-		//È¸¿øÁ¤º¸ ¼öÁ¤Ã³¸®,´Ð³×ÀÓÀÇ ¼¼¼ÇÀ» »õ·Î ¹Ù²ãÁØ ´Ð³×ÀÓÀ¸·Î º¯°æ,
+		//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½,ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,
 		public void modifyProc(MemberVO vo,HttpSession session) {
 			 mDAO.modifyProc(vo);
 			 session.setAttribute("nick", vo.getNick());
@@ -57,34 +59,34 @@ public class MemberService {
 		
 		
 		
-		//ºñ¹øÃ£±â ÀÎÁõÄÚµå ¹ß¼ÛÀ» À§ÇÑ ÀÌ¸ÞÀÏÈ®ÀÎ ÀÛ¾÷
+		//ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ ï¿½ß¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½È®ï¿½ï¿½ ï¿½Û¾ï¿½
 		public MemberVO pwCode(MemberVO vo) {
 			MemberVO code=mDAO.pwCode(vo);
 			return code;
 		}
 		
-		//ÀÎÁõÄÚµåÀúÀå
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
 		public void setCode(MemberVO vo) {
 			mDAO.setCode(vo);
 		}
 		
-		//ÀÎÁõÄÚµå ÀÛ¼ºÈÄ ºñ¹ø »õ·Î ÁöÁ¤ÇÏ±â
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 		public void modifyPw(MemberVO vo) {
 			mDAO.modifyPw(vo);
 		}
 		
-		//ajax ÀÌ¸ÞÀÏ°ú ´Ð³×ÀÓ Áßº¹ È®ÀÎ
+		//ajax ï¿½Ì¸ï¿½ï¿½Ï°ï¿½ ï¿½Ð³ï¿½ï¿½ï¿½ ï¿½ßºï¿½ È®ï¿½ï¿½
 		public int dupleCk(MemberVO vo) {
 			int str=mDAO.dupleCk(vo);
 			return str;
 		}
 		
-		//·Î±×ÀÎ,Å»Åð½Ã ºñ¹ø È®ÀÎ
+		//ï¿½Î±ï¿½ï¿½ï¿½,Å»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 		public	int CheckProc(MemberVO vo) {
 			int str= mDAO.CheckProc(vo);
 			return str;
 		}
-		//È¸¿ø Å»Åð , status¸¦ ¹Ù²ãÁÖ°í ¼¼¼Çµµ Á×ÀÎ´Ù.
+		//È¸ï¿½ï¿½ Å»ï¿½ï¿½ , statusï¿½ï¿½ ï¿½Ù²ï¿½ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½Çµï¿½ ï¿½ï¿½ï¿½Î´ï¿½.
 		public void withdraw(MemberVO vo,HttpServletRequest request) {
 			mDAO.withdraw(vo);
 			request.getSession().removeAttribute("nick");

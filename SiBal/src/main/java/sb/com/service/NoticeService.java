@@ -15,16 +15,16 @@ public class NoticeService {
 	private NoticeDAO nDAO;
 	
 	//페이징처리 실행함수
-	public PageUtil getPageInfo(int nowPage) {
+	public PageUtil getPageInfo(int nowPage, HttpSession session) {
 		//총 데이터 개수 구하자
-		int totalCount = nDAO.getTotalCount();
+		int totalCount = nDAO.getTotalCount(session);
 		System.out.println("totalCount "+totalCount);
 		PageUtil pageInfo = new PageUtil(nowPage,totalCount,5,5);
 		return pageInfo;
 	}
 	
 	//목록을 구하는 함수
-	public ArrayList getBoardList(PageUtil  pInfo){
+	public ArrayList getBoardList(PageUtil  pInfo, HttpSession session){
 
 		int start = (pInfo.getNowPage()-1) * pInfo.getListCount()+1;
 		int end   = start + pInfo.getListCount() -1;
@@ -33,7 +33,7 @@ public class NoticeService {
 		vo.setStart(start);
 		vo.setEnd(end);
 		
-		ArrayList list = nDAO.getNoticeList(vo);
+		ArrayList list = nDAO.getNoticeList(vo,session);
 		return list;
 	}
 	

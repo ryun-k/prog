@@ -24,7 +24,7 @@ public class MemberService {
 			
 			MemberVO result = mDAO.loginProc(vo);
 			if(result ==null) {
-				System.out.println("������");
+				System.out.println("값없음");
 			}else {
 				session.setAttribute("UID", result.getEmail());
 				session.setAttribute("nick", result.getNick());
@@ -41,7 +41,8 @@ public class MemberService {
 		
 		//회원가입 처리
 		public void signUpProc(MemberVO vo) {
-			mDAO.signUpProc(vo);
+			 mDAO.signUpProc(vo);
+			
 		}
 		
 		//회원정보 불러오기
@@ -91,5 +92,28 @@ public class MemberService {
 			mDAO.withdraw(vo);
 			request.getSession().removeAttribute("nick");
 			System.out.println(vo.getStatus());
+		}
+		//카카오이메일로 가입되었는지 확인
+		public int CheckKakao(MemberVO vo) {
+			int str = mDAO.CheckKakao(vo);
+			return str;
+		}
+		//카카오로 로그인하기
+		public int KakaoLogin(MemberVO vo) {
+			int str = mDAO.KakaoLogin(vo);
+			return str;
+		}
+		//카카오 회원 권한확인
+public void kakaostatus(MemberVO vo, HttpSession session) {
+		
+			MemberVO result = mDAO.kakaostatus(vo);
+			if(result ==null) {
+				System.out.println("값없음");
+			}else {
+				session.setAttribute("UID", result.getEmail());
+				session.setAttribute("nick", result.getNick());
+				session.setAttribute("status", result.getStatus());
+				System.out.println(session.getAttribute("status"));
+			}
 		}
 }

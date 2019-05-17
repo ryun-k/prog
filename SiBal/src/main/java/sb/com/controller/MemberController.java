@@ -230,5 +230,44 @@ public class MemberController {
 		}
 		return str;
 	}
-
+	
+	//카카오 이메일로 이미 가입되어있는지 확인
+	@RequestMapping(value="/CheckKakao", method=RequestMethod.POST)
+	public @ResponseBody String CheckKakao(MemberVO vo) {
+	System.out.println("ajax실행,카카오");
+		
+	String str="";
+	int ok = mService.CheckKakao(vo);
+	if(ok==1) {
+		str="YES";
+	}else {
+		System.out.println("0반환");
+		//가입시킨다.
+		mService.signUpProc(vo);
+		str="NO";
+	}
+	return str;
+	}
+	
+	//카카오로 로그인처리
+	@RequestMapping(value="/KakaoLogin", method=RequestMethod.POST)
+	public @ResponseBody String KakaoLogin(MemberVO vo,HttpSession session) {
+		System.out.println("ajaxt실행,카카오 로그인");
+		String str="";
+		int ok = mService.KakaoLogin(vo);
+		if(ok==1) {
+			//로그인실행
+			mService.kakaostatus(vo,session);
+			String strStatus = (String)session.getAttribute("status");
+			int status = Integer.parseInt(strStatus);
+			if(status==1) {
+				str="YES1";
+			}else if(status==0) {
+				str="YES2";
+			}
+		}else {
+			str="NO";
+		}
+		return str;
+	}
 }

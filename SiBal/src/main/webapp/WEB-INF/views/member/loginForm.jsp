@@ -18,9 +18,13 @@ w7hqPZTNwCeqHJZkw4qaCwMz
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script 
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<meta name="google-signin-scope" content="profile email">
+	
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+
+	<!-- <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="645231811798-k4jflp70j4nc4s9bfvr07u93tpogio97.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script> -->
     <script>
 		$(document).ready(function(){
 			//로그인시 이메일,비번 확인
@@ -59,9 +63,94 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 			$("#cBtn").click(function(){
 				$(location).attr("href","../");
 			})
+			
+			//카카오 로그인
+			$("#kakao-login-btn").click(function(){
+				Kakao.init('af6e8975be3fffc8d0f8d9b119294dea'); 
+			    Kakao.Auth.createLoginButton({
+			      container: '#kakao-login-btn',
+			      success: function(authObj) {
+			    	  Kakao.API.request({
+			    	       url: '/v1/user/me',
+			    	       success: function(res) {
+								
+			    	    	   if(res.kaccount_email_verified){
+				    	              var kakao=res.id;
+									  var email= res.kaccount_email;
+									  
+									  
+									  $("#Kemail").val(email);
+									  $("#Kkakao").val(kakao);
+									 
+									 
+									  if($("#Kemail").val()!="" && $("#Kkakao").val()!=""){
+										 
+												$.ajax({
+													type:"POST",
+													url:"../member/KakaoLogin.do",
+													data:{
+														"email":$("#Kemail").val(),
+														"kakao":$("#Kkakao").val()
+													},
+													success:function(data){
+														if($.trim(data)=='YES1'){
+															$(location).attr("href","../member/loginForm.do");
+														}else if($.trim(data)=='YES2'){
+															$(location).attr("href","../member/withDraw.do");
+														}
+														else{
+															alert('카카오계정으로 가입을 먼저 해주세요');
+															$(location).attr("hreg","../member/signUp.do");
+														}
+													}
+												})
+									  }else{
+										  alert('오류발생');
+									  }	
+									  
+									  
+								}else{
+									alert('귀하의 카카오 계정의 이메일은 본인확인이 필요합니다.')
+							   }
+			    	       
+			    	       }
+			    	   })
+			      },
+			      fail: function(err) {
+			         alert('로그인이 실패 되었습니다.');
+			      }
+			    });
+			  //카카오 로그아웃
+			  
+			})
+			/* //구글로그인
+			$("#gBtn").click(function(){
+				function onSignIn(googleUser) {
+					  // Useful data for your client-side scripts:
+					  var profile = googleUser.getBasicProfile(){
+					  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+					  console.log('Full Name: ' + profile.getName());
+					  console.log('Given Name: ' + profile.getGivenName());
+					  console.log('Family Name: ' + profile.getFamilyName());
+					  console.log("Image URL: " + profile.getImageUrl());
+					  console.log("Email: " + profile.getEmail());
+					  
+					 // The ID token you need to pass to your backend:
+					  var id_token = googleUser.getAuthResponse().id_token;
+					  console.log("ID Token: " + id_token);
+					  var email=profile.getEmail();
+					  var name= profile.getName();
+					  var image= profile.getImageUrl();
+					  var id= profile.getId(); 
+						document.getElementById('google').innerHTML=email+'<p/>'+name+id+
+						'<p/>'+'<img src="'+image+'">';
+					  }
+					}
+			}) */
+			
 		});
 		</script>
-<!-- 		<script>
+<!--  	<script>
 function onSignIn(googleUser) {
   // Useful data for your client-side scripts:
   var profile = googleUser.getBasicProfile(){
@@ -71,7 +160,7 @@ function onSignIn(googleUser) {
   console.log('Family Name: ' + profile.getFamilyName());
   console.log("Image URL: " + profile.getImageUrl());
   console.log("Email: " + profile.getEmail());
-  
+  }
  // The ID token you need to pass to your backend:
   var id_token = googleUser.getAuthResponse().id_token;
   console.log("ID Token: " + id_token);
@@ -81,9 +170,9 @@ function onSignIn(googleUser) {
   var id= profile.getId(); 
 	document.getElementById('google').innerHTML=email+'<p/>'+name+id+
 	'<p/>'+'<img src="'+image+'">';
-  }
+  
 }
-	</script>  -->
+	</script>   --> 
 </head>
 <body>
 <div class="container">
@@ -110,10 +199,18 @@ function onSignIn(googleUser) {
 					<input type="button" class="btn btn-primary" id="lBtn" value="Login">
 					<input type="button" class="btn btn-primary" id="fBtn" value="비밀번호 찾기">
 					<input type="button" class="btn btn-primary" id="cBtn" value="메인가기">
+					<!-- <input type="button" class="btn btn-primary" id="gBtn" value="구글로그인"> -->
+					<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오로그인">
+					
+					<div id='kakao'></div>
+
+
+
+
 	
 	</form>
-	<!-- <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-	<div id='google'></div> -->
+<!-- 	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+	<div id='google'></div>  -->
 	<br/>
 	
 	<% 
@@ -130,6 +227,12 @@ function onSignIn(googleUser) {
 	%>	
 	<form id="codeForm" method="post" action="checkEmail.do">
 	<input type="hidden" id="email1" name="email">
+	</form>
+	
+	<form id="kakaoLogin" method="post" >
+	<input type="hidden" id="Kemail" name="email">
+	<input type="hidden" id="Kkakao" name="kakao">
+	
 	</form>
 </div>
 </body>

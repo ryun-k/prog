@@ -29,6 +29,7 @@ public class QnaVo {
 	
 	private int reNo;
 	private int reQNo;
+	private int rePNo;
 	private String reContent;
 	private Date reWDate;
 	private int reDepth;
@@ -36,6 +37,14 @@ public class QnaVo {
 	
 	private int reRNo;
 	
+	
+	
+	public int getRePNo() {
+		return rePNo;
+	}
+	public void setRePNo(int rePNo) {
+		this.rePNo = rePNo;
+	}
 	public int getReNo() {
 		return reNo;
 	}

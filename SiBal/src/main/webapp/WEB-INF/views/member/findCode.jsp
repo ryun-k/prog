@@ -11,11 +11,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>비밀번호 찾기</title>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#sBtn").click(function(){
-		alert('비밀번호가 변경 되었습니다.');
+		alert('비밀번호가 설정 되었습니다.');
 		$("#codeForm").submit();
 	
 	})
@@ -82,18 +82,15 @@ $(document).ready(function(){
 <h1>메일발송이 완료 되었습니다.<br/>
 인증코드를 입력해주세요.<br/> 
 </h1>
-<form id="codeForm" class="was-validated" method="POST" action="../member/modifyPw.do">
+<form id="codeForm" class="was-validated" method="POST" action="../member/findPw.do">
  <div class="form-group">
 
  <label for="check">발송 코드 </label>
 
 <input type="text" id="check" class="form-control" placeholder="코드를 입력하세요" name="check" required="required">
 
-<!--  <label for="email">이메일</label>
-<input type="text" id="email" class="form-control" placeholder="이메일을 입력하세요" name="email" required="required"> -->
-
  <label for="email">이메일</label>
-<input type="text" id="email" class="form-control" value ="${INFO}" name="email" readonly="readonly">
+<input type="text" id="email" class="form-control" value="${INFO}" name="email" readonly="readonly">
 
  <label for="pw">새로지정할 비밀 번호</label>
 <input type="password" id="pw" class="form-control" placeholder="비밀번호를 입력하세요" name="pw" required="required">

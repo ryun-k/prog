@@ -126,9 +126,9 @@ public class MemberController {
 			return mv;
 		}else {
 			
-			rv=new RedirectView("../member/pwCode.do");
+			rv=new RedirectView("../member/findCode.do");
 			mv=new ModelAndView();
-			mv.addObject("email",check.getEmail());
+			mv.addObject("email",vo.getEmail());
 		
 			mv.setView(rv);
 			return mv;
@@ -137,46 +137,93 @@ public class MemberController {
 	}
 
 	//비밀번호 찾기 인증 코드
-	@RequestMapping("/pwCode")
-	public ModelAndView pwCode(MemberVO vo, HttpSession session) {
-		RedirectView rv=new RedirectView();
-		ModelAndView mv= new ModelAndView();
+		@RequestMapping("/findCode")
+		public ModelAndView findCode(MemberVO vo, HttpSession session) {
+			System.out.println(vo.getEmail());
+			RedirectView rv=new RedirectView();
+			ModelAndView mv= new ModelAndView();
+			String email=vo.getEmail();
+			String KeyCode=null;
+		try {
+			KeyCode = FindUtil.createkey();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String subject = "비밀번호 찾기 인증코드 안내";
 		
-		String KeyCode=null;
-	try {
-		KeyCode = FindUtil.createkey();
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	String subject = "비밀번호 찾기 인증코드 안내";
-	
-	String msg = "";
-	msg += "<div align = 'center' style='border:1px solid black; font-family:verdana'>";
-	msg += "<h1 style = 'color: blue;'> 비밀번호 찾기 인증 코드입니다..</h1>";
-	msg += "<h3>비밀번호 찾기 페이지로 돌아가 인증코드</h3><h1> <strong>";
-	msg += KeyCode+"</strong></h1><h3>를 입력해주세요.</h3></div><br/>	";
-	
-	try {
-		Email.sendMail(vo.getEmail(),subject,msg);
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	//vo에 키 코드를 저장시키고 폼에서 비교한다.
-	vo.setCheck(KeyCode);
-	
-	mService.setCode(vo);
-	return mv;
-	}
-	
-	@RequestMapping("/modifyPw")
-	public ModelAndView modifyPw(MemberVO vo) {
+		String msg = "";
+		msg += "<div align = 'center' style='border:1px solid black; font-family:verdana'>";
+		msg += "<h1 style = 'color: blue;'> 비밀번호 찾기 인증 코드입니다..</h1>";
+		msg += "<h3>비밀번호 찾기 페이지로 돌아가 인증코드</h3><h1> <strong>";
+		msg += KeyCode+"</strong></h1><h3>를 입력해주세요.</h3></div><br/>	";
 		
+		try {
+			Email.sendMail(vo.getEmail(),subject,msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//vo에 키 코드를 저장시키고 폼에서 비교한다.
+		vo.setCheck(KeyCode);
+		mService.setCode(vo);
+		mv.addObject("INFO", email);
+		return mv;
+		}
+		
+	//로그아웃 상태에서의 비번 찾기
+	@RequestMapping("/findPw")
+	public ModelAndView findPw(MemberVO vo) {
 		mService.modifyPw(vo);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/loginForm");
 		return mv;
 	}
 	
+	
+	//비밀번호 변경 인증 코드
+		@RequestMapping("/pwCode")
+		public ModelAndView pwCode(MemberVO vo, HttpSession session) {
+			System.out.println(vo.getEmail());
+			RedirectView rv=new RedirectView();
+			ModelAndView mv= new ModelAndView();
+			String email=null;
+			email=vo.getEmail();
+			String KeyCode=null;
+		try {
+			KeyCode = FindUtil.createkey();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String subject = "비밀번호 찾기 인증코드 안내";
+		
+		String msg = "";
+		msg += "<div align = 'center' style='border:1px solid black; font-family:verdana'>";
+		msg += "<h1 style = 'color: blue;'> 비밀번호 찾기 인증 코드입니다..</h1>";
+		msg += "<h3>비밀번호 찾기 페이지로 돌아가 인증코드</h3><h1> <strong>";
+		msg += KeyCode+"</strong></h1><h3>를 입력해주세요.</h3></div><br/>	";
+		
+		try {
+			Email.sendMail(vo.getEmail(),subject,msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//vo에 키 코드를 저장시키고 폼에서 비교한다.
+		vo.setCheck(KeyCode);
+		mService.setCode(vo);
+		
+		mv.addObject("INFO", email);
+		return mv;
+		}
+		
+		//로그인상태에서의 비번 변경
+		@RequestMapping("/modifyPw")
+		public ModelAndView modifyPw(MemberVO vo,RedirectView rv) {
+			
+			mService.modifyPw(vo);
+			ModelAndView mv = new ModelAndView();
+			rv = new RedirectView("../member/infoForm.do");
+			mv.setView(rv);
+			return mv;
+		}
 	//이메일 중복체크
 	@RequestMapping(value="/EmailCheck", method= RequestMethod.POST)
 	public @ResponseBody String AjaxView(MemberVO vo) {

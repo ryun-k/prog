@@ -27,6 +27,11 @@ $(document).ready(function(){
 	$("#wBtn").click(function(){
 		$(location).attr("href","../member/withdrawForm.do");
 	})
+	//비밀번호 변경
+	$("#pBtn").click(function(){
+		$("#modify").submit();
+	})
+	
 });
 
 </script>
@@ -36,10 +41,11 @@ $(document).ready(function(){
 <div class="container">
 <h1>회원정보</h1>
 
-<form id = "modify" class="was-validated" method="post" action="../member/modifyProc.do" encType="utf-8" >
+<form id = "modify" class="was-validated" method="post" action="../member/pwCode.do" encType="utf-8" >
 <div class="form-group">
   
 	<h3>${INFO.email}</h3><br/>
+	<input type="hidden" id="email" name="email" value="${INFO.email}">
 	
 	<label for="name">이름</label>
 	<input type="text" id="name" class="form-control" name="name" readonly="readonly" value="${INFO.name}"><br/>
@@ -55,6 +61,7 @@ $(document).ready(function(){
 
 <br/>
 </div>
+<input type="button" id="pBtn" class="btn btn-primary" value="비밀번호변경">
 <input type="button" id="mBtn" class="btn btn-primary" value="수정하기">
 <input type="button" id="wBtn" class="btn btn-primary" value="탈퇴하기">
 <input type="button" id="cBtn" class="btn btn-primary" value="취소하기">

@@ -27,9 +27,10 @@
 	<!-- 목록보기 -->
 	<select id="qnaList" parameterType="qVO" resultType="qVO">
 		select * from
-		(select rownum as rNo, q_no as no, q_title as title, m.m_nick as id, q_wDate as wDate, q_hit as hit,depth from qna q, sbmember m
+		(select rNo, no, title, id, wDate, hit, depth from
+		(select q_no as no, q_title as title, m.m_nick as id, q_wDate as wDate, q_hit as hit,depth, ROW_NUMBER() OVER ( ORDER BY q_no desc) as rNo from qna q, sbmember m
 		where m.m_nick=q.q_id
-		order by ref desc, step asc)
+		order by ref desc, step asc))
 		where rNo BETWEEN #{start} and #{end}
 	</select>
 	

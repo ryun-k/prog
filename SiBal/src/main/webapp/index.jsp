@@ -34,24 +34,7 @@
 <a href='/iedu/airportForm.do'>비행기표 확인</a><br/><br/>
 <a href="../sb/qnaBoard/qnaList.do"><button>질문리스트</button></a><br/><br/>
 
-<c:choose> 
-    <c:when test="${not empty sessionScope.nick }">    
-        <li><a href="../sb/member/logoutProc.do"><button>로그아웃</button></a><br/><br/></li>
-        <li><a href="../sb/member/modifyForm.do"><button>회원정보수정</button></a><br/><br/></li>
-        <li><a href="../sb/member/withdrawForm.do"><button>회원탈퇴</button></a><br/><br/></li>
-        <%
-	  String nick = (String)session.getAttribute("nick");
-     
-        %>
-        <li>
-        <%=nick %>(으)로 접속중.
-        </li>
-    </c:when>
-    <c:otherwise>   
-        <li><a href="../sb/member/loginForm.do"><button>로그인</button></a><br/><br/></li>
-        <li><a href="../sb/member/signUp.do"><button>회원가입</button></a><br/><br/></li>
-    </c:otherwise>                  
-</c:choose>
+
 
 <a href="../sb/information/informationList.do">뀨</a><br/><br/>
 

@@ -32,6 +32,7 @@ public class QnaService {
 		int start = (pInfo.getNowPage()-1) * pInfo.getListCount()+1;
 		int end   = start + pInfo.getListCount() -1;
 		
+		
 		QnaVo vo = new QnaVo();
 		vo.setStart(start);
 		vo.setEnd(end);
@@ -124,11 +125,11 @@ public class QnaService {
 	}
 	
 	// 댓글 카운트
-	public PageUtil repPageInfo(int nowPage,int oriNo) {
+	public PageUtil repPageInfo(int reNowPage,int oriNo) {
 		
 		int totalCount = qDAO.repCount(oriNo);
 		
-		PageUtil pageInfo = new PageUtil(nowPage,totalCount,10,5);
+		PageUtil pageInfo = new PageUtil(reNowPage,totalCount,10,5);
 		return pageInfo;
 		
 	}

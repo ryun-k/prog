@@ -67,27 +67,7 @@ $(document).ready(function(){
 				})
 			}) 
 	
-	//패스워드 검사
-	$("#pw").blur(function(){
-		if($("#pw").val()!=""){
-			if(reg2.test($("#pw").val())==false){
-				alert('형식에 맞지 않습니다.');
-				$("#pw").val("");
-				$("#pw").focus();
-			}
-		}
-	})
-	
-	//동일 패스워드 검사
-	$("#pw2").blur(function(){
-		if($("#pw2").val()!=""){
-			if($("#pw").val()!=$("#pw2").val()){
-				alert('패스워드가 서로 다릅니다.');
-				$("#pw2").val("");
-				$("#pw2").focus();
-			}
-		}
-	})
+
 	
 	//이름 검사
 	$("#name").blur(function(){
@@ -126,10 +106,15 @@ $(document).ready(function(){
     }).open();
 	});
 	
-	
+	//취소하기
 	$("#cBtn").click(function(){
-		$(location).attr("href","../");
+		$(location).attr("href","../member/infoForm.do");
 	});
+	
+	//수정하기
+	$("#mBtn").click(function(){
+		$("#modify").submit();
+	})
 });
 
 </script>
@@ -144,14 +129,6 @@ $(document).ready(function(){
 	<input type="hidden" class="form-control" name="email" value="${INFO.email}">
 	<h3>${INFO.email}</h3><br/>
 	
-	<label for="pw"> password</label>
-	<input type="password" id="pw" class="form-control" name="pw" placeholder="새로운 패스워드를 입력해주세요" required="required" 
-	 pattern="^[\W-가-힣a-zA-Z0-9]{4,20}" maxlength="20"> <br/>
-	 
-
-	<label for="pw2">password재입력</label>
-	<input type="password" id="pw2" class="form-control" required="required" placeholder="비밀번호를  다시 입력해주세요"
-	 pattern="^[\W-가-힣a-zA-Z0-9]{4,20}" maxlength="20"><br/>
 	
 	<label for="name">이름</label>
 	<input type="text" id="name" class="form-control" name="name" required="required" placeholder="이름을  입력해주세요"
@@ -170,7 +147,7 @@ $(document).ready(function(){
 
 <br/>
 </div>
-<input type="submit" id="mBtn" class="btn btn-primary" value="수정하기">
+<input type="button" id="mBtn" class="btn btn-primary" value="수정하기">
 <input type="button" id="cBtn" class="btn btn-primary" value="취소하기">
 </form>
 </div>

@@ -20,6 +20,7 @@
   </style>
   <script type="text/javascript">
   	$(function(){
+  		// 글쓰기 클릭시
   		$("#wBtn").click(function(){
   			location.href="../qnaBoard/qWriteForm.do";
   		});

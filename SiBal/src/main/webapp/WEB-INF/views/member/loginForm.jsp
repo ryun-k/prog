@@ -38,7 +38,7 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 					},
 					success:function(data){
 						if($.trim(data)=='YES1'){
-							$(location).attr("href","../member/loginForm.do");
+							$(location).attr("href","../");
 						}else if($.trim(data)=='YES2'){
 							$(location).attr("href","../member/withDraw.do");
 						}
@@ -64,10 +64,15 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 				$(location).attr("href","../");
 			})
 			
+			//회원가입 버튼
+			$("#sBtn").click(function(){
+				$(location).attr("href","../member/signUp.do");
+			})
+			
 			//카카오 로그인
 			$("#kakao-login-btn").click(function(){
 				Kakao.init('af6e8975be3fffc8d0f8d9b119294dea'); 
-			    Kakao.Auth.login({
+			    Kakao.Auth.loginForm({
 			      
 			      success: function(authObj) {
 			    	  Kakao.API.request({
@@ -94,7 +99,7 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 													},
 													success:function(data){
 														if($.trim(data)=='YES1'){
-															$(location).attr("href","../member/loginForm.do");
+															$(location).attr("href","../");
 														}else if($.trim(data)=='YES2'){
 															$(location).attr("href","../member/withDraw.do");
 														}
@@ -177,13 +182,6 @@ function onSignIn(googleUser) {
 <body>
 <div class="container">
 
-<%
-		//세션에서 데이터 꺼내보자
-		//왜? 로그인 했는지 안했는지의 차이는 세션에  (특정)데이터가 있고 없고의 차이니까..
-	  String nick = (String)session.getAttribute("nick");
-	  if(nick==null||nick.length()==0){ 
-	%>
-			<%-- 로그인 안 했다면 	로그인폼  --%>
 	<form method="POST" id="loginForm" action="../member/loginProc.do" class="was-validated">
 	<div class="form-group">
 			
@@ -197,10 +195,14 @@ function onSignIn(googleUser) {
 				<div class="valid-feedback"></div>
 				</div>
 					<input type="button" class="btn btn-primary" id="lBtn" value="Login">
+					<input type="button" class="btn btn-primary" id="sBtn" value="회원가입">
+					
+					<br/><br/><hr/>
+					
+					<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오로그인">
 					<input type="button" class="btn btn-primary" id="fBtn" value="비밀번호 찾기">
 					<input type="button" class="btn btn-primary" id="cBtn" value="메인가기">
 					<!-- <input type="button" class="btn btn-primary" id="gBtn" value="구글로그인"> -->
-					<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오로그인">
 					
 					<div id='kakao'></div>
 
@@ -209,22 +211,9 @@ function onSignIn(googleUser) {
 
 	
 	</form>
-<!-- 	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-	<div id='google'></div>  -->
+
 	<br/>
-	
-	<% 
-		}else{  
-	%>
-			<%-- 로그인    했다면 	출력  --%>
-			
-				<h3><%= nick %>님 접속중</h3>
-					<br/><br/>
-					<input type="button" class="btn btn-primary" id="cBtn" value="메인가기">
-				
-	<%	  
-	  }
-	%>	
+
 	<form id="codeForm" method="post" action="checkEmail.do">
 	<input type="hidden" id="email1" name="email">
 	</form>

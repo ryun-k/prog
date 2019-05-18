@@ -4,6 +4,7 @@ package sb.com.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.net.SyslogAppender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,7 @@ public class MemberController {
 	public ModelAndView logoutProc(HttpServletRequest request) {
 		mService.logoutProc(request);
 		ModelAndView mv = new ModelAndView();
-		RedirectView rv = new RedirectView("../member/logoutForm.do");
+		RedirectView rv = new RedirectView("../");
 		mv.setView(rv);
 		return mv;
 	}
@@ -72,12 +73,24 @@ public class MemberController {
 	
 	//회원정보 수정처리
 	@RequestMapping("/modifyProc")
-	public ModelAndView modifyProc(MemberVO vo,HttpSession session,ModelAndView mv) {
+	public ModelAndView modifyProc(MemberVO vo,HttpSession session,ModelAndView mv,RedirectView rv) {
 		mService.modifyProc(vo,session);
-		mv.setViewName("member/loginForm");
+		rv = new RedirectView("../member/infoForm.do");
+		mv.setView(rv);
 		return mv;
 	}
 	
+	//회원정보보기
+		@RequestMapping("/infoForm")
+		public ModelAndView InfoForm(MemberVO vo,HttpSession session,ModelAndView mv) {
+			String nick = (String)session.getAttribute("nick");
+			vo.setNick(nick);
+			MemberVO info = mService.memberInfo(vo);
+			mv.addObject("INFO",info);
+			mv.setViewName("member/infoForm");
+			return mv;
+		}
+		
 	//회원탈퇴폼
 	@RequestMapping("/withdrawForm")
 	public ModelAndView withdrawForm(MemberVO vo, HttpSession session,ModelAndView mv) {
@@ -105,11 +118,11 @@ public class MemberController {
 		RedirectView rv= null;
 		ModelAndView mv = null;
 		if(check.getEmail().equals("0")) {
-			String msg="존재하지 않는 이메일입니다..";
+			//String msg="존재하지 않는 이메일입니다..";
 			rv=new RedirectView("../member/loginForm.do");
 			mv=new ModelAndView();
 			mv.setView(rv);
-			mv.addObject("MSG",msg);
+			//mv.addObject("MSG",msg);
 			return mv;
 		}else {
 			
@@ -270,4 +283,6 @@ public class MemberController {
 		}
 		return str;
 	}
+	
+	
 }

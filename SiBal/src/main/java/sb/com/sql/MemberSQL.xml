@@ -132,7 +132,7 @@ and
 Update 
 	sbmember
 set 
-	m_pw 		= #{pw},
+	
 	m_name 		= #{name},  
 	m_nick 		= #{nick},  
 	m_address 	= #{addr},  

@@ -30,7 +30,7 @@
 
 <a href='../sb/airport/airportForm.do'>비행기표 확인</a><br/><br/>
 
-fatkun
+
 <a href='/iedu/airportForm.do'>비행기표 확인</a><br/><br/>
 <a href="../sb/qnaBoard/qnaList.do"><button>질문리스트</button></a><br/><br/>
 

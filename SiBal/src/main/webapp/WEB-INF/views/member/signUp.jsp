@@ -165,8 +165,8 @@ $(document).ready(function(){
 	//카카오 로그인
 			$("#kakao-login-btn").click(function(){
 				Kakao.init('af6e8975be3fffc8d0f8d9b119294dea'); 
-			    Kakao.Auth.createLoginButton({
-			      container: '#kakao-login-btn',
+			    Kakao.Auth.login({
+			      
 			      success: function(authObj) {
 			    	  Kakao.API.request({
 			    	       url: '/v1/user/me',

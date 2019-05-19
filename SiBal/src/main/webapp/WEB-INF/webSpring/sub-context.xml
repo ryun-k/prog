@@ -41,15 +41,15 @@
 	<bean id="informationDAO" class="sb.com.dao.InformationDAO" >
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
+	<bean id="memberDAO" class="sb.com.dao.MemberDAO">
+		<property name="sqlSessionTemplate" ref="sqlSession"/>
+	</bean>
 		
 	<!-- serviece bean처리 -->
 	<bean id="noticeService" class="sb.com.service.NoticeService"/>
 	<bean id="qnaService" class="sb.com.service.QnaService"/>
 	<bean id="informationService" class="sb.com.service.InformationService"/>
 		
-	<bean id="memberDAO" class="sb.com.dao.MemberDAO">
-		<property name="sqlSessionTemplate" ref="sqlSession"/>
-	</bean>
 	<bean id="qnaControll" class="sb.com.controller.QnaController"/>
 	<bean id="memberControll" class="sb.com.controller.MemberController"/>
 	<bean id="memberService" class="sb.com.service.MemberService"/>

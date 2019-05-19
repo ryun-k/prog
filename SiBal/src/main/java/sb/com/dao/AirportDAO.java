@@ -1,5 +1,7 @@
 package sb.com.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -22,4 +24,9 @@ public class AirportDAO extends SqlSessionDaoSupport{
 		session.insert("airport.insertBair", vo);
 		}
 	}
+	
+	//목록 조회 쿼리실행 함수
+		public ArrayList getrList(AirVO vo) {
+			return (ArrayList) getSqlSession().selectList("airport.gList",vo);
+		}
 }

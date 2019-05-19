@@ -1,8 +1,10 @@
 package sb.com.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -19,60 +22,82 @@ import sb.com.util.ApiExplorer;
 import sb.com.util.MyUtils;
 
 @Controller
+@RequestMapping("/airport")
 public class AirportController {
 	@Autowired
 	private AirportService aService;
 
-	@RequestMapping("/airport/airportForm")
+	@RequestMapping("/airportForm")
 	public String airportForm() {
 		return "/airport/airportForm";
 	}
-	//비행기 조회
-	@RequestMapping(value="/airport/airport", method = RequestMethod.POST)
-	public String goinfo(AirVO airVO, Model model) throws Exception{
+
+	// 편도 조회
+	@RequestMapping(value="/goAir", method = RequestMethod.POST)
+	public String goAir(AirVO airVO, Model model) throws Exception{
 		Map<String, String> result = MyUtils.getAirportId();
 		String depAirportId = result.get(airVO.getDepAirportNm());
 		String arrAirportId = result.get(airVO.getArrAirportNm());
 		String depPlandTime = airVO.getDepPlandTime();
-		String arrPlandTime = airVO.getArrPlandTime();
 		List<AirVO> go = ApiExplorer.getAirportJson(depAirportId, arrAirportId, depPlandTime);
-		List<AirVO> back = ApiExplorer.getAirportJson(arrAirportId,depAirportId , arrPlandTime);
 		
 		model.addAttribute("go", go);
-		model.addAttribute("back", back);
-		return "/airport/airport";
+		return "airport/goAir";
 	}
 	
-	 
-	//가는편 비행기 예매정보 입력
-	@RequestMapping("/airport/goProc")
+	// 오는 항공편 조회
+	@RequestMapping(value="/backAir", method = RequestMethod.POST)
+	public String backAir(AirVO airVO, Model model) throws Exception{
+		Map<String, String> result = MyUtils.getAirportId();
+		String depAirportId = result.get(airVO.getDepAirportNm());
+		String arrAirportId = result.get(airVO.getArrAirportNm());
+		String arrPlandTime = airVO.getArrPlandTime();
+		List<AirVO> back = ApiExplorer.getAirportJson(arrAirportId,depAirportId , arrPlandTime);
+		
+		model.addAttribute("back", back);
+		return "airport/backAir";
+	}
+
+	// 가는편 비행기 예매정보 입력
+	@RequestMapping("/goProc")
 	public ModelAndView goProc(AirVO vo, HttpSession session, ModelAndView mv) {
 		System.out.println("rConfirm()컨트롤러함수 호출성공");
-		
+
 		aService.insertGo(vo, session);
-		//뷰
-		RedirectView rv = new RedirectView("../airport/airportForm.do");
+		// 뷰
+		RedirectView rv = new RedirectView("../airport/rConfirm.do");
 		mv.setView(rv);
 		return mv;
 	}
-	
-	//오는편 비행기 예매정보 입력
-	@RequestMapping("/airport/backProc")
+
+	// 오는편 비행기 예매정보 입력
+	@RequestMapping("/backProc")
 	public ModelAndView backProc(AirVO vo, HttpSession session, ModelAndView mv) {
 		System.out.println("rConfirm()컨트롤러함수 호출성공");
-		
+
 		aService.insertBack(vo, session);
-		//뷰
+		// 뷰
 		RedirectView rv = new RedirectView("../airport/rConfirm.do");
 		mv.setView(rv);
 		return mv;
 	}
 	
-	@RequestMapping("/airport/rConfirm")
-	public String rConfirm() {
-		return "/airport/rConfirm";
+	//예매 목록 보기
+	@RequestMapping("/rConfirm")
+	public void rResult(HttpServletRequest request) {
+		
+		ArrayList list = aService.getrList();
+		
+		request.setAttribute("LIST", list);
+		
+		
 	}
-	
+
+//	@RequestMapping("/rConfirm")
+//	public String rConfirm() {
+//		return "/airport/rConfirm";
+//	}
+
 }
 
 //페이지 하나짜리

@@ -4,6 +4,115 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "member">
+<!-- ======================= 쿼리문 등록 ================================= -->
+<!-- 이메일과 닉네임 중복 -->
+<sql id="dupleSelect">
+<if test="target eq 'email'">
+where m_email = #{email}
+</if>
+<if test="target eq 'nick'">
+where m_nick = #{nick}
+</if>
+</sql>
+
+
+
+<!-- ======================= 쿼리문 등록 ================================= -->
+<!-- 카카오 권한확인 -->
+<select id="kakaostatus" parameterType="memberVO" resultType="memberVO">
+	SELECT
+	    M_email            	AS email,
+	    M_kakao     		AS kakao,
+	    M_NICK          	AS nick,
+	    M_STATUS			AS status
+	 FROM
+	    SBMEMBER
+	 WHERE
+	    M_EMAIL = #{email}
+	    AND
+	    M_KAKAO = #{kakao}
+	  
+	</select>
+
+<!--  카카오 로그인 -->
+<select id="KakaoLogin" parameterType="memberVO" resultType="int">
+select 
+	count	(*)
+from 
+	sbmember
+where
+	m_email = #{email}
+and
+	m_kakao = #{kakao}
+	  
+	</select>
+
+
+
+<select id="CheckKakao" parameterType="memberVO" resultType="int">
+select
+	count (*)
+from
+	sbmember
+where
+	m_email = #{email}
+</select>
+
+
+<!-- 로그인,탈퇴시 본인확인	 -->
+<select id ="CheckProc" parameterType="memberVO" resultType="int">
+select 
+	count (*)
+from 
+	sbmember
+where 
+	m_email = #{email}
+and
+	m_pw = #{pw}
+</select>
+
+<!-- 이메일, 닉네임 중복확인  -->
+<select id="dupleCk" parameterType="String" resultType="int">
+select count  (*)
+from sbmember
+<include refid = "dupleSelect"/>
+</select>
+
+
+<!--  코드인증후 비번 재지정 -->
+<update id="modifyPw" parameterType="memberVO">
+update 
+	sbmember 
+set 
+	m_pw = #{pw}
+where 
+	m_email = #{email}
+and
+	m_check = #{check}
+	
+</update>
+<!-- 인증코드 저장	 -->
+<update id="setCode" parameterType="memberVO">
+update
+	sbmember
+set
+	m_check = #{check}
+where
+	m_email = #{email}
+</update>
+
+<!--  유효한 이메일인지 확인  -->
+<select id="pwCode" parameterType="memberVO" resultType="memberVO">
+--이메일이 존재하지 않는다면 0을 리턴한다.
+select 
+	NVL(MAX(m_email),'0')as email
+from 
+	sbmember  
+where 
+	m_email = #{email}
+
+</select>
+
 <!-- 회원탈퇴 -->
 <update id="withdraw" parameterType="memberVO">
 
@@ -12,7 +121,7 @@ update
 set
 	m_status = '0'
 where 
-	m_nick = #{nick}
+	m_email = #{email}
 and
 	m_pw = #{pw}
 </update>
@@ -23,7 +132,7 @@ and
 Update 
 	sbmember
 set 
-	m_pw 		= #{pw},
+	
 	m_name 		= #{name},  
 	m_nick 		= #{nick},  
 	m_address 	= #{addr},  
@@ -57,7 +166,8 @@ insert into
 		m_name  ,  
 		m_nick ,  
 		m_address  ,  
-		m_phone  )
+		m_phone	,
+		m_kakao  )
 	values(
 		sbmember_seq.NEXTVAL,
 		#{email},
@@ -65,21 +175,24 @@ insert into
 		#{name},
 		#{nick},
 		#{addr},
-		#{phone}
+		#{phone},
+		#{kakao}
 	)
 </insert>
 
 	<!-- 로그인 본인 확인 쿼리 -->
-	<select id="loginProc" parameterType="hMap" resultType="hMap">
+	<select id="loginProc" parameterType="MemberVO" resultType="MemberVO">
 	SELECT
 	    M_email            	AS email,
 	    M_PW     			AS pw,
-	    M_NICK          	AS nick
+	    M_NICK          	AS nick,
+	    M_STATUS			AS status
 	 FROM
 	    SBMEMBER
 	 WHERE
 	    M_EMAIL = #{email}
 	    AND
 	    M_PW = #{pw}
+	  
 	</select>
 	</mapper>

@@ -11,18 +11,27 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style type="text/css">
+  	.gun a:link { text-decoration:none ; color:#fff}
+  	.gun a:visited { text-decoration:none ; color:#fff}
+  	.gun a:active { text-decoration:none ; color:#fff}
+  	.gun a:hover { text-decoration:none ; color:#fff}
+  </style>
   <script type="text/javascript">
   	$(function(){
+  		// 글쓰기 클릭시
   		$("#wBtn").click(function(){
   			location.href="../qnaBoard/qWriteForm.do";
   		});
+  		
   	});
   
   </script>
 </head>
 <body>
 <div class="container">
-  <h2>리스트</h2>
+  <h2 align="center">Q&A 리스트</h2>
   <table class="table table-dark table-striped">
     <thead>
       <tr>
@@ -35,9 +44,17 @@
     </thead>
     <tbody>
 		<c:forEach items="${LIST}" var="data">
-			<tr>
+			<tr class="gun">
 				<td>${data.no }</td>
-				<td><a href="../qnaBoard/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title}</a></td>
+					<td>
+						<a href="../qnaBoard/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">
+						<c:if test="${data.depth ge 1}">
+							<c:forEach begin="1" end="${data.depth * 4}">&nbsp;</c:forEach>
+							<i class="material-icons" >subdirectory_arrow_right</i>
+						</c:if>
+						${data.title}
+						</a>
+					</td>
 				<td>${data.id }</td>
 				<td>${data.wDate }</td>
 				<td>${data.hit}</td>
@@ -79,10 +96,23 @@
 	  	</tr>
     </tfoot>
   </table>
+ <form action="../qnaBoard/qnaSearch.do" method="POST" id="sFrm" class="col-12">
+    <div class="input-group-prepend " >
+      <select class="form-control col-2 " id="target" name="target">
+        <option value="title">제목</option>
+		<option value="body">내용</option>
+		<option value="writer">작성자</option>
+		<option value="both">제목+내용</option>
+      </select>
+      <input type="text" class="form-control col-8 "placeholder="검색할 내용을 입력해주세요" id="word" name="word">
+      <button type="submit" class="btn btn-dark col-2" id="sBtn">검색</button>
+    </div>
+  </form>
+  <br/>
   <div>
    	<button type="submit" class="btn btn-dark" id="wBtn" >글쓰기</button>
   </div>
- 
+  
 </div>
 </body>
 </html>

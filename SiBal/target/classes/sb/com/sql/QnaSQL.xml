@@ -3,50 +3,146 @@
 
 <mapper namespace="qnaBoard">
 	
-	<!-- 게시물 총 갯수 -->
+	<!-- 검색 결과반영 동적 SQL -->
+	<sql id="searchField">
+		<if test="target eq 'title'">
+			q_title like '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'body'">
+			q_content like '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'writer'">
+			q_id like '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'both'">
+			(q_title like '%'||#{word}||'%' or q_content like '%'||#{word}||'%')
+		</if>
+	</sql>
+	
+	<!-- 게시물 카운트 -->
 	<select id="totalCount" resultType="int">
 		select count(*) as cnt from qna
 	</select>
 	
 	<!-- 목록보기 -->
 	<select id="qnaList" parameterType="qVO" resultType="qVO">
-		select * from (
-		SELECT no, ROWNUM as rNo, p_no as pNo, g_no as gNo, LPAD(' ',2*(LEVEL-1)) || TITLE as title, 
-		m.m_id as id, writedate as wDate, hit
-		FROM QNA q, member m
-		where q.id=m.m_id
-		START WITH p_no=0
-		CONNECT BY PRIOR no = p_no
-		order SIBLINGS by g_no desc)
+		select * from
+		(select rNo, no, title, id, wDate, hit, depth from
+		(select q_no as no, q_title as title, m.m_nick as id, q_wDate as wDate, q_hit as hit,depth, ROW_NUMBER() OVER ( ORDER BY q_no desc) as rNo from qna q, sbmember m
+		where m.m_nick=q.q_id
+		order by ref desc, step asc))
 		where rNo BETWEEN #{start} and #{end}
 	</select>
 	
 	<!-- 질문입력 쿼리 -->
 	
 	<insert id="insertQ" parameterType="qVO">
-		INSERT INTO QNA VALUES 
-		((select nvl(max(no),0)+1 from qna),0, (select nvl(max(no),0)+1 from qna),#{title},#{content},#{id},SYSDATE, 0)
+		insert into qna(q_no, q_title, q_content, q_id, q_wdate, q_hit, ref, step, depth, p_no) 
+		values((select nvl(max(q_no),0)+1 from qna),#{title},#{content},#{id},sysdate,0,(select nvl(max(q_no),0)+1 from qna),1,0,null)
 	</insert>
 	
 	<!-- 조회수 증가  -->	
 	<update id="updateHit" parameterType="int">
-		update qna set hit = hit+1 where no= #{oriNo}
+		update qna set q_hit = q_hit+1 where q_no= #{oriNo}
 	</update>
 	
 	<!-- 상세보기 -->
 	<resultMap type="qVO" id="clobView">
-		<result property="content" column="content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="content" column="q_content" jdbcType="CLOB" javaType="java.lang.String"/>
 	</resultMap>
 	<select id="qnaView" resultMap="clobView" parameterType="int">
-		select no, p_no as pNo, g_no as pNo, title, content, m.m_id as id, writeDate as wDate
-		from qna q, member m
-		where no=#{no} and q.id = m.m_id
+		select q_no as no, q_title as title, q_content, m.m_nick as id, q_wDate as wDate, q_hit as hit, ref, step, depth
+		from qna q, sbmember m
+		where q_no=#{no} and q.q_id = m.m_nick
 	</select>
 	
 	<!-- 답변입력 쿼리 -->
 	<insert id="insertA" parameterType="qVO">
-		INSERT INTO QNA VALUES 
-		((select nvl(max(no),0)+1 from qna), #{oriNo}, #{oriNo},#{title},#{content},#{id},SYSDATE, 0)
+		INSERT INTO QNA(q_no, q_title, q_content, q_id, q_wdate, q_hit, ref, step, depth, p_no) 
+		VALUES ((select nvl(max(q_no),0)+1 from qna), #{title}, #{content},#{id},sysdate,0,#{ref}, #{step}, #{depth},#{pNo})
 	</insert>
+	
+	<!-- 스텝증가 -->	
+	<update id="updateStep" parameterType="int">
+		update qna set step = step+1 where ref= #{ref} and step >=#{step}
+	</update>
+	
+	<!-- 수정하기 -->
+	<update id="updateQna"  parameterType="qVO">
+		update qna set q_title =#{title}, q_content=#{content}, q_id=#{id}
+		WHERE q_no=#{oriNo}
+	</update>
+	
+	<!-- 삭제하기 -->
+	<delete id="deleteQna" parameterType="int">
+		delete from qna where q_no=#{no}	
+	</delete>
+	
+	<!-- 검색결과 카운트 -->
+	<select id="searchCount" parameterType="qVO" resultType="int">
+		select count(*) as cnt from qna where <include refid="searchField" />
+	</select>
+	
+	<!-- 검색하기 -->
+	<select id="searchList" parameterType="qVO" resultType="qVO">
+		select * from
+		(select rownum as rNo, q_no as no, q_title as title, m.m_nick as id, q_wDate as wDate, q_hit as hit,depth from qna q, sbmember m
+		where m.m_nick=q.q_id
+		and 
+		<include refid="searchField" />
+		order by ref desc, step asc)
+		where rNo BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 댓글 카운트 -->
+	<select id="repCount" resultType="int" parameterType="int">
+		select count(*) as cnt from re_qna
+		where re_q_no =#{oriNo}
+	</select>
+	
+	<!-- 댓글리스트 -->
+	<select id="repList" resultType="qVO" parameterType="qVO">
+		<!-- select * from
+		(select rownum as reRNo, re_no as reNo, re_content as reContent, m.m_id as id, re_wDate as reWDate, re_depth as reDepth, re_step as reStep from re_qna r, member m
+		where m.m_id=r.re_id and re_q_no=#{oriNo}
+		order by re_ref asc, re_wDate asc)
+		where reRNo between #{start} and #{end}
+		 -->
+		select * from
+		(select rownum as reRNo, re_no as reNo, re_p_no as rePno, re_content as reContent, m.m_nick as id, re_wDate as reWDate, re_depth as reDepth from re_qna r, sbmember m
+		where m.m_nick=r.re_id and re_q_no=#{oriNo}
+		START WITH re_p_no is null
+        CONNECT BY PRIOR re_no = re_p_no
+        order SIBLINGS by re_ref asc)
+		where reRNo between #{start} and #{end}
+	</select>
+	
+	<!-- 댓글 쓰기 -->
+	<insert id="repInsert" parameterType="qVO">
+		<!-- insert into re_qna(re_no, re_q_no, re_content, re_id, re_depth, re_ref, re_step)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reContent},#{id},0,(select nvl(max(re_ref),0)+1 from re_qna),1) -->
+		insert into re_qna(re_no, re_q_no, re_p_no, re_content, re_id, re_depth, re_ref)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},null,#{reContent},#{id},0,(select nvl(max(re_ref),0)+1 from re_qna))
+	</insert>
+	
+	<!-- 대댓글 쓰기 -->
+	<insert id="repRepInsert" parameterType="qVO">
+		<!-- insert into re_qna(re_no, re_q_no, re_content, re_id, re_depth, re_ref, re_step)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reContent},#{id},#{reDepth},#{reRef},#{reStep}) -->
+		insert into re_qna(re_no, re_q_no, re_p_no, re_content, re_id, re_depth, re_ref)
+		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reNo},#{reContent},#{id},#{reDepth},#{reNo})
+	</insert>
+	
+	<!-- 수정하기 -->
+	<update id="repUpdate">
+		update re_qna set re_content =#{reContent}
+		where re_no=#{reNo}
+	</update>	
+	
+	<!-- 삭제하기 -->
+	<delete id="repDelete">
+		delete from re_qna where re_no=#{reNo}
+	</delete>
+	
 	
 </mapper>

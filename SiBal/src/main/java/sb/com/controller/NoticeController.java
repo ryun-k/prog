@@ -3,6 +3,7 @@ package sb.com.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,32 +27,30 @@ public class NoticeController {
 	//공지사항 리스트
 	@RequestMapping("/List")
 	public void noticeList(@RequestParam(value="nowPage", required=false, 	defaultValue="1") int nowPage,
-			HttpServletRequest request
+			HttpServletRequest request, HttpSession session
 		) {
-		//1. 파라미터 요청
-		// user가 보고싶은 페이지를 알아내기 => @RequestParam이용
-		/*만약 파라미터가 넘어오지 않을 경우   다른 값으로 대체할 수 있다	
-		형식>@RequestParam(value="키값", required=false, defaultValue=?) 데이터타입 변수명*/			
+		PageUtil pInfo = nService.getPageInfo(nowPage,session);
 		
-		//2.비즈니스로직수행 ->서비스위임
+		ArrayList list = nService.getBoardList(pInfo,session);
 		
-			//2-1.페이징처리에 필요한 자료
-			PageUtil pInfo = nService.getPageInfo(nowPage);
-		
-			//2-2.목록에 뿌릴 자료
-			ArrayList list = nService.getBoardList(pInfo);
-		
-		//3.모델    정보를 뷰에게 전달해야한다
 		request.setAttribute("LIST", list); //게시물내용
 		request.setAttribute("PINFO", pInfo);//페이징처리
 		
-		//4.뷰 => 목록보기 페이지 보여줌
 	}
 	
 	//공지사항 상세보기
 	@RequestMapping("/View")
-	public void noticeView() {
+	public ModelAndView noticeView(@RequestParam(value="oriNo") int oriNo, @RequestParam(value="nowPage") int nowPage) {
+		System.out.println("noticeView진입");
+		System.out.println("oriNo "+oriNo);
+		NoticeVo vo = nService.viewNotice(oriNo);
+		System.out.println("viewNotice 서비스종료");
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("VIEW",vo);
+		mv.addObject("nowPage",nowPage);
+		mv.setViewName("notice/View");
 		
+		return mv;
 	}
 	
 	//공지사항 글쓰기폼
@@ -74,26 +73,62 @@ public class NoticeController {
 	
 	//조회수 처리
 	@RequestMapping("/hitProc")
-	public void noticeHitProc() {
+	public ModelAndView	noticeHitProc(ModelAndView mv, HttpServletRequest req, HttpSession session) {
+		String  strOriNo= req.getParameter("oriNo");
+		int     oriNo = Integer.parseInt(strOriNo);
+		String  nowPage = req.getParameter("nowPage"); 
+		nService.hitNotice(oriNo,session);
+		RedirectView rv = new RedirectView("../notice/View.do");
 		
+		rv.addStaticAttribute("oriNo", oriNo);
+		rv.addStaticAttribute("nowPage", nowPage);
+		mv.setView(rv);
+		return mv;
 	}
 	
 	//공지사항 수정 폼
 	@RequestMapping("/modifyForm")
-	public void noticeModifyForm() {
+	public ModelAndView noticeModifyForm(HttpServletRequest req, ModelAndView mv) {
+		String strOriNo = req.getParameter("oriNo");
+		int    oriNo    = Integer.parseInt(strOriNo);
+		String nowPage  = req.getParameter("nowPage");
+		System.out.println("modifyForm oriNo "+oriNo);
+		NoticeVo vo = nService.modifyNotice(oriNo);
+		
+		mv.addObject("DATA",vo);
+		mv.addObject("nowPage",nowPage);
+		mv.setViewName("notice/modifyForm");
+		return mv;
 		
 	}
 	
 	//공지사항 글쓰기 처리
 	@RequestMapping("/modifyProc")
-	public void noticeModifyProc() {
+	public ModelAndView noticeModifyProc(HttpServletRequest req, ModelAndView mv, NoticeVo vo) {
+		String strOriNo = req.getParameter("oriNo");
+		int    oriNo    = Integer.parseInt(strOriNo);
+		String nowPage  = req.getParameter("nowPage");
+		nService.updateNotice(vo, oriNo);
+		
+		RedirectView rv = new RedirectView("../notice/List.do");
+		rv.addStaticAttribute("nowPage", nowPage);
+		mv.setView(rv);
+		return mv;
 		
 	}
 	
 	//글삭제 처리
-	@RequestMapping("/deleteProc")
-	public void noticeDeleteProc(){
+	@RequestMapping("/delete")
+	public ModelAndView noticeDeleteProc(HttpServletRequest req, ModelAndView mv){
+		String strOriNo = req.getParameter("oriNo");
+		int    oriNo    = Integer.parseInt(strOriNo);
+		String nowPage  = req.getParameter("nowPage");
+		nService.deleteNotice(oriNo);
 		
+		RedirectView rv = new RedirectView("../notice/List.do");
+		rv.addStaticAttribute("nowPage", nowPage);
+		mv.setView(rv);
+		return mv;
 	}
 	
 }

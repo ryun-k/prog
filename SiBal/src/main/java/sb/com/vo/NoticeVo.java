@@ -14,13 +14,31 @@ public class NoticeVo {
 	private int hit;
 	private String isshow;
 	
-	//pageing
-	
 	private int start;
 	private int end;
 	
+	private int oriNo;
+	
+	private String brBody;
 	
 	
+	
+	public String getBrBody() {
+		String result = null;
+		if( content!=null && content.length()!=0 ) { //데이터가 존재하면
+			result = content.replaceAll("\r\n", "<br/>");
+		}
+		return result;
+	}
+	public void setBrBody(String brBody) {
+		this.brBody = brBody;
+	}
+	public int getOriNo() {
+		return oriNo;
+	}
+	public void setOriNo(int oriNo) {
+		this.oriNo = oriNo;
+	}
 	public String getIsshow() {
 		return isshow;
 	}

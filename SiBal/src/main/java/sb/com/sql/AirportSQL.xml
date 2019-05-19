@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="airport">
+	<insert id="insertGair" parameterType="airVO">
+ 		 INSERT INTO G_AIR
+ 		 VALUES((SELECT NVL(MAX(g_No),0)+1 FROM G_AIR),#{airlineNm},#{depAirportNm},#{arrAirportNm},#{economyCharge},#{vihicleId},SYSDATE)
+	</insert>
+	<insert id="insertBair" parameterType="airVO">
+ 		 INSERT INTO B_AIR
+ 		 VALUES((SELECT NVL(MAX(b_No),0)+1 FROM B_AIR),#{airlineNm},#{depAirportNm},#{arrAirportNm},#{economyCharge},#{vihicleId},SYSDATE)
+	</insert>
+</mapper>

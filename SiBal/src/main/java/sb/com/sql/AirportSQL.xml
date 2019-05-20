@@ -13,16 +13,7 @@
 	
 	<select id="gList" parameterType="airVO" 
 	resultType="airVO">
-		SELECT
-		    *
-		FROM (
-		        G_AIRLINENM   AS airlineNm,
-		        G_DEPAIRPORTNM AS depAirportNm,
-		        G_DEPAIRPORTNM AS arrAirportNm,
-		        G_ECONOMYCHARGE AS economyCharge,
-		        G_VIHICLEID AS vihicleId, 
-		        row_number() over(order by G_No DESC) AS gno)
-		    FROM
-		        G_AIR
+		SELECT * FROM ( G_AIRLINENM AS airlineNm, G_DEPAIRPORTNM AS depAirportNm, G_DEPAIRPORTNM AS arrAirportNm, G_ECONOMYCHARGE AS economyCharge, G_VIHICLEID AS vihicleId,)
+		    FROM G_AIR;
 	</select>
 </mapper>

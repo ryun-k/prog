@@ -1,13 +1,11 @@
 package sb.com.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import sb.com.dao.MemberDAO;
 import sb.com.vo.MemberVO;
@@ -15,6 +13,7 @@ import sb.com.vo.MemberVO;
 
 public class MemberService {
 
+	protected Logger log = Logger.getLogger(this.getClass());
 		@Autowired
 		private MemberDAO mDAO;
 		
@@ -24,12 +23,12 @@ public class MemberService {
 			
 			MemberVO result = mDAO.loginProc(vo);
 			if(result ==null) {
-				System.out.println("값없음");
+				log.info("값없음");
 			}else {
 				session.setAttribute("UID", result.getEmail());
 				session.setAttribute("nick", result.getNick());
 				session.setAttribute("status", result.getStatus());
-				System.out.println(session.getAttribute("status"));
+				log.info(session.getAttribute("status"));
 			}
 		}
 
@@ -47,7 +46,7 @@ public class MemberService {
 		
 		//회원정보 불러오기
 		public MemberVO memberInfo(MemberVO vo) {
-			System.out.println(vo.getNick());
+			log.info(vo.getNick());
 			MemberVO info =mDAO.memberInfo(vo);
 			return info;
 		}
@@ -91,7 +90,7 @@ public class MemberService {
 		public void withdraw(MemberVO vo,HttpServletRequest request) {
 			mDAO.withdraw(vo);
 			request.getSession().invalidate();
-			System.out.println(vo.getStatus());
+			log.info(vo.getStatus());
 		}
 		//카카오이메일로 가입되었는지 확인
 		public int CheckKakao(MemberVO vo) {
@@ -108,12 +107,12 @@ public void kakaostatus(MemberVO vo, HttpSession session) {
 		
 			MemberVO result = mDAO.kakaostatus(vo);
 			if(result ==null) {
-				System.out.println("값없음");
+				log.info("값없음");
 			}else {
 				session.setAttribute("UID", result.getEmail());
 				session.setAttribute("nick", result.getNick());
 				session.setAttribute("status", result.getStatus());
-				System.out.println(session.getAttribute("status"));
+				log.info(session.getAttribute("status"));
 			}
 		}
 }

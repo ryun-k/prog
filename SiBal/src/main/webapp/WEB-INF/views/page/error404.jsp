@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>404 HTML Template by Colorlib</title>
+	<title>404 error</title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
@@ -231,7 +231,7 @@ body {
 
   </div>
 			</div>
-			<a href="../">Homepage</a>
+			<a href="/sb">Homepage</a>
 		</div>
 	</div>
 

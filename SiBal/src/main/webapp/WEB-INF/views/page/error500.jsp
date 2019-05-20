@@ -231,7 +231,7 @@ body {
 
   </div>
 			</div>
-			<a href="../">Homepage</a>
+			<a href="/sb">Homepage</a>
 		</div>
 	</div>
 

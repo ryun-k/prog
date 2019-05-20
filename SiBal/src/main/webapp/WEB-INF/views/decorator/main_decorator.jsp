@@ -14,11 +14,7 @@
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-<<<<<<< HEAD
- 	
-=======
  
->>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
  	<script type="text/javascript">
  	$(function(){
  		var pathname = $(location).attr('pathname'); //uri pathname 값 가져오기 

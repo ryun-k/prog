@@ -113,7 +113,6 @@
 		        <a class="nav-link" href="#">Link 3</a>
 	     	 </div>	  	 
 		  	</li>
-<<<<<<< HEAD
 			<li class="nav-item">  
 				<% String nick = (String)session.getAttribute("nick");%>
 				<a class="nav-link" ><%=nick %> 님 환영합니다.</a>
@@ -122,10 +121,8 @@
 			    <a class="nav-link" href="/sb/member/logoutProc.do">
 			    <i class='fas fa-power-off' style='font-size:14px'></i> Logout</a>
 		  	</li>
-=======
 		    <a class="nav-link" id="logout" href="/sb/member/logoutProc.do">
 		    <i class='fas fa-power-off' style='font-size:14px'></i>Logout</a>
->>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
 		  </c:if>
 		    
 		</ul>

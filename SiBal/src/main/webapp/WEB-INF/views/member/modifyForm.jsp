@@ -15,6 +15,11 @@
 	<script 
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<style type="text/css">
+	#CKname,#CKnick,#CKphone{
+	color:blue;
+	}
+	</style>
 <script type="text/javascript">
 $(document).ready(function(){
 	//정규식
@@ -46,9 +51,9 @@ $(document).ready(function(){
 						if($.trim(data)=='YES'){
 							if($("#nick").val()!=""){
 								if(reg1.test($("#nick").val())==true){
-								alert("사용가능한 닉네임입니다.");
+									$("#CKnick").html("사용가능한 닉네임 입니다.");
 								}else{
-								alert('형식에 맞지 않습니다.');
+									$("#CKnick").html("형식에 맞지 않습니다.");
 								$("#nick").val("");
 								$("#nick").focus();
 								}
@@ -56,9 +61,9 @@ $(document).ready(function(){
 						}else{
 							if($("#nick").val()!=""){
 								if(reg1.test($("#nick").val())==false){
-									alert('형식에 맞지 않습니다.');
+									$("#CKnick").html("사용가능한 닉네임 입니다.");
 								}
-								alert("중복된 닉네임입니다.");
+								$("#CKnick").html("중복된 닉네임 입니다.");
 								$("#nick").val("");
 								$("#nick").focus();
 							}
@@ -73,9 +78,11 @@ $(document).ready(function(){
 	$("#name").blur(function(){
 		if($("#name").val()!=""){
 			if(reg3.test($("#name").val())==false){
-				alert('형식에 맞지 않습니다.');
+				$("#CKname").html("형식에 맞지 않습니다.");
 				$("#name").val("");
 				$("#name").focus();
+			}else{
+				$("#CKname").html("사용가능한 이름입니다.");
 			}
 		}
 	})
@@ -84,9 +91,11 @@ $(document).ready(function(){
 	$("#phone").blur(function(){
 		if($("#phone").val()!=""){
 			if(reg4.test($("#phone").val())==false){
-				alert('형식에 맞지 않습니다.');
+				$("#CKphone").html("형식에 맞지 않습니다.");
 				$("#phone").val("");
 				$("#phone").focus();
+			}else{
+				$("#CKphone").html("사용가능한 번호입니다.");
 			}
 		}
 	})
@@ -132,26 +141,30 @@ $(document).ready(function(){
 	
 	<label for="name">이름</label>
 	<input type="text" id="name" class="form-control" name="name" required="required" placeholder="이름을  입력해주세요"
-	pattern="^[가-힣]{2,5}$" maxlength="5" value="${INFO.name}"><br/>
+	pattern="^[가-힣]{2,5}$" maxlength="5" value="${INFO.name}">
+	<div id="CKname"><br/></div>
 
 	<label for="nick">닉네임 </label>
 	<input type="text" id="nick" class="form-control" name="nick" required="required" placeholder="닉네임을  입력해주세요"
-	pattern="^[\W-가-힣a-zA-Z0-9]{2,10}" maxlength="10" value="${INFO.nick}"><br/>
+	pattern="^[\W-가-힣a-zA-Z0-9]{2,10}" maxlength="10" value="${INFO.nick}">
+	<div id="CKnick"><br/></div>
 
-	<label for="addr">주소</label><br/><input type="button" id="map" name="map" value="주소입력">
-	<input type="text" id="addr" class="form-control" name="addr" placeholder="주소를 입력해주세요" value="${INFO.addr}"><br/>
-
+	<label for="addr">주소</label><br/><input type="button" class="btn btn-outline-primary" id="map" name="map" value="주소입력">
+	<input type="text" id="addr" class="form-control" name="addr" placeholder="주소를 입력해주세요" value="${INFO.addr}">
+	<br/>
+	
 	<label for="phone">휴대폰 번호</label> 
 	<input type="text" id="phone" class="form-control" name="phone" placeholder="휴대폰 번호를 입력해주세요" value="${INFO.phone}"
-	 pattern="^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$"> <br/>
+	 pattern="^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$"> 
+	 <div id="CKphone"><br/></div>
 
 <br/>
 </div>
 <div class="row">
-<div class="col-9"></div>
-<div class="col-3">
+<div class="col-10"></div>
+<div class="col-2">
 <input type="button" id="mBtn" class="btn btn-primary" value="수정하기">
-<input type="button" id="cBtn" class="btn btn-primary" value="취소하기">
+<input type="button" id="cBtn" class="btn btn-outline-danger" value="취소">
 </div>
 </div>
 </form>

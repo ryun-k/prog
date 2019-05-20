@@ -108,7 +108,7 @@ $(document).ready(function(){
 <div class="col-9"></div>
 <div class="col-3">
 <input type="button" id="sBtn" class="btn btn-primary" value="비밀번호 변경하기">
-<input type="button" id="cBtn" class="btn btn-primary" value="취소">
+<input type="button" id="cBtn" class="btn btn-outline-danger" value="취소">
 </div>
 </div>
 </form>

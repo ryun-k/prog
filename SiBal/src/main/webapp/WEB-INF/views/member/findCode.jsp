@@ -80,8 +80,9 @@ $(document).ready(function(){
 <body>
 <div class="container">
 <h1>메일발송이 완료 되었습니다.<br/>
-인증코드를 입력해주세요.<br/> <hr/>
+인증코드를 입력해주세요.<br/> 
 </h1>
+<hr/>
 <form id="codeForm" class="was-validated" method="POST" action="../member/findPw.do">
  <div class="form-group">
 
@@ -105,9 +106,13 @@ $(document).ready(function(){
 
 </div>
 <hr/>
+<div class="row">
+<div class="col-9"></div>
+<div class="col-3">
 <input type="button" id="sBtn" class="btn btn-primary" value="비밀번호 설정하기">
-<input type="button" id="cBtn" class="btn btn-primary" value="취소">
-
+<input type="button" id="cBtn" class="btn btn-outline-danger" value="취소">
+</div>
+</div>
 </form>
 </div>
 </body>

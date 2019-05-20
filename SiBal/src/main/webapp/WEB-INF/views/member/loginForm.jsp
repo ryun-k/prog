@@ -43,7 +43,7 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 							$(location).attr("href","../member/withDraw.do");
 						}
 						else{
-							alert('이메일과 비밀번호가 올바르지 않습니다.');
+							alert('가입정보가 올바르지 않습니다.');
 							$("#pw").val("");
 							$("#pw").focus();
 						}
@@ -198,16 +198,16 @@ function onSignIn(googleUser) {
 				<div class="col-10"></div>
 				<div class="col-2">
 					<input type="button" class="btn btn-primary" id="lBtn" value="Login">
-					<input type="button" class="btn btn-primary" id="sBtn" value="회원가입">
+					<input type="button" class="btn btn-outline-primary" id="sBtn" value="회원가입">
 				</div>
 				</div>
 				<hr/>
 				<div class="row">
 				<div class="col-8"></div>
 				<div class="col-4">
-					<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오로그인">
-					<input type="button" class="btn btn-primary" id="fBtn" value="비밀번호 찾기">
-					<input type="button" class="btn btn-primary" id="cBtn" value="메인가기">
+					<input type="button" class="btn btn-warning" id="kakao-login-btn" value="카카오로그인">
+					<input type="button" class="btn btn-primary float-auto" id="fBtn" value="비밀번호 찾기">
+					<input type="button" class="btn btn-outline-danger float-right" id="cBtn" value="취소하기">
 					<!-- <input type="button" class="btn btn-primary" id="gBtn" value="구글로그인"> -->
 				</div>	
 				</div>

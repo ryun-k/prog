@@ -13,6 +13,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <style>
+  #CKemail,#CKpw,#CKpw2,#CKname,#CKnick,#CKaddr,#CKphone {
+  color:blue;
+  }
+  
+  </style>
 <script type="text/javascript">
 $(document).ready(function(){
 	//정규식
@@ -47,19 +53,20 @@ $(document).ready(function(){
 						if($.trim(data)=='YES'){
 							if($("#email").val()!=""){
 								if(reg.test($("#email").val())==true){
-								alert("사용가능한 이메일입니다.");
+									$("#CKemail").html("사용 가능합니다.");
 								}else{
-								alert('형식에 맞지 않습니다.');
+									$("#CKemail").html("형식에 맞지 않습니다.");
 								$("#email").val("");
 								$("#email").focus();
 								}
 							}
 						}else{
+							$("#CKemail").html("");
 							if($("#email").val()!=""){
 								if(reg.test($("#email").val())==false){
-									alert('형식에 맞지 않습니다.');
+									$("#CKemail").html("형식에 맞지 않습니다.");
 								}
-								alert("중복된 이메일입니다.");
+								$("#CKemail").html("중복된 이메일 입니다.");
 								$("#email").val("");
 								$("#email").focus();
 							}
@@ -81,9 +88,9 @@ $(document).ready(function(){
 						if($.trim(data)=='YES'){
 							if($("#nick").val()!=""){
 								if(reg1.test($("#nick").val())==true){
-								alert("사용가능한 닉네임입니다.");
+									$("#CKnick").html("사용가능한 닉네임 입니다.");
 								}else{
-								alert('형식에 맞지 않습니다.');
+									$("#CKnick").html("형식에 맞지 않습니다.");
 								$("#nick").val("");
 								$("#nick").focus();
 								}
@@ -91,9 +98,9 @@ $(document).ready(function(){
 						}else{
 							if($("#nick").val()!=""){
 								if(reg1.test($("#nick").val())==false){
-									alert('형식에 맞지 않습니다.');
+									$("#CKnick").html("형식에 맞지 않습니다.");
 								}
-								alert("중복된 닉네임입니다.");
+								$("#CKnick").html("중복된 닉네임 입니다.");
 								$("#nick").val("");
 								$("#nick").focus();
 							}
@@ -106,9 +113,11 @@ $(document).ready(function(){
 	$("#pw").blur(function(){
 		if($("#pw").val()!=""){
 			if(reg2.test($("#pw").val())==false){
-				alert('형식에 맞지 않습니다.');
+				$("#CKpw").html("형식에 맞지 않습니다.");
 				$("#pw").val("");
 				$("#pw").focus();
+			}else{
+				$("#CKpw").html("사용가능한 비밀번호입니다.");
 			}
 		}
 	})
@@ -117,9 +126,11 @@ $(document).ready(function(){
 	$("#pw2").blur(function(){
 		if($("#pw2").val()!=""){
 			if($("#pw").val()!=$("#pw2").val()){
-				alert('패스워드가 서로 다릅니다.');
+				$("#CKpw2").html("패스워드가 서로 다릅니다.");
 				$("#pw2").val("");
 				$("#pw2").focus();
+			}else{
+				$("#CKpw2").html("비밀번호가 동일 합니다.");
 			}
 		}
 	})
@@ -128,9 +139,11 @@ $(document).ready(function(){
 	$("#name").blur(function(){
 		if($("#name").val()!=""){
 			if(reg3.test($("#name").val())==false){
-				alert('형식에 맞지 않습니다.');
+				$("#CKname").html("형식에 맞지 않습니다.");
 				$("#name").val("");
 				$("#name").focus();
+			}else{
+				$("#CKname").html("사용가능한 이름입니다.");
 			}
 		}
 	})
@@ -139,9 +152,11 @@ $(document).ready(function(){
 	$("#phone").blur(function(){
 		if($("#phone").val()!=""){
 			if(reg4.test($("#phone").val())==false){
-				alert('형식에 맞지 않습니다.');
+				$("#CKphone").html("형식에 맞지 않습니다.");
 				$("#phone").val("");
 				$("#phone").focus();
+			}else{
+				$("#CKphone").html("사용할 수 있는 번호입니다.");
 			}
 		}
 	})
@@ -232,7 +247,7 @@ $(document).ready(function(){
 			    })
 	//취소버튼
 	$("#cBtn").click(function(){
-		$(location).attr("href","../");
+		$(location).attr("href","/sb");
 	})
 
 });
@@ -248,33 +263,38 @@ $(document).ready(function(){
   <label for="uname">email</label>
 	<input type="email" id="email" class="form-control" name="email" placeholder="이메일을 입력해주세요." required="required" maxlength="20"
 	title="이메일은 반드시 입력하셔야 합니다." pattern="^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$"> 
-	<br/>
+	<div id=CKemail><br/></div>
 
 
 	<label for="pwd">password</label>
-	 <input type="password" id="pw" class="form-control" name="pw"  placeholder="비밀번호를 입력해주세요." required="required" title="비밀번호를  입력해주세요"
+	 <input type="password" id="pw" class="form-control" name="pw"  placeholder="비밀번호를 입력해주세요.(4~20)" required="required" title="비밀번호를  입력해주세요"
 	 pattern="^[\W-가-힣a-zA-Z0-9]{4,20}" maxlength="20"> 
-	<br/>
+	<div id=CKpw><br/></div>
+	
 	<label for="pwd2">password재입력</label>
-	<input type="password" id="pw2" class="form-control" required="required"  placeholder="비밀번호를 똑같이 입력해주세요." title="비밀번호를  다시 입력해주세요"
+	<input type="password" id="pw2" class="form-control" required="required"  placeholder="비밀번호를 똑같이 입력해주세요.(4~20)" title="비밀번호를  다시 입력해주세요"
 	 pattern="^[\W-가-힣a-zA-Z0-9]{4,20}" maxlength="20">
-	<br/>
+	<div id=CKpw2><br/></div>
+	
 	<label for="name">이름 </label>
 	<input type="text" id="name" class="form-control" name="name"  placeholder="이름을  입력해주세요." required="required" title="이름을  입력해주세요"
 	pattern="^[가-힣]{2,5}$" maxlength="5">
-	<br/>
+	<div id=CKname><br/></div>
+	
+	
 	<label for="nick">닉네임 </label>
-	<input type="text" id="nick" class="form-control" name="nick"  placeholder="닉네임을  입력해주세요." required="required" title="닉네임을  입력해주세요"
+	<input type="text" id="nick" class="form-control" name="nick"  placeholder="닉네임을  입력해주세요.(2~10)" required="required" title="닉네임을  입력해주세요"
 	pattern="^[\W-가-힣a-zA-Z0-9]{2,10}" maxlength="10">
-	<br/>
+	<div id=CKnick><br/></div>
 
 	<label for="addr">주소</label><br/><input type="button" id="map" name="map" value="주소입력">
-	<input type="text" id="addr" class="form-control" name="addr"  placeholder="주소를 입력해주세요." title="선택사항입니다." >
+	<input type="text" id="addr" class="form-control" name="addr"  placeholder="주소를 입력해주세요." title="선택사항입니다." maxlength="100">
+	<div id=CKaddr><br/></div>
 	
-	<br/>
 	<label for="addr">휴대폰 번호</label>
 	<input type="text" id="phone" class="form-control" name="phone"  placeholder="휴대폰 번호를 입력해주세요." title="선택사항입니다."
 	pattern="^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$"> 
+	<div id=CKphone><br/></div>
 	
 	<input type="hidden" id="kakao" name="kakao" value="code">
 
@@ -282,12 +302,12 @@ $(document).ready(function(){
 </div>
 <div class = "row">
 <div class = "col-2">
-<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오계정으로가입">
+<input type="button" class="btn btn-warning" id="kakao-login-btn" value="카카오계정으로가입">
 </div>
 <div class ="col-8"></div>
 <div class = "col-2">
 <input type="submit" class="btn btn-primary" id="ssBtn" value="가입하기">
-<input type="button" class="btn btn-primary" id="cBtn" value="취소">
+<input type="button" class="btn btn-outline-danger" id="cBtn" value="취소">
 
 </div>
 </div>

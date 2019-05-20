@@ -66,8 +66,8 @@ $(document).ready(function(){
 <div class="col-5">
 <input type="button" id="pBtn" class="btn btn-primary" value="비밀번호변경">
 <input type="button" id="mBtn" class="btn btn-primary" value="수정하기">
-<input type="button" id="wBtn" class="btn btn-primary" value="탈퇴하기">
-<input type="button" id="cBtn" class="btn btn-primary" value="취소하기">
+<input type="button" id="wBtn" class="btn btn-danger" value="탈퇴하기">
+<input type="button" id="cBtn" class="btn btn-outline-danger" value="취소하기">
 </div>
 </div>
 </form>

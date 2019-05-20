@@ -45,9 +45,11 @@
       </tr>
     </tbody>
   </table>
-   <div class="btn btn-primary" id="lBtn">목록보기</div>
-   <div class="btn btn-primary" id="mBtn">수정하기</div>
-   <div class="btn btn-primary" id="dBtn">삭제하기</div>
+ 		<div class="btn btn-primary" id="lBtn">목록보기</div>
+   <c:if test="${sessionScope.UID eq 'admin'}">
+	   	<div class="btn btn-primary" id="mBtn">수정하기</div>
+	   	<div class="btn btn-primary" id="dBtn">삭제하기</div>
+   </c:if>
 </div>
 
 </body>

@@ -14,6 +14,7 @@
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+ 
  	<script type="text/javascript">
  	$(function(){
  		var pathname = $(location).attr('pathname'); //uri pathname 값 가져오기 
@@ -36,7 +37,7 @@
 		if(pathname == nav4){
 			$('#nav4').addClass('active');
 		}
- 		
+
  	});
  	
  	</script>
@@ -44,6 +45,7 @@
  	
  	<decorator:head />
  	
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -55,31 +57,48 @@
      		 <a class="nav-link" href="/sb/notice/List.do">공지사항</a>
    		</li>
 	    <li class="nav-item" id="nav2">
-	      <a class="nav-link" href="/sb/airport/airportForm.do">비행기표 확인</a>
+	      <a class="nav-link" href="#">Left Link 2</a>
 	    </li>
 	    <li class="nav-item" id="nav3">
-	      <a class="nav-link" href="#">Left Link 3</a>
+	      <a class="nav-link" href="#">Left Link 2</a>
 	    </li>
 	    <li class="nav-item" id="nav4">
-	      <a class="nav-link" href="#">Left Link 4</a>
+	      <a class="nav-link" href="#">Left Link 2</a>
 	    </li>
 		</ul>
 		
+		
 		<ul class="navbar-nav ml-auto">
-		  <li class="nav-item">
+		  <!-- 로그인 x  -->
 		  <c:if test="${empty sessionScope.UID}">
-		    <a class="nav-link" href="/sb/member/loginForm.do">
-		    <i class='fas fa-power-off' style='font-size:14px'></i>Login</a>
-		  </c:if>
+			  <li class="nav-item dropdown">
+			    <a class="nav-link" href="/sb/member/loginForm.do">
+			    <i class='fas fa-power-off' style='font-size:14px'></i> Login</a>
+			  </li>
+		  </c:if> 
+		  
+		  <!-- 로그인 o  -->
 		  <c:if test="${not empty sessionScope.UID}">
-		  	<li class="nav-item">  <% String nick = (String)session.getAttribute("nick");%>
-		  	<a class="nav-link" href="/sb/member/infoForm.do"><%=nick %> 님 환영합니다.</a>
+		  	<li class="nav-item dropdown">	
+		  	<a class="nav-link" href="#" id="navbardrop" data-toggle="dropdown">
+			    <i class='fas fa-align-justify' style='font-size:20px'></i>
+		  	</a>
+		  	 <div class="dropdown-menu bg-dark">
+		        <a class="nav-link" href="/sb/member/infoForm.do">정보 수정</a>
+		        <a class="nav-link" href="#">Link 2</a>
+		        <a class="nav-link" href="#">Link 3</a>
+	     	 </div>	  	 
 		  	</li>
-		    <a class="nav-link" href="/sb/member/logoutProc.do">
-		    <i class='fas fa-power-off' style='font-size:14px'></i>Logout</a>
+			<li class="nav-item">  
+				<% String nick = (String)session.getAttribute("nick");%>
+				<a class="nav-link" ><%=nick %> 님 환영합니다.</a>
+			</li>
+			<li class="nav-item">		  	
+			    <a class="nav-link" href="/sb/member/logoutProc.do">
+			    <i class='fas fa-power-off' style='font-size:14px'></i> Logout</a>
+		  	</li>
 		  </c:if>
 		    
-		  </li>
 		</ul>
 	</nav>	
         <decorator:body />

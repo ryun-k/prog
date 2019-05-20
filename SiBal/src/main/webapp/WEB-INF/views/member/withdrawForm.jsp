@@ -46,6 +46,7 @@ $(document).ready(function(){
 <body>
 <div class="container">
 <h1>회원탈퇴</h1>
+<hr/>
 <form id = "withdrawForm" class="was-validated" method="post" action="" encType="utf-8" >
 <div class="form-group">
 	<input type="hidden" id="email" class="form-control" name="email" value="${INFO.email}">
@@ -55,8 +56,13 @@ $(document).ready(function(){
 
 <br/>
 </div>
+<div class="row">
+<div class="col-10"></div>
+<div class="col-2">
 <input type="button" id="wBtn" class="btn btn-primary" value="탈퇴하기">
-<input type="button" id="cBtn" class="btn btn-primary" value="취소하기">
+<input type="button" id="cBtn" class="btn btn-outline-danger" value="취소">
+</div>
+</div>
 </form>
 </div>
 </body>

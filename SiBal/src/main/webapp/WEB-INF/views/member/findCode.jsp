@@ -82,26 +82,37 @@ $(document).ready(function(){
 <h1>메일발송이 완료 되었습니다.<br/>
 인증코드를 입력해주세요.<br/> 
 </h1>
+<hr/>
 <form id="codeForm" class="was-validated" method="POST" action="../member/findPw.do">
  <div class="form-group">
 
  <label for="check">발송 코드 </label>
 
 <input type="text" id="check" class="form-control" placeholder="코드를 입력하세요" name="check" required="required">
+<br/>
 
  <label for="email">이메일</label>
 <input type="text" id="email" class="form-control" value="${INFO}" name="email" readonly="readonly">
+<br/>
 
  <label for="pw">새로지정할 비밀 번호</label>
-<input type="password" id="pw" class="form-control" placeholder="비밀번호를 입력하세요" name="pw" required="required">
+<input type="password" id="pw" class="form-control" placeholder="비밀번호를 입력하세요(4~20)" name="pw" required="required">
+<br/>
 
 
  <label for="pw1">비밀 번호 재 확인</label>
-<input type="password" id="pw1" class="form-control" placeholder="비밀번호를 입력하세요" name="pw1" required="required">
-</div>
-<input type="button" id="sBtn" class="btn btn-primary" value="비밀번호 설정하기">
-<input type="button" id="cBtn" class="btn btn-primary" value="취소">
+<input type="password" id="pw1" class="form-control" placeholder="비밀번호를 입력하세요(4~20)" name="pw1" required="required">
 
+
+</div>
+<hr/>
+<div class="row">
+<div class="col-9"></div>
+<div class="col-3">
+<input type="button" id="sBtn" class="btn btn-primary" value="비밀번호 설정하기">
+<input type="button" id="cBtn" class="btn btn-outline-danger" value="취소">
+</div>
+</div>
 </form>
 </div>
 </body>

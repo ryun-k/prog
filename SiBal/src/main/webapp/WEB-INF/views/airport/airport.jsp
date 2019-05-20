@@ -48,8 +48,10 @@
 			//alert(  this.value );
 			//$(this).value='t${status.count}';
 		//})
-		$(".gobtn").on("click", function(){
+		$(".checkGo").on("click", function(){
 			var ss = $("input:checkbox[name='go']:checked").val();
+			alert(ss)
+			console.log(ss)
 		})
 		
 		
@@ -106,11 +108,11 @@
 									<input type="hidden" name="arrAirportNm" value="${item.arrAirportNm}" /> 
 									<input type="hidden" name="economyCharge" value="${item.economyCharge}" /> 
 									<input type="hidden" name="vihicleId" value="${item.vihicleId}" />
-									<input type="button" class="btn btn-secondary gobtn"  value="선택"/>
-									<%-- <input type="checkbox" class='checkGo' name="go" value="${status.count}"/>--%> 
-									<%-- <button class="reserve">예매</button> <!-- <input type="button" class="reserve" value="예매"/> -->--%>
+									<%--<input type="checkbox" class="gobtn" name="go" value="선택${status.index}"/> --%>
+									<input type="checkbox" class='checkGo' name="go" value="${status.index}"/>
 								</form>
 								</td>
+									<%-- <button class="reserve">예매</button> <!-- <input type="button" class="reserve" value="예매"/> -->--%>
 							</c:when>
 						</c:choose>
 					</tr>

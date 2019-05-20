@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import sb.com.vo.MemberVO;
 
 public class MemberDAO extends SqlSessionDaoSupport{
+	protected Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	SqlSessionTemplate session;
 	
@@ -41,13 +43,13 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	
 	//회원탈퇴 쿼리 실행
 	public void withdraw(MemberVO vo) {
-		System.out.println("DAO="+vo.getPw());
+		log.info(vo.getPw());
 		session.update("member.withdraw",vo);
 	}
 	
 	//발송이메일 확인쿼리 실행
 	public MemberVO pwCode(MemberVO vo) {
-		System.out.println("DAO="+vo.getEmail());
+		log.info(vo.getEmail());
 		MemberVO code = session.selectOne("member.pwCode",vo);
 		return code;
 	}

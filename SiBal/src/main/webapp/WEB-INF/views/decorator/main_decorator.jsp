@@ -93,7 +93,7 @@
 		  <c:if test="${empty sessionScope.UID}">
 			  <li class="nav-item dropdown">
 			    <a class="nav-link" href="/sb/member/loginForm.do">
-			    <i class='fas fa-power-off' style='font-size:14px'></i>Login</a>
+			    <i class='fas fa-power-off' style='font-size:14px'></i> Login</a>
 			  </li>
 		  </c:if> 
 		  
@@ -117,8 +117,6 @@
 			    <a class="nav-link" href="/sb/member/logoutProc.do">
 			    <i class='fas fa-power-off' style='font-size:14px'></i> Logout</a>
 		  	</li>
-		    <a class="nav-link" id="logout" href="/sb/member/logoutProc.do">
-		    <i class='fas fa-power-off' style='font-size:14px'></i>Logout</a>
 		  </c:if>
 		    
 		</ul>

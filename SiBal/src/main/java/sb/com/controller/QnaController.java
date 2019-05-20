@@ -66,11 +66,13 @@ public class QnaController {
 	
 	// 상세보기 (댓글리스트 추가)
 	@RequestMapping("/qnaView")
-	public ModelAndView qnaView(@RequestParam(value="nowPage") int nowPage,@RequestParam(value="oriNo") int oriNo , ModelAndView mv) {
+	public ModelAndView qnaView(@RequestParam(value="nowPage") int nowPage, @RequestParam(value="oriNo") int oriNo ,
+			@RequestParam(value="reNowPage", required=false, defaultValue="1") int reNowPage, 
+			ModelAndView mv) {
 		
 		QnaVo vo = qService.getQnaView(oriNo);
 		
-		PageUtil pInfo = qService.repPageInfo(nowPage,oriNo);
+		PageUtil pInfo = qService.repPageInfo(reNowPage,oriNo);
 		ArrayList list = qService.repList(pInfo,oriNo);
 		
 		mv.addObject("LIST", list);
@@ -78,6 +80,7 @@ public class QnaController {
 		mv.addObject("oriNo", oriNo);
 		mv.addObject("VIEW",vo);
 		mv.addObject("nowPage",nowPage);
+		mv.addObject("reNowPage",reNowPage);
 		
 		mv.setViewName("/qnaBoard/qnaView");
 		return mv;
@@ -175,18 +178,22 @@ public class QnaController {
 	
 	// 댓글 입력
 	@RequestMapping("/repWrite")
-	public ModelAndView repWrite(@RequestParam(value="nowPage") int nowPage,@RequestParam(value="oriNo") int oriNo ,ModelAndView mv, QnaVo vo, HttpSession session) {
+	public ModelAndView repWrite(@RequestParam(value="reNowPage") int reNowPage ,@RequestParam(value="nowPage") int nowPage,
+			@RequestParam(value="oriNo") int oriNo ,ModelAndView mv, QnaVo vo, HttpSession session) {
+			
 		qService.repInsert(session,vo);
 		RedirectView rv = new RedirectView("../qnaBoard/qnaView.do");
 		mv.addObject("oriNo", oriNo);
 		mv.addObject("nowPage",nowPage);
+		mv.addObject("reNowPage",reNowPage);
 		mv.setView(rv);
 		return mv;
 	}
 	
 	// 대댓글 입력
 	@RequestMapping("/repRepWrite")
-	public ModelAndView repRepWrite(@RequestParam(value="nowPage") int nowPage,@RequestParam(value="oriNo") int oriNo ,ModelAndView mv, QnaVo vo, HttpSession session,
+	public ModelAndView repRepWrite(@RequestParam(value="reNowPage") int reNowPage, @RequestParam(value="nowPage") int nowPage,
+			@RequestParam(value="oriNo") int oriNo ,ModelAndView mv, QnaVo vo, HttpSession session,
 			HttpServletRequest req) {
 		String strReDepth = req.getParameter("reDepth");
 		int reDepth = Integer.parseInt(strReDepth);
@@ -200,6 +207,7 @@ public class QnaController {
 		RedirectView rv = new RedirectView("../qnaBoard/qnaView.do");
 		mv.addObject("oriNo", oriNo);
 		mv.addObject("nowPage",nowPage);
+		mv.addObject("reNowPage",reNowPage);
 		mv.setView(rv);
 		return mv;
 	}
@@ -212,12 +220,14 @@ public class QnaController {
 		String strReNo = req.getParameter("reNo");
 		int    reNo    = Integer.parseInt(strReNo);
 		String nowPage  = req.getParameter("nowPage");
+		String reNowPage  = req.getParameter("reNowPage");
 		
 		vo.setReNo(reNo);
 		
 		qService.repUpdate(vo);
 		RedirectView rv = new RedirectView("../qnaBoard/qnaView.do");
 		mv.addObject("oriNo",oriNo);
+		mv.addObject("reNowPage",reNowPage);
 		mv.addObject("nowPage",nowPage);
 		mv.setView(rv);	
 		return mv;
@@ -230,11 +240,13 @@ public class QnaController {
 		int    oriNo    = Integer.parseInt(strOriNo);
 		String strReNo = req.getParameter("reNo");
 		int    reNo    = Integer.parseInt(strReNo);
+		String reNowPage  = req.getParameter("reNowPage");
 		String nowPage  = req.getParameter("nowPage");
 		
 		qService.repDelete(reNo);
 		RedirectView rv = new RedirectView("../qnaBoard/qnaView.do");
 		mv.addObject("oriNo",oriNo);
+		mv.addObject("reNowPage",reNowPage);
 		mv.addObject("nowPage",nowPage);
 		mv.setView(rv);	
 		return mv;

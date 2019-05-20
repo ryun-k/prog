@@ -10,4 +10,16 @@
  		 INSERT INTO B_AIR
  		 VALUES((SELECT NVL(MAX(b_No),0)+1 FROM B_AIR),#{airlineNm},#{depAirportNm},#{arrAirportNm},#{economyCharge},#{vihicleId},SYSDATE)
 	</insert>
+	
+	<select id="gList" parameterType="airVO" 
+	resultType="airVO">
+		SELECT
+		        G_AIRLINENM   AS airlineNm,
+		        G_DEPAIRPORTNM AS depAirportNm,
+		        G_DEPAIRPORTNM AS arrAirportNm,
+		        G_ECONOMYCHARGE AS economyCharge,
+		        G_VIHICLEID AS vihicleId 
+		FROM
+		G_AIR
+	</select>
 </mapper>

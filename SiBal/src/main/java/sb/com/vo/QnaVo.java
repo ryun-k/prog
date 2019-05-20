@@ -36,9 +36,15 @@ public class QnaVo {
 	private int reRef;
 	
 	private int reRNo;
+	private int reNowPage;
 	
 	
-	
+	public int getReNowPage() {
+		return reNowPage;
+	}
+	public void setReNowPage(int reNowPage) {
+		this.reNowPage = reNowPage;
+	}
 	public int getRePNo() {
 		return rePNo;
 	}
@@ -60,6 +66,15 @@ public class QnaVo {
 	public String getReContent() {
 		return reContent;
 	}
+	
+	public String getBrReContent() {
+		String result="";
+		if(reContent!=null && reContent.length()!=0) {
+			result = reContent.replace("\r\n", "<br/>");
+		}
+		return result;
+	}
+	
 	public void setReContent(String reContent) {
 		this.reContent = reContent;
 	}

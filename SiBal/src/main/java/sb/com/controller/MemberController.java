@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import sb.com.service.MemberService;
@@ -37,16 +38,18 @@ public class MemberController {
 	// 로그아웃폼
 	@RequestMapping("/logoutForm")
 	public void logoutForm() {
+		log.info("로그아웃");
 	}
 
 	// 로그아웃처리
 	@RequestMapping("/logoutProc")
-	public ModelAndView logoutProc(HttpServletRequest request) {
+	public String  logoutProc(HttpServletRequest request,RedirectAttributes redirectAttr) {
 		mService.logoutProc(request);
-		ModelAndView mv = new ModelAndView();
-		RedirectView rv = new RedirectView("../");
-		mv.setView(rv);
-		return mv;
+		redirectAttr.addFlashAttribute("message", "로그아웃 되었습니다.");
+//		mv.addObject("LOG", "logout" );
+//		mv.setView(rv);
+//		mv.setView(rv);
+		return "redirect:logoutForm.do";
 	}
 
 	// 회원가입폼

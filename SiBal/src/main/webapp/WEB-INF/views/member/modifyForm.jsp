@@ -147,8 +147,13 @@ $(document).ready(function(){
 
 <br/>
 </div>
+<div class="row">
+<div class="col-9"></div>
+<div class="col-3">
 <input type="button" id="mBtn" class="btn btn-primary" value="수정하기">
 <input type="button" id="cBtn" class="btn btn-primary" value="취소하기">
+</div>
+</div>
 </form>
 </div>
 </body>

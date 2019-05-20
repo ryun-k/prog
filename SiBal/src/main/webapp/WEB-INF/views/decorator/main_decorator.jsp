@@ -14,9 +14,16 @@
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+ 
  	
  	<decorator:head />
- 	
+ 	<script type="text/javascript">
+ 	$(document).ready(function(){
+ 		$("#logout").click(function(){
+ 			alert('로그아웃 되었습니다.');
+ 		})
+ 	});
+ 	</script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -48,7 +55,7 @@
 		  	<li class="nav-item">  <% String nick = (String)session.getAttribute("nick");%>
 		  	<a class="nav-link" href="/sb/member/infoForm.do"><%=nick %> 님 환영합니다.</a>
 		  	</li>
-		    <a class="nav-link" href="/sb/member/logoutProc.do">
+		    <a class="nav-link" id="logout" href="/sb/member/logoutProc.do">
 		    <i class='fas fa-power-off' style='font-size:14px'></i>Logout</a>
 		  </c:if>
 		    

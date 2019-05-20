@@ -37,28 +37,15 @@
 		if(pathname == nav4){
 			$('#nav4').addClass('active');
 		}
-		
-		
-		$('.dropdown-item').hover(function(){
-			$(this).addClass('dhover');
-		},function(){
-			$(this).removeClass('dhover');
-		});
- 		
+
  	});
  	
  	</script>
  	
- 	<style type="text/css">
- 	.dhover{
- 		 background-color: red;
- 	}
- 	
- 	</style>
- 	
- 	
  	
  	<decorator:head />
+ 	
+ 	
  	<script type="text/javascript">
  	$(document).ready(function(){
  		$("#logout").click(function(){
@@ -73,16 +60,16 @@
 	  <a class="navbar-brand" href="/sb">시ː발</a>
 	  <!-- Links -->
 		<ul class="navbar-nav mr-auto">
-   		<li class="nav-item active">
+   		<li class="nav-item" id="nav1">
      		 <a class="nav-link" href="/sb/notice/List.do">공지사항</a>
    		</li>
-	    <li class="nav-item">
+	    <li class="nav-item" id="nav2">
 	      <a class="nav-link" href="#">Left Link 2</a>
 	    </li>
-	    <li class="nav-item">
+	    <li class="nav-item" id="nav3">
 	      <a class="nav-link" href="#">Left Link 2</a>
 	    </li>
-	    <li class="nav-item">
+	    <li class="nav-item" id="nav4">
 	      <a class="nav-link" href="#">Left Link 2</a>
 	    </li>
 		</ul>

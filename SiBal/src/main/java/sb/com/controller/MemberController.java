@@ -334,14 +334,4 @@ public class MemberController {
 		return str;
 	}
 
-	@RequestMapping("/error")
-	public void error() {
-
-	}
-	
-	@RequestMapping("/alert")
-	public void alert() {
-		
-	}
-
 }

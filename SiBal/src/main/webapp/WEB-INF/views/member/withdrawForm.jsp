@@ -46,6 +46,7 @@ $(document).ready(function(){
 <body>
 <div class="container">
 <h1>회원탈퇴</h1>
+<hr/>
 <form id = "withdrawForm" class="was-validated" method="post" action="" encType="utf-8" >
 <div class="form-group">
 	<input type="hidden" id="email" class="form-control" name="email" value="${INFO.email}">

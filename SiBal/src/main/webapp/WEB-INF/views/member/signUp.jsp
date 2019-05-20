@@ -276,18 +276,19 @@ $(document).ready(function(){
 	<input type="text" id="phone" class="form-control" name="phone"  placeholder="휴대폰 번호를 입력해주세요." title="선택사항입니다."
 	pattern="^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$"> 
 	
-	<input type="hidden" id="kakao" name="kakao" value="CODE">
+	<input type="hidden" id="kakao" name="kakao" value="code">
 
 <hr/>
 </div>
 <div class = "row">
-<div class = "col-1">
-<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오계정으로 가입">
+<div class = "col-2">
+<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오계정으로가입">
 </div>
 <div class ="col-8"></div>
-<div class = "col-3">
+<div class = "col-2">
 <input type="submit" class="btn btn-primary" id="ssBtn" value="가입하기">
-<input type="button" class="btn btn-primary" id="cBtn" value="메인가기">
+<input type="button" class="btn btn-primary" id="cBtn" value="취소">
+
 </div>
 </div>
 </form>

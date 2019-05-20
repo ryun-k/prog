@@ -13,7 +13,18 @@
 	
 	<select id="gList" parameterType="airVO" 
 	resultType="airVO">
+<<<<<<< HEAD
 		SELECT * FROM ( G_AIRLINENM AS airlineNm, G_DEPAIRPORTNM AS depAirportNm, G_DEPAIRPORTNM AS arrAirportNm, G_ECONOMYCHARGE AS economyCharge, G_VIHICLEID AS vihicleId,)
 		    FROM G_AIR;
+=======
+		SELECT
+		        G_AIRLINENM   AS airlineNm,
+		        G_DEPAIRPORTNM AS depAirportNm,
+		        G_DEPAIRPORTNM AS arrAirportNm,
+		        G_ECONOMYCHARGE AS economyCharge,
+		        G_VIHICLEID AS vihicleId 
+		FROM
+		G_AIR
+>>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
 	</select>
 </mapper>

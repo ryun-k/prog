@@ -32,6 +32,7 @@ public class QnaService {
 		int start = (pInfo.getNowPage()-1) * pInfo.getListCount()+1;
 		int end   = start + pInfo.getListCount() -1;
 		
+		
 		QnaVo vo = new QnaVo();
 		vo.setStart(start);
 		vo.setEnd(end);
@@ -41,8 +42,8 @@ public class QnaService {
 	}
 	// 질문 입력
 	public void insertQ(HttpSession session,QnaVo vo) {
-//		String id = (String)session.getAttribute("UID");
-//		vo.setId(id);
+		String id = (String)session.getAttribute("nick");
+		vo.setId(id);
 		qDAO.insertQ(vo);
 	}
 	
@@ -76,8 +77,8 @@ public class QnaService {
 	
 	// 답변하기
 	public void insertA(HttpSession session, QnaVo vo) {
-//		String id = (String)session.getAttribute("UID");
-//		vo.setId(id);
+		String id = (String)session.getAttribute("nick");
+		vo.setId(id);
 		
 		vo.getRef();
 		vo.setStep(vo.getStep()+1);
@@ -123,4 +124,57 @@ public class QnaService {
 		return searchList;
 	}
 	
+	// 댓글 카운트
+	public PageUtil repPageInfo(int reNowPage,int oriNo) {
+		
+		int totalCount = qDAO.repCount(oriNo);
+		
+		PageUtil pageInfo = new PageUtil(reNowPage,totalCount,10,5);
+		return pageInfo;
+		
+	}
+	
+	// 댓글 리스트
+	public ArrayList repList(PageUtil pInfo, int oriNo) {
+		
+		int start = (pInfo.getNowPage()-1) * pInfo.getListCount()+1;
+		int end   = start + pInfo.getListCount() -1;
+		
+		QnaVo vo = new QnaVo();
+		vo.setStart(start);
+		vo.setEnd(end);
+		vo.setOriNo(oriNo);
+		
+		ArrayList list = qDAO.repList(vo);
+		return list;
+	}
+	
+	// 댓글 입력
+	public void repInsert(HttpSession session,QnaVo vo) {
+		String id = (String)session.getAttribute("nick");
+		vo.setId(id);
+		qDAO.repInsert(vo);
+	}
+	
+	// 대댓글 입력
+	public void repRepInsert(HttpSession session, QnaVo vo) {
+		String id = (String)session.getAttribute("nick");
+		vo.setId(id);
+		
+		vo.getReRef();
+		vo.setReDepth(vo.getReDepth()+1);
+		
+		qDAO.repRepInsert(vo);
+	}
+	
+	// 수정하기
+	public void repUpdate(QnaVo vo) {
+		qDAO.repUpdate(vo);
+	}
+	
+	// 삭제하기
+	public void repDelete(int reNo) {
+		qDAO.repDelete(reNo);	
+	}
+
 }

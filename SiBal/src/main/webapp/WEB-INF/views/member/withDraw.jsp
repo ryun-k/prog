@@ -1,12 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>±ÇÇÑ ¾øÀ½</title>
+<meta charset="utf-8">
+<title>ê¶Œí•œ ì—†ìŒ</title>
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#cBtn").click(function(){
+			$(location).attr("href","../");
+		})
+	});
+</script>
 </head>
 <body>
-<h1>»çÀÌÆ® ÀÌ¿ë ±ÇÇÑÀÌ ¾ø½À´Ï´Ù.</h1>
+<h1>ì‚¬ì´íŠ¸ ì´ìš© ê¶Œí•œì´ ì—†ìŠµë‹ˆë‹¤.</h1>
+
+<input type = "button" value="ë©”ì¸ìœ¼ë¡œ" id="cBtn">
 </body>
 </html>

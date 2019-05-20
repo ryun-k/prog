@@ -11,6 +11,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style type="text/css">
   	.gun a:link { text-decoration:none ; color:#fff}
   	.gun a:visited { text-decoration:none ; color:#fff}
@@ -19,6 +20,7 @@
   </style>
   <script type="text/javascript">
   	$(function(){
+  		// 글쓰기 클릭시
   		$("#wBtn").click(function(){
   			location.href="../qnaBoard/qWriteForm.do";
   		});
@@ -29,7 +31,7 @@
 </head>
 <body>
 <div class="container">
-  <h2>리스트</h2>
+  <h2 align="center">Q&A 리스트</h2>
   <table class="table table-dark table-striped">
     <thead>
       <tr>
@@ -46,7 +48,10 @@
 				<td>${data.no }</td>
 					<td>
 						<a href="../qnaBoard/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">
-						<c:forEach begin="1" end="${data.depth * 5}">&nbsp;</c:forEach>
+						<c:if test="${data.depth ge 1}">
+							<c:forEach begin="1" end="${data.depth * 4}">&nbsp;</c:forEach>
+							<i class="material-icons" >subdirectory_arrow_right</i>
+						</c:if>
 						${data.title}
 						</a>
 					</td>

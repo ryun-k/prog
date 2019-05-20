@@ -19,8 +19,20 @@ public class NoticeVo {
 	
 	private int oriNo;
 	
+	private String brBody;
 	
 	
+	
+	public String getBrBody() {
+		String result = null;
+		if( content!=null && content.length()!=0 ) { //데이터가 존재하면
+			result = content.replaceAll("\r\n", "<br/>");
+		}
+		return result;
+	}
+	public void setBrBody(String brBody) {
+		this.brBody = brBody;
+	}
 	public int getOriNo() {
 		return oriNo;
 	}

@@ -12,10 +12,19 @@
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
  	<script type="text/javascript">
  	$(function(){
+ 		//글쓰기버튼 클릭 시  페이지 이동
  		$('#wBtn').click(function(){
 			$(location).attr("href","../notice/writeForm.do");
  		});
+ 		
+ 		//목록 클릭 시 뷰페이지 이동
+ 		$('#list > tr').click(function(){
+ 			var no = $(this).attr('id');
+ 			$(location).attr("href","../notice/hitProc.do?oriNo="+no+"&nowPage=${PINFO.nowPage}");
+ 			 
+ 		}); 
  	});
+ 	// ../notice/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}
  	</script>
 </head>
 <body>
@@ -30,10 +39,10 @@
         <th>DATE</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="list">
 	    <c:forEach items="${LIST }" var="data">
-	      <tr>
-	        <td><a href="../notice/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.no }</a></td>
+	      <tr id="${data.no }">
+	        <td>${data.no }</td>
 	        <td>${data.title }</td>
 	        <td>${data.hit }</td>
 	        <td>${data.wDate }</td>

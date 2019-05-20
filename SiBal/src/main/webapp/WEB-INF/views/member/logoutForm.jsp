@@ -16,22 +16,15 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-if($("#logout").val()!=null){
-	alert("로그아웃 되었습니다.");
-};
-});
 
-</script>
 </head>
 <body>
-<input type="hidden" id="logout" value="33">
-alert('${message}');
-<%
+<script type="text/javascript">
+$(document).ready(function(){
+alert('로그아웃 되었습니다.');
+location.href ="../";	
+});
+</script>
 
-response.sendRedirect("/sb");
-
-%>
 </body>
 </html>

@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 
-Client ID
-645231811798-k4jflp70j4nc4s9bfvr07u93tpogio97.apps.googleusercontent.com
 
-Client Secret
-w7hqPZTNwCeqHJZkw4qaCwMz 
--->
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,10 +15,6 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 	
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-
-	<!-- <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="645231811798-k4jflp70j4nc4s9bfvr07u93tpogio97.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script> -->
     <script>
 		$(document).ready(function(){
 			//로그인시 이메일,비번 확인
@@ -125,59 +115,9 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 			         alert('로그인이 실패 되었습니다.');
 			      }
 			    });
-			  //카카오 로그아웃
-			  
 			})
-			/* //구글로그인
-			$("#gBtn").click(function(){
-				function onSignIn(googleUser) {
-					  // Useful data for your client-side scripts:
-					  var profile = googleUser.getBasicProfile(){
-					  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-					  console.log('Full Name: ' + profile.getName());
-					  console.log('Given Name: ' + profile.getGivenName());
-					  console.log('Family Name: ' + profile.getFamilyName());
-					  console.log("Image URL: " + profile.getImageUrl());
-					  console.log("Email: " + profile.getEmail());
-					  
-					 // The ID token you need to pass to your backend:
-					  var id_token = googleUser.getAuthResponse().id_token;
-					  console.log("ID Token: " + id_token);
-					  var email=profile.getEmail();
-					  var name= profile.getName();
-					  var image= profile.getImageUrl();
-					  var id= profile.getId(); 
-						document.getElementById('google').innerHTML=email+'<p/>'+name+id+
-						'<p/>'+'<img src="'+image+'">';
-					  }
-					}
-			}) */
-			
 		});
 		</script>
-<!--  	<script>
-function onSignIn(googleUser) {
-  // Useful data for your client-side scripts:
-  var profile = googleUser.getBasicProfile(){
-  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-  console.log('Full Name: ' + profile.getName());
-  console.log('Given Name: ' + profile.getGivenName());
-  console.log('Family Name: ' + profile.getFamilyName());
-  console.log("Image URL: " + profile.getImageUrl());
-  console.log("Email: " + profile.getEmail());
-  }
- // The ID token you need to pass to your backend:
-  var id_token = googleUser.getAuthResponse().id_token;
-  console.log("ID Token: " + id_token);
-  var email=profile.getEmail();
-  var name= profile.getName();
-  var image= profile.getImageUrl();
-  var id= profile.getId(); 
-	document.getElementById('google').innerHTML=email+'<p/>'+name+id+
-	'<p/>'+'<img src="'+image+'">';
-  
-}
-	</script>   --> 
 </head>
 <body>
 <div class="container">
@@ -208,18 +148,12 @@ function onSignIn(googleUser) {
 					<input type="button" class="btn btn-warning" id="kakao-login-btn" value="카카오로그인">
 					<input type="button" class="btn btn-primary float-auto" id="fBtn" value="비밀번호 찾기">
 					<input type="button" class="btn btn-outline-danger float-right" id="cBtn" value="취소하기">
-					<!-- <input type="button" class="btn btn-primary" id="gBtn" value="구글로그인"> -->
 				</div>	
 				</div>
 
-
-
-
-	
 	</form>
-
 	<br/>
-
+	
 	<form id="codeForm" method="post" action="checkEmail.do">
 	<input type="hidden" id="email1" name="email">
 	</form>

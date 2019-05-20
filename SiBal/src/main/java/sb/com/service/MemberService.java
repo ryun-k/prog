@@ -35,7 +35,6 @@ public class MemberService {
 		//로그아웃 처리
 		public void logoutProc(HttpServletRequest request) {
 			request.getSession().invalidate();
-			request.getSession().invalidate();
 		}
 		
 		//회원가입 처리

@@ -14,7 +14,11 @@
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+<<<<<<< HEAD
  	
+=======
+ 
+>>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
  	<script type="text/javascript">
  	$(function(){
  		var pathname = $(location).attr('pathname'); //uri pathname 값 가져오기 
@@ -59,7 +63,13 @@
  	
  	
  	<decorator:head />
- 	
+ 	<script type="text/javascript">
+ 	$(document).ready(function(){
+ 		$("#logout").click(function(){
+ 			alert('로그아웃 되었습니다.');
+ 		})
+ 	});
+ 	</script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -67,17 +77,17 @@
 	  <a class="navbar-brand" href="/sb">시ː발</a>
 	  <!-- Links -->
 		<ul class="navbar-nav mr-auto">
-   		<li class="nav-item" id="nav1">
+   		<li class="nav-item active">
      		 <a class="nav-link" href="/sb/notice/List.do">공지사항</a>
    		</li>
-	    <li class="nav-item" id="nav2">
-	      <a class="nav-link" href="/sb/airport/airportForm.do">비행기표 확인</a>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#">Left Link 2</a>
 	    </li>
-	    <li class="nav-item" id="nav3">
-	      <a class="nav-link" href="#">Left Link 3</a>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#">Left Link 2</a>
 	    </li>
-	    <li class="nav-item" id="nav4">
-	      <a class="nav-link" href="#">Left Link 4</a>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#">Left Link 2</a>
 	    </li>
 		</ul>
 		
@@ -103,6 +113,7 @@
 		        <a class="nav-link" href="#">Link 3</a>
 	     	 </div>	  	 
 		  	</li>
+<<<<<<< HEAD
 			<li class="nav-item">  
 				<% String nick = (String)session.getAttribute("nick");%>
 				<a class="nav-link" ><%=nick %> 님 환영합니다.</a>
@@ -111,6 +122,10 @@
 			    <a class="nav-link" href="/sb/member/logoutProc.do">
 			    <i class='fas fa-power-off' style='font-size:14px'></i> Logout</a>
 		  	</li>
+=======
+		    <a class="nav-link" id="logout" href="/sb/member/logoutProc.do">
+		    <i class='fas fa-power-off' style='font-size:14px'></i>Logout</a>
+>>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
 		  </c:if>
 		    
 		</ul>

@@ -242,6 +242,7 @@ $(document).ready(function(){
 <body>
 <div class="container">
 <h1>회원가입</h1>
+<hr/>
 <form id = "signUp" method="post" action="../member/signUpProc.do" class="was-validated" encType="utf-8" >
 <div class="form-group">
   <label for="uname">email</label>
@@ -274,13 +275,22 @@ $(document).ready(function(){
 	<label for="addr">휴대폰 번호</label>
 	<input type="text" id="phone" class="form-control" name="phone"  placeholder="휴대폰 번호를 입력해주세요." title="선택사항입니다."
 	pattern="^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$"> 
+	
+	<input type="hidden" id="kakao" name="kakao" value="code">
 
-<br/>
+<hr/>
 </div>
+<div class = "row">
+<div class = "col-2">
+<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오계정으로가입">
+</div>
+<div class ="col-8"></div>
+<div class = "col-2">
 <input type="submit" class="btn btn-primary" id="ssBtn" value="가입하기">
-<input type="button" class="btn btn-primary" id="cBtn" value="메인가기">
-<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오계정으로 가입">
+<input type="button" class="btn btn-primary" id="cBtn" value="취소">
 
+</div>
+</div>
 </form>
 
 <form id="kakaoSignup" method="post" action="../member/CheckKakao.do">

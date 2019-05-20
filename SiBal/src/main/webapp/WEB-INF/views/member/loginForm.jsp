@@ -11,7 +11,7 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>로그인폼</title>
+	<title>로그인</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -194,17 +194,23 @@ function onSignIn(googleUser) {
 				<input type="password" class="form-control" placeholder="비밀번호를 입력하세요" name="pw" id="pw"  required="required">
 				<div class="valid-feedback"></div>
 				</div>
+				<div class="row">
+				<div class="col-10"></div>
+				<div class="col-2">
 					<input type="button" class="btn btn-primary" id="lBtn" value="Login">
 					<input type="button" class="btn btn-primary" id="sBtn" value="회원가입">
-					
-					<br/><br/><hr/>
-					
+				</div>
+				</div>
+				<hr/>
+				<div class="row">
+				<div class="col-8"></div>
+				<div class="col-4">
 					<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오로그인">
 					<input type="button" class="btn btn-primary" id="fBtn" value="비밀번호 찾기">
 					<input type="button" class="btn btn-primary" id="cBtn" value="메인가기">
 					<!-- <input type="button" class="btn btn-primary" id="gBtn" value="구글로그인"> -->
-					
-					<div id='kakao'></div>
+				</div>	
+				</div>
 
 
 

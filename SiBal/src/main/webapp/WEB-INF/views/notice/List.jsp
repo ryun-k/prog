@@ -19,7 +19,7 @@
  	</script>
 </head>
 <body>
-
+<div class="container">
   <h2>*공지사항*</h2>
   <table class="table table-hover">
     <thead>
@@ -44,6 +44,7 @@
 	  	
     </tbody>
   </table>
+</div>
 <div class="container">
   	<table class="table">
 		<tbody>

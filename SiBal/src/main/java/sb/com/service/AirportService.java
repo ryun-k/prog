@@ -15,11 +15,16 @@ public class AirportService {
 	
 	public void insertGo(AirVO vo, HttpSession session) {
 		System.out.println("DAO호출성공");
+		String nick = "Hyoung";
+		vo.setNick(nick);
+		System.out.println(vo.getNick());
 		aDAO.insertGo(vo, "go");
 	}
 	
 	public void insertBack(AirVO vo, HttpSession session) {
 		System.out.println("DAO호출성공");
+		String nick = "Hyoung";
+		vo.setNick(nick);
 		aDAO.insertBack(vo, "back");
 	}
 	

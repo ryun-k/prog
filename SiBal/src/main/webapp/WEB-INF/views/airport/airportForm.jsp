@@ -98,18 +98,6 @@
 </head>
 <body>
 
-<<<<<<< HEAD
-<h2>편도</h2>
-<form action="goAir.do" method="post">
-	출발 : <input type="text" name="depAirportNm"><br/>
-	도착 : <input type="text" name="arrAirportNm"><br/>
-	가는날 : <input type="text" id="gopicker" name="depPlandTime"><br/>
-	<input type="submit" value="확인">
-</form>
-
-<h2>오는항공편</h2>
-<form action="backAir.do" method="post">
-=======
 <div id="wrapper">    
     <!--탭 메뉴 영역 -->
     <ul class="tabs">
@@ -121,7 +109,7 @@
     <div class="tab_container">
 
         <div id="tab1" class="tab_content">
-           <form action="goAir.do" method="post">
+           <form action="pAir.do" method="post">
 	출발 : <input type="text" name="depAirportNm"><br/>
 	도착 : <input type="text" name="arrAirportNm"><br/>
 	가는날 : <input type="text" id="gopicker" name="depPlandTime"><br/>
@@ -130,8 +118,7 @@
         </div>
 
         <div id="tab2" class="tab_content">
-          <form action="backAir.do" method="post">
->>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
+          <form action="wgoAir.do" method="post">
 	출발 : <input type="text" name="depAirportNm"><br/>
 	도착 : <input type="text" name="arrAirportNm"><br/>
 	가는날 : <input type="text" id="gopicker" name="depPlandTime"><br/>

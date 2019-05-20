@@ -2,21 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="airport">
+
 	<insert id="insertGair" parameterType="airVO">
- 		 INSERT INTO G_AIR
- 		 VALUES((SELECT NVL(MAX(g_No),0)+1 FROM G_AIR),#{airlineNm},#{depAirportNm},#{arrAirportNm},#{economyCharge},#{vihicleId},SYSDATE)
+ 		 INSERT INTO G_AIR(g_NO,g_AIRLINENM,g_DEPAIRPORTNM,g_ARRAIRPORTNM,g_ECONOMYCHARGE,g_VIHICLEID,g_RDATE,g_NICK)
+ 		 VALUES((SELECT NVL(MAX(g_No),0)+1 FROM G_AIR),#{airlineNm},#{depAirportNm},#{arrAirportNm},#{economyCharge},#{vihicleId},SYSDATE,#{nick})
 	</insert>
+	
 	<insert id="insertBair" parameterType="airVO">
- 		 INSERT INTO B_AIR
- 		 VALUES((SELECT NVL(MAX(b_No),0)+1 FROM B_AIR),#{airlineNm},#{depAirportNm},#{arrAirportNm},#{economyCharge},#{vihicleId},SYSDATE)
+ 		 INSERT INTO B_AIR(b_NO,b_AIRLINENM,b_DEPAIRPORTNM,b_ARRAIRPORTNM,b_ECONOMYCHARGE,b_VIHICLEID,b_RDATE,b_NICK)
+ 		 VALUES((SELECT NVL(MAX(b_No),0)+1 FROM B_AIR),#{airlineNm},#{depAirportNm},#{arrAirportNm},#{economyCharge},#{vihicleId},SYSDATE,#{nick})
 	</insert>
 	
 	<select id="gList" parameterType="airVO" 
 	resultType="airVO">
-<<<<<<< HEAD
-		SELECT * FROM ( G_AIRLINENM AS airlineNm, G_DEPAIRPORTNM AS depAirportNm, G_DEPAIRPORTNM AS arrAirportNm, G_ECONOMYCHARGE AS economyCharge, G_VIHICLEID AS vihicleId,)
-		    FROM G_AIR;
-=======
 		SELECT
 		        G_AIRLINENM   AS airlineNm,
 		        G_DEPAIRPORTNM AS depAirportNm,
@@ -25,6 +23,5 @@
 		        G_VIHICLEID AS vihicleId 
 		FROM
 		G_AIR
->>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
 	</select>
 </mapper>

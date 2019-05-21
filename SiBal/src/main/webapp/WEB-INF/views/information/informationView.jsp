@@ -57,17 +57,18 @@
 				<%-- 수정과 삭제기능은 글작성한 로그인 유저만 가능하도록 하겠다.
 					 만약 로그인한 사용자인지 확인하고싶다면 
 					<c:if test="${ not empty sessionScope.UID }"></c:if> --%>
-				<input class="btn btn-primary" type="button" id="mBtn" value="수정하기"/>
-				<input class="btn btn-primary" type="button" id="dBtn" value="삭제하기"/>
+				<input class="btn btn-info" type="button" id="mBtn" value="수정하기"/>
+				<input class="btn btn-danger" type="button" id="dBtn" value="삭제하기"/>
 				
 <%-- 				<c:if test="${sessionScope.UID eq VIEW.id}"> --%>
 			</div>
 			<br/>
 			<br/>
 			
-			<div>
-				<c:forEach items="${LIST}" var="info">
-				<img src="/uploads/${info.oriName }" width="25%"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			<div align="center">
+				<c:forEach items="${LIST}" var="list">
+<%-- 				확인용:LIST.oriName=${list.oriName}<br/> --%>
+				<img src="/uploads/${list.oriName }" width="100%;" height="400px;" style="margin-bottom: 20px;"> &nbsp; 
 				</c:forEach>
 			</div>
 			
@@ -78,8 +79,8 @@
 			<br/>
 			<br/>
 			<div align="center">
-				<input class="btn btn-primary" type="button" id="gBtn" value="좋아요"/>
-				<input class="btn btn-primary" type="button" id="ngBtn" value="싫어요"/>
+				<input class="btn btn-success" type="button" id="gBtn" value="좋아요"/>
+				<input class="btn btn-warning" type="button" id="ngBtn" value="싫어요"/>
 			</div>	
 	    </div> 
   	  </div>

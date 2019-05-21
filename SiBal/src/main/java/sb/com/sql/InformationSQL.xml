@@ -37,30 +37,36 @@
 	
 	<!-- 목록 -->
 	<select id="informationList" resultType="informationVO" parameterType="informationVO">
-		SELECT
-		    *
-		FROM (		SELECT
-			i_No       AS no,
-			i_Title    AS title, 
-			i_writeDate     AS writeDate,	
-			i_Hit      AS hit,
-			i_Good	   AS good, 
-		        i_Writer   AS writer,
-		        row_number() over(order by i_No DESC) AS rno
-		    FROM
-		        INFORMATION,
-		        (SELECT
-		            COUNT(*) AS CNT, 
-		            FI_ORINO
-		        FROM 
-		            IMAGEINFO
-		        GROUP BY FI_ORINO) T1
-		    WHERE
+	select
+		b.*
+	from
+	(
+		select 
+			row_number() over(order by no DESC) AS rno,
+			a.* 
+		from 
+		(
+			select 
+				i_no as no,
+				i_title as title,
+				i_body as body,
+				i_writer as writer,
+				i_writeDate as writeDate,
+				i_hit as hit,
+				i_good as good,
+				fi_oriname as oriName,
+				row_number() over(partition by fi_orino order by fi_no) as ff
+			from 
+				imageinfo,
+				information 
+			where 
 				upper(i_IsShow)='Y' 
-		        AND
-		         INFORMATION.i_No=T1.FI_ORINO(+))
-		WHERE
-			RNO BETWEEN #{start} AND #{end}
+			and
+				imageinfo.fi_orino=information.i_no(+)) a 
+			where 
+				a.ff=1) b
+			where
+				rno between #{start} and #{end}
 	</select>
 		
 	<!-- 데이터입력 쿼리문  -->                   
@@ -152,32 +158,38 @@
 	<!-- 검색 결과를 반영한 목록조회 -->
 	<select id="informationsearchList" parameterType="informationVO" 
 					resultType="informationVO">
-		SELECT
-		    *
-		FROM (		SELECT
-			i_No       AS no,
-			i_Title    AS title, 
-			i_writeDate     AS writeDate,	
-			i_Hit      AS hit,
-			i_Good	   AS good,  
-		        i_Writer   AS writer,
-		        row_number() over(order by i_No DESC) AS rno
-		    FROM
-		        INFORMATION,
-		        (SELECT
-		            COUNT(*) AS CNT, 
-		            FI_ORINO
-		        FROM 
-		            IMAGEINFO
-		        GROUP BY FI_ORINO) T1
-		    WHERE
-		        <include refid="isShow"/>
-		        AND
-		         INFORMATION.i_No=T1.FI_ORINO(+)
-		        AND
-		        <include refid="searchField"/>)
-		 WHERE
-		    RNO BETWEEN #{start} AND #{end}			
+	select
+		b.*
+	from
+	(
+		select 
+			row_number() over(order by no DESC) AS rno,
+			a.* 
+		from 
+		(
+			select 
+				i_no as no,
+				i_title as title,
+				i_body as body,
+				i_writer as writer,
+				i_writeDate as writeDate,
+				i_hit as hit,
+				i_good as good,
+				fi_oriname as oriName,
+				row_number() over(partition by fi_orino order by fi_no) as ff
+			from 
+				imageinfo,
+				information 
+			where 
+				upper(i_IsShow)='Y' 
+			and
+				imageinfo.fi_orino=information.i_no(+)
+				and
+				 <include refid="searchField"/>) a 
+			where 
+				a.ff=1) b
+			where
+				rno between #{start} and #{end} 	
 	</select>
 	
 	<!-- 게시물 수정 쿼리문	-->

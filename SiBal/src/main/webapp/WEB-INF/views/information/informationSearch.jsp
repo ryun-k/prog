@@ -43,10 +43,10 @@
   		<div class="row">
 			<c:forEach items="${LIST}" var="data">
 				<div class="col-md-4">
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="/uploads/ab.jpg" style="width:100% "/>
+				<div class="card" style="width:300px; height:450px;">
+					<img class="card-img-top" src="/uploads/${data.oriName }" style="width:300px; height:300px;"/>
 					 <div class="card-body">
-					 <h4 class="card-title"><a href="../information/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title}</a></h4>
+					 <h4 class="card-title"><a href="../information/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title2}</a></h4>
 					<p class="card-text"><span class="far fa-calendar-check"> ${data.writeDate}</span> | <span class="fas fa-search"> ${data.hit}</span> | <span class="fas fa-heart"> ${data.good }</span></p>
 					</div>
 				</div>

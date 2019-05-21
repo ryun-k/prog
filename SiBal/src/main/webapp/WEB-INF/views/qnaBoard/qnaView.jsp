@@ -35,7 +35,7 @@
   				location.href="../qnaBoard/deleteProc.do?oriNo=${VIEW.no}&nowPage=${nowPage}";
   		});
   		
-  		var reContent = RegExp(/^.{1,300}$/);  
+  		var reContent = RegExp(/^(.|\n|\r){1,1000}$/);
   		
   		// 답글 입력창
   		$(".rBtn").click(function(){

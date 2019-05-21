@@ -1,5 +1,9 @@
 package sb.com.vo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class AirVO {
 	private String airlineNm;
 	private String arrAirportNm;
@@ -7,6 +11,8 @@ public class AirVO {
 	private String depAirportNm;
 	private String depPlandTime;
 	private int economyCharge;
+	private int no;
+	private int cal;
 	private String prestigeCharge;
 	private String vihicleId;
 	private String nick;
@@ -26,6 +32,13 @@ public class AirVO {
 	public String getArrPlandTime() {
 		return arrPlandTime;
 	}
+	public String getArrPlandTime2() {
+		String result = arrPlandTime.substring(0,4)+"년"+arrPlandTime.substring(4,6)+"월"
+						+arrPlandTime.substring(6,8)+"일"+"\n"+arrPlandTime.substring(8,10)+"시"
+						+arrPlandTime.substring(10,12)+"분";
+		
+		return result;
+	}
 	public void setArrPlandTime(String arrPlandTime) {
 		this.arrPlandTime = arrPlandTime;
 	}
@@ -37,6 +50,12 @@ public class AirVO {
 	}
 	public String getDepPlandTime() {
 		return depPlandTime;
+	}
+	public String getDepPlandTime2() {
+		String result = arrPlandTime.substring(0,4)+"년"+arrPlandTime.substring(4,6)+"월"
+				+arrPlandTime.substring(6,8)+"일"+"\n"+arrPlandTime.substring(8,10)+"시"
+				+arrPlandTime.substring(10,12)+"분";
+			return result;
 	}
 	public void setDepPlandTime(String depPlandTime) {
 		this.depPlandTime = depPlandTime;
@@ -64,6 +83,18 @@ public class AirVO {
 	}
 	public void setNick(String nick) {
 		this.nick = nick;
+	}
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	public int getCal() {
+		return cal;
+	}
+	public void setCal(int cal) {
+		this.cal = cal;
 	}
 	
 	

@@ -7,10 +7,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<style>
+body {
+  background-image:url("https://cdn.pixabay.com/photo/2016/11/18/07/46/cozy-seopji-1833560_960_720.jpg");
+  background-size: cover;
+}
+</style>
 <meta charset="utf-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script
@@ -20,23 +28,25 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
-	$(document).ready(function() {
-		$(".gobtn").click(function() {
-			alert("클릭")
 
-			var formObj = this.form;
+	$(document).ready(function() {
+		$(".backbtn").click(function() {
+			//var formObj = this.form;
 			$(this.form).submit();
 		})
 
 	});
 </script>
-<title>가는날</title>
+<title>오는날</title>
 </head>
 <body>
-	<h1 align="center">가는날</h1>
 	&nbsp;
-
 	<div class="container">
+	<div class="card border-0 shadow my-5">
+	<div class="card-body p-5">
+	
+	<h1 align="center">오는날</h1>
+	&nbsp;
 		<table class="table table-dark">
 			<thead align="center">
 				<tr align="center">
@@ -58,9 +68,9 @@
 								<td>${status.count}</td>
 								<td>${item.airlineNm}</td>
 								<td>${item.depAirportNm}</td>
-								<td>${item.depPlandTime}</td>
+								<td>${item.depPlandTime2}</td>
 								<td>${item.arrAirportNm}</td>
-								<td>${item.arrPlandTime}</td>
+								<td>${item.arrPlandTime2}</td>
 								<td>${item.economyCharge}원</td>
 								<td>${item.vihicleId}
 								<td><form class="info${status.index}" method="GET"
@@ -69,14 +79,12 @@
 											hidden="hidden"> 
 											<input type="hidden" name="airlineNm" value="${item.airlineNm}" /> 
 											<input type="hidden" name="depAirportNm" value="${item.depAirportNm}" /> 
+											<input type="hidden" name="depPlandTime" value="${item.depPlandTime2}" /> 
 											<input type="hidden" name="arrAirportNm" value="${item.arrAirportNm}" /> 
-											<input type="hidden" name="depPlandTime" value="${item.depPlandTime}" /> 
-											<input type="hidden" name="arrPlandTime" value="${item.arrPlandTime}" /> 
+											<input type="hidden" name="arrPlandTime" value="${item.arrPlandTime2}" /> 
 											<input type="hidden" name="economyCharge" value="${item.economyCharge}" /> 
 											<input type="hidden" name="vihicleId" value="${item.vihicleId}" /> 
-											<input type="button" class="btn btn-secondary gobtn" value="예매" />
-										<!-- <input type="button" class="reserve" value="예매"/> -->
-										<%-- <button class="reserve">예매</button> <!-- <input type="button" class="reserve" value="예매"/> -->--%>
+											<input type="button" class="btn btn-secondary backbtn" value="예매" />
 									</form></td>
 							</c:when>
 						</c:choose>
@@ -85,32 +93,7 @@
 			</tbody>
 		</table>
 	</div>
-
-	<div>
-		<c:forEach var="item" varStatus="status" items="${back}">
-			<c:choose>
-				<c:when test="${item.economyCharge!=0}">
-					<a class="content_box">
-						<dl class="content">
-							<dt>
-								<span>${item.airlineNm}</span>
-							</dt>
-							<dd class="time">
-								<span>${item.depAirportNm}</span> <i class="ico_com i_time_bar"></i>
-								<span>${item.arrAirportNm}</span>
-							</dd>
-							<dd class="price">
-								<span class="air_signal">₩</span>${item.economyCharge}
-							</dd>
-						</dl>
-					</a>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-	</div>
-
-
-
-
+</div>
+</div>
 </body>
 </html>

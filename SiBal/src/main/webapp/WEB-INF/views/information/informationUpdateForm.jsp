@@ -3,10 +3,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
 	<title>Document</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
 
 	$(document).ready(function(){
 			var	count = 1;
@@ -73,48 +77,38 @@
 	</script>
 </head>
 <body>
-	<form method="POST" action="../information/informationUpdateProc.do" 
+	 <div class="container">
+ 		<form method="POST" action="../information/informationUpdateProc.do" 
 			id="mfrm" encType="multipart/form-data">
 		<input type="hidden" name="oriNo" value="${VIEW.no}" />
-		<input type="hidden" name="nowPage" value="${nowPage}" /> <%--릴레이용--%>
-		<table width="800" border="1" align="center">
-			<tr>
-				<td>글쓴이</td>
-				<td><input type="text" name="writer" id="writer"></td>
-			</tr>
-			<tr>
-				<td>제목</td>
-				<td>
-					<input type="text" name="title" id="title" value="${VIEW.title }">
-				</td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td>
-					<textarea name="body" id="body">${VIEW.body}</textarea>
-				</td>
-			</tr>
-			<tr>
-				<td>첨부파일</td>
-				<td>
-					<input type="button" value="추가" id="aBtn">
-					<input type="button" value="삭제" id="dBtn">
-				</td>
-			</tr>
-			<tr>
-				<td>첨부파일</td>
-				<td>
-					<input type="file" name="files" id="files" class="img"/>
-	  				<img id="siba" src="#" alt=" " width="200" height="130"/>
-				</td>
-			</tr>
-			<tr id="copy">
-				<td colspan="2" align="center">
-					<input type="button" id="mBtn" value="수정하기">
-				</td>
-			</tr>
-		</table>
-	</form>
+		<input type="hidden" name="nowPage" value="${nowPage}" />
+<%--     	<div class="form-group">    
+			<label for="writer">작성자</label>
+ 			<input class="form-control" type="text" name="writer" id="writer"> 
+ 		</div> --%>
+  		<div class="form-group">
+  			<label for="title">제목</label>
+  			<input class="form-control" type="text" name="title" id="title" required="required" placeholder="제목을 입력해주세요" value="${VIEW.title }">
+  		</div>
+  		<div class="form-group">
+  			<label for="body">내용</label>
+  			<textarea class="form-control" name="body" id="body">${VIEW.body }</textarea>
+  		</div>
+  		<div class="form-group">
+  			<label for="f">첨부파일</label>
+  				<input class="btn btn-primary" type="button" value="추가" id="aBtn">
+  				<input class="btn btn-primary" type="button" value="삭제" id="dBtn">
+  		</div>
+  		<div id="ggg">
+  			<label for="files">첨부파일</label>
+  			<input type="file" name="files" id="files" class="img"/>
+  			<img id="siba" src="#" alt=" " width="200" height="130"/>
+  		</div>		
+  		<div class="form-group" id="copy" align="center">
+  				<input class="btn btn-primary" type="button" id="mBtn" value="글쓰기" />
+  		</div>
+  </form>
+  </div>		 
 </body>
 </html>
 

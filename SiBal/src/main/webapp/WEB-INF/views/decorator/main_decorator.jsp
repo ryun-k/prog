@@ -38,13 +38,17 @@
 			$('#nav4').addClass('active');
 		}
 		
-		//창크기에맞게 바디시작위치 수정
+		//창크기 가져오기
+		var imgW=$(window).outerWidth();
 		var h=$("#nav").outerHeight();
+		$('#mainimg').css('width',imgW);
 		$('body').css('margin-top', h);
 		//창 크기변화에 따른 수정
 		$(window).resize(function(){
 			var h=$("#nav").outerHeight();
 			$('body').css('margin-top', h);
+			var imgW=$(window).outerWidth();
+			$('#mainimg').css('width',imgW);
 		});
 		
  	});
@@ -52,10 +56,14 @@
  	</script>
  	<style type="text/css">
  	#body{
- 		margin-top: 55px;
+ 		margin-top: 56px;
+ 	}
+ 	#mainimg{
  	}
  	
  	</style>
+
+
  	
  	<decorator:head />
  	
@@ -114,6 +122,9 @@
 		    
 		</ul>
 	</nav>	
+	<img id="mainimg" src="/sb/img/mainimg.png" />
+	
+	
 	<div id="body">
         <decorator:body />
 	</div>

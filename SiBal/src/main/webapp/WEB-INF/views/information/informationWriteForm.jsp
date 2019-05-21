@@ -3,10 +3,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>	
 	<script>
 		$(document).ready(function(){
 			var count=1; //버튼의 개수제한용
@@ -18,7 +21,6 @@
 					$("#wfrm").submit();
 			});
 			
-			//첨부파일 추가버튼 클릭시 id="aBtn" 첨부파일 동적추가
 			$("#aBtn").click(function(){
 				count++;
 				if(count==6){
@@ -27,29 +29,23 @@
 					return;
 				}
 				
-				//추가할 폼을 만든다
-				var tr = "<tr><th>첨부파일</th>";
-				tr +="<td><input type='file' name='files' id='files"+count+"' class='img'><img id='siba' src='#' alt=' ' width='200' height='130'/></td></tr>";
+				var div = "          ";
+				div +="<div id='ggg'><input type='file' name='files' id='files"+count+"' class='img'><img id='siba' src='#' alt=' ' width='200' height='130'/></div>";
 				
-				//원하는 위치에 배치시킨다
-				$("#copy").before(tr);
+				$("#copy").before(div);
 			});
 			
-  		//첨부파일 삭제버튼 클릭시 id="dBtn"	첨부파일 동적삭제
 			$("#dBtn").click(function(){
 				if(count==1){
 					alert("최소 1개는 있어야 합니다");
 					return;
 				}
 				
-				//해당 줄tr삭제
-				//(count는 마지막번호인) id가 copy인 요소의 부모들중에서 tr객체
-				var tr = $("#files"+count).parents("tr");
-				tr.remove();
+				var div = $("#files"+count).parents("div#ggg");
+				div.remove();
 				count--;
 			});
-		});
-		$(document).ready(function(){ 
+  		
 			function readURL(input) { 
 				var files = event.target.files;
 				for(var i=0; i<files.length; i++){
@@ -65,51 +61,42 @@
 				$(".img").change(function(){ 
 					readURL(this); 
 				}); 
-			});
+		});
 
 		
 	</script>
 </head>
 <body>
-  <%-- 글쓰기 폼 보여주자
-  		 우리는 파일업로드 기능을 가진 게시판을 보여주기로 했으므로
-  		 업로드 기능을 구현하기위해 encType="multipart/form-data"로 지정하여
-  		 파라미터 방식이 아닌 스트림방식으로 처리해야 한다	 --%>
+  <div class="container">
   <form id="wfrm" method="post" action="../information/informationWriteProc.do" 
         encType="multipart/form-data">
-  	<table border="1" width="800" align="center">
-  		<tr>
-  			<th>작성자</th>
-  			<td><input type="text" name="writer" id="writer"></td>
-  		</tr>
-  		<tr>
-  			<th>제목</th>
-  			<td><input type="text" name="title" id="title"></td>
-  		</tr>
-  		<tr>
-  			<th>내용</th>
-  			<td><textarea name="body" id="body"></textarea></td>
-  		</tr>
-  		<tr>
-  			<th>첨부파일</th>
-  			<td>
-  				<input type="button" value="추가" id="aBtn">
-  				<input type="button" value="삭제" id="dBtn">
-  			</td>
-  		</tr>
-  		<tr>
-  			<th>첨부파일</th>
-  			<td><input type="file" name="files" id="files" class="img"/>
-  				<img id="siba" src="#" alt=" " width="200" height="130"/>
-  			</td>
-  		</tr>		
-  		<tr id="copy">
-  			<td colspan="2" align="center">
-  				<input type="button" id="sBtn" value="글쓰기" />
-  			</th>
-  		</tr>
-  	</table>
-  </form>		 
+    	<div class="form-group">    
+  			<label for="writer">작성자</label>
+  			<input class="form-control" type="text" name="writer" id="writer">
+  		</div>
+  		<div class="form-group">
+  			<label for="title">제목</label>
+  			<input class="form-control" type="text" name="title" id="title" required="required" placeholder="제목을 입력해주세요">
+  		</div>
+  		<div class="form-group">
+  			<label for="body">내용</label>
+  			<textarea class="form-control" name="body" id="body"></textarea>
+  		</div>
+  		<div class="form-group">
+  			<label for="f">첨부파일</label>
+  				<input class="btn btn-primary" type="button" value="추가" id="aBtn">
+  				<input class="btn btn-primary" type="button" value="삭제" id="dBtn">
+  		</div>
+  		<div id="ggg">
+  			<label for="files">첨부파일</label>
+  			<input type="file" name="files" id="files" class="img"/>
+  			<img id="siba" src="#" alt=" " width="200" height="130"/>
+  		</div>		
+  		<div class="form-group" id="copy" align="center">
+  				<input class="btn btn-primary" type="button" id="sBtn" value="글쓰기" />
+  		</div>
+  </form>
+  </div>		 
 </body>
 </html>
 

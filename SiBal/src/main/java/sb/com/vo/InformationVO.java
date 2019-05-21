@@ -119,6 +119,16 @@ public class InformationVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	public String getTitle2() {
+		if(title.length()>=10) {
+			return title.substring(0, 10)+"...";			
+		}
+		else {
+			return title;
+		}
+	}
+	
 	public String getBody() {
 		return body;
 	}

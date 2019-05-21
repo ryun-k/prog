@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>½Ã¢°¹ß  ã·Û¡</title>
+<title>ì‹œËë°œ  å§‹ç™¼</title>
 <meta charset="utf-8">	
 <meta name="viewport" content="width=device-width, initial-scale=1">	
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">	
@@ -28,22 +26,20 @@
 
 
 
-<h1>ÀÓ½Ã¸ÞÀÎ</h1><br><br>
-
-
-<a href='/sb/notice/List.do'>°øÁö»çÇ×</a><br/><br/>
-
-<a href='../sb/airport/airportForm.do'>ºñÇà±âÇ¥ È®ÀÎ</a><br/><br/>
-
-
-<a href='/iedu/airportForm.do'>ºñÇà±âÇ¥ È®ÀÎ</a><br/><br/>
-<a href="../sb/qnaBoard/qnaList.do"><button>Áú¹®¸®½ºÆ®</button></a><br/><br/>
+<h1>ìž„ì‹œë©”ì¸</h1><br><br>
 
 
 
-<a href="../sb/information/informationList.do">²ó</a><br/><br/>
+<a href='../sb/airport/airportForm.do'>ë¹„í–‰ê¸°í‘œ í™•ì¸</a><br/><br/>
 
-<a href="../sb/member/memberList.do"><button>¸â¹ö¸®½ºÆ®</button></a><br/><br/>
-<a href="../sb/member/test.do"><button>Å×½ºÆ®</button></a><br/><br/>
+
+<a href="../sb/qnaBoard/qnaList.do"><button>ì§ˆë¬¸ë¦¬ìŠ¤íŠ¸</button></a><br/><br/>
+
+
+
+<a href="../sb/information/informationList.do">ë€¨</a><br/><br/>
+
+<a href="../sb/member/memberList.do"><button>ë©¤ë²„ë¦¬ìŠ¤íŠ¸</button></a><br/><br/>
+<a href="../sb/member/test.do"><button>í…ŒìŠ¤íŠ¸</button></a><br/><br/>
 </body>
 </html>

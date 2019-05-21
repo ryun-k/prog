@@ -4,40 +4,39 @@
 <mapper namespace="airport">
 
 	<insert id="insertGair" parameterType="airVO">
- 		 INSERT INTO G_AIR(g_NO,g_AIRLINENM,g_DEPAIRPORTNM,g_DEPPLANDTIME,g_ARRAIRPORTNM,g_ARRPLANDTIME,g_ECONOMYCHARGE,g_VIHICLEID,g_RDATE,g_NICK)
- 		 VALUES((SELECT NVL(MAX(g_No),0)+1 FROM G_AIR),#{airlineNm},#{depAirportNm},#{depPlandTime},#{arrAirportNm},#{arrPlandTime},#{economyCharge},#{vihicleId},SYSDATE,#{nick})
+ 		 INSERT INTO G_AIR(g_NO,g_AIRLINENM,g_DEPAIRPORTNM,g_ARRAIRPORTNM,g_ECONOMYCHARGE,g_VIHICLEID,g_RDATE,g_NICK, g_depPlandTime,g_arrPlandTime)
+ 		 VALUES((SELECT NVL(MAX(g_No),0)+1 FROM G_AIR),#{airlineNm},#{depAirportNm},#{arrAirportNm},#{economyCharge},#{vihicleId},SYSDATE,#{nick},#{depPlandTime},#{arrPlandTime})
 	</insert>
 	
 	<insert id="insertBair" parameterType="airVO">
- 		 INSERT INTO B_AIR(b_NO,b_AIRLINENM,b_DEPAIRPORTNM,b_DEPPLANDTIME,b_ARRAIRPORTNM,b_ARRPLANDTIME,b_ECONOMYCHARGE,b_VIHICLEID,b_RDATE,b_NICK)
- 		 VALUES((SELECT NVL(MAX(b_No),0)+1 FROM B_AIR),#{airlineNm},#{depAirportNm},#{depPlandTime},#{arrAirportNm},#{arrPlandTime},#{economyCharge},#{vihicleId},SYSDATE,#{nick})
+ 		 INSERT INTO B_AIR(b_NO,b_AIRLINENM,b_DEPAIRPORTNM,b_ARRAIRPORTNM,b_ECONOMYCHARGE,b_VIHICLEID,b_RDATE,b_NICK, b_depPlandTime,b_arrPlandTime)
+ 		 VALUES((SELECT NVL(MAX(b_No),0)+1 FROM B_AIR),#{airlineNm},#{depAirportNm},#{arrAirportNm},#{economyCharge},#{vihicleId},SYSDATE,#{nick},#{depPlandTime},#{arrPlandTime})
 	</insert>
 	
-	<select id="gList" parameterType="airVO" 
+	<select id="goList" parameterType="airVO" 
 	resultType="airVO">
 		SELECT
 		        G_AIRLINENM   AS airlineNm,
 		        G_DEPAIRPORTNM AS depAirportNm,
-		        G_DEPPLANDTIME AS depPlandTime,
 		        G_ARRAIRPORTNM AS arrAirportNm,
-		        G_ARRPLANDTIME AS arrPlandTime,
 		        G_ECONOMYCHARGE AS economyCharge,
-		        G_VIHICLEID AS vihicleId 
+		        G_VIHICLEID AS vihicleId,
+		        g_depPlandTime as depPlandTime,
+		        g_arrPlandTime as arrPlandTime
 		FROM
 		G_AIR
 	</select>
-	
-	<select id="bList" parameterType="airVO" 
+	<select id="backList" parameterType="airVO" 
 	resultType="airVO">
 		SELECT
-		        B_AIRLINENM   AS airlineNm,
-		        B_DEPAIRPORTNM AS depAirportNm,
-		        B_DEPPLANDTIME AS depPlandTime,
-		        B_ARRAIRPORTNM AS arrAirportNm,
-		        B_ARRPLANDTIME AS arrPlandTime,
-		        B_ECONOMYCHARGE AS economyCharge,
-		        B_VIHICLEID AS vihicleId 
+		        b_AIRLINENM   AS airlineNm,
+		        b_DEPAIRPORTNM AS depAirportNm,
+		        b_ARRAIRPORTNM AS arrAirportNm,
+		        b_ECONOMYCHARGE AS economyCharge,
+		        b_VIHICLEID AS vihicleId,
+		        b_depPlandTime as depPlandTime,
+		        b_arrPlandTime as arrPlandTime
 		FROM
-		B_AIR
+		b_AIR
 	</select>
 </mapper>

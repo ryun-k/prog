@@ -6,12 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script>
-$(function (){
-	$("#button").click(function (){
-  	$("#divToggle").toggle();
-  });
-});
+<script type="text/javascript">
+	$(function(){
+		$("#bBtn").click(function(){
+			location.href = "../airport/airportForm2.do"
+		});
+	});
+
 </script>
 <title>Insert title here</title>
 </head>
@@ -34,7 +35,7 @@ $(function (){
 				</tr>
 			</thead>
 			<tbody align="center">
-				<c:forEach var="list" varStatus="status" items="${gLIST}">
+				<c:forEach var="list" varStatus="status" items="${LIST}">
 					<tr align="center" id="t${status.index}">
 								<td>${status.count}</td>
 								<td>${list.airlineNm}</td>
@@ -49,18 +50,9 @@ $(function (){
 				</c:forEach>
 			</tbody>
 		</table>
-		&nbsp;
-	<button id="button">토글버튼</button>
-	<div id="divToggle" style="display: none;">
-	 <form action="wAir.do" method="post">
-	출발 : <input type="text" name="depAirportNm"><br/>
-	도착 : <input type="text" name="arrAirportNm"><br/>
-	가는날 : <input type="text" id="gopicker" name="depPlandTime"><br/>
-	<input type="submit" value="확인">
-	</form>
-	</div>	
-		&nbsp;
 	</div>
+	<button type="button" id="bBtn">오는날 예약</button>
+	<c:if test="${not empty LIST1}">
 	<h2>오는날</h2>
 	<div class="container">
 		<table class="table table-dark">
@@ -77,21 +69,22 @@ $(function (){
 				</tr>
 			</thead>
 			<tbody align="center">
-				<c:forEach var="list" varStatus="status" items="${bLIST}">
+				<c:forEach var="list1" varStatus="status" items="${LIST1}">
 					<tr align="center" id="t${status.index}">
 								<td>${status.count}</td>
-								<td>${list.airlineNm}</td>
-								<td>${list.depAirportNm}</td>
-								<td>${list.depPlandTime}</td>
-								<td>${list.arrAirportNm}</td>
-								<td>${list.arrPlandTime}</td>
-								<td>${list.economyCharge}원</td>
-								<td>${list.vihicleId}
+								<td>${list1.airlineNm}</td>
+								<td>${list1.depAirportNm}</td>
+								<td>${list1.depPlandTime}</td>
+								<td>${list1.arrAirportNm}</td>
+								<td>${list1.arrPlandTime}</td>
+								<td>${list1.economyCharge}원</td>
+								<td>${list1.vihicleId}
 								</td>
 					</tr>
 				</c:forEach>
-				</tbody>
+			</tbody>
 		</table>
 	</div>
+	</c:if>
 </body>
 </html>

@@ -7,30 +7,28 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import sb.com.vo.AirVO;
 
-public class AirportDAO extends SqlSessionDaoSupport {
+public class AirportDAO extends SqlSessionDaoSupport{
 
-	public void insertGo(AirVO vo, String kind) {
+	public void insertGo(AirVO vo,String kind) {
 		SqlSession session = this.getSqlSession();
-
-		if (kind.equals("go")) {// 출발지 입력이라면
-			session.insert("airport.insertGair", vo);
+		
+		if(kind.equals("go")) {//출발지 입력이라면
+		session.insert("airport.insertGair", vo);
 		}
 	}
-
-	public void insertBack(AirVO vo, String kind) {
+	
+	public void insertBack(AirVO vo,String kind) {
 		SqlSession session = this.getSqlSession();
-		if (kind.equals("back")) {// 출발지 입력이라면
-			session.insert("airport.insertBair", vo);
+		if(kind.equals("back")) {//출발지 입력이라면
+		session.insert("airport.insertBair", vo);
 		}
 	}
-
-	// 가는날 조회 쿼리실행 함수
-	public ArrayList getgList(AirVO vo) {
-		return (ArrayList) getSqlSession().selectList("airport.gList", vo);
-	}
-
-	// 가는날 조회 쿼리실행 함수
-	public ArrayList getbList(AirVO vo) {
-		return (ArrayList) getSqlSession().selectList("airport.bList", vo);
+	
+	public ArrayList getGoList(AirVO vo) {
+			return (ArrayList) getSqlSession().selectList("airport.goList",vo);
+		}
+	
+	public ArrayList getBackList(AirVO vo) {
+		return (ArrayList) getSqlSession().selectList("airport.backList",vo);
 	}
 }

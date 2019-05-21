@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<img src="${pageContext.request.contextPath}/img/jeju_2018_01.png">
+<script type="text/javascript">
+	$(function(){
+		alert("로그인후 이용할 수 있습니다.");
+		location.href="../member/loginForm.do"
+	});
+</script>
 </body>
 </html>

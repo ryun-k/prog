@@ -25,7 +25,7 @@
 				</tr>
 			</thead>
 			<tbody align="center">
-				<c:forEach var="list" varStatus="status" items="${list}">
+				<c:forEach var="list" varStatus="status" items="${LIST}">
 					<tr align="center" id="t${status.index}">
 								<td>${status.count}</td>
 								<td>${list.airlineNm}</td>

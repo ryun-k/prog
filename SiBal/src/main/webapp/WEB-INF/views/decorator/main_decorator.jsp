@@ -45,14 +45,7 @@
  	
  	<decorator:head />
  	
- 	
- 	<script type="text/javascript">
- 	$(document).ready(function(){
- 		$("#logout").click(function(){
- 			alert('로그아웃 되었습니다.');
- 		})
- 	});
- 	</script>
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">

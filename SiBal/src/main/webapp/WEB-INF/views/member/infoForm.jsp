@@ -40,7 +40,7 @@ $(document).ready(function(){
 <body>
 <div class="container">
 <h1>회원정보</h1>
-
+<hr/>
 <form id = "modify" class="was-validated" method="post" action="../member/pwCode.do" encType="utf-8" >
 <div class="form-group">
   

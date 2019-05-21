@@ -43,12 +43,9 @@ public class MemberController {
 
 	// 로그아웃처리
 	@RequestMapping("/logoutProc")
-	public String  logoutProc(HttpServletRequest request,RedirectAttributes redirectAttr) {
+	public String  logoutProc(HttpServletRequest request) {
 		mService.logoutProc(request);
-		redirectAttr.addFlashAttribute("message", "로그아웃 되었습니다.");
-//		mv.addObject("LOG", "logout" );
-//		mv.setView(rv);
-//		mv.setView(rv);
+
 		return "redirect:logoutForm.do";
 	}
 
@@ -335,11 +332,6 @@ public class MemberController {
 			str = "NO";
 		}
 		return str;
-	}
-
-	@RequestMapping("/error")
-	public void error() {
-
 	}
 
 }

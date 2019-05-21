@@ -53,7 +53,7 @@
 								<%-- <td>${item.arrPlandTime}</td> --%>
 								<td>${item.economyCharge}원</td>
 								<td>${item.vihicleId}
-								<td><form id="info${status.index}" method="GET" action="../airport/backProc.do">
+								<td><form id="info${status.index}" method="GET" action="../airport/wbackProc.do">
 									<input type="hidden" name="airlineNm" value="${item.airlineNm}" />
 									<input type="hidden" name="depAirportNm" value="${item.depAirportNm}" /> 
 										<input type="hidden" name="arrAirportNm" value="${item.arrAirportNm}" /> 

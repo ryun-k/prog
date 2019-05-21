@@ -11,6 +11,8 @@ public class AirVO {
 	private String depAirportNm;
 	private String depPlandTime;
 	private int economyCharge;
+	private int no;
+	private int cal;
 	private String prestigeCharge;
 	private String vihicleId;
 	private String nick;
@@ -53,8 +55,7 @@ public class AirVO {
 		String result = arrPlandTime.substring(0,4)+"년"+arrPlandTime.substring(4,6)+"월"
 				+arrPlandTime.substring(6,8)+"일"+"\n"+arrPlandTime.substring(8,10)+"시"
 				+arrPlandTime.substring(10,12)+"분";
-
-return result;
+			return result;
 	}
 	public void setDepPlandTime(String depPlandTime) {
 		this.depPlandTime = depPlandTime;
@@ -82,6 +83,18 @@ return result;
 	}
 	public void setNick(String nick) {
 		this.nick = nick;
+	}
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	public int getCal() {
+		return cal;
+	}
+	public void setCal(int cal) {
+		this.cal = cal;
 	}
 	
 	

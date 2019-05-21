@@ -15,16 +15,16 @@ public class AirportService {
 	
 	public void insertGo(AirVO vo, HttpSession session) {
 		System.out.println("DAO호출성공");
-		String nick = "가와";
+		String nick = "Hyoung";
 		vo.setNick(nick);
-		aDAO.insertGo(vo, "go");
+		aDAO.insertGo(vo);
 	}
 	
 	public void insertBack(AirVO vo, HttpSession session) {
 		System.out.println("DAO호출성공");
-		String nick = "가와";
+		String nick = "Hyoung";
 		vo.setNick(nick);
-		aDAO.insertBack(vo, "back");
+		aDAO.insertBack(vo);
 	}
 	
 	public ArrayList getGoList() {
@@ -40,5 +40,21 @@ public class AirportService {
 		
 		ArrayList list = aDAO.getBackList(vo);
 		return list;
+	}
+	
+	public void gdelProc(AirVO vo) {
+		aDAO.gdelProc(vo);
+	}
+	
+	public void bdelProc(AirVO vo) {
+		aDAO.bdelProc(vo);
+	}
+	
+	public void gcalProc(AirVO vo) {
+		aDAO.gcalProc(vo);
+	}
+	
+	public void bcalProc(AirVO vo) {
+		aDAO.bcalProc(vo);
 	}
 }

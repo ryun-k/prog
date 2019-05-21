@@ -32,67 +32,36 @@ public class AirportController {
 	public String airportForm() {
 		return "/airport/airportForm";
 	}
+//================================================================================================================
 	
-	// 편도 조회
+	// 편도(가는날) 조회
 	@RequestMapping(value="/pAir", method = RequestMethod.POST)
 	public String pgoAir(AirVO airVO, Model model) throws Exception{
+		
 		Map<String, String> result = MyUtils.getAirportId();
 		String depAirportId = result.get(airVO.getDepAirportNm());
 		String arrAirportId = result.get(airVO.getArrAirportNm());
 		String depPlandTime = airVO.getDepPlandTime();
+		
 		List<AirVO> go = ApiExplorer.getAirportJson(depAirportId, arrAirportId, depPlandTime);
 		
 		model.addAttribute("go", go);
 		return "airport/pAir";
 	}
-//================================================================================================================
 	
-	// 왕복에서 가는날 조회
-	@RequestMapping(value="/wgoAir", method = RequestMethod.POST)
-	public String wgoAir(AirVO airVO, Model model) throws Exception{
-		Map<String, String> result = MyUtils.getAirportId();
-		String depAirportId = result.get(airVO.getDepAirportNm());
-		String arrAirportId = result.get(airVO.getArrAirportNm());
-		String depPlandTime = airVO.getDepPlandTime();
-		String arrPlandTime = airVO.getArrPlandTime();
-		
-		List<AirVO> go = ApiExplorer.getAirportJson(depAirportId, arrAirportId, depPlandTime);
-		
-		model.addAttribute("go", go);
-		return "airport/wgoAir";
-	}
-	
-	@RequestMapping(value="/wbackAir")
-	public ModelAndView wbackAir(AirVO airVO, ModelAndView mv, HttpSession session) throws Exception{
-		String depAirportNm2 = (String) session.getAttribute("depAirportNm");
-		String arrAirportNm2 = (String) session.getAttribute("arrAirportNm");
-		String depPlandTime2 = (String) session.getAttribute("depPlandTime");
-		
-		System.out.println(depAirportNm2);
-		System.out.println(arrAirportNm2);
-		System.out.println(depPlandTime2);
-		
-		airVO.setDepAirportNm(depAirportNm2);
-		airVO.setArrAirportNm(arrAirportNm2);
-		airVO.setDepPlandTime(depPlandTime2);
+	// 편도(오는날) 조회
+	@RequestMapping(value="/wAir")
+	public String wbackAir(AirVO airVO, Model model) throws Exception{
 		
 		Map<String, String> result = MyUtils.getAirportId();
 		String depAirportId = result.get(airVO.getDepAirportNm());
 		String arrAirportId = result.get(airVO.getArrAirportNm());
 		String depPlandTime = airVO.getDepPlandTime();
 		
-//		List<AirVO> back = ApiExplorer.getAirportJson(arrAirportId, depAirportId , depPlandTime);
-		String back = ApiExplorer.getAirportData(arrAirportId, depAirportId , depPlandTime);
-		
-		session.removeAttribute("depAirportNm");
-		session.removeAttribute("arrAirportNm");
-		session.removeAttribute("depPlandTime");
-		
-		aService.insertBack(airVO, session);
-		// 뷰
-		RedirectView rv = new RedirectView("../airport/wbackProc");
-		mv.setView(rv);
-		return mv;
+		String back = ApiExplorer.getAirportData(depAirportId, arrAirportId , depPlandTime);
+			
+		model.addAttribute("back", back);
+		return "airport/wAir";
 		
 	}
 //================================================================================================================
@@ -113,47 +82,28 @@ public class AirportController {
 	
 	// 왕복정보 입력시 가는길 입력
 	@RequestMapping(value="/wgoProc")
-	public ModelAndView wgoProc(AirVO vo, HttpSession session, HttpServletRequest req) {
+	public ModelAndView wgoProc(AirVO vo, HttpSession session,ModelAndView mv, HttpServletRequest req) {
 		
 		System.out.println("rConfirm()컨트롤러함수 호출성공");
-		ModelAndView mv = new ModelAndView("/airport/wbackAir");		
-		//mv.addObject("depAirportNm", vo.getDepAirportNm());
-		//mv.addObject("arrAirportNm", vo.getArrAirportNm());
-		//mv.addObject("arrPlandTime", vo.getArrPlandTime());
-		aService.insertGo(vo, session);
+		
+		aService.insertBack(vo, session);
 		// 뷰
-		session.setAttribute("depAirportNm", vo.getDepAirportNm());
-		session.setAttribute("arrAirportNm", vo.getArrAirportNm());
-		session.setAttribute("depPlandTime", vo.getDepPlandTime());
 		
-		
-		RedirectView rv = new RedirectView("../airport/wbackAir.do");
+		RedirectView rv = new RedirectView("../airport/rConfirm.do");
 		mv.setView(rv);
 		return mv;
 	}
-	
-	// 왕복정보 입력시 오는길 입력
-		@RequestMapping("/wbackProc")
-		public ModelAndView wbackProc(AirVO vo, HttpSession session, ModelAndView mv, HttpServletRequest req) {
-			
-			System.out.println("rConfirm()컨트롤러함수 호출성공");
-			
-			aService.insertBack(vo, session);
-			// 뷰
-			RedirectView rv = new RedirectView("../airport/rConfirm.do");
-			mv.setView(rv);
-			return mv;
-		}
 	
 //================================================================================================================
 	//예매 목록 보기
 	@RequestMapping("/rConfirm")
 	public void rResult(HttpServletRequest request) {
 		
-		ArrayList list = aService.getrList();
+		ArrayList glist = aService.getgList();
+		ArrayList blist = aService.getbList();
 		
-		request.setAttribute("LIST", list);
-		
+		request.setAttribute("gLIST", glist);
+		request.setAttribute("bLIST", blist);
 		
 	}
 

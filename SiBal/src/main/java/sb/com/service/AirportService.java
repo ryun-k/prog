@@ -28,12 +28,15 @@ public class AirportService {
 		aDAO.insertBack(vo, "back");
 	}
 	
-	public ArrayList getrList() {
-		
+	public ArrayList getgList() {
 		AirVO vo = new AirVO();
-		
-		ArrayList list = aDAO.getrList(vo);
+		ArrayList list = aDAO.getgList(vo);
 		return list;
-		
+	}
+	
+	public ArrayList getbList() {
+		AirVO vo = new AirVO();
+		ArrayList list = aDAO.getbList(vo);
+		return list;
 	}
 }

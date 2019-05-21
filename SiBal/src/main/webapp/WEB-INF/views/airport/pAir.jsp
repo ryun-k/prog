@@ -43,9 +43,9 @@
 					<th>번호</th>
 					<th>항공사</th>
 					<th>출발지</th>
-					<!-- <th>출발시간</th> -->
+					<th>출발시간</th>
 					<th>도착지</th>
-					<!-- <th>도착시간</th> -->
+					<th>도착시간</th>
 					<th>가격</th>
 					<th>비행기</th>
 				</tr>
@@ -58,9 +58,9 @@
 								<td>${status.count}</td>
 								<td>${item.airlineNm}</td>
 								<td>${item.depAirportNm}</td>
-								<%-- <td>${item.depPlandTime}</td> --%>
+								<td>${item.depPlandTime2}</td>
 								<td>${item.arrAirportNm}</td>
-								<%-- <td>${item.arrPlandTime}</td> --%>
+								<td>${item.arrPlandTime2}</td>
 								<td>${item.economyCharge}원</td>
 								<td>${item.vihicleId}
 								<td><form class="info${status.index}" method="GET"
@@ -69,9 +69,9 @@
 											hidden="hidden"> 
 											<input type="hidden" name="airlineNm" value="${item.airlineNm}" /> 
 											<input type="hidden" name="depAirportNm" value="${item.depAirportNm}" /> 
+											<input type="hidden" name="depPlandTime" value="${item.depPlandTime2}" /> 
 											<input type="hidden" name="arrAirportNm" value="${item.arrAirportNm}" /> 
-											<input type="hidden" name="depPlandTime" value="${item.depPlandTime}" /> 
-											<input type="hidden" name="arrPlandTime" value="${item.arrPlandTime}" /> 
+											<input type="hidden" name="arrPlandTime" value="${item.arrPlandTime2}" /> 
 											<input type="hidden" name="economyCharge" value="${item.economyCharge}" /> 
 											<input type="hidden" name="vihicleId" value="${item.vihicleId}" /> 
 											<input type="button" class="btn btn-secondary gobtn" value="예매" />
@@ -85,32 +85,6 @@
 			</tbody>
 		</table>
 	</div>
-
-	<div>
-		<c:forEach var="item" varStatus="status" items="${go}">
-			<c:choose>
-				<c:when test="${item.economyCharge!=0}">
-					<a class="content_box">
-						<dl class="content">
-							<dt>
-								<span>${item.airlineNm}</span>
-							</dt>
-							<dd class="time">
-								<span>${item.depAirportNm}</span> <i class="ico_com i_time_bar"></i>
-								<span>${item.arrAirportNm}</span>
-							</dd>
-							<dd class="price">
-								<span class="air_signal">₩</span>${item.economyCharge}
-							</dd>
-						</dl>
-					</a>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-	</div>
-
-
-
 
 </body>
 </html>

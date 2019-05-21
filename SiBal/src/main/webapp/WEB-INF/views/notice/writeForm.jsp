@@ -63,7 +63,7 @@
         </div>
       </div>
     </div>
-        <button type="submit" class="btn btn-primary">글쓰기</button>
+        <button type="submit" class="btn btn-dark">글쓰기</button>
   </form>
 </div>
 

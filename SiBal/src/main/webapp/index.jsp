@@ -1,39 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>ì‹œËë°œ  å§‹ç™¼</title>
+<meta charset="utf-8">	
+<meta name="viewport" content="width=device-width, initial-scale=1">	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>	
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
-<h1>ÀÓ½Ã¸ÞÀÎ</h1><br><br>
 
-<a href='/iedu/airportForm.do'>ºñÇà±âÇ¥ È®ÀÎ</a><br/><br/>
-<a href="../sb/qnaBoard/qnaList.do"><button>Áú¹®¸®½ºÆ®</button></a><br/><br/>
-<c:choose> 
-    <c:when test="${not empty sessionScope.nick }">    
-        <li><a href="../sb/member/logoutProc.do"><button>·Î±×¾Æ¿ô</button></a><br/><br/></li>
-        <li><a href="../sb/member/modifyForm.do"><button>È¸¿øÁ¤º¸¼öÁ¤</button></a><br/><br/></li>
-        <li><a href="../sb/member/withdrawForm.do"><button>È¸¿øÅ»Åð</button></a><br/><br/></li>
-        <%
-	  String nick = (String)session.getAttribute("nick");
-        %>
-        <li>
-        <%=nick %>(À¸)·Î Á¢¼ÓÁß.
-        </li>
-    </c:when>
-    <c:otherwise>   
-        <li><a href="../sb/member/loginForm.do"><button>·Î±×ÀÎ</button></a><br/><br/></li>
-        <li><a href="../sb/member/signUp.do"><button>È¸¿ø°¡ÀÔ</button></a><br/><br/></li>
-    </c:otherwise>                  
-</c:choose>
 
-<a href="../sb/member/logoutProc.do"><button>·Î±×¾Æ¿ô</button></a><br/><br/>
-<a href="../sb/information/informationList.do">²ó</a><br/><br/>
 
-<a href="../sb/member/memberList.do"><button>¸â¹ö¸®½ºÆ®</button></a><br/><br/>
-<a href="../sb/member/test.do"><button>Å×½ºÆ®</button></a><br/><br/>
+<h1>ìž„ì‹œë©”ì¸</h1><br><br>
+
+
+
+<a href='../sb/airport/airportForm.do'>ë¹„í–‰ê¸°í‘œ í™•ì¸</a><br/><br/>
+
+
+<a href="../sb/qnaBoard/qnaList.do"><button>ì§ˆë¬¸ë¦¬ìŠ¤íŠ¸</button></a><br/><br/>
+
+
+
+<a href="../sb/information/informationList.do">ë€¨</a><br/><br/>
+
+<a href="../sb/member/memberList.do"><button>ë©¤ë²„ë¦¬ìŠ¤íŠ¸</button></a><br/><br/>
+<a href="../sb/member/test.do"><button>í…ŒìŠ¤íŠ¸</button></a><br/><br/>
 </body>
 </html>

@@ -1,20 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="en">
-<head>
-	<title>writeForm</title>
-	<meta charset="utf-8">
- 	<meta name="viewport" content="width=device-width, initial-scale=1">
- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<!doctype html>	
+<html lang="en">	
+<head>	
+	<title>writeForm</title>	
+	<meta charset="utf-8">	
+  	<meta name="viewport" content="width=device-width, initial-scale=1">	
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">	
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>	
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 	
+	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
  	<script type="text/javascript">
  	
  	  $( function() {
@@ -22,8 +22,14 @@
         $( "#startDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
         $( "#endDate" ).datepicker();
         $( "#endDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+        
+        if ($('input[name=isshow]').is(":checked")) {
+            $('input[name=sampleHidden]').val('Y');
+        } else {
+            $('input[name=sampleHidden]').val('N');
+        }
  	 } );
-
+	
 
  	</script>
 </head>
@@ -31,11 +37,11 @@
 
 <div class="container">
   <h1>writeForm</h1>
-  <form class="form-horizontal" action="../notice/writeProc.do" method="get">
+  <form class="form-horizontal" action="../notice/writeProc.do" method="post">
     <div class="form-group">
       <label class="control-label col-sm-2" >제목</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="title" name="title">
+        <input type="text" class="form-control" id="title" name="title" value="">
       </div>
     </div>
     <div class="form-group">
@@ -48,11 +54,11 @@
 	<div class="form-group">
       <label class="control-label col-sm-2" >시작일</label>
       <div class="col-sm-10">          
-		<input type="text" class="form-control"  id="startDate" name="startDate" size="30"/> 
+		<input type="text" class="form-control"  id="startDate" name="startDate" size="30" autocomplete="off"/> 
       </div>
       <label class="control-label col-sm-2" >종료일</label>
       <div class="col-sm-10">          
-		<input type="text" class="form-control"  id="endDate"  name="endDate" size="30"/>
+		<input type="text" class="form-control"  id="endDate"  name="endDate" size="30" autocomplete="off"/>
       </div>
     </div> 
        
@@ -60,12 +66,12 @@
       <div class="col-sm-offset-2 col-sm-10">
         <div class="checkbox">
           <label><input type="checkbox" name="isshow" value="Y" >공개</label>
+          <input type="hidden" name="isshowHidden" value="Y" >
         </div>
       </div>
     </div>
-        <button type="submit" class="btn btn-primary">글쓰기</button>
+        <button type="submit" class="btn btn-dark">글쓰기</button>
   </form>
 </div>
 
 </body>
-</html>

@@ -6,9 +6,11 @@ public class AirVO {
 	private String arrPlandTime;
 	private String depAirportNm;
 	private String depPlandTime;
-	private String economyCharge;
+	private int economyCharge;
 	private String prestigeCharge;
 	private String vihicleId;
+	private String nick;
+	
 	public String getAirlineNm() {
 		return airlineNm;
 	}
@@ -39,10 +41,10 @@ public class AirVO {
 	public void setDepPlandTime(String depPlandTime) {
 		this.depPlandTime = depPlandTime;
 	}
-	public String getEconomyCharge() {
+	public int getEconomyCharge() {
 		return economyCharge;
 	}
-	public void setEconomyCharge(String economyCharge) {
+	public void setEconomyCharge(int economyCharge) {
 		this.economyCharge = economyCharge;
 	}
 	public String getPrestigeCharge() {
@@ -56,6 +58,12 @@ public class AirVO {
 	}
 	public void setVihicleId(String vihicleId) {
 		this.vihicleId = vihicleId;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 	
 	

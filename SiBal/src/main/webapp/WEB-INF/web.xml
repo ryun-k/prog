@@ -12,6 +12,8 @@
 		-->
 		<param-value>/WEB-INF/webSpring/sub-context.xml</param-value>
 	</context-param>
+
+
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
@@ -31,6 +33,12 @@
 			 -->
 			<param-value>/WEB-INF/webSpring/sb-context.xml</param-value>
 		</init-param>
+		<!-- 404에러페이지 -->
+		<init-param>
+			<param-name>throwExceptionIfNoHandlerFound</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
@@ -43,6 +51,18 @@
 		-->
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Sitemesh Page Filter -->
+	<filter>
+	    <filter-name>sitemeshPageFilter</filter-name>
+	    <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	    <filter-name>sitemeshPageFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	    <!-- <dispatcher>FORWARD</dispatcher> -->
+	</filter-mapping>
 	
 	<!--  POST 방식의 한글 깨짐 방지  -->
 	<filter>

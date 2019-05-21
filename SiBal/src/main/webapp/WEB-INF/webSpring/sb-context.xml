@@ -8,9 +8,12 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<annotation-driven />
-
 	<resources mapping="/resources/**" location="/resources/" />
+<<<<<<< HEAD
 	<resources mapping="/uploads/**" location="/uploads/" />
+=======
+	
+>>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 여기에서는 views 폴더의 위치는 변경하지 않고 /WEB-INF/views/ 그대로 가기로함 -->
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -29,6 +32,7 @@
 		<!--	파일의 이름이 한글인 경우 엔코딩 방식을 지정	-->
 		<beans:property name="defaultEncoding" value="UTF-8" />
   		</beans:bean>
+		
 		
 	<!-- 컨트롤러가 만들어지는 기본 경로를 지정하는 부분 -->
 	<context:component-scan base-package="sb.com" />

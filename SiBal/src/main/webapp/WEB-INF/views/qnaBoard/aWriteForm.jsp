@@ -14,39 +14,41 @@
   <script type="text/javascript">
   	$(function(){
   		
-  		var title = RegExp(/^.{1,30}$/);  	
-  		var content = RegExp(/^.{1,1000}$/);  	
   		
   		$("#aBtn").click(function(){
+	  		var title = RegExp(/^.{1,30}$/);  	
+	  		var content = RegExp(/^(.|\n|\r){1,1000}$/);
+	  		
   			if($("#title").val()==""){
   			  alert("제목을 입력해주세요.");
   		      $("#title").focus();
   		      return false;
-  			};
+  			}
   			
   			if(!title.test($("#title").val())){
   			  alert("제목은 문자 30자리까지만 입력가능합니다.");
   		      $("#title").focus();
   		      return false;
-  		  	};
+  		  	}
   		  	
   			if($("#content").val()==""){
   			  alert("내용을 입력해주세요.");
   		      $("#content").focus();
   		      return false;
-  			};
+  			}
   			
   			if(!content.test($("#content").val())){
    			  alert("내용은 문자 1000자리까지만 입력가능합니다.");
    		      $("#content").focus();
    		      return false;
-  			};
+  			}
   			
    		   if($("#id").val()==""){
    			  alert("글쓰기는 로그인 상태에서 할 수 있습니다.");
    			  location.href="../member/loginForm.do";
    		      return false;
-   			};
+   			}
+  		});
   		
   		$("#cBtn").click(function(){
   			history.back();

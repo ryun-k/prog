@@ -35,7 +35,7 @@
   				location.href="../qnaBoard/deleteProc.do?oriNo=${VIEW.no}&nowPage=${nowPage}";
   		});
   		
-  		var reContent = RegExp(/^.{1,300}$/);  
+  		var reContent = RegExp(/^(.|\n|\r){1,1000}$/);
   		
   		// 답글 입력창
   		$(".rBtn").click(function(){
@@ -45,15 +45,17 @@
   		
   		// 답글 입력
   		$(".rrBtn").click(function(){
-  			if($("#reReContent").val()==""){
+  			
+  			var value = $(this).parent("div").children("textarea").val();
+  			if(value==""){
   				alert("답글 내용을 입력해주세요.");
-    		    $("#reReContent").focus();
+    		    $(".reReContent").focus();
     		    return false;
   			};
   			
-  			if(!reContent.test($("#reReContent").val())){
+  			if(!reContent.test(value)){
    			  alert("댓글은 문자 300자리까지만 입력가능합니다.");
-   		      $("#reReContent").focus();
+   		      $(".reReContent").focus();
    		      return false;
    			};
   			
@@ -76,15 +78,17 @@
   		// 댓글 수정
   		$(".umBtn").click(function(){
   			
-  			if($("#mReContent").val()==""){
-  				alert("답글 내용을 입력해주세요.");
-    		    $("#mReContent").focus();
+  			var value = $(this).parent("div").children("textarea").val();
+  			
+  			if(value==""){
+  				alert("댓글 수정 내용을 입력해주세요.");
+    		    $(".mReContent").focus();
     		    return false;
   			};
   			
-  			if(!reContent.test($("#mReContent").val())){
+  			if(!reContent.test(value)){
    			  alert("댓글은 문자 300자리까지만 입력가능합니다.");
-   		      $("#mRecontent").focus();
+   		      $(".mRecontent").focus();
    		      return false;
    			};
   			
@@ -148,7 +152,9 @@
     </tbody>
   </table>
   <div>
-	<button type="submit" class="btn btn-dark" id="rBtn" >답변하기</button>
+  	<c:if test="${not empty sessionScope.nick}">
+		<button type="submit" class="btn btn-dark" id="rBtn" >답변하기</button>
+  	</c:if>
    	<c:if test="${sessionScope.nick eq VIEW.id}">
 	   	<button type="submit" class="btn btn-dark" id="uBtn" >수정하기</button>
 	   	<button type="submit" class="btn btn-dark" id="dBtn" >삭제하기</button>
@@ -168,7 +174,9 @@
 			   <div class="card-header" id="${data.reNo}">
 			     <strong class="card-text">${data.id}</strong>
 			     <span>${data.reWDate}</span>
-			     <button class="card-link btn btn-outline-secondary rBtn">답글달기</button>
+			     <c:if test="${not empty sessionScope.nick}">
+			     	<button class="card-link btn btn-outline-secondary rBtn">답글달기</button>
+			     </c:if>
 			     <c:if test="${sessionScope.nick eq data.id}">
 					 <button class="card-link btn btn-outline-secondary mBtn">수정하기</button>
 					 <button class="card-link btn btn-outline-secondary dBtn">삭제하기</button>
@@ -185,7 +193,7 @@
 				  <input type="hidden" name="reNo" value="${data.reNo}" />
 				  <div class="form-group">
 				    <label for="mReContent"></label>
-				    <textarea class="form-control" rows="4" id="mReContent" name="reContent" >${data.reContent}</textarea>
+				    <textarea class="form-control mReContent" rows="4" id="mReContent" name="reContent" >${data.reContent}</textarea>
 				  <button type="button" class="btn btn-outline-secondary umBtn">수정</button>
 				  <button type="button" class="btn btn-outline-secondary cmBtn">취소</button>
 				  </div>
@@ -199,7 +207,7 @@
 				  <input type="hidden" name="reNo" value="${data.reNo}" />
 				  <div class="form-group">
 				    <label for="reReContent"></label>
-				    <textarea class="form-control " rows="4" id="reReContent" name="reContent" ></textarea>
+				    <textarea class="form-control reReContent" rows="4" id="reReContent" name="reContent" ></textarea>
 				  <button type="button" class="btn btn-outline-secondary rrBtn">답글달기</button>
 				  <button type="button" class="btn btn-outline-secondary crBtn">취소</button>
 				  </div>

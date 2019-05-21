@@ -109,7 +109,7 @@
     <div class="tab_container">
 
         <div id="tab1" class="tab_content">
-           <form action="goAir.do" method="post">
+           <form action="pAir.do" method="post">
 	출발 : <input type="text" name="depAirportNm"><br/>
 	도착 : <input type="text" name="arrAirportNm"><br/>
 	가는날 : <input type="text" id="gopicker" name="depPlandTime"><br/>
@@ -118,7 +118,7 @@
         </div>
 
         <div id="tab2" class="tab_content">
-          <form action="backAir.do" method="post">
+          <form action="wgoAir.do" method="post">
 	출발 : <input type="text" name="depAirportNm"><br/>
 	도착 : <input type="text" name="arrAirportNm"><br/>
 	가는날 : <input type="text" id="gopicker" name="depPlandTime"><br/>

@@ -43,12 +43,9 @@ public class MemberController {
 
 	// 로그아웃처리
 	@RequestMapping("/logoutProc")
-	public String  logoutProc(HttpServletRequest request,RedirectAttributes redirectAttr) {
+	public String  logoutProc(HttpServletRequest request) {
 		mService.logoutProc(request);
-		redirectAttr.addFlashAttribute("message", "로그아웃 되었습니다.");
-//		mv.addObject("LOG", "logout" );
-//		mv.setView(rv);
-//		mv.setView(rv);
+
 		return "redirect:logoutForm.do";
 	}
 
@@ -200,12 +197,12 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String subject = "비밀번호 찾기 인증코드 안내";
+		String subject = "비밀번호 변경하기 인증코드 안내";
 
 		String msg = "";
 		msg += "<div align = 'center' style='border:1px solid black; font-family:verdana'>";
-		msg += "<h1 style = 'color: blue;'> 비밀번호 찾기 인증 코드입니다..</h1>";
-		msg += "<h3>비밀번호 찾기 페이지로 돌아가 인증코드</h3><h1> <strong>";
+		msg += "<h1 style = 'color: blue;'> 비밀번호 변경하기 인증 코드입니다..</h1>";
+		msg += "<h3>비밀번호 변경하기 페이지로 돌아가 인증코드</h3><h1> <strong>";
 		msg += KeyCode + "</strong></h1><h3>를 입력해주세요.</h3></div><br/>	";
 
 		try {
@@ -335,11 +332,6 @@ public class MemberController {
 			str = "NO";
 		}
 		return str;
-	}
-
-	@RequestMapping("/error")
-	public void error() {
-
 	}
 
 }

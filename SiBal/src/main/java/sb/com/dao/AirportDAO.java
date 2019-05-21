@@ -19,7 +19,6 @@ public class AirportDAO extends SqlSessionDaoSupport{
 	
 	public void insertBack(AirVO vo,String kind) {
 		SqlSession session = this.getSqlSession();
-		
 		if(kind.equals("back")) {//출발지 입력이라면
 		session.insert("airport.insertBair", vo);
 		}

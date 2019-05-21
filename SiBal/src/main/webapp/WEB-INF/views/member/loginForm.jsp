@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 
-Client ID
-645231811798-k4jflp70j4nc4s9bfvr07u93tpogio97.apps.googleusercontent.com
 
-Client Secret
-w7hqPZTNwCeqHJZkw4qaCwMz 
--->
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>로그인폼</title>
+	<title>로그인</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -21,10 +15,6 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 	
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-
-	<!-- <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="645231811798-k4jflp70j4nc4s9bfvr07u93tpogio97.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script> -->
     <script>
 		$(document).ready(function(){
 			//로그인시 이메일,비번 확인
@@ -43,7 +33,7 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 							$(location).attr("href","../member/withDraw.do");
 						}
 						else{
-							alert('이메일과 비밀번호가 올바르지 않습니다.');
+							alert('가입정보가 올바르지 않습니다.');
 							$("#pw").val("");
 							$("#pw").focus();
 						}
@@ -125,59 +115,9 @@ w7hqPZTNwCeqHJZkw4qaCwMz
 			         alert('로그인이 실패 되었습니다.');
 			      }
 			    });
-			  //카카오 로그아웃
-			  
 			})
-			/* //구글로그인
-			$("#gBtn").click(function(){
-				function onSignIn(googleUser) {
-					  // Useful data for your client-side scripts:
-					  var profile = googleUser.getBasicProfile(){
-					  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-					  console.log('Full Name: ' + profile.getName());
-					  console.log('Given Name: ' + profile.getGivenName());
-					  console.log('Family Name: ' + profile.getFamilyName());
-					  console.log("Image URL: " + profile.getImageUrl());
-					  console.log("Email: " + profile.getEmail());
-					  
-					 // The ID token you need to pass to your backend:
-					  var id_token = googleUser.getAuthResponse().id_token;
-					  console.log("ID Token: " + id_token);
-					  var email=profile.getEmail();
-					  var name= profile.getName();
-					  var image= profile.getImageUrl();
-					  var id= profile.getId(); 
-						document.getElementById('google').innerHTML=email+'<p/>'+name+id+
-						'<p/>'+'<img src="'+image+'">';
-					  }
-					}
-			}) */
-			
 		});
 		</script>
-<!--  	<script>
-function onSignIn(googleUser) {
-  // Useful data for your client-side scripts:
-  var profile = googleUser.getBasicProfile(){
-  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-  console.log('Full Name: ' + profile.getName());
-  console.log('Given Name: ' + profile.getGivenName());
-  console.log('Family Name: ' + profile.getFamilyName());
-  console.log("Image URL: " + profile.getImageUrl());
-  console.log("Email: " + profile.getEmail());
-  }
- // The ID token you need to pass to your backend:
-  var id_token = googleUser.getAuthResponse().id_token;
-  console.log("ID Token: " + id_token);
-  var email=profile.getEmail();
-  var name= profile.getName();
-  var image= profile.getImageUrl();
-  var id= profile.getId(); 
-	document.getElementById('google').innerHTML=email+'<p/>'+name+id+
-	'<p/>'+'<img src="'+image+'">';
-  
-}
-	</script>   --> 
 </head>
 <body>
 <div class="container">
@@ -198,28 +138,22 @@ function onSignIn(googleUser) {
 				<div class="col-10"></div>
 				<div class="col-2">
 					<input type="button" class="btn btn-primary" id="lBtn" value="Login">
-					<input type="button" class="btn btn-primary" id="sBtn" value="회원가입">
+					<input type="button" class="btn btn-outline-primary" id="sBtn" value="회원가입">
 				</div>
 				</div>
 				<hr/>
 				<div class="row">
 				<div class="col-8"></div>
 				<div class="col-4">
-					<input type="button" class="btn btn-primary" id="kakao-login-btn" value="카카오로그인">
-					<input type="button" class="btn btn-primary" id="fBtn" value="비밀번호 찾기">
-					<input type="button" class="btn btn-primary" id="cBtn" value="메인가기">
-					<!-- <input type="button" class="btn btn-primary" id="gBtn" value="구글로그인"> -->
+					<input type="button" class="btn btn-warning" id="kakao-login-btn" value="카카오로그인">
+					<input type="button" class="btn btn-primary float-auto" id="fBtn" value="비밀번호 찾기">
+					<input type="button" class="btn btn-outline-danger float-right" id="cBtn" value="취소하기">
 				</div>	
 				</div>
 
-
-
-
-	
 	</form>
-
 	<br/>
-
+	
 	<form id="codeForm" method="post" action="checkEmail.do">
 	<input type="hidden" id="email1" name="email">
 	</form>

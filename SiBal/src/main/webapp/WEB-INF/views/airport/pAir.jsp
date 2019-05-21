@@ -64,17 +64,17 @@
 								<td>${item.economyCharge}원</td>
 								<td>${item.vihicleId}
 								<td><form class="info${status.index}" method="GET"
-										action="../airport/goProc.do">
+										action="../airport/pgoProc.do">
 										<input type="text" name="go${status.index}" value="go"
-											hidden="hidden"> <input type="hidden"
-											name="airlineNm" value="${item.airlineNm}" /> <input
-											type="hidden" name="depAirportNm"
-											value="${item.depAirportNm}" /> <input type="hidden"
-											name="arrAirportNm" value="${item.arrAirportNm}" /> <input
-											type="hidden" name="economyCharge"
-											value="${item.economyCharge}" /> <input type="hidden"
-											name="vihicleId" value="${item.vihicleId}" /> <input
-											type="button" class="btn btn-secondary gobtn" value="예매" />
+											hidden="hidden"> 
+											<input type="hidden" name="airlineNm" value="${item.airlineNm}" /> 
+											<input type="hidden" name="depAirportNm" value="${item.depAirportNm}" /> 
+											<input type="hidden" name="arrAirportNm" value="${item.arrAirportNm}" /> 
+											<input type="hidden" name="depPlandTime" value="${item.depPlandTime}" /> 
+											<input type="hidden" name="arrPlandTime" value="${item.arrPlandTime}" /> 
+											<input type="hidden" name="economyCharge" value="${item.economyCharge}" /> 
+											<input type="hidden" name="vihicleId" value="${item.vihicleId}" /> 
+											<input type="button" class="btn btn-secondary gobtn" value="예매" />
 										<!-- <input type="button" class="reserve" value="예매"/> -->
 										<%-- <button class="reserve">예매</button> <!-- <input type="button" class="reserve" value="예매"/> -->--%>
 									</form></td>

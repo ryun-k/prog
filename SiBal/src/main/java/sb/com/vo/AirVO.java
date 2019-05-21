@@ -9,6 +9,7 @@ public class AirVO {
 	private int economyCharge;
 	private String prestigeCharge;
 	private String vihicleId;
+	private String nick;
 	
 	public String getAirlineNm() {
 		return airlineNm;
@@ -57,6 +58,12 @@ public class AirVO {
 	}
 	public void setVihicleId(String vihicleId) {
 		this.vihicleId = vihicleId;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 	
 	

@@ -33,7 +33,9 @@
     <table class="table table-hover" width="800">
 			<tr>
 				<td align="right">
+				<c:if test="${sessionScope.UID eq 'admin'}">
 					<input class="btn btn-primary" type="button" id="wBtn" value="글쓰기"/>
+				</c:if>	
 				</td>
 			</tr>
 		</table>	
@@ -46,7 +48,7 @@
 <%--   			확인용:LIST.oriName=${data.oriName}<br/> --%>
 				<div class="col-md-4">
 				<div class="card" style="width:300px; height:450px;">
-					<img class="card-img-top" src="/uploads/${data.oriName}" style="width:300px; height:300px;"/>
+					<img class="card-img-top" src="/imgs/${data.oriName}" style="width:300px; height:300px;"/>
 					 <div class="card-body">
 					 <h4 class="card-title"><a href="../information/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title2}</a></h4>
 					 <br/><br/>

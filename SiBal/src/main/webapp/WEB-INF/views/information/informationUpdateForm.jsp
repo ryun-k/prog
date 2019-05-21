@@ -17,43 +17,48 @@
 		
 			//수정하기 버튼클릭시
 			$("#mBtn").click(function(){
-				//	무결성 검사하고
+				
+				if($("#title").val()==""){
+		  			  alert("제목을 입력하지 않으셨습니다.");
+		  		      $("#title").focus();
+		  		      return;
+		  			}
+				
+				if($("#body").val()==""){
+		  			  alert("내용을 입력하지 않으셨습니다.");
+		  		      $("#body").focus();
+		  		      return;
+		  			}
 				
 				$("#mfrm").submit();
 			});
 			
 			
-			//삭제 버튼클릭시
-			$("#dBtn").click(function(){
-				if(count == 1) {
-					alert("한개는 반드시 있어야 합니다.");
+			$("#aBtn").click(function(){
+				count++;
+				if(count==6){
+					alert("최대 5개까지 파일을 첨부할 수 있어요");
+					count=5;
 					return;
 				}
-				//	할일
-				//	현재  마지막 count 번호를 가진 tr을 구한다.
-				var		tr = $("#files" + count).parents("tr");
-				tr.remove();
+				
+				var div = "          ";
+				div +="<div id='ggg'><input type='file' name='files' id='files"+count+"' class='img'><img id='siba' src='#' alt=' ' width='200' height='130'/></div>";
+				
+				$("#copy").before(div);
+			});
+			
+			$("#dBtn").click(function(){
+				if(count==1){
+					alert("최소 1개는 있어야 합니다");
+					return;
+				}
+				
+				var div = $("#files"+count).parents("div#ggg");
+				div.remove();
 				count--;
 			});
-			
-			
-			//추가 버튼 클릭시
-			$("#aBtn").click(function(){
-				//	할일
-				//	추가할 폼을 만든다.
-				count++;
-				if(count == 6) {
-					alert("5개 이상은 추가할 수 없습니다.");
-					count = 5;
-					return;
-				}
-				var	tr = "<tr><td>첨부파일</td>";
-				tr += "<td><input type='file' name='files' id='files"+count+"' class='img'><img id='siba' src='#' alt=' ' width='200' height='130'/></td></tr>";
-				
-				//	원하는 위치에 붙인다.
-				$("#copy").before(tr);
-			});
-		});
+		});	
 	
 		$(document).ready(function(){ 
 			function readURL(input) { 
@@ -92,7 +97,7 @@
   		</div>
   		<div class="form-group">
   			<label for="body">내용</label>
-  			<textarea class="form-control" name="body" id="body">${VIEW.body }</textarea>
+  			<textarea class="form-control" name="body" id="body" rows="15" style="resize:none; margin:1px;">${VIEW.body }</textarea>
   		</div>
   		<div class="form-group">
   			<label for="f">첨부파일</label>

@@ -26,7 +26,7 @@
 			
 			//삭제하기 버튼 클릭시
 			$("#dBtn").click(function(){
-				if(!confirm(" 이거 삭제할거임?")){
+				if(!confirm("정말로 삭제하시겠습니까?")){
 					return false;
 				};
 				$(location).attr("href","../information/informationDelete.do?oriNo=${VIEW.no}&nowPage=${nowPage}")
@@ -54,13 +54,10 @@
 			<br/>
 	    	<div align="right">
 	    		<input class="btn btn-primary" type="button" id="lBtn" value="목록보기"/>
-				<%-- 수정과 삭제기능은 글작성한 로그인 유저만 가능하도록 하겠다.
-					 만약 로그인한 사용자인지 확인하고싶다면 
-					<c:if test="${ not empty sessionScope.UID }"></c:if> --%>
+				<c:if test="${sessionScope.UID eq 'admin'}">
 				<input class="btn btn-info" type="button" id="mBtn" value="수정하기"/>
 				<input class="btn btn-danger" type="button" id="dBtn" value="삭제하기"/>
-				
-<%-- 				<c:if test="${sessionScope.UID eq VIEW.id}"> --%>
+				</c:if>
 			</div>
 			<br/>
 			<br/>
@@ -68,7 +65,7 @@
 			<div align="center">
 				<c:forEach items="${LIST}" var="list">
 <%-- 				확인용:LIST.oriName=${list.oriName}<br/> --%>
-				<img src="/uploads/${list.oriName }" width="100%;" height="400px;" style="margin-bottom: 20px;"> &nbsp; 
+				<img src="/imgs/${list.oriName }" width="100%;" height="400px;" style="margin-bottom: 20px;"> &nbsp; 
 				</c:forEach>
 			</div>
 			

@@ -56,9 +56,11 @@
  	</script>
  	<style type="text/css">
  	#body{
- 		margin-top: 56px;
+ 		padding-top:20px;
+ 		background-color: #FFFFFF;
  	}
  	#mainimg{
+ 		
  	}
  	
  	</style>

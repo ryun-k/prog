@@ -16,20 +16,9 @@
 			
 			//글쓰기버튼 클릭시 id="sBtn"
 			$("#sBtn").click(function(){
-				
-				if($("#title").val()==""){
-		  			  alert("제목을 입력하지 않으셨습니다.");
-		  		      $("#title").focus();
-		  		      return;
-		  			}
-				
-				if($("#body").val()==""){
-		  			  alert("내용을 입력하지 않으셨습니다.");
-		  		      $("#body").focus();
-		  		      return;
-		  			}
+					//무결성검사하세요
 					
-				$("#wfrm").submit();
+					$("#wfrm").submit();
 			});
 			
 			$("#aBtn").click(function(){
@@ -83,7 +72,7 @@
         encType="multipart/form-data">
     	<div class="form-group">    
   			<label for="writer">작성자</label>
-  			<label class="form-control">${sessionScope.UID}</label>
+  			<input class="form-control" type="text" name="writer" id="writer">
   		</div>
   		<div class="form-group">
   			<label for="title">제목</label>
@@ -91,7 +80,7 @@
   		</div>
   		<div class="form-group">
   			<label for="body">내용</label>
-  			<textarea class="form-control" name="body" id="body" rows="15" style="resize:none; margin:1px;" required="required" placeholder="내용을 입력해주세요"></textarea>
+  			<textarea class="form-control" name="body" id="body"></textarea>
   		</div>
   		<div class="form-group">
   			<label for="f">첨부파일</label>

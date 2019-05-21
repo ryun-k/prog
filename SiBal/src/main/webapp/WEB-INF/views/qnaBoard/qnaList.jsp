@@ -24,6 +24,9 @@
   		$("#wBtn").click(function(){
   			location.href="../qnaBoard/qWriteForm.do";
   		});
+  		$("#lBtn").click(function(){
+  			location.href="../qnaBoard/qnaList.do";
+  		});
   		
   	});
   
@@ -104,8 +107,9 @@
 		<option value="writer">작성자</option>
 		<option value="both">제목+내용</option>
       </select>
-      <input type="text" class="form-control col-8 "placeholder="검색할 내용을 입력해주세요" id="word" name="word">
-      <button type="submit" class="btn btn-dark col-2" id="sBtn">검색</button>
+      <input type="text" class="form-control col-6 "placeholder="검색할 내용을 입력해주세요" id="word" name="word">
+      <button type="submit" class="btn btn-outline-secondary col-2" id="sBtn">검색</button>
+      <button type="button" class="btn btn-outline-secondary col-2" id="lBtn">초기화</button>
     </div>
   </form>
   <br/>

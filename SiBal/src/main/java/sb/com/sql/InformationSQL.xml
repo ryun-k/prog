@@ -37,32 +37,38 @@
 	
 	<!-- 목록 -->
 	<select id="informationList" resultType="informationVO" parameterType="informationVO">
-		SELECT
-		    *
-		FROM (		SELECT
-			i_No       AS no,
-			i_Title    AS title, 
-			i_writeDate     AS writeDate,	
-			i_Hit      AS hit, 
-		        i_Writer   AS writer,
-		        NVL(T1.CNT,0) AS fileCount, 
-		        row_number() over(order by i_No DESC) AS rno
-		    FROM
-		        INFORMATION,
-		        (SELECT
-		            COUNT(*) AS CNT, 
-		            FI_ORINO
-		        FROM 
-		            IMAGEINFO
-		        GROUP BY FI_ORINO) T1
-		    WHERE
+	select
+		b.*
+	from
+	(
+		select 
+			row_number() over(order by no DESC) AS rno,
+			a.* 
+		from 
+		(
+			select 
+				i_no as no,
+				i_title as title,
+				i_body as body,
+				i_writer as writer,
+				i_writeDate as writeDate,
+				i_hit as hit,
+				i_good as good,
+				fi_oriname as oriName,
+				row_number() over(partition by fi_orino order by fi_no) as ff
+			from 
+				imageinfo,
+				information 
+			where 
 				upper(i_IsShow)='Y' 
-		        AND
-		         INFORMATION.i_No=T1.FI_ORINO(+))
-		 WHERE
-		    RNO BETWEEN #{start} AND #{end}
+			and
+				imageinfo.fi_orino=information.i_no(+)) a 
+			where 
+				a.ff=1) b
+			where
+				rno between #{start} and #{end}
 	</select>
-	
+		
 	<!-- 데이터입력 쿼리문  -->                   
 	<insert id="insertInformation" parameterType="informationVO">
 	  <selectKey keyProperty="no" resultType="int" order="BEFORE">
@@ -84,8 +90,23 @@
 	<update id="updateHit" parameterType="int">
 		UPDATE INFORMATION
 		SET i_Hit = i_Hit+1
-		WHERE i_No = #{no}
+		WHERE i_No = #{oriNo}
 	</update>
+	
+	<!-- 좋아요 증가  -->	
+	<update id="updateGood" parameterType="int">
+		UPDATE INFORMATION
+		SET i_Good = i_Good+1
+		WHERE i_No = #{oriNo}
+	</update>
+	
+	<!-- 좋아요 감소 -->	
+	<update id="updateNoGood" parameterType="int">
+		UPDATE INFORMATION
+		SET i_Good = i_Good-1
+		WHERE i_No = #{oriNo}
+	</update>
+	
 	
 	<!-- 상세보기 -->
 	<resultMap id="clobView" type="informationVO">
@@ -98,6 +119,7 @@
 			i_Title AS title,
 			i_WriteDate AS writeDate,
 			i_Hit AS hit,
+			i_Good	   AS good, 
 			i_Writer   AS writer,
 			i_Body	<!-- as를 이용한 alias처리하지말것! -->
 		FROM
@@ -136,39 +158,45 @@
 	<!-- 검색 결과를 반영한 목록조회 -->
 	<select id="informationsearchList" parameterType="informationVO" 
 					resultType="informationVO">
-		SELECT
-		    *
-		FROM (		SELECT
-			i_No       AS no,
-			i_Title    AS title, 
-			i_writeDate     AS writeDate,	
-			i_Hit      AS hit, 
-		        i_Writer   AS writer,
-		        NVL(T1.CNT,0) AS fileCount, 
-		        row_number() over(order by i_No DESC) AS rno
-		    FROM
-		        INFORMATION,
-		        (SELECT
-		            COUNT(*) AS CNT, 
-		            FI_ORINO
-		        FROM 
-		            IMAGEINFO
-		        GROUP BY FI_ORINO) T1
-		    WHERE
-		        <include refid="isShow"/>
-		        AND
-		         INFORMATION.i_No=T1.FI_ORINO(+)
-		        AND
-		        <include refid="searchField"/>)
-		 WHERE
-		    RNO BETWEEN #{start} AND #{end}			
+	select
+		b.*
+	from
+	(
+		select 
+			row_number() over(order by no DESC) AS rno,
+			a.* 
+		from 
+		(
+			select 
+				i_no as no,
+				i_title as title,
+				i_body as body,
+				i_writer as writer,
+				i_writeDate as writeDate,
+				i_hit as hit,
+				i_good as good,
+				fi_oriname as oriName,
+				row_number() over(partition by fi_orino order by fi_no) as ff
+			from 
+				imageinfo,
+				information 
+			where 
+				upper(i_IsShow)='Y' 
+			and
+				imageinfo.fi_orino=information.i_no(+)
+				and
+				 <include refid="searchField"/>) a 
+			where 
+				a.ff=1) b
+			where
+				rno between #{start} and #{end} 	
 	</select>
 	
 	<!-- 게시물 수정 쿼리문	-->
 	<update id="updateInformation"  parameterType="informationVO">
-		UPDATE FILEBOARD
+		UPDATE INFORMATION
 		SET i_Title =#{title},
-				i_Body  =#{body},
+				i_Body  =#{body}
 		WHERE
 				i_No=#{oriNo}
 	</update>
@@ -180,5 +208,13 @@
 	  WHERE  
 	  	fi_OriNo=#{oriNo}
 	</delete> 
+	
+	<!-- 삭제  -->
+	<update id="deleteInformation" parameterType="informationVO">
+		UPDATE INFORMATION
+		SET    i_IsShow='N'
+		WHERE  i_No=#{oriNo}
+	</update>
+		
 	
 </mapper>

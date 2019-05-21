@@ -17,7 +17,7 @@
   		
   		$("#mBtn").click(function(){
 	  		var title = RegExp(/^.{1,30}$/);  	
-	  		var content = RegExp(/^.{1,1000}$/);
+	  		var content = RegExp(/^(.|\n|\r){1,1000}$/);
 	  		
   			if($("#title").val()==""){
   			  alert("제목을 입력해주세요.");
@@ -48,10 +48,14 @@
    			  location.href="../member/loginForm.do";
    		      return false;
    			}
-   			
+   		
+  		});
+  		
   		$("#cBtn").click(function(){
   			history.back();
-  		});
+  			
+		});
+  		
   	});
   		
 </script>

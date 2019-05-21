@@ -19,7 +19,7 @@ public class InformationService {
 		
 		int totalCount = iDAO.getTotalCount();
 		
-		PageUtil pageInfo = new PageUtil(nowPage,totalCount,5,5);
+		PageUtil pageInfo = new PageUtil(nowPage,totalCount,6,5);
 		return pageInfo;
 		
 	}
@@ -48,7 +48,7 @@ public class InformationService {
 		
 		for(int i=0; i<list.size(); i++) {
 
-			vo.setOriNo(vo.getOriNo());
+			vo.setOriNo(vo.getNo());
 			HashMap map =(HashMap)list.get(i);	
 			vo.setPath((String)map.get("path"));
 			
@@ -63,7 +63,7 @@ public class InformationService {
 	
 	
 	//조회수 증가 요청 처리함수
-	public void updateHit(int No, HttpSession session) {
+	public void updateHit(int oriNo, HttpSession session) {
 
 		boolean isHit = false; 
 		ArrayList hitList = (ArrayList)session.getAttribute("HIT");
@@ -71,12 +71,12 @@ public class InformationService {
 		if(hitList==null || hitList.size()==0) { 
 			isHit = true;
 			hitList = new ArrayList(); 
-			hitList.add(No);
+			hitList.add(oriNo);
 			session.setAttribute("HIT",hitList);
 		}
-		else if( !hitList.contains(No) ){
+		else if( !hitList.contains(oriNo) ){
 			isHit = true;
-			hitList.add(No);
+			hitList.add(oriNo);
 			session.setAttribute("HIT",hitList);
 		}
 		else { 
@@ -84,13 +84,13 @@ public class InformationService {
 		}
 		
 		if(isHit == true) {
-			iDAO.updateHit(No);
+			iDAO.updateHit(oriNo);
 		}
 	}
 	
 	//상세보기 요청 처리함수
-	public InformationVO getInformationView(int No) {
-		InformationVO vo = iDAO.getInformationView(No);
+	public InformationVO getInformationView(int oriNo) {
+		InformationVO vo = iDAO.getInformationView(oriNo);
 		return vo;
 	}
 	
@@ -105,7 +105,7 @@ public class InformationService {
 		int searchCount = iDAO.getSearchCount(vo); //검색에 따른 총 게시물수조회
 		System.out.println("검색에 따른 총 게시물수="+ searchCount );
 		
-		PageUtil pageInfo = new PageUtil(nowPage,searchCount,5,5);
+		PageUtil pageInfo = new PageUtil(nowPage,searchCount,6,5);
 		return pageInfo;
 	}
 	
@@ -137,6 +137,64 @@ public class InformationService {
 	
 	public void insertImageInfo(InformationVO vo) {
 		iDAO.insertInformation(vo,"imageInfo");
+	}
+	
+	//삭제요청 처리함수
+	public int informationDelete(InformationVO vo) {
+		int cnt = iDAO.informationDelete(vo);
+		return cnt;
+	}
+	
+	//좋아요 감소 요청 처리함수
+	public void updateNoGood(int oriNo, HttpSession session) {
+
+		boolean isNoGood = false; 
+		ArrayList noGoodList = (ArrayList)session.getAttribute("NOGOOD");
+		
+		if(noGoodList==null || noGoodList.size()==0) { 
+			isNoGood = true;
+			noGoodList = new ArrayList(); 
+			noGoodList.add(oriNo);
+			session.setAttribute("NOGOOD",noGoodList);
+		}
+		else if( !noGoodList.contains(oriNo) ){
+			isNoGood = true;
+			noGoodList.add(oriNo);
+			session.setAttribute("NOGOOD",noGoodList);
+		}
+		else { 
+			isNoGood = false; 
+		}
+		
+		if(isNoGood == true) {
+			iDAO.updateNoGood(oriNo);
+		}
+	}
+	
+	//좋아요 증가 요청 처리함수
+	public void updateGood(int oriNo, HttpSession session) {
+
+		boolean isGood = false; 
+		ArrayList goodList = (ArrayList)session.getAttribute("GOOD");
+		
+		if(goodList==null || goodList.size()==0) { 
+			isGood = true;
+			goodList = new ArrayList(); 
+			goodList.add(oriNo);
+			session.setAttribute("GOOD",goodList);
+		}
+		else if( !goodList.contains(oriNo) ){
+			isGood = true;
+			goodList.add(oriNo);
+			session.setAttribute("GOOD",goodList);
+		}
+		else { 
+			isGood = false; 
+		}
+		
+		if(isGood == true) {
+			iDAO.updateGood(oriNo);
+		}
 	}
 	
 	

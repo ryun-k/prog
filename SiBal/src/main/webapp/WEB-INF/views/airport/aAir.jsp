@@ -51,7 +51,7 @@
 				</tr>
 			</thead>
 			<tbody align="center">
-				<c:forEach var="item" varStatus="status" items="${go}">
+				<c:forEach var="item" varStatus="status" items="${back}">
 					<tr align="center" id="t${status.index}">
 						<c:choose>
 							<c:when test="${item.economyCharge!=0}">
@@ -64,8 +64,8 @@
 								<td>${item.economyCharge}원</td>
 								<td>${item.vihicleId}
 								<td><form class="info${status.index}" method="GET"
-										action="../airport/pgoProc.do">
-										<input type="text" name="go${status.index}" value="go"
+										action="../airport/pbackProc.do">
+										<input type="text" name="back${status.index}" value="back"
 											hidden="hidden"> 
 											<input type="hidden" name="airlineNm" value="${item.airlineNm}" /> 
 											<input type="hidden" name="depAirportNm" value="${item.depAirportNm}" /> 
@@ -87,7 +87,7 @@
 	</div>
 
 	<div>
-		<c:forEach var="item" varStatus="status" items="${go}">
+		<c:forEach var="item" varStatus="status" items="${back}">
 			<c:choose>
 				<c:when test="${item.economyCharge!=0}">
 					<a class="content_box">

@@ -24,8 +24,11 @@ public class AirportDAO extends SqlSessionDaoSupport{
 		}
 	}
 	
-	//목록 조회 쿼리실행 함수
-		public ArrayList getrList(AirVO vo) {
-			return (ArrayList) getSqlSession().selectList("airport.gList",vo);
+	public ArrayList getGoList(AirVO vo) {
+			return (ArrayList) getSqlSession().selectList("airport.goList",vo);
 		}
+	
+	public ArrayList getBackList(AirVO vo) {
+		return (ArrayList) getSqlSession().selectList("airport.backList",vo);
+	}
 }

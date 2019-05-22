@@ -34,7 +34,9 @@
     <table class="table table-hover" width="800">
 			<tr>
 				<td align="right">
+				<c:if test="${sessionScope.UID eq 'admin'}">
 					<input class="btn btn-primary" type="button" id="wBtn" value="글쓰기"/>
+				</c:if>
 				</td>
 			</tr>
 		</table>	
@@ -44,7 +46,7 @@
 			<c:forEach items="${LIST}" var="data">
 				<div class="col-md-4">
 				<div class="card" style="width:300px; height:450px;">
-					<img class="card-img-top" src="/uploads/${data.oriName }" style="width:300px; height:300px;"/>
+					<img class="card-img-top" src="/imgs/${data.oriName }" style="width:300px; height:300px;"/>
 					 <div class="card-body">
 					 <h4 class="card-title"><a href="../information/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title2}</a></h4>
 					<p class="card-text"><span class="far fa-calendar-check"> ${data.writeDate}</span> | <span class="fas fa-search"> ${data.hit}</span> | <span class="fas fa-heart"> ${data.good }</span></p>
@@ -58,7 +60,6 @@
 		<tbody>
 			<tr>
 				<td align="center">
-					확인용:PINFO.startPage=${PINFO.startPage}<br/>
 					<%-- 1. 이전단추 만들기 --%>
 					<%-- PINFO는 컨트롤러에서 페이징관련정보가 담긴 모델 --%>
 					<c:if test="${PINFO.startPage eq 1}">[이전]</c:if>

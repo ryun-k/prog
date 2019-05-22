@@ -114,4 +114,10 @@ public void kakaostatus(MemberVO vo, HttpSession session) {
 				log.info(session.getAttribute("status"));
 			}
 		}
+
+		//인증코드 유효검사
+		public int codeValid(MemberVO vo) {
+			int str = mDAO.codeValid(vo);
+			return str;
+		}
 }

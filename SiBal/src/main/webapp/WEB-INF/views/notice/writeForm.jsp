@@ -23,23 +23,22 @@
         $( "#endDate" ).datepicker();
         $( "#endDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
         
-        if ($('input[name=ischeck]').is(":checked")) {
-            $('input[name=isshow]').val('Y');
-        } else {
-            $('input[name=isshow]').val('N');
-        };
-        
-
         $( "#wBtn" ).click(function() { 
         	var sd =$( "#startDate" ).val();
         	var ed =$( "#endDate" ).val();
         	if(sd<=ed){
+	            if ($('input[name=ischeck]').is(":checked")) {
+	                $('input[name=isshow]').val('Y');
+	            } else {
+	                $('input[name=isshow]').val('N');
+	            }
 	        	$("#wFrom").submit();
         	}
         	else if(sd>ed){
         		alert("시작일이 종료일보다 큽니다");
         		$( "#endDate" ).val("");
         	}
+
         });
         
         

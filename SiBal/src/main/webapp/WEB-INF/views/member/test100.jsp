@@ -13,7 +13,7 @@
 <script>
 $(document).ready(function(){
 	$("#sBtn").click(function(){
-		$("#graph").html("<img src='${pageContext.request.contextPath}/img/loader.gif'>")
+		$("#graph").html("<img src='${pageContext.request.contextPath}/img/ajax-loader.gif'>")
 		setTimeout(function(){
 			
 		
@@ -87,7 +87,7 @@ $(document).ready(function(){
 #graph{
 position:center;
 }
-img{
+#graph > img{
 width:640px;
 height:480px;
 }

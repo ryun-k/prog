@@ -13,14 +13,13 @@
 <script>
 $(document).ready(function(){
 	$("#sBtn").click(function(){
-		/* alert($("#month option:selected").val());
-		$("#graph").html("<img src='${pageContext.request.contextPath}/img/ajax-loader.gif'>") */
+		$("#graph").html("<img src='${pageContext.request.contextPath}/img/ajax-loader.gif'>")
 		$.ajax({
 			type:"POST",
 			url:"../graph/pie.do",
 			data:{
 				"no":$("#month option:selected").val()
-				/* delay: 20 */
+				
 			},
 			success:function(data){
 				
@@ -74,7 +73,6 @@ $(document).ready(function(){
 					$("#graph").html("<img src='${pageContext.request.contextPath}/img/jeju_2019_04.png'>")
 					break;
 				}
-				alert('다시시도');
 			}
 		})
 	})
@@ -105,7 +103,7 @@ $(document).ready(function(){
 <input type="button" id="sBtn" name="graph" value="외국인 관광객 통계보기">
 <hr/>
 <br/>
-<div id="graph"><img src="${pageContext.request.contextPath}/img/logout.gif"></div>
-
+<div id="graph"></div>
+<%-- <img src='${pageContext.request.contextPath}/img/jeju_2018_01.png'> --%>
 </body>
 </html>

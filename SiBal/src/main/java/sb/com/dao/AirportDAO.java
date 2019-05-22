@@ -46,4 +46,14 @@ public class AirportDAO extends SqlSessionDaoSupport{
 		SqlSession session = this.getSqlSession();
 		session.update("airport.calBack", vo);
 	}
+	
+	public void gcalcalProc(AirVO vo) {
+		SqlSession session = this.getSqlSession();
+		session.update("airport.calcalGo", vo);
+	}
+	
+	public void bcalcalProc(AirVO vo) {
+		SqlSession session = this.getSqlSession();
+		session.update("airport.calcalBack", vo);
+	}
 }

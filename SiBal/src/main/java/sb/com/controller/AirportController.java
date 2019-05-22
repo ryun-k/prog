@@ -151,5 +151,29 @@ public class AirportController {
 			mv.setView(rv);
 			return mv;
 		}
+		
+		//가는날 결제취소
+		@RequestMapping("/gCalCal")
+		public ModelAndView gcalcalProc(AirVO vo) {
+			ModelAndView mv = new ModelAndView();	
+			
+			aService.gcalcalProc(vo);
+			
+			RedirectView rv = new RedirectView("../airport/rConfirm.do");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		//오는날 결제취소
+		@RequestMapping("/bCalCal")
+		public ModelAndView bcalcalProc(AirVO vo) {
+			ModelAndView mv = new ModelAndView();	
+			
+			aService.bcalcalProc(vo);
+			
+			RedirectView rv = new RedirectView("../airport/rConfirm.do");
+			mv.setView(rv);
+			return mv;
+		}
 	
 }

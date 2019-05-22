@@ -23,7 +23,6 @@
   margin-left: auto;
 }
 
-출처: https://dgkim5360.tistory.com/entry/bootstrap-adjust-container-width [개발새발로그]
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -105,6 +104,7 @@
 								<td>결제완료</td>
 								</c:when>
 								</c:choose>
+								<c:if test="${list.cal eq 1}">
 								<td>
 								<form class="info${status.index}" method="GET" action="../airport/gCal.do">
 								 <input type="hidden" name="no" value="${list.no}" /> 
@@ -118,6 +118,15 @@
 								 <input type="button" class="btn btn-secondary gdelbtn" value="예매취소" />
 								 </form>
 								</td>
+								</c:if>
+								<c:if test="${list.cal eq 2}">
+								<td>
+								<form class="info${status.index}" method="GET" action="../airport/gCalCal.do">
+								 <input type="hidden" name="no" value="${list.no}" /> 
+								 <input type="button" class="btn btn-secondary gcalcal" value="결제취소" />
+								 </form>
+								</td>
+								</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -164,9 +173,10 @@
 								<td>결제완료</td>
 								</c:when>
 								</c:choose>
+								<c:if test="${list.cal eq 1}">
 								<td>
 								<form class="info${status.index}" method="GET" action="../airport/bCal.do">
-								 <input type="hidden" name="no" value="${list1.no}" /> 
+								 <input type="hidden" name="no" value="${list1.no}" />  
 								 <input type="button" class="btn btn-secondary bcal" value="결제" />
 								 </form>
 								</td>
@@ -176,6 +186,15 @@
 									<input type="button" class="btn btn-secondary bdelbtn" value="예매취소" />
 								</form>
 								</td>			
+								</c:if>
+								<c:if test="${list.cal eq 2}">
+								<td>
+								<form class="info${status.index}" method="GET" action="../airport/bCalCal.do">
+								 <input type="hidden" name="no" value="${list1.no}" />  
+								 <input type="button" class="btn btn-secondary bcalcal" value="결제취소" />
+								 </form>
+								</td>
+								</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -185,9 +204,7 @@
 	</div>
 	</c:if>
 	<div align="center">
-	<c:if test="${empty LIST1}">
 	<button type="button" class="btn btn-secondary" id="bBtn">오는날 예약</button>
-	</c:if>
 	</div>
 </body>
 </html>

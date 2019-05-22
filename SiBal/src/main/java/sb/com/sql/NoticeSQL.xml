@@ -28,7 +28,7 @@
 			COUNT(*) AS CNT
 		FROM
 			NOTICE
-	</select>
+	</select> 
 	<select id="totalcount" resultType="int">
 		SELECT
 			COUNT(*) AS CNT
@@ -125,7 +125,7 @@
 			N_CONTENT	= #{content}, 
 			N_STARTDATE	= #{startDate}, 
 			N_ENDDATE	= #{endDate}, 
-			N_ISSHOW		= #{isshow}
+			N_ISSHOW	= #{isshow}
 		WHERE
 			N_NO = #{oriNo}
 	</update>

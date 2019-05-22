@@ -94,10 +94,10 @@ public class AirportController {
 
 	//예매 목록 보기
 	@RequestMapping("/rConfirm")
-	public void rResult(HttpServletRequest request) {
+	public void rResult(HttpServletRequest request, HttpSession session) {
 		
-		ArrayList list = aService.getGoList();
-		ArrayList list1 = aService.getBackList();
+		ArrayList list = aService.getGoList(session);
+		ArrayList list1 = aService.getBackList(session);
 		
 		request.setAttribute("LIST", list);
 		request.setAttribute("LIST1", list1);
@@ -146,6 +146,30 @@ public class AirportController {
 			ModelAndView mv = new ModelAndView();	
 			
 			aService.bcalProc(vo);
+			
+			RedirectView rv = new RedirectView("../airport/rConfirm.do");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		//가는날 결제취소
+		@RequestMapping("/gCalCal")
+		public ModelAndView gcalcalProc(AirVO vo) {
+			ModelAndView mv = new ModelAndView();	
+			
+			aService.gcalcalProc(vo);
+			
+			RedirectView rv = new RedirectView("../airport/rConfirm.do");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		//오는날 결제취소
+		@RequestMapping("/bCalCal")
+		public ModelAndView bcalcalProc(AirVO vo) {
+			ModelAndView mv = new ModelAndView();	
+			
+			aService.bcalcalProc(vo);
 			
 			RedirectView rv = new RedirectView("../airport/rConfirm.do");
 			mv.setView(rv);

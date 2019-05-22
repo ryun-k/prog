@@ -235,7 +235,7 @@ public class QnaController {
 	
 	// 삭제하기
 	@RequestMapping("/repDelete")
-	public ModelAndView  repDelete(HttpServletRequest req, ModelAndView mv) {
+	public ModelAndView  repDelete(HttpServletRequest req, ModelAndView mv, QnaVo vo) {
 		String strOriNo = req.getParameter("oriNo");
 		int    oriNo    = Integer.parseInt(strOriNo);
 		String strReNo = req.getParameter("reNo");
@@ -243,7 +243,9 @@ public class QnaController {
 		String reNowPage  = req.getParameter("reNowPage");
 		String nowPage  = req.getParameter("nowPage");
 		
-		qService.repDelete(reNo);
+		vo.setReNo(reNo);
+		
+		qService.repDelete(vo);
 		RedirectView rv = new RedirectView("../qnaBoard/qnaView.do");
 		mv.addObject("oriNo",oriNo);
 		mv.addObject("reNowPage",reNowPage);

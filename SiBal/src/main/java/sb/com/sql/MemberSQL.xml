@@ -18,6 +18,19 @@ where m_nick = #{nick}
 
 
 <!-- ======================= 쿼리문 등록 ================================= -->
+<!-- 인증번호가 맞는지 확인하는 쿼리 -->
+<select id="codevalid" parameterType="memberVO" resultType="int">
+select 
+	count (*)
+from 
+	SBMEMBER
+where
+	m_email =	#{email}
+and
+	m_check	=	#{check}
+
+</select>
+
 <!-- 카카오 권한확인 -->
 <select id="kakaostatus" parameterType="memberVO" resultType="memberVO">
 	SELECT

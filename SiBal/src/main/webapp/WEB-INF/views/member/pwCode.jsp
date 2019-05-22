@@ -15,9 +15,25 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#sBtn").click(function(){
-		alert('비밀번호가 변경 되었습니다.');
-		$("#codeForm").submit();
-	
+		$.ajax({
+			type:"POST",
+			url:"../member/codeValid.do",
+			data:{
+				"email":$("#email").val(),
+				"check":$("#check").val()
+			},
+			success:function(data){
+				if($.trim(data)=='YES'){
+					alert('비밀번호가 변경 되었습니다.');
+					$("#codeForm").submit();
+				}
+				else{
+					alert('인증번호가 올바르지 않습니다.');
+					$("#check").val("");
+					$("#check").focus();
+				}
+			}
+		})
 	})
 	//code 정규식
 	var reg = /^[a-zA-Z0-9]{10,16}$/

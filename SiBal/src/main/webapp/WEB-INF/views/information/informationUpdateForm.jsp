@@ -24,12 +24,6 @@
 		  		      return;
 		  			}
 				
-				if($("#body").val()==""){
-		  			  alert("내용을 입력하지 않으셨습니다.");
-		  		      $("#body").focus();
-		  		      return;
-		  			}
-				
 				$("#mfrm").submit();
 			});
 			
@@ -87,17 +81,17 @@
 			id="mfrm" encType="multipart/form-data">
 		<input type="hidden" name="oriNo" value="${VIEW.no}" />
 		<input type="hidden" name="nowPage" value="${nowPage}" />
-<%--     	<div class="form-group">    
+     	<div class="form-group">    
 			<label for="writer">작성자</label>
- 			<input class="form-control" type="text" name="writer" id="writer"> 
- 		</div> --%>
+			<label class="form-control">${sessionScope.UID}</label>
+ 		</div> 
   		<div class="form-group">
   			<label for="title">제목</label>
   			<input class="form-control" type="text" name="title" id="title" required="required" placeholder="제목을 입력해주세요" value="${VIEW.title }">
   		</div>
   		<div class="form-group">
   			<label for="body">내용</label>
-  			<textarea class="form-control" name="body" id="body"  rows="15" style="resize:none; margin:1px;">${VIEW.body }</textarea>
+  			<textarea class="form-control" name="body" id="body"  rows="15" style="resize:none; margin:1px;" required="required">${VIEW.body }</textarea>
   		</div>
   		<div class="form-group">
   			<label for="f">첨부파일</label>

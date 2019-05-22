@@ -103,7 +103,7 @@
   		
   		// 댓글 삭제
   		$(".dBtn").click(function(){
-  			var no = $(this).parent("div").attr("id")
+  			var no = $(this).parent("div").attr("id");
   			if(confirm("정말 삭제하시겠습니까?"))
   				location.href="../qnaBoard/repDelete.do?oriNo=${oriNo}&nowPage=${nowPage}&reNowPage=${reNowPage}&reNo="+no;
   		});
@@ -170,9 +170,9 @@
 			<input type="hidden" name="reNo" value="${data.reNo}" />
 			<c:if test="${data.reDepth ge 1}"><i class="material-icons" style=" margin-left: <c:out value='${data.reDepth * 20}'/>px;" >subdirectory_arrow_right</i></c:if>
 		 	<c:if test="${data.depth eq 0}"><br/></c:if>
-		 	<div class="card" style=" margin-left: <c:out value='${data.reDepth * 30}'/>px;">
-			   <div class="card-header" id="${data.reNo}">
-			     <strong class="card-text">${data.id}</strong>
+		 	<div class="card" style="margin-left: <c:out value='${data.reDepth * 30}'/>px;">
+			   <div class="card-header" id="${data.reNo}" >
+			     <strong class="card-text" >${data.id}</strong>
 			     <span>${data.reWDate}</span>
 			     <c:if test="${not empty sessionScope.nick}">
 			     	<button class="card-link btn btn-outline-secondary rBtn">답글달기</button>

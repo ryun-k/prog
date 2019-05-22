@@ -133,6 +133,12 @@
 		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reNo},#{reContent},#{id},#{reDepth},#{reNo})
 	</insert>
 	
+	<!-- 대댓글 쓸때 삭제 구분용 업데이트 -->
+	<update id="repCheckUpdate">
+		update re_qna set re_check='N'
+		where re_no=#{reNo}
+	</update>
+	
 	<!-- 수정하기 -->
 	<update id="repUpdate">
 		update re_qna set re_content =#{reContent}
@@ -144,5 +150,15 @@
 		delete from re_qna where re_no=#{reNo}
 	</delete>
 	
+	<!-- 부모댓글 체크 가져오기 -->
+	<select id="repRepselect" parameterType="qVO" resultType="java.lang.String">
+		select re_check as reCheck from re_qna where re_no=#{reNo}	
+	</select>
+	
+	<!-- 삭제할때 대댓글이 있으면 content update -->
+	<update id="repDelete2" parameterType="qVO">
+		update re_qna set re_content = '삭제된 댓글입니다.'
+		where re_no=#{reNo}
+	</update>
 	
 </mapper>

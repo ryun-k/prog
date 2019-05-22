@@ -22,6 +22,27 @@
         $( "#startDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" ).datepicker('setDate', '${DATA.startDate}');
         $( "#endDate" ).datepicker();
         $( "#endDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" ).datepicker('setDate', '${DATA.endDate}');
+        
+        $( "#wBtn" ).click(function() { 
+        	var sd =$( "#startDate" ).val();
+        	var ed =$( "#endDate" ).val();
+        	if(sd<=ed){
+	            if ($('input[name=ischeck]').is(":checked")) {
+	                $('input[name=isshow]').val('Y');
+	            } else {
+	                $('input[name=isshow]').val('N');
+	            }
+	        	$("#wFrom").submit();
+        	}
+        	else if(sd>ed){
+        		alert("시작일이 종료일보다 큽니다");
+        		$( "#endDate" ).val("");
+        	}
+
+        });
+        
+        
+       
  	 } );
 
 
@@ -30,7 +51,7 @@
 <body>
 <div class="container">
   <h1>writeForm</h1>
-  <form class="form-horizontal" action="../notice/modifyProc.do" method="get">
+  <form class="form-horizontal" action="../notice/modifyProc.do"  id="wFrom" method="get">
   	<input type="hidden" id="oriNo" name="oriNo" value="${DATA.no }"/>
   	<input type="hidden" id="nowPage" name="nowPage" value="${nowPage }"/>
   	 
@@ -43,7 +64,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="content">내용</label>
       <div class="col-sm-10">          
-        <textarea type="text" class="form-control" id="content" name="content">${DATA.brBody}</textarea>
+        <textarea type="text" class="form-control" id="content" name="content">${DATA.content}</textarea>
       </div>
     </div>
     
@@ -61,11 +82,12 @@
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
         <div class="checkbox">
-          <label><input type="checkbox" name="isshow" value="Y" >공개</label>
+         	<label><input type="checkbox" name="ischeck" />공개</label>
+          	<input type="hidden" name="isshow" />
         </div>
       </div>
     </div>
-        <button type="submit" class="btn btn-dark">수정하기</button>
+        <button id="wBtn" type="button" class="btn btn-dark">수정하기</button>
   </form>
 </div>
 

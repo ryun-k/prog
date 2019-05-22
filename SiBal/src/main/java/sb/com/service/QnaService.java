@@ -163,8 +163,8 @@ public class QnaService {
 		
 		vo.getReRef();
 		vo.setReDepth(vo.getReDepth()+1);
-		
 		qDAO.repRepInsert(vo);
+		qDAO.repCheckUpdate(vo);
 	}
 	
 	// 수정하기
@@ -173,8 +173,15 @@ public class QnaService {
 	}
 	
 	// 삭제하기
-	public void repDelete(int reNo) {
-		qDAO.repDelete(reNo);	
+	public void repDelete(QnaVo vo) {
+		
+		String check = qDAO.repRepselect(vo);
+		
+		if(check.equals("Y")) {
+			qDAO.repDelete(vo);	
+		}else if(check.equals("N")) {
+			qDAO.repDelete2(vo);
+		}
 	}
 
 }

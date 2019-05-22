@@ -156,9 +156,6 @@
 								<td>${list1.arrPlandTime}</td>
 								<td>${list1.economyCharge}원</td>
 								<td>${list1.vihicleId}</td>
-<<<<<<< HEAD
-								<td>${list1.vihicleId}</td>
-=======
 								<c:choose>
 								<c:when test="${list1.cal eq 1}">
 								<td>미결제</td>
@@ -179,7 +176,6 @@
 									<input type="button" class="btn btn-secondary bdelbtn" value="예매취소" />
 								</form>
 								</td>			
->>>>>>> branch 'master' of https://github.com/ryun-k/prog
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -9,7 +9,7 @@
 
 	<annotation-driven />
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/imgs/*" location="/imgs/" />
+	<resources mapping="/imgs/**" location="/imgs/" />
 	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 여기에서는 views 폴더의 위치는 변경하지 않고 /WEB-INF/views/ 그대로 가기로함 -->
@@ -37,6 +37,7 @@
 				<!-- 언제 인터셉터가 처리될지를 지정하는 부분 -->
 				<mapping path="/qnaBoard/qWriteForm.do"/>
 				<mapping path="/qnaBoard/repWrite.do"/>
+				<mapping path="/airport/**"/>
 				<!-- 인터셉터 예외지정 -->
 				<!-- <exclude-mapping path=""/> -->
 				

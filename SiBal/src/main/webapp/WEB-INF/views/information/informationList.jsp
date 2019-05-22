@@ -43,9 +43,6 @@
   <%-- 목록 보여주기 --%>
   		<div class="row">
 			<c:forEach items="${LIST}" var="data">
-			<%-- <c:if test="${status.first}">
-			</c:if> --%>
-<%--   			확인용:LIST.oriName=${data.oriName}<br/> --%>
 				<div class="col-md-4">
 				<div class="card" style="width:300px; height:450px;">
 					<img class="card-img-top" src="/imgs/${data.oriName}" style="width:300px; height:300px;"/>
@@ -70,7 +67,8 @@
 					
 					<c:if test="${PINFO.startPage ne 1}">
 					<%-- 링크는 목록보기 --%>
-					<a href="../information/informationList.do?nowPage=${PINFO.startPage-5}">[이전]</a>
+					<a href="../information/informationList.do?nowPage=${nowPage-nowPage+1}">[맨앞]</a>
+					<a href="../information/informationList.do?nowPage=${PINFO.startPage-1}">[이전]</a>
 					</c:if>			 
 					
 					<%-- 2. 페이지번호 [1][2][3][4][5]만들기 --%>
@@ -88,7 +86,8 @@
 					</c:if>
 					
 					<c:if test="${PINFO.endPage ne PINFO.totalPage}">
-					<a href="../information/informationList.do?nowPage=${PINFO.endPage+5}">[다음]</a></c:if>	
+					<a href="../information/informationList.do?nowPage=${PINFO.endPage+1}">[다음]</a>	
+					<a href="../information/informationList.do?nowPage=${PINFO.totalPage}">[맨끝]</a></c:if>	
 				</td>
 			</tr>
 		</tbody>

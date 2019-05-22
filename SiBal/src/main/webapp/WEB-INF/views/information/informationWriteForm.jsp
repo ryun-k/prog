@@ -20,15 +20,9 @@
 				if($("#title").val()==""){
 		  			  alert("제목을 입력하지 않으셨습니다.");
 		  		      $("#title").focus();
-		  		      return false;
+		  		      return;
 		  			}
 				
-				if($("#body").val()==""){
-		  			  alert("내용을 입력하지 않으셨습니다.");
-		  		      $("#body").focus();
-		  		      return false;
-		  			}
-					
 				$("#wfrm").submit();
 			});
 			
@@ -87,6 +81,7 @@
   		</div>
   		<div class="form-group">
   			<label for="title">제목</label>
+
   			<input class="form-control" type="text" name="title" id="title" required="required" placeholder="제목을 입력해주세요">
   		</div>
   		<div class="form-group">

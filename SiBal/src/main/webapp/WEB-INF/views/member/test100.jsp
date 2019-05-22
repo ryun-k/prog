@@ -13,7 +13,7 @@
 <script>
 $(document).ready(function(){
 	$("#sBtn").click(function(){
-		$("#graph").html("<img src='${pageContext.request.contextPath}/img/ajax-loader.gif'>")
+		$("#graph").html("<img src='${pageContext.request.contextPath}/img/loader.gif'>")
 		setTimeout(function(){
 			
 		
@@ -83,9 +83,20 @@ $(document).ready(function(){
 });
 
 </script>
+<style type="text/css">
+#graph{
+position:center;
+}
+img{
+width:640px;
+height:480px;
+}
+</style>
 </head>
 <body>
-
+<div class="container">
+<div class="row">
+<div class="col-3"></div>
 <select name="month" id="month">
 <option value="0">2018년1월</option>
 <option value="1">2018년2월</option>
@@ -99,15 +110,19 @@ $(document).ready(function(){
 <option value="9">2018년10월</option>
 <option value="10">2018년11월</option>
 <option value="11">2018년12월</option>
-<option value="12">2019년1월</option>
 <option value="13">2019년2월</option>
 <option value="14">2019년3월</option>
 <option value="15">2019년4월</option>
 </select>
-<input type="button" id="sBtn" name="graph" value="외국인 관광객 통계보기">
+<div class="col-3"></div>
+<input type="button" id="sBtn" name="graph" value="외국인 관광객 통계보기" class="btn btn-outline-success">
+</div>
+</div>
 <hr/>
 <br/>
+<div class="row">
+<div class="col-4"></div>
 <div id="graph"></div>
-<%-- <img src='${pageContext.request.contextPath}/img/jeju_2018_01.png'> --%>
+</div>
 </body>
 </html>

@@ -334,4 +334,8 @@ public class MemberController {
 		return str;
 	}
 
+	@RequestMapping("/test100")
+	public void test100() {
+		
+	}
 }

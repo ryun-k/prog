@@ -58,7 +58,7 @@ public class InformationController {
 		return mv;
 	}
 	
-	//상세보기 싫어요
+	//상세보기 싫어요 
 		@RequestMapping("/noGoodProc")
 		public ModelAndView	informationNoGoodProc(ModelAndView mv,
 				HttpServletRequest req,HttpSession session) {

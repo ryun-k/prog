@@ -60,5 +60,6 @@
       
    <bean id="qnaControll" class="sb.com.controller.QnaController"/>
    <bean id="memberControll" class="sb.com.controller.MemberController"/>
+   <bean id="sbmainController" class="sb.com.controller.sbmainController"/>
    
 </beans>

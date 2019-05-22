@@ -17,7 +17,7 @@
 		
 			//수정하기 버튼클릭시
 			$("#mBtn").click(function(){
-				
+				//	무결성 검사하고
 				if($("#title").val()==""){
 		  			  alert("제목을 입력하지 않으셨습니다.");
 		  		      $("#title").focus();
@@ -58,7 +58,7 @@
 				div.remove();
 				count--;
 			});
-		});	
+		});
 	
 		$(document).ready(function(){ 
 			function readURL(input) { 
@@ -97,7 +97,7 @@
   		</div>
   		<div class="form-group">
   			<label for="body">내용</label>
-  			<textarea class="form-control" name="body" id="body" rows="15" style="resize:none; margin:1px;">${VIEW.body }</textarea>
+  			<textarea class="form-control" name="body" id="body"  rows="15" style="resize:none; margin:1px;">${VIEW.body }</textarea>
   		</div>
   		<div class="form-group">
   			<label for="f">첨부파일</label>

@@ -26,7 +26,7 @@
 			
 			//삭제하기 버튼 클릭시
 			$("#dBtn").click(function(){
-				if(!confirm("정말로 삭제하시겠습니까?")){
+				if(!confirm("정말로 삭제하시겠습니까??")){
 					return false;
 				};
 				$(location).attr("href","../information/informationDelete.do?oriNo=${VIEW.no}&nowPage=${nowPage}")

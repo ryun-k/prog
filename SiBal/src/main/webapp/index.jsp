@@ -14,26 +14,23 @@
 
 </head>
 <body>
-<div class="container">
-	
-	
-	
-	<h1>임시메인</h1><br><br>
-	
-	
-	
-	<a href='../sb/airport/airportForm.do'>비행기표 확인</a><br/><br/>
-	
-	
-	<a href="../sb/qnaBoard/qnaList.do"><button>질문리스트</button></a><br/><br/>
-	
-	
-	
-	<a href="../sb/information/informationList.do">뀨</a><br/><br/>
-	
-	<a href="../sb/member/memberList.do"><button>멤버리스트</button></a><br/><br/>
-	<a href="../sb/member/test.do"><button>테스트</button></a><br/><br/>
-	
-</div>
+
+
+
+<h1>임시메인</h1><br><br>
+
+
+
+<a href='../sb/airport/airportForm.do'>비행기표 확인</a><br/><br/>
+
+
+<a href="../sb/qnaBoard/qnaList.do"><button>질문리스트</button></a><br/><br/>
+
+
+
+<a href="../sb/information/informationList.do">뀨</a><br/><br/>
+
+<a href="../sb/member/memberList.do"><button>멤버리스트</button></a><br/><br/>
+<a href="../sb/member/test.do"><button>테스트</button></a><br/><br/>
 </body>
 </html>

@@ -36,7 +36,7 @@
 				<td align="right">
 				<c:if test="${sessionScope.UID eq 'admin'}">
 					<input class="btn btn-primary" type="button" id="wBtn" value="글쓰기"/>
-				</c:if>	
+				</c:if>
 				</td>
 			</tr>
 		</table>	
@@ -60,7 +60,6 @@
 		<tbody>
 			<tr>
 				<td align="center">
-					확인용:PINFO.startPage=${PINFO.startPage}<br/>
 					<%-- 1. 이전단추 만들기 --%>
 					<%-- PINFO는 컨트롤러에서 페이징관련정보가 담긴 모델 --%>
 					<c:if test="${PINFO.startPage eq 1}">[이전]</c:if>

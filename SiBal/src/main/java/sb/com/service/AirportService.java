@@ -25,17 +25,18 @@ public class AirportService {
 		aDAO.insertBack(vo);
 	}
 	
-	public ArrayList getGoList() {
-		
+	public ArrayList getGoList(HttpSession session) {
 		AirVO vo = new AirVO();
-		
+		String nick = (String)session.getAttribute("nick");
+		vo.setNick(nick);
 		ArrayList list = aDAO.getGoList(vo);
 		return list;
 	}
-	public ArrayList getBackList() {
+	public ArrayList getBackList(HttpSession session) {
 		
 		AirVO vo = new AirVO();
-		
+		String nick = (String)session.getAttribute("nick");
+		vo.setNick(nick);
 		ArrayList list = aDAO.getBackList(vo);
 		return list;
 	}

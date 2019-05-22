@@ -94,10 +94,10 @@ public class AirportController {
 
 	//예매 목록 보기
 	@RequestMapping("/rConfirm")
-	public void rResult(HttpServletRequest request) {
+	public void rResult(HttpServletRequest request, HttpSession session) {
 		
-		ArrayList list = aService.getGoList();
-		ArrayList list1 = aService.getBackList();
+		ArrayList list = aService.getGoList(session);
+		ArrayList list1 = aService.getBackList(session);
 		
 		request.setAttribute("LIST", list);
 		request.setAttribute("LIST1", list1);

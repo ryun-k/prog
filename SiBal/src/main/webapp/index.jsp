@@ -10,27 +10,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>	
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(location).attr("href", "/sb/sbtrip.do");
+	});
 
-
+</script>
 </head>
 <body>
-
-
-
-<h1>임시메인</h1><br><br>
-
-
-
-<a href='../sb/airport/airportForm.do'>비행기표 확인</a><br/><br/>
-
-
-<a href="../sb/qnaBoard/qnaList.do"><button>질문리스트</button></a><br/><br/>
-
-
-
-<a href="../sb/information/informationList.do">뀨</a><br/><br/>
-
-<a href="../sb/member/memberList.do"><button>멤버리스트</button></a><br/><br/>
-<a href="../sb/member/test.do"><button>테스트</button></a><br/><br/>
-</body>
-</html>

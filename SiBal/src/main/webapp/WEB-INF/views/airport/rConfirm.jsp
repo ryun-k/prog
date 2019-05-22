@@ -196,6 +196,7 @@
 									<input type="button" class="btn btn-secondary bdelbtn" value="예매취소" />
 								</form>
 								</td>			
+
 								</c:if>
 								<c:if test="${list1.cal eq 2}">
 								<td>
@@ -214,7 +215,9 @@
 	</div>
 	</c:if>
 	<div align="center">
+	<c:if test="${empty LIST1}">
 	<button type="button" class="btn btn-secondary" id="bBtn">오는날 예약</button>
+	</c:if>
 	</div>
 </body>
 </html>

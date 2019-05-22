@@ -90,12 +90,30 @@ public class QnaDAO extends SqlSessionDaoSupport{
 		session.insert("qnaBoard.repRepInsert",vo);
 	}
 	
-	// 삭제하기
-	public void repDelete(int no) {
-		getSqlSession().delete("qnaBoard.repDelete",no);
+	// 대댓글입력시 re_check 업데이트
+	public void repCheckUpdate(QnaVo vo) {
+		getSqlSession().update("qnaBoard.repCheckUpdate",vo);
 	}
+	
 	// 수정하기
 	public void repUpdate(QnaVo vo) {
 		getSqlSession().update("qnaBoard.repUpdate",vo);
 	}
+	
+	// 삭제할때 부모 댓글 check 확인
+	public String repRepselect(QnaVo vo) {
+		String check = (String)getSqlSession().selectOne("qnaBoard.repRepselect",vo);
+		return check;
+	}
+	
+	// re_check= 'N' 일때 수정하기
+	public void repDelete2(QnaVo vo) {
+		getSqlSession().update("qnaBoard.repDelete2",vo);
+	}
+	
+	// re_check= 'Y' 일때 삭제하기
+	public void repDelete(QnaVo vo) {
+		getSqlSession().delete("qnaBoard.repDelete",vo);
+	}
+	
 }

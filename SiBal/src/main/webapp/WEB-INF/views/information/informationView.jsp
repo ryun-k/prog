@@ -65,7 +65,7 @@
 			<div align="center">
 				<c:forEach items="${LIST}" var="list">
 <%-- 				확인용:LIST.oriName=${list.oriName}<br/> --%>
-				<img src="/imgs/${list.oriName }" width="100%;" height="400px;" style="margin-bottom: 20px;"> &nbsp; 
+				<img src="/sb/imgs/${list.oriName }" width="100%;" height="400px;" style="margin-bottom: 20px;"> &nbsp; 
 				</c:forEach>
 			</div>
 			

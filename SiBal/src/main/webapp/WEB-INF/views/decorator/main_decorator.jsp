@@ -72,7 +72,7 @@
 <body>
 	<nav id="nav" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 	  <!-- Brand/logo -->
-	  <a class="navbar-brand" href="/sb">시ː발</a>
+	  <a class="navbar-brand" href="/sb/sbtrip.do">시ː발</a>
 	  <!-- Links -->
 		<ul class="navbar-nav mr-auto">
 	   		<li class="nav-item" id="nav1">

@@ -9,7 +9,9 @@ public class sbmainController {
 	
 	// 로그인 폼으로 돌아가는 페이지
 	@RequestMapping("/check")
-	public void qWriterForm() {
+	public void check() {
 		
 	}
+	
+		
 }

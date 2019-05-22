@@ -49,6 +49,7 @@
 					<img class="card-img-top" src="/imgs/${data.oriName }" style="width:300px; height:300px;"/>
 					 <div class="card-body">
 					 <h4 class="card-title"><a href="../information/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title2}</a></h4>
+					 <p class="card-text">${data.writer}
 					<p class="card-text"><span class="far fa-calendar-check"> ${data.writeDate}</span> | <span class="fas fa-search"> ${data.hit}</span> | <span class="fas fa-heart"> ${data.good }</span></p>
 					</div>
 				</div>

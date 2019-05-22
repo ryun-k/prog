@@ -71,7 +71,7 @@
 			
 			<br/>
 			<div>
-				${VIEW.body }
+				${VIEW.brBody }
 			</div>
 			<br/>
 			<br/>
@@ -79,10 +79,17 @@
 				<input class="btn btn-success" type="button" id="gBtn" value="좋아요"/>
 				<input class="btn btn-warning" type="button" id="ngBtn" value="싫어요"/>
 			</div>	
-	    </div> 
+	    </div>
+	    
   	  </div>
 	
 </div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 </body>
 </html>
 

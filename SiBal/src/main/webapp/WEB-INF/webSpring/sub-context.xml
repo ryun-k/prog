@@ -49,6 +49,9 @@
    <bean id="memberDAO" class="sb.com.dao.MemberDAO">
       <property name="sqlSessionTemplate" ref="sqlSession"/>
    </bean>
+   <bean id="mainDAO" class="sb.com.dao.MainDAO">
+      <property name="sqlSessionTemplate" ref="sqlSession"/>
+   </bean>
 
       
    <!-- serviece bean처리 -->

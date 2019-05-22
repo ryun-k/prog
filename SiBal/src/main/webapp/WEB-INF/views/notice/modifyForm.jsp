@@ -29,6 +29,17 @@
             $('input[name=isshow]').val('N');
         }
         
+        $( "#wBtn" ).click(function() { 
+        	var sd =$( "#startDate" ).val();
+        	var ed =$( "#endDate" ).val();
+        	if(sd<=ed){
+	        	$("#wFrom").submit();
+        	}
+        	else if(sd>ed){
+        		alert("시작일이 종료일보다 큽니다");
+        		$( "#endDate" ).val("");
+        	}
+        });
  	 } );
 
 
@@ -37,7 +48,7 @@
 <body>
 <div class="container">
   <h1>writeForm</h1>
-  <form class="form-horizontal" action="../notice/modifyProc.do" method="get">
+  <form class="form-horizontal" action="../notice/modifyProc.do"  id="wFrom" method="get">
   	<input type="hidden" id="oriNo" name="oriNo" value="${DATA.no }"/>
   	<input type="hidden" id="nowPage" name="nowPage" value="${nowPage }"/>
   	 
@@ -73,7 +84,7 @@
         </div>
       </div>
     </div>
-        <button type="submit" class="btn btn-dark">수정하기</button>
+        <button id="wBtn" type="button" class="btn btn-dark">수정하기</button>
   </form>
 </div>
 

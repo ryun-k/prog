@@ -27,8 +27,23 @@
             $('input[name=isshow]').val('Y');
         } else {
             $('input[name=isshow]').val('N');
-        }
- 	 } );
+        };
+        
+
+        $( "#wBtn" ).click(function() { 
+        	var sd =$( "#startDate" ).val();
+        	var ed =$( "#endDate" ).val();
+        	if(sd<=ed){
+	        	$("#wFrom").submit();
+        	}
+        	else if(sd>ed){
+        		alert("시작일이 종료일보다 큽니다");
+        		$( "#endDate" ).val("");
+        	}
+        });
+        
+        
+ 	 });
 	
 
  	</script>
@@ -37,7 +52,7 @@
 
 <div class="container">
   <h1>writeForm</h1>
-  <form class="form-horizontal" action="../notice/writeProc.do" method="post">
+  <form class="form-horizontal" action="../notice/writeProc.do" id="wFrom" method="post">
     <div class="form-group">
       <label class="control-label col-sm-2" >제목</label>
       <div class="col-sm-10">
@@ -70,7 +85,7 @@
         </div>
       </div>
     </div>
-        <button type="submit" class="btn btn-dark">글쓰기</button>
+        <button id="wBtn" type="button" class="btn btn-dark">글쓰기</button>
   </form>
 </div>
 

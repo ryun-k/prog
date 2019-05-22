@@ -27,12 +27,7 @@
 		        G_CAL as cal
 		FROM
 		G_AIR
-<<<<<<< HEAD
-		WHERE
-		G_NICK = #{nick}
-=======
 		where g_nick=#{nick}
->>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
 	</select>
 	
 	<select id="backList" parameterType="airVO" 
@@ -49,12 +44,7 @@
 		        b_CAL as cal
 		FROM
 		b_AIR
-<<<<<<< HEAD
-		WHERE
-		B_NICK = #{nick}
-=======
 		where b_nick=#{nick}
->>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
 	</select>
 	
 	<delete id="delGo" parameterType="airVO" >

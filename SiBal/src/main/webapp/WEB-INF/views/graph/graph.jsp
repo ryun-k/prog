@@ -13,22 +13,22 @@
 <script>
 $(document).ready(function(){
 	$("#sBtn").click(function(){
+		
 		$("#graph").html("<img src='${pageContext.request.contextPath}/img/ajax-loader.gif'>")
 		setTimeout(function(){
-			
-		
 		$.ajax({
 			type:"POST",
 			url:"../graph/pie.do",
 			data:{
 				"no":$("#month option:selected").val()
-				
 			},
 			success:function(data){
 				
 				switch (data){
 				case 0:
+					
 					$("#graph").html("<img src='${pageContext.request.contextPath}/img/jeju_2018_01.png'>")
+					
 					break;
 				case 1:
 					$("#graph").html("<img src='${pageContext.request.contextPath}/img/jeju_2018_02.png'>")
@@ -122,7 +122,7 @@ height:480px;
 <br/>
 <div class="row">
 <div class="col-4"></div>
-<div id="graph"></div>
+<div id="graph"><h3>보고 싶은 통계의 연,월을 선택하고 통계보기 버튼을 눌러주세요</h3></div>
 </div>
 </body>
 </html>

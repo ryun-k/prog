@@ -52,7 +52,13 @@
 		});
 		
  	});
- 	
+ 	$(function(){
+ 		  $(".mr-auto li").hover(function(){
+ 		    $('ul:first',this).show();
+ 		  }, function(){
+ 		    $('ul:first',this).hide();
+ 		  });
+ 	});	  
  	</script>
  	<style type="text/css">
  	#body{
@@ -60,7 +66,27 @@
  	}
  	#mainimg{
  	}
- 	
+ 	.mr-auto ul {
+	  background: #333333;
+	  border: 1px solid;
+	  display: none;
+	  padding: 0;
+	  position: absolute;
+	  left: 0;
+	  top: 100%;
+	  width: 180px;
+	}
+	.mr-auto ul li { float: none; }
+	.mr-auto li {
+	  float: left;
+	  list-style:none;
+	  position: relative;
+	}
+	.mr-auto a {
+	  display: block;
+	  padding: 10px 20px;
+	  text-decoration: none;
+	}
  	</style>
 
 
@@ -82,7 +108,11 @@
 		    	<a class="nav-link" href="/sb/airport/airportForm.do">티켓 예매</a>
 		    </li>
 		    <li class="nav-item" id="nav3">
-		    	<a class="nav-link" href="/sb/information/informationList.do">여행 정보</a>
+		    	<a class="nav-link" href="#">여행 정보<i class='fa fa-angle-down'></i></a>
+		    	<ul class="submenu"> 
+			    	<li><a class="nav-link" href="/sb/information/informationList.do">관광지</a></li> 
+			    	<li><a class="nav-link" href="/sb/information/informationList.do">관광통계</a></li> 
+		    	</ul>
 		    </li>
 		    <li class="nav-item" id="nav4">
 		    	<a class="nav-link" href="/sb/qnaBoard/qnaList.do">QNA</a>

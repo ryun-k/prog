@@ -65,13 +65,13 @@
 			<div align="center">
 				<c:forEach items="${LIST}" var="list">
 <%-- 				확인용:LIST.oriName=${list.oriName}<br/> --%>
-				<img src="/imgs/${list.oriName }" width="100%;" height="400px;" style="margin-bottom: 20px;"> &nbsp; 
+				<img src="/sb/imgs/${list.oriName }" width="100%;" height="400px;" style="margin-bottom: 20px;"> &nbsp; 
 				</c:forEach>
 			</div>
 			
 			<br/>
 			<div>
-				${VIEW.body }
+				${VIEW.brBody }
 			</div>
 			<br/>
 			<br/>
@@ -79,10 +79,17 @@
 				<input class="btn btn-success" type="button" id="gBtn" value="좋아요"/>
 				<input class="btn btn-warning" type="button" id="ngBtn" value="싫어요"/>
 			</div>	
-	    </div> 
+	    </div>
+	    
   	  </div>
 	
 </div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 </body>
 </html>
 

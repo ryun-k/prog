@@ -1,8 +1,6 @@
 package sb.com.vo;
 
-import java.util.Date;
 
-import oracle.sql.CHAR;
 
 public class MemberVO {
 	

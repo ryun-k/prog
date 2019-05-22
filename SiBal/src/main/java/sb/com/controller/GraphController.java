@@ -4,8 +4,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import sb.com.service.GraphService;
+import sb.com.vo.GraphVO;
 
 @Controller
 @RequestMapping("/graph")
@@ -16,17 +19,21 @@ public class GraphController {
 	@Autowired
 	private GraphService gService;
 	
-	//파이그래프 그리기
-	@RequestMapping("/pie")
-	public void loadGraph() {
-		gService.makeGraph();
-		 log.info("그래프 ");
+	//그래프 보기
+	@RequestMapping("/graph")
+	public void praph() {
+		
 	}
 	
-	//샘플 데이터 불러오기
-	@RequestMapping("/sample")
-	public void loadSample() {
-		gService.makeSample();
-		log.info("샘플");
+	//파이그래프 그리기
+	@RequestMapping(value="/pie",method=RequestMethod.POST)
+	public @ResponseBody int loadGraph(GraphVO vo) {
+		log.info("ajax실행,그래프");
+		
+		int ok = gService.makeGraph(vo);
+		
+		
+		 return ok;
 	}
+	
 }

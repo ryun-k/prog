@@ -132,9 +132,18 @@ public class InformationVO {
 	public String getBody() {
 		return body;
 	}
+	
+	public String getBrBody() {
+		String result = null;
+		if( body!=null && body.length()!=0 ) { //데이터가 존재하면
+			result = body.replaceAll("\n", "<br/>");
+		}
+		return result;
+	}
 	public void setBody(String body) {
 		this.body = body;
 	}
+	
 	//천단위마다 컴마찍기
 	public String getComma() {
 		DecimalFormat form = new DecimalFormat("###,###,###");

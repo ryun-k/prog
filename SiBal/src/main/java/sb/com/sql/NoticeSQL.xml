@@ -4,6 +4,8 @@
 
 <mapper namespace="notice">
 	<sql id="eventT">
+		upper(N_ISSHOW) = 'Y' 
+		and
 		N_STARTDATE <![CDATA[ <= ]]> sysdate
 		and 
 		sysdate <![CDATA[ <= ]]> N_ENDDATE
@@ -17,7 +19,7 @@
 		N_ENDDATE		as	endDate,
 		N_WDATE			as	wDate,
 		N_HIT			as	hit,
-		N_ISSHOW		as	issow
+		N_ISSHOW		as	isshow
 	</sql>
 	
 	<!-- count -->
@@ -26,18 +28,13 @@
 			COUNT(*) AS CNT
 		FROM
 			NOTICE
-		WHERE
-			upper(N_ISSHOW)='Y' 
-	</select>
+	</select> 
 	<select id="totalcount" resultType="int">
 		SELECT
 			COUNT(*) AS CNT
 		FROM
 			NOTICE
 		WHERE
-			upper(N_ISSHOW)='Y' 
-			and
-			
 			<include refid="eventT" />			
 	</select>
 	
@@ -51,7 +48,7 @@
 			        N_NO            as no,
 			        N_TITLE         as title,
 			        N_WDATE         as wDate,
-			        N_HIT           as hit    
+			        N_HIT           as hit
 			    from 
 			    	notice
 			)
@@ -70,10 +67,7 @@
 			        N_HIT           as hit    
 			    from 
 			    	notice
-			    	
 			    where
-				    upper(N_ISSHOW)='Y' 
-					and	
 			    	<include refid="eventT" />	
 			)
 		where 
@@ -131,7 +125,7 @@
 			N_CONTENT	= #{content}, 
 			N_STARTDATE	= #{startDate}, 
 			N_ENDDATE	= #{endDate}, 
-			N_ISSHOW		= #{isshow}
+			N_ISSHOW	= #{isshow}
 		WHERE
 			N_NO = #{oriNo}
 	</update>

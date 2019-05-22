@@ -102,7 +102,7 @@ public class MemberService {
 			return str;
 		}
 		//카카오 회원 권한확인
-public void kakaostatus(MemberVO vo, HttpSession session) {
+		public void kakaostatus(MemberVO vo, HttpSession session) {
 		
 			MemberVO result = mDAO.kakaostatus(vo);
 			if(result ==null) {
@@ -113,5 +113,11 @@ public void kakaostatus(MemberVO vo, HttpSession session) {
 				session.setAttribute("status", result.getStatus());
 				log.info(session.getAttribute("status"));
 			}
+		}
+
+		//인증코드 유효검사
+		public int codeValid(MemberVO vo) {
+			int str = mDAO.codeValid(vo);
+			return str;
 		}
 }

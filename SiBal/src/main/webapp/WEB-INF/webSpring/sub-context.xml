@@ -60,9 +60,11 @@
    <bean id="airportService" class="sb.com.service.AirportService"/>   
    <bean id="informationService" class="sb.com.service.InformationService"/>
    <bean id="memberService" class="sb.com.service.MemberService"/>
+   <bean id="graphService" class="sb.com.service.GraphService"/>
    <bean id="mainService" class="sb.com.service.MainService"/>
       
       
+   <bean id="graphControll" class="sb.com.controller.GraphController"/>
    <bean id="qnaControll" class="sb.com.controller.QnaController"/>
    <bean id="memberControll" class="sb.com.controller.MemberController"/>
    <bean id="sbmainController" class="sb.com.controller.sbmainController"/>

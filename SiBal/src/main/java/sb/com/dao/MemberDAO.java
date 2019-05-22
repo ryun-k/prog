@@ -93,4 +93,10 @@ public class MemberDAO extends SqlSessionDaoSupport{
 		MemberVO result = session.selectOne("member.kakaostatus",vo);
 		return result;
 	}
+	
+	//인증번호 유효확인 쿼리 실행
+	public int codeValid(MemberVO vo) {
+		int str = session.selectOne("member.codevalid",vo);
+		return str;
+	}
 }

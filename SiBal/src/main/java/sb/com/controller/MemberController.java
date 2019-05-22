@@ -123,11 +123,11 @@ public class MemberController {
 		RedirectView rv = null;
 		ModelAndView mv = null;
 		if (check.getEmail().equals("0")) {
-			// String msg="존재하지 않는 이메일입니다..";
+			//String msg="존재하지 않는 이메일입니다..";
 			rv = new RedirectView("../member/loginForm.do");
 			mv = new ModelAndView();
 			mv.setView(rv);
-			// mv.addObject("MSG",msg);
+			//mv.addObject("MSG",msg);
 			return mv;
 		} else {
 
@@ -177,6 +177,7 @@ public class MemberController {
 	// 로그아웃 상태에서의 비번 찾기
 	@RequestMapping("/findPw")
 	public ModelAndView findPw(MemberVO vo) {
+		log.info("비번설정완료");
 		mService.modifyPw(vo);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/loginForm");
@@ -333,6 +334,22 @@ public class MemberController {
 		}
 		return str;
 	}
+	
+	@RequestMapping(value="/codeValid", method=RequestMethod.POST)
+	public @ResponseBody String CodeValid(MemberVO vo) {
+		log.info("ajax실행,인증코드 유효검사");
+		String str="";
+		int ok= mService.codeValid(vo);
+		if (ok==1) {
+			//코드가 유효
+			str = "YES";
+		}else {
+			//잘못된 인증번호
+			str = "NO";
+		}
+		return str;
+	}
+	
 
 	@RequestMapping("/test100")
 	public void test100() {

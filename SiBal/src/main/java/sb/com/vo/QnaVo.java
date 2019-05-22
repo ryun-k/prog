@@ -38,7 +38,15 @@ public class QnaVo {
 	private int reRNo;
 	private int reNowPage;
 	
+	private String reCheck;
 	
+	
+	public String getReCheck() {
+		return reCheck;
+	}
+	public void setReCheck(String reCheck) {
+		this.reCheck = reCheck;
+	}
 	public int getReNowPage() {
 		return reNowPage;
 	}

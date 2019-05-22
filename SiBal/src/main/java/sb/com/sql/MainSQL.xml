@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="maininfo">
+	<select id="trip" resultType="mainVO">
+		select 
+			i_no as no,
+			i_title as title,
+			i_body as body,
+			i_writer as writer,
+			i_writeDate as writeDate,
+			i_hit as hit,
+			i_good as good,
+			fi_oriname as oriName,
+			row_number() over(partition by fi_orino order by fi_no) as ff
+		from 
+			imageinfo,
+			information 
+		where
+			upper(i_IsShow)='Y' 
+			and
+			imageinfo.fi_orino=information.i_no(+)
+			and
+			i_good != 0 
+	</select>
+</mapper>

@@ -33,7 +33,9 @@
     <table class="table table-hover" width="800">
 			<tr>
 				<td align="right">
+				<c:if test="${sessionScope.UID eq 'admin'}">
 					<input class="btn btn-primary" type="button" id="wBtn" value="글쓰기"/>
+				</c:if>
 				</td>
 			</tr>
 		</table>	
@@ -46,13 +48,14 @@
 <%--   			확인용:LIST.oriName=${data.oriName}<br/> --%>
 				<div class="col-md-4">
 				<div class="card" style="width:300px; height:450px;">
-					<img class="card-img-top" src="/uploads/${data.oriName}" style="width:300px; height:300px;"/>
+					<img class="card-img-top" src="/imgs/${data.oriName}" style="width:300px; height:300px;"/>
 					 <div class="card-body">
 					 <h4 class="card-title"><a href="../information/hitProc.do?oriNo=${data.no}&nowPage=${PINFO.nowPage}">${data.title2}</a></h4>
-					 <br/><br/>
+					<p class="card-text">${data.writer}
 					<p class="card-text"><span class="far fa-calendar-check"> ${data.writeDate}</span> | <span class="fas fa-search"> ${data.hit}</span> | <span class="fas fa-heart"> ${data.good }</span></p>
 					</div>
 				</div>
+				<br/><br/>
 				</div>
 			</c:forEach>
 		</div>	
@@ -67,7 +70,7 @@
 					
 					<c:if test="${PINFO.startPage ne 1}">
 					<%-- 링크는 목록보기 --%>
-					<a href="../information/informationList.do?nowPage=${PINFO.startPage-1}">[이전]</a>
+					<a href="../information/informationList.do?nowPage=${PINFO.startPage-5}">[이전]</a>
 					</c:if>			 
 					
 					<%-- 2. 페이지번호 [1][2][3][4][5]만들기 --%>
@@ -85,8 +88,7 @@
 					</c:if>
 					
 					<c:if test="${PINFO.endPage ne PINFO.totalPage}">
-					<a href="../information/informationList.do?nowPage=${PINFO.endPage+1}">[다음]</a></c:if>	
-					
+					<a href="../information/informationList.do?nowPage=${PINFO.endPage+5}">[다음]</a></c:if>	
 				</td>
 			</tr>
 		</tbody>

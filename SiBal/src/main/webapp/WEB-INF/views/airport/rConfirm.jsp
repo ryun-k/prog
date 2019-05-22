@@ -78,8 +78,8 @@
 								<td>${list1.arrAirportNm}</td>
 								<td>${list1.arrPlandTime}</td>
 								<td>${list1.economyCharge}원</td>
-								<td>${list1.vihicleId}
-								</td>
+								<td>${list1.vihicleId}</td>
+								<td>${list1.vihicleId}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -27,7 +27,7 @@
 		FROM
 			NOTICE
 		WHERE
-			upper(n_IsShow)='Y' 
+			upper(N_ISSHOW)='Y' 
 	</select>
 	<select id="totalcount" resultType="int">
 		SELECT
@@ -35,7 +35,7 @@
 		FROM
 			NOTICE
 		WHERE
-			upper(n_IsShow)='Y' 
+			upper(N_ISSHOW)='Y' 
 			and
 			
 			<include refid="eventT" />			
@@ -72,6 +72,8 @@
 			    	notice
 			    	
 			    where
+				    upper(N_ISSHOW)='Y' 
+					and	
 			    	<include refid="eventT" />	
 			)
 		where 

@@ -23,10 +23,10 @@
         $( "#endDate" ).datepicker();
         $( "#endDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
         
-        if ($('input[name=isshow]').is(":checked")) {
-            $('input[name=sampleHidden]').val('Y');
+        if ($('input[name=ischeck]').is(":checked")) {
+            $('input[name=isshow]').val('Y');
         } else {
-            $('input[name=sampleHidden]').val('N');
+            $('input[name=isshow]').val('N');
         }
  	 } );
 	
@@ -65,8 +65,8 @@
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
         <div class="checkbox">
-          <label><input type="checkbox" name="isshow" value="Y" >공개</label>
-          <input type="hidden" name="isshowHidden" value="Y" >
+          <label><input type="checkbox" name="ischeck" />공개</label>
+          	<input type="hidden" name="isshow" />
         </div>
       </div>
     </div>

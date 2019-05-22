@@ -56,4 +56,12 @@ public class AirportService {
 	public void bcalProc(AirVO vo) {
 		aDAO.bcalProc(vo);
 	}
+	
+	public void gcalcalProc(AirVO vo) {
+		aDAO.gcalcalProc(vo);
+	}
+	
+	public void bcalcalProc(AirVO vo) {
+		aDAO.bcalcalProc(vo);
+	}
 }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="maininfo">
+
+	<!-- mainselect -->
+	<select id="trip" resultType="InformationVO">
+	select
+		b.*
+	from
+	(
+		select 
+			row_number() over(order by hit DESC) AS rno,
+			a.* 
+		from 
+		(
+			select 
+				i_no as no,
+				i_title as title,
+				i_body as body,
+				i_writer as writer,
+				i_writeDate as writeDate,
+				i_hit as hit,
+				i_good as good,
+				fi_oriname as oriName,
+				row_number() over(partition by fi_orino order by fi_no) as ff
+			from 
+				imageinfo,
+				information 
+			where 
+				upper(i_IsShow)='Y'
+				and
+				i_hit > 0 
+			and
+				imageinfo.fi_orino=information.i_no(+)) a 
+			where 
+				a.ff=1
+	) b
+	where
+		rno between 1 and 3
+	</select>
+	<select id="trip1" resultType="InformationVO">
+	select
+		b.*
+	from
+	(
+		select 
+			row_number() over(order by hit DESC) AS rno,
+			a.* 
+		from 
+		(
+			select 
+				i_no as no,
+				i_title as title,
+				i_body as body,
+				i_writer as writer,
+				i_writeDate as writeDate,
+				i_hit as hit,
+				i_good as good,
+				fi_oriname as oriName,
+				row_number() over(partition by fi_orino order by fi_no) as ff
+			from 
+				imageinfo,
+				information 
+			where 
+				upper(i_IsShow)='Y'
+				and
+				i_hit > 0 
+			and
+				imageinfo.fi_orino=information.i_no(+)) a 
+			where 
+				a.ff=1
+	) b
+	where
+		rno between 4 and 6
+	</select>
+	
+</mapper>

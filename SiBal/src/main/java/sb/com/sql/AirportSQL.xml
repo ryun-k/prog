@@ -77,6 +77,22 @@
 		WHERE B_NO = #{no}
 	</update>
 	
+	<update id="calcalGo" parameterType="airVO" >
+	UPDATE
+		G_AIR
+		SET
+		G_CAL=1
+		WHERE G_NO = #{no}
+	</update>
+	
+	<update id="calcalBack" parameterType="airVO" >
+	UPDATE
+		B_AIR
+		SET
+		B_CAL=1
+		WHERE B_NO = #{no}
+	</update>
+	
 	
 	
 </mapper>

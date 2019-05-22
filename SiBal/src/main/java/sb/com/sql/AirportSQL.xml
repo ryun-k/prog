@@ -27,6 +27,7 @@
 		        G_CAL as cal
 		FROM
 		G_AIR
+		where g_nick=#{nick}
 	</select>
 	
 	<select id="backList" parameterType="airVO" 
@@ -43,6 +44,7 @@
 		        b_CAL as cal
 		FROM
 		b_AIR
+		where b_nick=#{nick}
 	</select>
 	
 	<delete id="delGo" parameterType="airVO" >

@@ -20,13 +20,13 @@
 				if($("#title").val()==""){
 		  			  alert("제목을 입력하지 않으셨습니다.");
 		  		      $("#title").focus();
-		  		      return;
+		  		      return false;
 		  			}
 				
 				if($("#body").val()==""){
 		  			  alert("내용을 입력하지 않으셨습니다.");
 		  		      $("#body").focus();
-		  		      return;
+		  		      return false;
 		  			}
 					
 				$("#wfrm").submit();

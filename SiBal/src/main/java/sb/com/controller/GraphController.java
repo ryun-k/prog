@@ -25,13 +25,8 @@ public class GraphController {
 		log.info("ajax실행,그래프");
 		
 		int ok = gService.makeGraph(vo);
-		if(ok>0) {
-			//EXE파일을 실행시켰다.
-			log.info("exe실행");
-		}else {
-			//EXE파일을 실행시키지 못함.
-			log.info("exe실행안됨");
-		}
+		
+		
 		 return ok;
 	}
 	

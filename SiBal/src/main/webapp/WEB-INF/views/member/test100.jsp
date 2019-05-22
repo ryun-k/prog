@@ -14,6 +14,9 @@
 $(document).ready(function(){
 	$("#sBtn").click(function(){
 		$("#graph").html("<img src='${pageContext.request.contextPath}/img/ajax-loader.gif'>")
+		setTimeout(function(){
+			
+		
 		$.ajax({
 			type:"POST",
 			url:"../graph/pie.do",
@@ -75,6 +78,7 @@ $(document).ready(function(){
 				}
 			}
 		})
+		},3000);
 	})
 });
 

@@ -1,7 +1,6 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'master' of https\://github.com/ryun-k/prog.git
 eclipse.preferences.version=1
-<<<<<<< HEAD
-encoding//src/main/webapp/WEB-INF/views/airport/test.jsp=UTF-8
-=======
 encoding//src/main/webapp/WEB-INF/views/member/pwCode.jsp=UTF-8
->>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
 encoding//src/main/webapp/WEB-INF/views/member/signUp.jsp=UTF-8

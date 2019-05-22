@@ -60,7 +60,7 @@ public class AirportController {
 		String depAirportId = result.get(airVO.getDepAirportNm());
 		String arrAirportId = result.get(airVO.getArrAirportNm());
 		String depPlandTime = airVO.getDepPlandTime();
-		List<AirVO> back = ApiExplorer.getAirportJson(arrAirportId, depAirportId, depPlandTime);
+		List<AirVO> back = ApiExplorer.getAirportJson(depAirportId, arrAirportId, depPlandTime);
 		
 		model.addAttribute("back", back);
 		return "airport/aAir";
@@ -92,8 +92,6 @@ public class AirportController {
 		return mv;
 	}
 
-	
-
 	//예매 목록 보기
 	@RequestMapping("/rConfirm")
 	public void rResult(HttpServletRequest request) {
@@ -104,6 +102,54 @@ public class AirportController {
 		request.setAttribute("LIST", list);
 		request.setAttribute("LIST1", list1);
 		
-		
 	}
+	
+	//예매 취소(가는날)
+	@RequestMapping("/gDelete")
+	public ModelAndView gdelProc(AirVO vo) {
+		ModelAndView mv = new ModelAndView();	
+		
+		aService.gdelProc(vo);
+		
+		RedirectView rv = new RedirectView("../airport/rConfirm.do");
+		mv.setView(rv);
+		return mv;
+	}
+	
+	//예매 취소(가는날)
+		@RequestMapping("/bDelete")
+		public ModelAndView bdelProc(AirVO vo) {
+			ModelAndView mv = new ModelAndView();	
+			
+			aService.bdelProc(vo);
+			
+			RedirectView rv = new RedirectView("../airport/rConfirm.do");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		//가는날 결제
+		@RequestMapping("/gCal")
+		public ModelAndView gcalProc(AirVO vo) {
+			ModelAndView mv = new ModelAndView();	
+			
+			aService.gcalProc(vo);
+			
+			RedirectView rv = new RedirectView("../airport/rConfirm.do");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		//가는날 결제
+		@RequestMapping("/bCal")
+		public ModelAndView bcalProc(AirVO vo) {
+			ModelAndView mv = new ModelAndView();	
+			
+			aService.bcalProc(vo);
+			
+			RedirectView rv = new RedirectView("../airport/rConfirm.do");
+			mv.setView(rv);
+			return mv;
+		}
+	
 }

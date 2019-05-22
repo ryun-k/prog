@@ -58,7 +58,7 @@ public class InformationController {
 		return mv;
 	}
 	
-	//상세보기 조회수 
+	//상세보기 싫어요 
 		@RequestMapping("/noGoodProc")
 		public ModelAndView	informationNoGoodProc(ModelAndView mv,
 				HttpServletRequest req,HttpSession session) {
@@ -76,7 +76,7 @@ public class InformationController {
 			mv.setView(rv);
 			return mv;
 		}
-		//상세보기 조회수 
+		//상세보기 좋아요 
 		@RequestMapping("/goodProc")
 		public ModelAndView	informationGoodProc(ModelAndView mv,
 				HttpServletRequest req,HttpSession session) {
@@ -126,7 +126,7 @@ public class InformationController {
 	public ModelAndView informationWriteProc(InformationVO vo, HttpSession session, ModelAndView mv){
 		System.out.println("fileWriteProc()컨트롤러함수 호출성공");
 		
-		String path = "D:\\uploads";
+		String path = "C:\\Users\\hong\\git\\prog\\SiBal\\src\\main\\webapp\\imgs";
 		ArrayList list = new ArrayList();
 		
 		for( int i=0; i<vo.getFiles().length ;i++) {

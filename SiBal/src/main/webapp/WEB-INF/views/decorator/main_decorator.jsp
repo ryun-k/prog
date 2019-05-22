@@ -87,6 +87,11 @@
 		    <li class="nav-item" id="nav4">
 		    	<a class="nav-link" href="/sb/qnaBoard/qnaList.do">QNA</a>
 		    </li>
+		    <c:if test="${sessionScope.UID eq 'admin'}">
+		    <li class="nav-item" id="nav5">
+		    	<a class="nav-link" href="/sb/admin/list.do">회원관리</a>
+		    </li>
+		    </c:if>
 		</ul>
 		
 		

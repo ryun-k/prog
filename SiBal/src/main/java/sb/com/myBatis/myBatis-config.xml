@@ -45,6 +45,7 @@
 		<typeAlias alias="informationVO" type="sb.com.vo.InformationVO"/>
 		<typeAlias alias="noticeVO" type="sb.com.vo.NoticeVo" />
 		<typeAlias alias="qVO" type="sb.com.vo.QnaVo" />
+		<typeAlias alias="aVO" type="sb.com.vo.AdminVo" />
 		
 		<typeAlias alias="mainVO" type="sb.com.vo.MainVo"/>
 
@@ -61,6 +62,7 @@
 		<mapper resource="/sb/com/sql/NoticeSQL.xml" />
 		<mapper resource="/sb/com/sql/QnaSQL.xml" />
 		<mapper resource="/sb/com/sql/MainSQL.xml" />
+		<mapper resource="/sb/com/sql/AdminSQL.xml" />
 	 
 	</mappers>
 </configuration>

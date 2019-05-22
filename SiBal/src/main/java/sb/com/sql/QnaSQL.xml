@@ -157,7 +157,7 @@
 	
 	<!-- 삭제할때 대댓글이 있으면 content update -->
 	<update id="repDelete2" parameterType="qVO">
-		update re_qna set re_content = '삭제된 댓글입니다.'
+		update re_qna set re_content = '//삭제된 댓글입니다.//'
 		where re_no=#{reNo}
 	</update>
 	

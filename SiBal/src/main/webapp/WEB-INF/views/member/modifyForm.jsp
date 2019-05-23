@@ -136,7 +136,7 @@ $(document).ready(function(){
 <div class="form-group">
   
 	<input type="hidden" class="form-control" name="email" value="${INFO.email}">
-	<h3>${INFO.email}</h3><br/>
+	<h3>${INFO.email}</h3>
 	
 	
 	<label for="name">이름</label>
@@ -156,15 +156,15 @@ $(document).ready(function(){
 	<label for="phone">휴대폰 번호</label> 
 	<input type="text" id="phone" class="form-control" name="phone" placeholder="휴대폰 번호를 입력해주세요" value="${INFO.phone}"
 	 pattern="^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$"> 
-	 <div id="CKphone"><br/></div>
+	 <div id="CKphone"></div>
 
-<br/>
 </div>
 <div class="row">
 <div class="col-10"></div>
 <div class="col-2">
 <input type="button" id="mBtn" class="btn btn-primary" value="수정하기">
 <input type="button" id="cBtn" class="btn btn-outline-danger" value="취소">
+<br/><br/><br/><br/>
 </div>
 </div>
 </form>

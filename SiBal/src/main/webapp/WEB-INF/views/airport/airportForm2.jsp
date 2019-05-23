@@ -111,11 +111,6 @@ body {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -123,20 +118,28 @@ body {
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-	$(document).ready(function() {
-		$("#gopicker").datepicker();
-		$("#backpicker").datepicker();
+$(function() {
+	  $( "#dtpicker" ).datepicker({
+	    dateFormat: 'yymmdd',
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    dayNames: ['일','월','화','수','목','금','토'],
+	    dayNamesShort: ['일','월','화','수','목','금','토'],
+	    dayNamesMin: ['일','월','화','수','목','금','토'],
+	    showMonthAfterYear: true,
+	    changeMonth: true,
+	    changeYear: true,
+	    yearSuffix: '년'
+	  });
 	});
-	function email_chk() {
-		if(document.fom.email2.value=="직접입력"){
-		document.fom.email3.style.visibility='visible'; 
-		document.fom.email3.style.display='';
-		document.fom.email2.style.visibility='hidden'; 
-		document.fom.email2.style.display='none';
-		document.fom.email3.focus();
-		}
-		}
 </script>
 <title>항공권 검색</title>
 </head>
@@ -149,29 +152,48 @@ body {
 						<h4 class="card-title text-center">항공권 검색</h4>
 						<form class="form-signin" action="aAir.do" method="post">
 							<div class="form-label-group">
-								<SELECT name=email2 onchange="email_chk()">
-									<OPTION>선택하세요</OPTION>
-									<OPTION value="daum.net">다음</OPTION>
-									<OPTION value="hanmail.net">한메일</OPTION>
-									<OPTION value="nate.com">네이트</OPTION>
-									<OPTION value="직접입력">기타[직접입력]</OPTION>
-								</SELECT> 
-								<INPUT class=input style="DISPLAY: none" size=15 name=email3>
-								<input type="text" id="inputDep" name="depAirportNm"
-									class="form-control" placeholder="출발지" required autofocus>
-								<label for="inputDep">출발지</label>
+								<select class="form-control" name="depAirportNm">
+								<option value="" selected disabled hidden>==출발지==</option>
+									<option>광주</option>
+									<option>군산</option>
+									<option>김포</option>
+									<option>김해</option>
+									<option>대구</option>
+									<option>무안</option>
+									<option>양양</option>
+									<option>여수</option>
+									<option>원주</option>
+									<option>울산</option>
+									<option>인천</option>
+									<option>제주</option>
+									<option>포항</option>
+									<option>청주</option>
+								</select>
 							</div>
 
 							<div class="form-label-group">
-								<input type="text" id="inputArr" name="arrAirportNm"
-									class="form-control" placeholder="도착지" required> <label
-									for="inputArr">도착지</label>
+								<select class="form-control" name="arrAirportNm" onscroll="onscroll">
+								<option value="" selected disabled hidden>==도착지==</option>
+									<option>광주</option>
+									<option>군산</option>
+									<option>김포</option>
+									<option>김해</option>
+									<option>대구</option>
+									<option>무안</option>
+									<option>양양</option>
+									<option>여수</option>
+									<option>원주</option>
+									<option>울산</option>
+									<option>인천</option>
+									<option>제주</option>
+									<option>포항</option>
+									<option>청주</option>
+								</select>
 							</div>
-
+							<h4 class="text-center">날짜선택</h4>
 							<div class="form-label-group">
-								<input type="text" id="inputTime" name="depPlandTime"
-									class="form-control" placeholder="가는날" required> <label
-									for="inputTime">가는날</label>
+								<input type="text" id="dtpicker" name="depPlandTime"
+									class="form-control" placeholder="가는날" required>
 							</div>
 
 							<button class="btn btn-lg btn-primary btn-block text-uppercase"

@@ -13,7 +13,7 @@ public class AdminVo {
 	private String phone;
 	private String check;
 	private String isShow;
-	private int status;
+	private int stat;
 	private String kakao;
 	
 	private int start;
@@ -99,11 +99,11 @@ public class AdminVo {
 	public void setIsShow(String isShow) {
 		this.isShow = isShow;
 	}
-	public int getStatus() {
-		return status;
+	public int getStat() {
+		return stat;
 	}
-	public void setStatus(int status) {
-		this.status = status;
+	public void setStat(int stat) {
+		this.stat = stat;
 	}
 	public String getKakao() {
 		return kakao;

@@ -116,4 +116,9 @@ public class QnaDAO extends SqlSessionDaoSupport{
 		getSqlSession().delete("qnaBoard.repDelete",vo);
 	}
 	
+	// 맨 아래 댓글 삭제시 re_check 업데이트
+	public void repDeleteCup(QnaVo vo) {
+		getSqlSession().update("qnaBoard.repDeleteCup",vo);
+	}
+	
 }

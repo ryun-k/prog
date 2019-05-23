@@ -31,6 +31,7 @@
 <body>
    <%-- 기타 기능 --%>
     <div class="container">
+	<h2 align="left">관광지</h2>
     <table class="table table-hover" width="800">
 			<tr>
 				<td align="right">

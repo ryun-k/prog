@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import sb.com.service.AdminService;
 import sb.com.util.PageUtil;
@@ -66,19 +67,55 @@ public class AdminController {
 	// 회원 상세보기
 	@RequestMapping("/detail")
 	public ModelAndView detail(@RequestParam(value="nowPage") int nowPage, @RequestParam(value="no") int no , ModelAndView mv,
-			@RequestParam(value="nick") String nick) {
+			@RequestParam(value="nick") String nick, AdminVo vo, AirVO aVo ) {
 		
-		AdminVo vo = adService.detail(no);
-		AirVO aVo = new AirVO();
+		vo = adService.detail(no);
+		
 		aVo.setNick(nick);
 		ArrayList aList = adService.detailGair(aVo);
+		ArrayList bList = adService.detailBair(aVo);
  		
 		mv.addObject("no", no);
 		mv.addObject("VIEW",vo);
 		mv.addObject("nowPage",nowPage);
 		mv.addObject("ALIST",aList);
+		mv.addObject("BLIST",bList);
 		
-		mv.setViewName("/admin/detail");
+		mv.setViewName("admin/detail");
+		return mv;
+	}
+	// 회원 수정 폼
+	@RequestMapping("/modify")
+	public ModelAndView modify(@RequestParam(value="nowPage") int nowPage, @RequestParam(value="no") int no , ModelAndView mv, AdminVo vo) {
+		
+		vo = adService.detail(no);
+		
+		mv.addObject("no", no);
+		mv.addObject("VIEW",vo);
+		mv.addObject("nowPage",nowPage);
+		
+		mv.setViewName("admin/modify");
+		return mv;
+	}
+	
+	// 회원 수정
+	@RequestMapping("/modifyP")
+	public ModelAndView modifyP(@RequestParam(value="nowPage", required=false) int nowPage, @RequestParam(value="no") int no ,ModelAndView mv
+			, AdminVo vo) {
+		
+		
+		adService.detailUpdate(vo);
+		
+		String nick = vo.getNick();
+		
+		RedirectView rv = new RedirectView("../admin/detail.do");
+		mv.addObject("no", no);
+		mv.addObject("VIEW",vo);
+		mv.addObject("nowPage",nowPage);
+		mv.addObject("nick",nick);
+		
+		mv.setView(rv);
+		
 		return mv;
 	}
 }

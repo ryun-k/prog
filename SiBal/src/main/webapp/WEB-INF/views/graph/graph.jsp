@@ -122,7 +122,8 @@ height:480px;
 <br/>
 <div class="row">
 <div class="col-4"></div>
-<div id="graph"><h3>보고 싶은 통계의 연,월을 선택하고 통계보기 버튼을 눌러주세요</h3></div>
+<div id="graph"><h3>보고 싶은  연,월을 선택하고 통계보기 버튼을 눌러주세요</h3></div>
 </div>
+<br/><br/>
 </body>
 </html>

@@ -52,9 +52,9 @@ public class AirVO {
 		return depPlandTime;
 	}
 	public String getDepPlandTime2() {
-		String result = arrPlandTime.substring(0,4)+"년"+arrPlandTime.substring(4,6)+"월"
-				+arrPlandTime.substring(6,8)+"일"+"<br/>"+arrPlandTime.substring(8,10)+"시"
-				+arrPlandTime.substring(10,12)+"분";
+		String result = depPlandTime.substring(0,4)+"년"+depPlandTime.substring(4,6)+"월"
+				+depPlandTime.substring(6,8)+"일"+"<br/>"+depPlandTime.substring(8,10)+"시"
+				+depPlandTime.substring(10,12)+"분";
 			return result;
 	}
 	public void setDepPlandTime(String depPlandTime) {

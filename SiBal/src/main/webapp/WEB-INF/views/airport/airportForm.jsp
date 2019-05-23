@@ -150,7 +150,7 @@ $(function() {
 				<div class="card card-signin my-5">
 					<div class="card-body">
 						<h4 class="card-title text-center">항공권 검색</h4>
-						<form class="form-signin" action="aAir.do" method="post">
+						<form class="form-signin" action="pAir.do" method="post">
 							<div class="form-label-group">
 								<select class="form-control" name="depAirportNm">
 								<option value="" selected disabled hidden>==출발지==</option>

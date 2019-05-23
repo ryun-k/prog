@@ -24,8 +24,8 @@
 	<!-- 목록보기 -->
 	<select id="list" parameterType="aVO" resultType="aVO">
 		select * from
-		(select rNo, no, email, name, nick, status from
-		(select m_no as no, m_email as email, m_name as name, m_nick as nick, m_status as status, ROW_NUMBER() OVER ( ORDER BY m_no desc) as rNo 
+		(select rNo, no, email, name, nick, stat from
+		(select m_no as no, m_email as email, m_name as name, m_nick as nick, m_status as stat, ROW_NUMBER() OVER ( ORDER BY m_no desc) as rNo 
 		from sbmember
 		order by m_no desc))
 		where rNo BETWEEN #{start} and #{end}
@@ -39,8 +39,8 @@
 	<!-- 검색하기 -->
 	<select id="searchList" parameterType="aVO" resultType="aVO">
 		select * from
-		(select rNo, no, email, name, nick, status from
-		(select m_no as no, m_email as email, m_name as name, m_nick as nick, m_status as status, ROW_NUMBER() OVER ( ORDER BY m_no desc) as rNo 
+		(select rNo, no, email, name, nick, stat from
+		(select m_no as no, m_email as email, m_name as name, m_nick as nick, m_status as stat, ROW_NUMBER() OVER ( ORDER BY m_no desc) as rNo 
 		from sbmember
 		where <include refid="searchField" />
 		order by m_no desc))
@@ -49,7 +49,7 @@
 	
 	<!-- 회원정보 상세보기 -->
 	<select id="detail" parameterType="int" resultType="aVO">
-		select m_no as no, m_email as email, m_name as name, m_nick as nick, m_status as status, m_address as address,
+		select m_no as no, m_email as email, m_name as name, m_nick as nick, m_status as stat, m_address as address,
 			   m_phone as phone, m_kakao as kakao from sbmember where m_no=#{no}
 	</select>
 	
@@ -60,9 +60,21 @@
 			   g_VIHICLEID as vihicleId, g_cal as cal  
 		from  g_air 
 		where g_nick=#{nick}
+	</select>
+		
+	<!-- 회원 오는날 예매 내용 확인 -->
+	<select id="detailBair" parameterType="airVO" resultType="airVO">
+		select b_NO as no, b_AIRLINENM as airlineNm, b_DEPAIRPORTNM as depAirportNm, b_depPlandTime as depPlandTime, 
+			   b_ARRAIRPORTNM as arrAirportNm , b_arrPlandTime as arrPlandTime , b_ECONOMYCHARGE as economyCharge, 
+			   b_VIHICLEID as vihicleId, b_cal as cal  
+		from  b_air 
+		where b_nick=#{nick}
 	</select>	
 	
-	
+	<update id="detailUpdate" parameterType="aVO">
+		update sbmember set m_name=#{name}, m_address=#{address}, m_phone=#{phone}, m_status=#{stat}
+		where m_no=#{no}	
+	</update>
 	
 	
 	

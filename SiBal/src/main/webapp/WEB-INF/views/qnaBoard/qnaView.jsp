@@ -104,8 +104,9 @@
   		// 댓글 삭제
   		$(".dBtn").click(function(){
   			var no = $(this).parent("div").attr("id");
+  			var Pno = $(this).parent("div").children("input").attr("id");
   			if(confirm("정말 삭제하시겠습니까?"))
-  				location.href="../qnaBoard/repDelete.do?oriNo=${oriNo}&nowPage=${nowPage}&reNowPage=${reNowPage}&reNo="+no;
+  				location.href="../qnaBoard/repDelete.do?oriNo=${oriNo}&nowPage=${nowPage}&reNowPage=${reNowPage}&reNo="+no+"&rePNo="+Pno;
   		});
   		
   		// 댓글입력 유효성 검사
@@ -172,6 +173,7 @@
 		 	<c:if test="${data.depth eq 0}"><br/></c:if>
 		 	<div class="card" style="margin-left: <c:out value='${data.reDepth * 30}'/>px;">
 			   <div class="card-header" id="${data.reNo}" >
+			   <input type="hidden" name="rePNo" id="${data.rePNo}" />
 			     <strong class="card-text" >${data.id}</strong>
 			     <span>${data.reWDate}</span>
 			     <c:if test="${not empty sessionScope.nick}">

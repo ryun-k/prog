@@ -76,5 +76,15 @@ public class AdminService {
 		ArrayList list = adDAO.detailGair(vo);
 		return list;
 	}
-
+	
+	// 오는날 조회
+	public ArrayList detailBair(AirVO vo) {
+		ArrayList list = adDAO.detailBair(vo);
+		return list;
+	}
+	
+	// 수정하기
+	public void detailUpdate(AdminVo vo) {
+		adDAO.detailUpdate(vo);
+	}
 }

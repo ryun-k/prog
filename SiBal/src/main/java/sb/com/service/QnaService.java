@@ -178,7 +178,9 @@ public class QnaService {
 		String check = qDAO.repRepselect(vo);
 		
 		if(check.equals("Y")) {
-			qDAO.repDelete(vo);	
+			qDAO.repDelete(vo);
+			qDAO.repDeleteCup(vo);
+			
 		}else if(check.equals("N")) {
 			qDAO.repDelete2(vo);
 		}

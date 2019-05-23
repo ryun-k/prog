@@ -52,6 +52,9 @@
    <bean id="mainDAO" class="sb.com.dao.MainDAO">
       <property name="sqlSessionTemplate" ref="sqlSession"/>
    </bean>
+   <bean id="adminDAO" class="sb.com.dao.AdminDAO">
+      <property name="sqlSessionTemplate" ref="sqlSession"/>
+   </bean>
 
       
    <!-- serviece bean처리 -->
@@ -62,11 +65,13 @@
    <bean id="memberService" class="sb.com.service.MemberService"/>
    <bean id="graphService" class="sb.com.service.GraphService"/>
    <bean id="mainService" class="sb.com.service.MainService"/>
+   <bean id="adminService" class="sb.com.service.AdminService"/>
       
       
    <bean id="graphControll" class="sb.com.controller.GraphController"/>
    <bean id="qnaControll" class="sb.com.controller.QnaController"/>
    <bean id="memberControll" class="sb.com.controller.MemberController"/>
    <bean id="sbmainController" class="sb.com.controller.sbmainController"/>
+   <bean id="adminController" class="sb.com.controller.AdminController"/>
    
 </beans>

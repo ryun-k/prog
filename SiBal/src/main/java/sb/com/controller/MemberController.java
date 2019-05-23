@@ -351,8 +351,5 @@ public class MemberController {
 	}
 	
 
-	@RequestMapping("/test100")
-	public void test100() {
-		
-	}
+	
 }

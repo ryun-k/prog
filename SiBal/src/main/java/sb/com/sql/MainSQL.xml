@@ -11,7 +11,7 @@
 	from
 	(
 		select 
-			row_number() over(order by hit DESC) AS rno,
+			row_number() over(order by good,hit DESC) AS rno,
 			a.* 
 		from 
 		(
@@ -31,7 +31,9 @@
 			where 
 				upper(i_IsShow)='Y'
 				and
-				i_hit > 0 
+				i_hit > 0
+				and
+				i_good > 0 
 			and
 				imageinfo.fi_orino=information.i_no(+)) a 
 			where 
@@ -46,7 +48,7 @@
 	from
 	(
 		select 
-			row_number() over(order by hit DESC) AS rno,
+			row_number() over(order by good,hit DESC) AS rno,
 			a.* 
 		from 
 		(
@@ -66,7 +68,9 @@
 			where 
 				upper(i_IsShow)='Y'
 				and
-				i_hit > 0 
+				i_hit > 0
+				and
+				i_good > 0
 			and
 				imageinfo.fi_orino=information.i_no(+)) a 
 			where 

@@ -31,7 +31,8 @@
 		//데이트픽커 포멧
 		$( "#inputTime" ).datepicker();
         $( "#inputTime" ).datepicker( "option", "dateFormat", "yymmdd" );
-		
+        $( "#inputTime" ).val($.datepicker.formatDate('yymmdd', new Date()));
+
 		
         //체인지버튼 화면크기에 따른 배치변경
         $(window).resize(function(){
@@ -83,9 +84,20 @@
 				      <div class="col-sm ">
 				       <select class="form-control" name="depAirportNm" id="inputDep">
 								    <option>출발지</option>
-								    <option>김포</option>
-								    <option>제주</option>
-								    <option>인천</option>
+								    <option>광주</option>
+									<option>군산</option>
+									<option>김포</option>
+									<option>김해</option>
+									<option>대구</option>
+									<option>무안</option>
+									<option>양양</option>
+									<option>여수</option>
+									<option>원주</option>
+									<option>울산</option>
+									<option>인천</option>
+									<option>제주</option>
+									<option>포항</option>
+									<option>청주</option>
 								  </select>
 				      </div>
 				      <div id="change" align="center">
@@ -94,9 +106,20 @@
 				      <div class="col-sm ">
 				       <select class="form-control" name="arrAirportNm"  id="inputArr">
 								    <option>도착지</option>
-								    <option>김포</option>
-								    <option>제주</option>
-								    <option>인천</option>
+								    <option>광주</option>
+									<option>군산</option>
+									<option>김포</option>
+									<option>김해</option>
+									<option>대구</option>
+									<option>무안</option>
+									<option>양양</option>
+									<option>여수</option>
+									<option>원주</option>
+									<option>울산</option>
+									<option>인천</option>
+									<option>제주</option>
+									<option>포항</option>
+									<option>청주</option>
 								  </select>
 				      </div>
 				      <div class="col-sm ">

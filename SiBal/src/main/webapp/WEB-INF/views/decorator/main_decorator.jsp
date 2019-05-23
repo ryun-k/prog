@@ -19,10 +19,14 @@
  	$(function(){
  		var pathname = $(location).attr('pathname'); //uri pathname 값 가져오기 
 
-		var nav1 = $('#nav1 > a').attr('href');		//nav 이동경로 가져오기
-		var nav2 = $('#nav2 > a').attr('href');		
+ 		var nav1 = $('#nav1 > a').attr('href');		//nav 이동경로 가져오기
+		var nav2 = $('#nav2 > a').attr('href');
+ 		
 		var nav3 = $('#nav3 > a').attr('href');		
+		var nav3_1 = $('#nav3_1 > a').attr('href');		
+		var nav3_2 = $('#nav3_2 > a').attr('href');
 		var nav4 = $('#nav4 > a').attr('href');		
+		var nav5 = $('#nav5 > a').attr('href');		
 		
 		//네비 클릭 활성화
 		if(pathname == nav1){
@@ -31,11 +35,14 @@
 		if(pathname == nav2){
 			$('#nav2').addClass('active');
 		}
-		if(pathname == nav3){
+		if(pathname == nav3||pathname == nav3_1||pathname == nav3_2){
 			$('#nav3').addClass('active');
 		}
 		if(pathname == nav4){
 			$('#nav4').addClass('active');
+		}
+		if(pathname == nav5){
+			$('#nav5').addClass('active');
 		}
 		
 		//창크기 가져오기
@@ -110,8 +117,12 @@
 		    <li class="nav-item" id="nav3">
 		    	<a class="nav-link" href="#">여행 정보<i class='fa fa-angle-down'></i></a>
 		    	<ul class="submenu"> 
-			    	<li><a class="nav-link" href="/sb/information/informationList.do">관광지</a></li> 
-			    	<li><a class="nav-link" href="/sb/information/informationList.do">관광통계</a></li> 
+			    	<li class="nav-item" id="nav3_1">
+			    		<a class="nav-link" href="/sb/information/informationList.do">관광지</a>
+		    		</li> 
+			    	<li class="nav-item" id="nav3_2">
+			    		<a class="nav-link" href="/sb/information/informationList.do">관광통계</a>
+			    	</li> 
 		    	</ul>
 		    </li>
 		    <li class="nav-item" id="nav4">

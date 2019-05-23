@@ -208,7 +208,6 @@ width:1000px;
 <div class="col-4"></div>
 <div id="graph"><h3>보고 싶은  연,월을 선택하고 통계보기 버튼을 눌러주세요</h3></div>
 </div>
-<<<<<<< HEAD
 <br/>
 <br/>
 <div class="row">
@@ -255,8 +254,6 @@ width:1000px;
 <br/>
 <br/>
 
-=======
 <br/><br/>
->>>>>>> branch 'master' of https://github.com/ryun-k/prog.git
 </body>
 </html>

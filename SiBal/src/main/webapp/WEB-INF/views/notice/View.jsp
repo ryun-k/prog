@@ -30,11 +30,12 @@
 <body>
 
 <div class="container">
-  <table class="table table-bordered">
+  <table class="table table-dark table-striped">
     <tbody>
       <tr>
         <td width="10%">제목</td>
         <td>${VIEW.title }</td>
+        <td>${VIEW.wDate }</td>
       </tr>
       <tr>
         <td width="10%">내용</td>

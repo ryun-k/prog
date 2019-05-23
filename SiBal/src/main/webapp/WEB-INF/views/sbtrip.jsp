@@ -147,7 +147,7 @@
 				<h4 class="card-title">${data.title2}</h4>
 				<p class="card-text"><span class="far fa-calendar-check"> ${data.writeDate}</span> | <span class="fas fa-search"> ${data.hit}</span> | <span class="fas fa-heart"> ${data.good }</span></p>
 			</div>
-    	</td>
+    	</td> 
       </c:forEach>
       
       </tr>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+	
+	<!-- 검색 결과반영 동적 SQL -->
+	<sql id="searchField">
+		<if test="target eq 'email'">
+			m_email like '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'nick'">
+			m_nick like '%'||#{word}||'%'
+		</if>
+		<if test="target eq 'name'">
+			m_name like '%'||#{word}||'%'
+		</if>
+	</sql>
+	
+	<!-- 게시물 카운트 -->
+	<select id="totalCount" resultType="int">
+		select count(*) as cnt from sbmember
+	</select>
+	
+	<!-- 목록보기 -->
+	<select id="list" parameterType="aVO" resultType="aVO">
+		select * from
+		(select rNo, no, email, name, nick, status from
+		(select m_no as no, m_email as email, m_name as name, m_nick as nick, m_status as status, ROW_NUMBER() OVER ( ORDER BY m_no desc) as rNo 
+		from sbmember
+		order by m_no desc))
+		where rNo BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 검색결과 카운트 -->
+	<select id="searchCount" parameterType="aVO" resultType="int">
+		select count(*) as cnt from sbmember where <include refid="searchField" />
+	</select>
+	
+	<!-- 검색하기 -->
+	<select id="searchList" parameterType="aVO" resultType="aVO">
+		select * from
+		(select rNo, no, email, name, nick, status from
+		(select m_no as no, m_email as email, m_name as name, m_nick as nick, m_status as status, ROW_NUMBER() OVER ( ORDER BY m_no desc) as rNo 
+		from sbmember
+		where <include refid="searchField" />
+		order by m_no desc))
+		where rNo BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 회원정보 상세보기 -->
+	<select id="detail" parameterType="int" resultType="aVO">
+		select m_no as no, m_email as email, m_name as name, m_nick as nick, m_status as status, m_address as address,
+			   m_phone as phone, m_kakao as kakao from sbmember where m_no=#{no}
+	</select>
+	
+	<!-- 회원 가는날 예매 내용 확인 -->
+	<select id="detailGair" parameterType="airVO" resultType="airVO">
+		select g_NO as no, g_AIRLINENM as airlineNm, g_DEPAIRPORTNM as depAirportNm, g_depPlandTime as depPlandTime, 
+			   g_ARRAIRPORTNM as arrAirportNm , g_arrPlandTime as arrPlandTime , g_ECONOMYCHARGE as economyCharge, 
+			   g_VIHICLEID as vihicleId, g_cal as cal  
+		from  g_air 
+		where g_nick=#{nick}
+	</select>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

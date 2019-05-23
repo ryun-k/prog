@@ -19,6 +19,12 @@ public class GraphController {
 	@Autowired
 	private GraphService gService;
 	
+	//그래프 보기
+	@RequestMapping("/graph")
+	public void praph() {
+		
+	}
+	
 	//파이그래프 그리기
 	@RequestMapping(value="/pie",method=RequestMethod.POST)
 	public @ResponseBody int loadGraph(GraphVO vo) {

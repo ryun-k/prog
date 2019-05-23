@@ -27,42 +27,99 @@
 			$(location).attr("href","/sb/information/hitProc.do?oriNo="+no+"&nowPage=1");
 		}); 
 	
+		
+		//데이트픽커 포멧
 		$( "#inputTime" ).datepicker();
         $( "#inputTime" ).datepicker( "option", "dateFormat", "yymmdd" );
+        $( "#inputTime" ).val($.datepicker.formatDate('yymmdd', new Date()));
+
 		
+        //체인지버튼 화면크기에 따른 배치변경
+        $(window).resize(function(){
+        	if($(window).width()<560){
+        		$('#change').addClass('col-sm');
+        	}else{
+        		$('#change').removeClass('col-sm');
+        	}
+        	
+        });
+       	if($(window).width()<560){
+       		$('#change').addClass('col-sm');
+       	}else{
+       		$('#change').removeClass('col-sm');
+       	}
+        
+       	//change 버튼 클릭시
+       	$('#change').click(function(){
+       		
+       		var inputDep=$('#inputDep').val();
+       		var inputArr=$('#inputArr').val();
+       		
+       		$('#inputDep').val(inputArr);
+       		$('#inputArr').val(inputDep);
+       		
+       		
+       	});
+       	
 	});
 </script>
 <style type="text/css">
 	.back{
 		margin-bottom:50px;
-		padding: 30px;
+		padding: 50px;
 		background-size: cover;
 		background-image: url("/sb/img/canada-lake-feb.jpg");
 	}
+	
 
 </style>
 </head>
 <body>
 
 <div class="container-fluid back">
-            <h4 class="card-title text-center">항공권 검색</h4>
+            <h2 class="card-title text-center text-white" style="margin-bottom:30px">티켓 검색</h2>
             <form class="form-signin" action="/sb/airport/pAir.do" method="post">
               <div class="container-fluid">
 				    <div class="row">
 				      <div class="col-sm ">
 				       <select class="form-control" name="depAirportNm" id="inputDep">
 								    <option>출발지</option>
-								    <option>김포</option>
-								    <option>제주</option>
-								    <option>인천</option>
+								    <option>광주</option>
+									<option>군산</option>
+									<option>김포</option>
+									<option>김해</option>
+									<option>대구</option>
+									<option>무안</option>
+									<option>양양</option>
+									<option>여수</option>
+									<option>원주</option>
+									<option>울산</option>
+									<option>인천</option>
+									<option>제주</option>
+									<option>포항</option>
+									<option>청주</option>
 								  </select>
+				      </div>
+				      <div id="change" align="center">
+					      <i class='fas fa-exchange-alt' style='font-size:35px;color:white'></i>
 				      </div>
 				      <div class="col-sm ">
 				       <select class="form-control" name="arrAirportNm"  id="inputArr">
 								    <option>도착지</option>
-								    <option>김포</option>
-								    <option>제주</option>
-								    <option>인천</option>
+								    <option>광주</option>
+									<option>군산</option>
+									<option>김포</option>
+									<option>김해</option>
+									<option>대구</option>
+									<option>무안</option>
+									<option>양양</option>
+									<option>여수</option>
+									<option>원주</option>
+									<option>울산</option>
+									<option>인천</option>
+									<option>제주</option>
+									<option>포항</option>
+									<option>청주</option>
 								  </select>
 				      </div>
 				      <div class="col-sm ">
@@ -81,11 +138,11 @@
 <table class="table table-dark">
 <h2 align="center">추천 여행지</h2>
 	<tbody>
-      <tr id="list">
+      <tr id="list" align="center">
       
       <c:forEach items="${LIST}" var="data">
       	<td id="${data.no}">
-			<img class="card-img-top" src="/sb/imgs/${data.oriName}" />
+			<img class="card-img-top img" src="/sb/imgs/${data.oriName}" />
 			 <div class="card-body">
 				<h4 class="card-title">${data.title2}</h4>
 				<p class="card-text"><span class="far fa-calendar-check"> ${data.writeDate}</span> | <span class="fas fa-search"> ${data.hit}</span> | <span class="fas fa-heart"> ${data.good }</span></p>
@@ -94,11 +151,11 @@
       </c:forEach>
       
       </tr>
-      <tr id="list1">
+      <tr id="list1" align="center">
       
       <c:forEach items="${LIST1}" var="data">
       	<td id="${data.no}">
-			<img class="card-img-top" src="/sb/imgs/${data.oriName}" />
+			<img class="card-img-top img" src="/sb/imgs/${data.oriName}" />
 			 <div class="card-body">
 				<h4 class="card-title">${data.title2}</h4>
 				<p class="card-text"><span class="far fa-calendar-check"> ${data.writeDate}</span> | <span class="fas fa-search"> ${data.hit}</span> | <span class="fas fa-heart"> ${data.good }</span></p>

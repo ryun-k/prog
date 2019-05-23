@@ -247,6 +247,7 @@ public class QnaController {
 		
 		vo.setReNo(reNo);
 		vo.setRePNo(rePNo);
+		
 		qService.repDelete(vo);
 		RedirectView rv = new RedirectView("../qnaBoard/qnaView.do");
 		mv.addObject("oriNo",oriNo);

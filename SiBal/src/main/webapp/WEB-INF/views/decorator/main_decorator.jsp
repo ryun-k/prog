@@ -25,6 +25,7 @@
 		var nav3 = $('#nav3 > a').attr('href');		
 		var nav3_1 = $('#nav3_1 > a').attr('href');		
 		var nav3_2 = $('#nav3_2 > a').attr('href');
+		
 		var nav4 = $('#nav4 > a').attr('href');		
 		var nav5 = $('#nav5 > a').attr('href');		
 		

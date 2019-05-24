@@ -38,8 +38,12 @@
         $(window).resize(function(){
         	if($(window).width()<560){
         		$('#change').addClass('col-sm');
+        		$('#change > i').removeClass('fa-exchange-alt');
+        		$('#change > i').addClass('fa-retweet');
         	}else{
         		$('#change').removeClass('col-sm');
+        		$('#change > i').removeClass('fa-retweet');
+        		$('#change > i').addClass('fa-exchange-alt');
         	}
         	
         });

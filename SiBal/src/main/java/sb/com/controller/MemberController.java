@@ -285,11 +285,11 @@ public class MemberController {
 			mService.loginProc(vo, session);
 			String strStatus = (String) session.getAttribute("status");
 			int status = Integer.parseInt(strStatus);
-			if (status == 1) {
+			if (status == 1 || status == 9) {
 				str = "YES1";
 			} else if (status == 0) {
 				str = "YES2";
-			}
+			} 
 		} else {
 			str = "NO";
 		}

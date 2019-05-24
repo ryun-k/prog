@@ -40,5 +40,15 @@ public class AdminDAO extends SqlSessionDaoSupport{
 		return (ArrayList) getSqlSession().selectList("admin.detailGair",vo);
 	}
 	
+	// 오는날 조회
+	public ArrayList detailBair(AirVO vo) {
+		return (ArrayList) getSqlSession().selectList("admin.detailBair",vo);
+	}
+	
+	// 회원 수정
+	public void detailUpdate(AdminVo vo) {
+		getSqlSession().update("admin.detailUpdate", vo);
+	}
+	
 	
 }

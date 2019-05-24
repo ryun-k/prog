@@ -38,8 +38,12 @@
         $(window).resize(function(){
         	if($(window).width()<560){
         		$('#change').addClass('col-sm');
+        		$('#change > i').removeClass('fa-exchange-alt');
+        		$('#change > i').addClass('fa-retweet');
         	}else{
         		$('#change').removeClass('col-sm');
+        		$('#change > i').removeClass('fa-retweet');
+        		$('#change > i').addClass('fa-exchange-alt');
         	}
         	
         });
@@ -147,7 +151,7 @@
 				<h4 class="card-title">${data.title2}</h4>
 				<p class="card-text"><span class="far fa-calendar-check"> ${data.writeDate}</span> | <span class="fas fa-search"> ${data.hit}</span> | <span class="fas fa-heart"> ${data.good }</span></p>
 			</div>
-    	</td>
+    	</td> 
       </c:forEach>
       
       </tr>

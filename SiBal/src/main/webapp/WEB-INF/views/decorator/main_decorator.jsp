@@ -117,16 +117,20 @@
 		    <li class="nav-item" id="nav3">
 		    	<a class="nav-link" href="#">여행 정보<i class='fa fa-angle-down'></i></a>
 		    	<ul class="submenu"> 
-			    	<li class="nav-item" id="nav3_1">
+
+			    	
+			       	<li class="nav-item" id="nav3_1">
 			    		<a class="nav-link" href="/sb/information/informationList.do">관광지</a>
 		    		</li> 
 			    	<li class="nav-item" id="nav3_2">
-			    		<a class="nav-link" href="/sb/information/informationList.do">관광통계</a>
+			    		<a class="nav-link" href="/sb/graph/graph.do">관광통계</a>
 			    	</li> 
+
+
 		    	</ul>
 		    </li>
 		    <li class="nav-item" id="nav4">
-		    	<a class="nav-link" href="/sb/qnaBoard/qnaList.do">QNA</a>
+		    	<a class="nav-link" href="/sb/qnaBoard/qnaList.do">Q&A</a>
 		    </li>
 		    <c:if test="${sessionScope.UID eq 'admin'}">
 		    <li class="nav-item" id="nav5">
@@ -153,7 +157,7 @@
 			  	</a>
 		  	 <div class="dropdown-menu bg-dark">
 		        <a class="nav-link" href="/sb/member/infoForm.do">회원정보 수정</a>
-		        <a class="nav-link" href="#">예매 확인</a>
+		        <a class="nav-link" href="/sb/airport/rConfirm.do">예매 확인</a>
 	     	 </div>	  	 
 		  	</li>
 			<li class="nav-item">  

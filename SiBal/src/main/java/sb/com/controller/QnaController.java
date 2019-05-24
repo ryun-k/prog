@@ -242,8 +242,11 @@ public class QnaController {
 		int    reNo    = Integer.parseInt(strReNo);
 		String reNowPage  = req.getParameter("reNowPage");
 		String nowPage  = req.getParameter("nowPage");
+		String strRePNo  = req.getParameter("rePNo");
+		int    rePNo    = Integer.parseInt(strRePNo);
 		
 		vo.setReNo(reNo);
+		vo.setRePNo(rePNo);
 		
 		qService.repDelete(vo);
 		RedirectView rv = new RedirectView("../qnaBoard/qnaView.do");

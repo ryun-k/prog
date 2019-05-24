@@ -54,13 +54,13 @@
 				<td>${data.nick }</td>
 				<td>${data.name }</td>
 				<c:choose>
-					<c:when test="${data.status eq '0'}">
+					<c:when test="${data.stat eq '0'}">
 						<td>탈퇴회원</td>
 					</c:when>
-					<c:when test="${data.status eq '1'}">
+					<c:when test="${data.stat eq '1'}">
 						<td>일반회원</td>
 					</c:when>
-					<c:when test="${data.status eq '9'}">
+					<c:when test="${data.stat eq '9'}">
 						<td>관리자</td>
 					</c:when>
 				</c:choose>

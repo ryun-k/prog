@@ -176,10 +176,15 @@ public class QnaService {
 	public void repDelete(QnaVo vo) {
 		
 		String check = qDAO.repRepselect(vo);
+		int count = qDAO.cnt(vo);
 		
-		if(check.equals("Y")) {
-			qDAO.repDelete(vo);	
-		}else if(check.equals("N")) {
+		if(check.equals("Y") && count==1) {
+			qDAO.repDelete(vo);
+			qDAO.repDeleteCup(vo);
+			
+		}else if(check.equals("Y") && count!=1) {
+			qDAO.repDelete(vo);
+		}else {
 			qDAO.repDelete2(vo);
 		}
 	}

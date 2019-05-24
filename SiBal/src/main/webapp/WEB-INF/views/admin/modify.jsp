@@ -14,8 +14,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script type="text/javascript">
   	$(function(){
-  		$("#listback").click(function(){
-  			location.href="../admin/modify.do?no=${no}&nowPage=${nowPage}"
+  		$("#cBtn").click(function(){
+  			history.back();
   		});
   		
   		$("#mBtn").click(function(){
@@ -131,7 +131,7 @@
 	<div class="form-group col-12">        
 	    <div class="col-12">
 	      <button type="submit" class="btn btn-primary btn-block" id="mBtn" >수정하기</button>
-	      <button id="listback" type="button" class="btn btn-primary btn-block">수정취소</button>
+	      <button id="cBtn" type="button" class="btn btn-primary btn-block">수정취소</button>
 	    </div>
 	</div>
   </form>

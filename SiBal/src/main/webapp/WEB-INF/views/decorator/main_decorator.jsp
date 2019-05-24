@@ -168,7 +168,7 @@
 		    
 		</ul>
 	</nav>	
-	<img id="mainimg" src="/sb/img/mainimg.png" />
+	<img id="mainimg" src="/sb/img/SibalTrip.png" />
 	
 	
 	<div id="body">

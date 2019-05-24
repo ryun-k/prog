@@ -121,4 +121,10 @@ public class QnaDAO extends SqlSessionDaoSupport{
 		getSqlSession().update("qnaBoard.repDeleteCup",vo);
 	}
 	
+	// 대댓글 삭제할때 서브쿼리로 들어갔어야 하는 내용
+	public int cnt(QnaVo vo) {
+		int cnt = (int)getSqlSession().selectOne("qnaBoard.cnt",vo);
+		return cnt;
+	}
+	
 }

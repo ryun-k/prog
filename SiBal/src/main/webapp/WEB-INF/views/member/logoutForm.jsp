@@ -17,11 +17,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style type="text/css">
-img{
+/* img{
 position:fixed;
 left:1600px;
 top:750px;
-}
+} */
 </style>
 </head>
 <body>
@@ -31,7 +31,7 @@ alert('로그아웃 되었습니다.');
 location.href ="../";	
 });
 </script>
-<div class='img'>
+<div class='img' align="center">
 <img src="${pageContext.request.contextPath}/img/logout.gif" class="bottomright">
 </div>
 </body>

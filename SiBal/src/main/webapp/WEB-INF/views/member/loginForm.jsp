@@ -126,7 +126,7 @@
 	<div class="form-group">
 			
 				<label for="uname">이메일</label>
-				<input type="email" class="form-control" placeholder="이메일을 입력하세요" name="email" id="email"  required="required">
+				<input type="text" class="form-control" placeholder="이메일을 입력하세요" name="email" id="email"  required="required">
 				<div class="valid-feedback"></div>
 			   </div>
 			    <div class="form-group">

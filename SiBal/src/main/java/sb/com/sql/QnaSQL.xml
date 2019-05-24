@@ -19,6 +19,7 @@
 		</if>
 	</sql>
 	
+	
 	<!-- 게시물 카운트 -->
 	<select id="totalCount" resultType="int">
 		select count(*) as cnt from qna
@@ -137,11 +138,6 @@
 		values((select nvl(max(re_no),0)+1 from re_qna),#{oriNo},#{reNo},#{reContent},#{id},#{reDepth},#{reNo})
 	</insert>
 	
-	<!-- 대댓글 쓸때 삭제 구분용 업데이트 -->
-	<update id="repCheckUpdate">
-		update re_qna set re_check='N'
-		where re_no=#{reNo}
-	</update>
 	
 	<!-- 수정하기 -->
 	<update id="repUpdate">
@@ -153,6 +149,17 @@
 	<delete id="repDelete">
 		delete from re_qna where re_no=#{reNo}
 	</delete>
+	
+	<!-- 이미 대댓글이 달려있는 부모 댓글에 다시 댓글달고 지울때 check 변하는거 막는 count -->
+	<select id="cnt" parameterType="qVO" resultType="int">
+		select count(*) from re_qna where re_q_no=#{oriNo} and re_p_no=#{rePNo}
+	</select>
+	
+	<!-- 대댓글 쓸때 삭제 구분용 업데이트 -->
+	<update id="repCheckUpdate">
+		update re_qna set re_check='N'
+		where re_no=#{reNo}
+	</update>
 	
 	<!-- 마지막 댓글 삭제될때 실행됭 업데이트 -->
 	<update id="repDeleteCup">

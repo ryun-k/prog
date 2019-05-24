@@ -193,6 +193,7 @@ width:1000px;
 <option value="9">2018년10월</option>
 <option value="10">2018년11월</option>
 <option value="11">2018년12월</option>
+<option value="12">2019년1월</option>
 <option value="13">2019년2월</option>
 <option value="14">2019년3월</option>
 <option value="15">2019년4월</option>

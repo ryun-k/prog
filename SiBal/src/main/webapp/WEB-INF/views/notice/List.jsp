@@ -49,48 +49,44 @@
 	      </tr>
 	    </c:forEach>
     </tbody>
+    <tfoot>
+    	<tr>
+    		<td colspan="5">
+			  <ul class="pagination justify-content-center" >
+				
+				<c:if test="${PINFO.startPage eq 1}">
+			    <li class="page-item">
+					<a  class="page-link" href="" ><<</a>
+			    </li>
+				</c:if>
+				<c:if test="${PINFO.startPage ne 1}">
+			    <li class="page-item">
+					<a class="page-link" href="../notice/List.do?nowPage=${PINFO.startPage-1}"><<</a>
+			    </li>
+				</c:if>
+			    <c:forEach  var="page" begin="${PINFO.startPage}" end="${PINFO.endPage}" step="1">
+			    <li class="page-item">
+			    	<a class="page-link" href="../notice/List.do?nowPage=${page}">${page}</a>
+			    </li>
+			    </c:forEach>
+			    <c:if test="${PINFO.endPage eq PINFO.totalPage}">
+				<li class="page-item">
+			    	<a class="page-link" href="">>></a>
+			    </li>
+				</c:if>
+				<c:if test="${PINFO.endPage ne PINFO.totalPage}">
+			    <li class="page-item">
+			    	<a class="page-link" href="../notice/List.do?nowPage=${PINFO.endPage+1}">>></a>
+			    </li>
+				</c:if>
+			  </ul>
+	  		</td>
+	  	</tr>
+    </tfoot>
   </table>
 </div>
 <div class="container">
-	<ul class="pagination justify-content-center">
-  	
-			<li class="page-item">	
-					<%-- 1. 이전단추 만들기 --%>
-					<%-- PINFO는 컨트롤러에서 페이징관련정보가 담긴 모델 --%>
-					<c:if test="${PINFO.startPage eq 1}"> 
-					<a class="page-link">
-					<< 
-					</a>
-					</c:if>
-					
-					<c:if test="${PINFO.startPage ne 1}">
-					<%-- 링크는 목록보기 --%>
-					<a class="page-link" href="../notice/List.do?nowPage=${PINFO.startPage-1}"><<</a>
-					</c:if>			 
-			</li>		
-			
-			<li class="page-item">	
-					<%-- 2. 페이지번호 [1][2][3][4][5]만들기 --%>
-					<c:forEach  var="page"
-								begin="${PINFO.startPage}"
-								end="${PINFO.endPage}"   
-								step="1">
-					  <a class="page-link" href="../notice/List.do?nowPage=${page}">${page}</a>
-					</c:forEach>
-			</li>		
-			
-			<li class="page-item">	
-					<%-- 3. 다음단추 만들기 --%>
-					<c:if test="${PINFO.endPage eq PINFO.totalPage}">
-					<a class="page-link">
-					 >> 
-					</a> 
-					</c:if>
-					
-					<c:if test="${PINFO.endPage ne PINFO.totalPage}">
-					<a class="page-link" href="../notice/List.do?nowPage=${PINFO.endPage+1}">>> </a></c:if>	
-			</li>	
-	</ul>	
+	
 	<ul>
 		<c:if test="${sessionScope.UID eq 'admin'}">
 		    <button type="button" class="btn btn-dark" id="wBtn">글쓰기</button>
